@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Help from './pages/Help.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import Notification from './pages/Notification.jsx'
+import Profile from './pages/Profile.jsx'
+import Report from './pages/Report.jsx'
 
 import './App.css'
 
@@ -12,8 +15,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Help" element={<Help />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/notification" element={<Notification />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/report" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </>
