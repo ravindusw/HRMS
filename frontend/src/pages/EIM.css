@@ -48,6 +48,10 @@ button#add-employee {
     background-color: #4CAF50;
     color: white;
 }
+button#add-employee:hover {
+    background-color:  #59c45c;
+  }
+
 
 
 
@@ -100,20 +104,27 @@ tbody tr:nth-child(even) {
 }
 
 .btn-edit {
-    background-color: yellow;
+    background-color: rgb(185, 185, 56);
     color: black;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
 }
+.btn-edit:hover {
+    background-color: rgb(255, 255, 0) ;
+  }
+
 
 .btn-delete {
-    background-color: red;
+    background-color: rgb(185, 5, 5);
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
 }
+.btn-delete:hover {
+    background-color: rgb(240, 5, 5);
+  }
 
 /* navigaton below the page*/
 .nav {

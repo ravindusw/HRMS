@@ -91,8 +91,18 @@ const EmployeeInfoManagement = () => {
   const currentEmployees = employees.slice(startIndex, endIndex);
 
   const handleDelete = (id) => {
-    setEmployees(employees.filter(employee => employee.id !== id));
+    const userConfirm = window.confirm('Are you sure you want to delete this employee?');
+    if(userConfirm){
+      
+      setEmployees(employees.filter(employee => employee.id !== id));
+      
+      }
+    
   };
+
+  
+
+
 
   const handleView = (id) => {
     const employee = employees.find(emp => emp.id === id);
