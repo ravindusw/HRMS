@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Notification from './pages/Notification.jsx'
 import Profile from './pages/Profile.jsx'
 import Report from './pages/Report.jsx'
+import EIM from './pages/Employee_Information_Management.jsx'
 
 import './App.css'
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/notification" element={<Notification />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/EIm" element={<EIM />} />
         </Routes>
       </BrowserRouter>
     </>
