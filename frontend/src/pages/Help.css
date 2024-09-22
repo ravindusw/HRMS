@@ -1,6 +1,6 @@
 /* Container styling */
 .support-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
     font-family: Arial, sans-serif;
@@ -71,6 +71,7 @@
   .faq-section {
     text-align: left;
     margin-top: 20px;
+    width: 800px;
   }
   
   .faq-item {
