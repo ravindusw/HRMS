@@ -1,4 +1,4 @@
-/* General Styling */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -51,7 +51,7 @@ button#add-employee {
 
 
 
-/* Table Styling */
+
 table {
     width: 100%;
     margin: 0 auto;
@@ -82,7 +82,7 @@ tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Action Buttons Styling */
+
 .action-buttons button {
     padding: 6px 12px;
     margin-right: 5px;
@@ -115,7 +115,7 @@ tbody tr:nth-child(even) {
     cursor: pointer;
 }
 
-/* Pagination Styling */
+/* navigaton below the page*/
 .nav {
     text-align: center;
     margin-top: 20px;
