@@ -147,5 +147,6 @@ tbody tr:nth-child(even) {
 }
 input{
     background-color:#cff7d3;
+    margin-top: 12px;
     
 }
