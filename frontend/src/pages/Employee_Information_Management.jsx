@@ -76,6 +76,7 @@ const FilterGenders=()=>{
 
 const EmployeeInfoManagement = () => {
   const [employees, setEmployees] = useState(initialEmployees);
+  const [filterEmplooyees, setfilterEmplooyees] = useState(employees);
 
   
   const [filter, setFilter] = useState("")
@@ -92,14 +93,14 @@ const EmployeeInfoManagement = () => {
     setFilter(inputValue)
 
     event.preventDefault()
-    if(inputValue === ""){
-      setfilterCountry(initialEmployees)
+    if(inputValue === "" ){
+      setfilterEmplooyees(employees)
       console.log("no filter")
     }
     else{
       const subfilterInLowerCase = inputValue.toLowerCase()
     
-    setfilterCountry(countries.filter(country => country.name.common.toLowerCase().includes(subfilterInLowerCase)))
+      setfilterEmplooyees(employees.filter(Emplooyee => Emplooyee.name.toLowerCase().includes(subfilterInLowerCase)))
     }
     
 
@@ -109,7 +110,7 @@ const EmployeeInfoManagement = () => {
 
   const ShowSilteredEmployees=()=>{
     return(
-      <ShowEmployees initialEmployees={employees}/>
+      <ShowEmployees initialEmployees={filterEmplooyees}/>
   
     )
   
@@ -125,7 +126,7 @@ const EmployeeInfoManagement = () => {
         <h1>Employee Information Management</h1>
         <div className="search-filters">
         
-        <input id='emp_name' type="text" placeholder="Search..." onChange={changeFilter}/>
+        <input id='emp_name' type="text" placeholder="Search..." onChange={changeFilter} value={filter}/>
         
         <Filterdepartment/>
         <FilterJobTitle/>
