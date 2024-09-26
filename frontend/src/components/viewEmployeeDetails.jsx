@@ -2,7 +2,13 @@ import React, { useState,useEffect } from 'react';
 
 const ViewEmployeeDetails = () => {
     return(
-        <div>Hello world!</div>
+        <div>Emp name
+            age
+            job title
+
+
+
+        </div>
 
 
     )
