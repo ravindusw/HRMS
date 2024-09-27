@@ -7,7 +7,11 @@ import Notification from './pages/Notification.jsx'
 import Profile from './pages/Profile.jsx'
 import Report from './pages/Report.jsx'
 import EIM from './pages/Employee_Information_Management.jsx'
+import EditemployeeData from './pages/EditemployeeData.jsx'
+import AddEmployee from './pages/AddEmployee.jsx'
 
+
+import HrView from './pages/HrView.jsx'
 import './App.css'
 
 function App() {
@@ -22,6 +26,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/report" element={<Report />} />
           <Route path="/EIm" element={<EIM />} />
+          <Route path="/HrView" element={<HrView />} />
+          <Route path="/EditemployeeData" element={<EditemployeeData />} />
+          <Route path="/AddEmployee" element={<AddEmployee />} />
         </Routes>
       </BrowserRouter>
     </>

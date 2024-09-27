@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import '../pages/EIM.css';
 
@@ -10,6 +11,11 @@ import '../pages/EIM.css';
 const ShowEmplyees=({initialEmployees})=>{
     const [employees, setEmployees] = useState(initialEmployees);
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
+
+
+
+
     const handleDelete = (id) => {
       const userConfirm = window.confirm('Are you sure you want to delete this employee?');
       if(userConfirm){
@@ -24,10 +30,11 @@ const ShowEmplyees=({initialEmployees})=>{
   
   
   
-    const handleView = (id) => {
-      const employee = employees.find(emp => emp.id === id);
-      alert(`Viewing details of ${employee.name}`);
+    
+    const handleViewButtonClick = (id) => {
+      navigate('/HrView');
     };
+
   
     const handleEdit = (id) => {
       const employee = employees.find(emp => emp.id === id);
@@ -77,7 +84,7 @@ const ShowEmplyees=({initialEmployees})=>{
               <td>{employee.job}</td>
               <td>{employee.email}</td>
               <td className="action-buttons">
-                <button className="btn-view" onClick={() => handleView(employee.id)}>View</button>
+                <button className="btn-view" onClick={() => handleViewButtonClick(employee.id)}>View</button>
                 <button className="btn-edit" onClick={() => handleEdit(employee.id)}>Edit</button>
                 <button className="btn-delete" onClick={() => handleDelete(employee.id)}>Delete</button>
               </td>
