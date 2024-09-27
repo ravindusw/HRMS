@@ -1,7 +1,7 @@
 const HrView=()=>{
     return(
         <div>
-            <h1>HR View</h1>
+            <h1>#HR View</h1>
         </div>
     )
 
