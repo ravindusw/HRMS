@@ -32,13 +32,25 @@ const ShowEmplyees=({initialEmployees})=>{
   
     
     const handleViewButtonClick = (id) => {
-      navigate('/HrView');
+      const id_to_view=id;
+      navigate(`/Employee_Information_Management/HrView/${id_to_view}`);
     };
 
   
     const handleEdit = (id) => {
-      const employee = employees.find(emp => emp.id === id);
-      alert(`Editing details of ${employee.name}`);
+      
+      const userConfirm = window.confirm('Are you sure you want to edit this employee?');
+      if(userConfirm){
+        
+        const employee = employees.find(emp => emp.id === id);
+        
+        //alert(`Editing details of ${employee.name}`);
+        const id_to_edit=id;
+        navigate(`/Employee_Information_Management/EditemployeeData/${id_to_edit}`);
+        
+        
+        }
+      
     };
   
   
@@ -64,6 +76,7 @@ const ShowEmplyees=({initialEmployees})=>{
   
     return(
       <div>
+        <div>{employees.length} of results</div>
         <table>
         <thead>
           <tr>
@@ -78,7 +91,7 @@ const ShowEmplyees=({initialEmployees})=>{
         <tbody>
           {currentEmployees.map(employee => (
             <tr key={employee.id}>
-              <td>{employee.id}</td>
+              <td >{employee.id}</td>
               <td>{employee.name}</td>
               <td>{employee.gender}</td>
               <td>{employee.job}</td>

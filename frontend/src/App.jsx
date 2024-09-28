@@ -25,10 +25,10 @@ function App() {
           <Route path="/notification" element={<Notification />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/report" element={<Report />} />
-          <Route path="/EIm" element={<EIM />} />
-          <Route path="/HrView" element={<HrView />} />
-          <Route path="/EditemployeeData" element={<EditemployeeData />} />
-          <Route path="/AddEmployee" element={<AddEmployee />} />
+          <Route path="/Employee_Information_Management" element={<EIM />} />
+          <Route path="/Employee_Information_Management/HrView/:id_to_view" element={<HrView />} />
+          <Route path="/Employee_Information_Management/EditemployeeData/:id_to_edit" element={<EditemployeeData />} />
+          <Route path="/Employee_Information_Management/AddEmployee" element={<AddEmployee />} />
         </Routes>
       </BrowserRouter>
     </>

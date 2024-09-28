@@ -95,7 +95,7 @@ const EmployeeInfoManagement = () => {
     event.preventDefault()
     if(inputValue === "" ){
       setfilterEmplooyees(employees)
-      console.log("no filter")
+      //console.log("no filter")
     }
     else{
       const subfilterInLowerCase = inputValue.toLowerCase()
@@ -114,6 +114,17 @@ const EmployeeInfoManagement = () => {
   
     )
   
+  }
+  const handleAddNewEmployeeButtonClick=()=>{
+    const userConfirm = window.confirm('Are you sure you want to add new employee?');
+      if(userConfirm){
+        
+        
+        const id_to_edit=id;
+        navigate('/Employee_Information_Management/AddEmployee');
+        
+        
+        }
   }
   
 
@@ -137,7 +148,7 @@ const EmployeeInfoManagement = () => {
       </header>
       
       
-      <button id="add-employee">Add Employee</button>
+      <button id="add-employee" onClick={() => handleAddNewEmployeeButtonClick}>Add Employee</button>
       <ShowSilteredEmployees/>
       
       
