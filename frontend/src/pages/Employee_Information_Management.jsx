@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './EIM.css';
 import ShowEmployees from '../components/ShowEmplyees.jsx';
 
@@ -80,7 +81,7 @@ const EmployeeInfoManagement = () => {
 
   
   const [filter, setFilter] = useState("")
-  
+  const navigate = useNavigate();
 
   
 
@@ -120,7 +121,7 @@ const EmployeeInfoManagement = () => {
       if(userConfirm){
         
         
-        const id_to_edit=id;
+        
         navigate('/Employee_Information_Management/AddEmployee');
         
         
@@ -148,7 +149,7 @@ const EmployeeInfoManagement = () => {
       </header>
       
       
-      <button id="add-employee" onClick={() => handleAddNewEmployeeButtonClick}>Add Employee</button>
+      <button id="add-employee" onClick={() => handleAddNewEmployeeButtonClick()}>Add Employee</button>
       <ShowSilteredEmployees/>
       
       
