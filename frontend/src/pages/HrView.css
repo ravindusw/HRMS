@@ -1,73 +1,75 @@
-/* General styling for the entire view */
 .hr-view-container {
-    max-width: 600px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
     font-family: Arial, sans-serif;
 }
 
-/* Styling for the header */
-.hr-view-container h1 {
+.hr-view-header {
     text-align: center;
-    color: #333;
+    width: 800px;
+    align-items: center;
     margin-bottom: 20px;
+    background-color: #e6f5e8;
 }
 
-/* Individual employee details */
-.hr-view-container p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-    margin: 8px 0;
-}
-
-/* Highlighted strong text */
-.hr-view-container strong {
+.hr-view-header h1 {
+    font-size: 2rem;
     color: #333;
-    font-weight: bold;
 }
 
-/* Dependents section */
-.hr-view-container h3 {
+h2 {
     margin-top: 20px;
+    font-size: 1.5rem;
     color: #444;
-    font-size: 18px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
 }
 
-/* Styling for dependents list */
-.hr-view-container ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.hr-view-container ul li {
-    padding: 10px;
-    background-color: #f0f0f0;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.hr-view-container ul li p {
+p {
+    font-size: 1rem;
+    color: #666;
     margin: 5px 0;
-    color: #555;
 }
 
-/* Message for no dependents */
-.hr-view-container em {
-    color: #888;
-    font-style: italic;
+strong {
+    color: #333;
 }
 
-/* Error message if employee not found */
-.hr-view-container .error-message {
+.employee-details {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+.dependents-section {
+    margin-top: 20px;
+}
+
+.dependents-box {
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #f1f8ff;
+}
+
+.dependents-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.dependents-box li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+.error-message {
     color: red;
-    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
     text-align: center;
 }

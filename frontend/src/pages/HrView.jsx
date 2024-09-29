@@ -32,33 +32,44 @@ const HrView=()=>{
     console.log(id_to_view)
     const employee = initialEmployees.find(emp => emp.id === id_to_view);
 
+
+
     return (
         <div className="hr-view-container">
-            <h1>Employee Details</h1>
+            <header className="hr-view-header">
+                <h1>Employee Details</h1>
+            </header>
 
             {employee ? (
                 <div>
-                    <p><strong>Employee ID:</strong> {employee.id}</p>
-                    <p><strong>Name:</strong> {employee.name}</p>
-                    <p><strong>Job Title:</strong> {employee.job}</p>
-                    <p><strong>Email:</strong> {employee.email}</p>
+                    {/* Employee Details Section */}
+                    <section className="employee-details">
+                        <h2>Employee Information</h2>
+                        <p><strong>Employee ID:</strong> {employee.id}</p>
+                        <p><strong>Name:</strong> {employee.name}</p>
+                        <p><strong>Job Title:</strong> {employee.job}</p>
+                        <p><strong>Email:</strong> {employee.email}</p>
+                    </section>
 
-                    {employee.dependents ? (
-                        <div>
-                            <h3>Dependents:</h3>
-                            <ul>
-                                {employee.dependents.map((dependent, index) => (
-                                    <li key={index}>
-                                        <p><strong>Name:</strong> {dependent.name}</p>
-                                        <p><strong>Relation:</strong> {dependent.relation}</p>
-                                        <p><strong>Age:</strong> {dependent.age}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ) : (
-                        <p><em>No dependents</em></p>
-                    )}
+                    {/* Dependents Section */}
+                    <section className="dependents-section">
+                        <h2>Dependents</h2>
+                        {employee.dependents && employee.dependents.length > 0 ? (
+                            <div className="dependents-box">
+                                <ul>
+                                    {employee.dependents.map((dependent, index) => (
+                                        <li key={index}>
+                                            <p><strong>Name:</strong> {dependent.name}</p>
+                                            <p><strong>Relation:</strong> {dependent.relation}</p>
+                                            <p><strong>Age:</strong> {dependent.age}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ) : (
+                            <p><em>No dependents</em></p>
+                        )}
+                    </section>
                 </div>
             ) : (
                 <p className="error-message">No employee found with ID {id_to_view}</p>
@@ -66,5 +77,4 @@ const HrView=()=>{
         </div>
     );
 };
-
 export default HrView
