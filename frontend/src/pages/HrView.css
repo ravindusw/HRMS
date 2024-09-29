@@ -1,0 +1,54 @@
+/* General styling for the entire view */
+.hr-view-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Styling for the header */
+.hr-view-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Individual employee details */
+.hr-view-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 8px 0;
+}
+
+/* Highlighted strong text */
+.hr-view-container strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Dependents section */
+.hr-view-container h3 {
+    margin-top: 20px;
+    color: #444;
+    font-size: 18px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Styling for dependents list */
+.hr-view-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.hr-view-container ul li {
+    padding: 10px;
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 
