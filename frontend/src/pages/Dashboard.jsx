@@ -1,4 +1,7 @@
 import './Dashboard.css'
+import 'react-calendar/dist/Calendar.css';
+
+import Calendar from 'react-calendar'
 
 export default function Dashboard() {
     return (
@@ -17,6 +20,7 @@ export default function Dashboard() {
             </div>
 
             <div className="calendar">
+                <Calendar />
                 <h3>Upcoming Meetings</h3>
                 <p>03/02/2024 - Meeting with Managers</p>
                 <p>05/10/2024 - Meeting</p>

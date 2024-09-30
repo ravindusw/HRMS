@@ -48,6 +48,13 @@
   
   .calendar {
     /* grid-column: span 2; */
-    grid-row: span 4;
+    grid-row: span 3;
   }
+
+  .react-calendar__tile,
+  .react-calendar__navigation__label,
+  .react-calendar__navigation__arrow{
+    color: black;
+  }
+
   
