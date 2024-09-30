@@ -1,0 +1,60 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    min-width: 775px;
+  }
+  
+  .info-summary, .remaining-leaves, .employees-info, .user-role-distribution, .quick-actions, .calendar {
+    background-color: #DFE4D7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .leave-types {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+  
+  .leave-card {
+    background-color: #BCCBB1;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .employees-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .btn-update, .btn-apply {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .btn-update:hover, .btn-apply:hover {
+    background-color: #45a049;
+  }
+  
+  .calendar {
+    /* grid-column: span 2; */
+    grid-row: span 3;
+  }
+
+  .react-calendar__tile,
+  .react-calendar__navigation__label,
+  .react-calendar__navigation__arrow{
+    color: black;
+  }
+
+  
