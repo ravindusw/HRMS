@@ -1,6 +1,18 @@
 import express from 'express';
+import cors from 'cors';
+import mysql from 'mysql2';
 
 const app = express();
+
+// Import all routes here
+import notificationRouter from './src/routes/notification.js';
+
+// Use all routes here
+app.use(notificationRouter);
+
+// Middleware
+app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello, This is backend!<h1>');
