@@ -1,4 +1,6 @@
 .hr-view-container {
+
+    
     width: 100%;
     margin: 20px auto;
     padding: 20px;
@@ -10,10 +12,11 @@
 }
 
 .hr-view-header {
+    margin: 5px auto;
     text-align: center;
     width: 800px;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
     background-color: #e6f5e8;
 }
 
@@ -49,9 +52,9 @@ strong {
 
 .dependents-box {
     padding: 10px;
-    border: 1px solid #007bff;
+    border: 1px solid #00ff44;
     border-radius: 5px;
-    background-color: #f1f8ff;
+    
 }
 
 .dependents-box ul {
