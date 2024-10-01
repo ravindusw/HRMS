@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh; /* Ensures full viewport height */
+  width: 100vw;
+}
+
+/* Left panel styles */
+.left-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.network-info {
+  text-align: center;
+  max-width: 400px;
+}
+
+.network-info h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.network-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.network-info h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.network-info p {
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.login-link {
+  color: #00c896;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* Right panel styles */
+.right-panel {
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Adds padding to ensure content has space */
+}
+
+.login-form {
+  width: 100%;
+  max-width: 300px; /* Ensures the form doesn't take up too much space */
+}
+
+.login-form h1 {
+  font-size: large;
+  margin-bottom: 20px;
+}
+
+.login-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.show-password {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #00c896;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #00a878;
+}
+
+/*Logo styles with animation */
+.animated-logo {
+  width: 25rem;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: none;
+    width: 100%;
+    min-height: 50vh;
+  }
+}
