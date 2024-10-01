@@ -2,7 +2,7 @@ import "./Help.css";
 
 import React, { useState } from "react";
 import "./Login.css";
-import logo from "../public/Jupiter_Logo.png";
+import logo from "/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
