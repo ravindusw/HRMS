@@ -1,0 +1,100 @@
+/* Container for the whole form */
+.leave-management {
+    font-family: Arial, sans-serif;
+    width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(16, 5, 91, 0.1);
+  }
+  
+  /* Header Section */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 555px;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+
+  }
+  
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .profile-btn, .my-leaves-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #0ec00b;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .profile-btn:hover, .my-leaves-btn:hover {
+    background-color: #0ec00b;
+  }
+  
+  /* Form styling */
+  .leave-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+
+  }
+  
+  .leave-form h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .leave-form label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .leave-form input, .leave-form select, .leave-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+  
+  .leave-form select {
+    cursor: pointer;
+  }
+  
+  .leave-form textarea {
+    height: 100px;
+    resize: none;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0ec00b;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0ec00b;
+  }
+  
