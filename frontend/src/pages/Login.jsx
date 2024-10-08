@@ -16,16 +16,19 @@ const LoginPage = () => {
     setErrorMessage(""); // Clear error message before submission
 
     try {
-      const response = await axios.post("http://localhost:8800/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:8800/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       // Store the user_id (employee_id) in localStorage
       const employee_id = response.data.employee_id;
       localStorage.setItem("employee_id", employee_id); // Overwrite any existing ID
       console.log("Logged in with employee ID:", employee_id);
-      console.log(localStorage.getItem("employee_id"));
+
       // Navigate to the dashboard page
       navigate("/dashboard");
     } catch (err) {
