@@ -2,17 +2,17 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2";
 
-const app = express();
-
-// Middleware
-app.use(express.json());
-app.use(cors());
-
 // Import all routes here
 import notificationRouter from "./src/routes/notification.js";
 import getemployeesForEIMRouter from "./src/routes/getemployeesForEIM.js";
 import loginRouter from "./src/routes/login.js";
 import profileRouter from "./src/routes/profile.js";
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
 
 // Create and export MySQL connection
 export const db = mysql.createConnection({
@@ -20,6 +20,15 @@ export const db = mysql.createConnection({
   user: "root",
   password: "222336699",
   database: "db4_all",
+});
+
+// Use all routes here
+app.use(notificationRouter);
+app.use(getemployeesForEIMRouter);
+
+app.get("/", (req, res) => {
+  res.send("<h1>Hello, This is backend!<h1>");
+  console.log("Backend server is running...");
 });
 
 // Connect to the database

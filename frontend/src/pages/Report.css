@@ -1,0 +1,161 @@
+.left-image {
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+}
+
+.right-container {
+  width: 50%;
+  background-color: rgba(123, 212, 142, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  width: 80%;
+  height: 80%;
+  background-color: rgba(191, 238, 201, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+h1 {
+  color: #2e7d32;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #4caf50;
+  margin-bottom: 15px;
+  text-align: left;
+  font-size: 1.75em;
+}
+
+/* Form and Input Styling */
+form {
+  margin: 20px 0;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #4caf50;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1.1em;
+}
+
+/* Button Styling */
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+/* Generated Report List Styling */
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  background-color: #052e08;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border-left: 5px solid #4caf50;
+}
+
+li p {
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+
+/* CSV Button */
+.csv-button {
+  display: block;
+  text-decoration: none;
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.csv-button:hover {
+  background-color: #d8e3d9;
+}
+
+/* Style for report type buttons */
+.report-buttons {
+  margin: 20px 0;
+}
+
+.report-buttons button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.report-buttons button:hover {
+  background-color: #388e3c;
+}
+
+/* CSV Button */
+.csv-button {
+  display: block;
+  text-decoration: none;
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.csv-button:hover {
+  background-color: #1b5e20;
+}

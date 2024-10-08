@@ -64,7 +64,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px; /* Adds padding to ensure content has space */
+  padding: 20px;
+  flex: column;
 }
 
 .login-form {

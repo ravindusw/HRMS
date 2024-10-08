@@ -20,6 +20,8 @@ import Report from "./pages/Report.jsx";
 import EIM from "./pages/Employee_Information_Management.jsx";
 import EditemployeeData from "./pages/EditemployeeData.jsx";
 import AddEmployee from "./pages/AddEmployee.jsx";
+import LeaveApplication from "./pages/LeaveApplication.jsx";
+import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
 
 import HrView from "./pages/HrView.jsx";
 import "./App.css";
@@ -102,6 +104,8 @@ function App() {
             path="/Employee_Information_Management/AddEmployee"
             element={<AddEmployee />}
           />
+          <Route path="/leaveapplication" element={<LeaveApplication />} />
+          <Route path="leave-history-admin" element={<LeaveHistory />} />
         </Routes>
       </BrowserRouter>
     </>
