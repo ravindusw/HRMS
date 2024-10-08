@@ -1,101 +1,167 @@
-/* Container styling */
+/* Container styling
 .support-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1, h2 {
-    color: #333;
-  }
-  
-  h3 {
-    margin-top: 20px;
-    color: #444;
-  }
-  
-  .form-container {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 40px;
-    display: inline-block;
-    text-align: left;
-  }
-  
-  .support-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input, textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  textarea {
-    resize: none;
-    height: 100px;
-  }
-  
-  
-  
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #449946;
-  }
-  
-  /* FAQ section */
-  .faq-section {
-    text-align: left;
-    margin-top: 20px;
-    width: 800px;
-  }
-  
-  .faq-item {
-    margin-bottom: 10px;
-  }
-  
-  details {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  details[open] summary {
-    font-weight: bold;
-  }
-  
-  summary {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  p {
-    margin: 0;
-    padding-left: 15px;
-  }
-  
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.support-container h1,
+h2 {
+  color: #333;
+}
+
+.support-container h3 {
+  margin-top: 20px;
+  color: #444;
+}
+
+.support-container .form-container {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+  text-align: left;
+}
+
+.support-container .support-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.support-container label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.support-container input,
+textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.support-container textarea {
+  resize: none;
+  height: 100px;
+}
+
+.support-container button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.support-container button:hover {
+  background-color: #449946;
+}
+
+
+.support-container .faq-section {
+  text-align: left;
+  margin-top: 20px;
+  width: 800px;
+}
+
+.support-container .faq-item {
+  margin-bottom: 10px;
+}
+
+.support-container details {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.support-container details[open] summary {
+  font-weight: bold;
+}
+
+.support-container summary {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.support-container p {
+  margin: 0;
+  padding-left: 15px;
+} */
+
+/* Additional spacing for Navbar */
+.support-container {
+  padding-top: 20px; /* Adjust this value based on your Navbar height */
+  font-family: "Poppins", sans-serif;
+  /* min-height: calc(100vh - 0px); */
+}
+
+.support-container h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.support-container h2 {
+  color: #34495e;
+  font-size: 1.8rem;
+}
+
+.support-container h3 {
+  color: #34495e;
+  font-size: 1.5rem;
+}
+
+.faq,
+.contact_us {
+  border-radius: 10px;
+  background-color: lightgrey;
+  border-style: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+}
+
+.accordion-item {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.accordion-header {
+  font-size: 1.2rem;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+button {
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+/* Additional styles for cards */
+.card {
+  border: 1px solid #e1e1e1; /* Subtle border */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.card-header {
+  background-color: #f7f7f7; /* Light background for headers */
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.card-body {
+  padding: 20px; /* Padding for card body */
+}

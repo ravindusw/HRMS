@@ -1,60 +1,133 @@
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
-    min-width: 775px;
-  }
-  
-  .info-summary, .remaining-leaves, .employees-info, .user-role-distribution, .quick-actions, .calendar {
-    background-color: #DFE4D7;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
-  .leave-types {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
-  }
-  
-  .leave-card {
-    background-color: #BCCBB1;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .employees-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .btn-update, .btn-apply {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-  }
-  
-  .btn-update:hover, .btn-apply:hover {
-    background-color: #45a049;
-  }
-  
-  .calendar {
-    /* grid-column: span 2; */
-    grid-row: span 3;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  gap: 15px;
+  margin-top: 40px;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+  min-width: 750px;
+}
 
-  .react-calendar__tile,
-  .react-calendar__navigation__label,
-  .react-calendar__navigation__arrow{
-    color: black;
-  }
+.dashboard-container h1,
+h2 {
+  color: #333;
+}
 
-  
+.info-summary,
+.remaining-leaves,
+.employees-info,
+.user-role-distribution,
+.quick-actions,
+.calendar {
+  background-color: #ffffff;
+  padding: 15px; /* Reduced padding */
+  border-radius: 10px; /* Smaller border radius */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-summary:hover,
+.remaining-leaves:hover,
+.employees-info:hover,
+.user-role-distribution:hover,
+.quick-actions:hover,
+.calendar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.leave-types {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.leave-card {
+  background-color: #f3f6f9;
+  padding: 8px; /* Reduced padding */
+  border-radius: 8px; /* Smaller border radius */
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 8px;
+  color: #555;
+}
+
+.leave-card span {
+  font-size: 1.2rem; /* Reduced font size */
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-update,
+.btn-apply {
+  padding: 10px 18px; /* Reduced button size */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px; /* Smaller button */
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-update:hover,
+.btn-apply:hover {
+  background-color: #0056b3;
+}
+
+.employees-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.employees-count,
+.employees-on-leave {
+  flex: 1;
+  text-align: center;
+  background-color: #f3f6f9;
+  padding: 15px; /* Reduced padding */
+  border-radius: 8px; /* Smaller border radius */
+}
+
+.user-role-distribution p {
+  margin-bottom: 8px; /* Reduced margin */
+}
+
+.calendar {
+  grid-row: span 2;
+}
+
+.quick-actions p {
+  cursor: pointer;
+  margin-bottom: 8px; /* Reduced margin */
+  transition: color 0.2s ease;
+}
+
+.quick-actions p:hover {
+  color: #007bff;
+}
+
+.react-calendar {
+  border: none;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.react-calendar__tile--active {
+  background-color: #007bff !important;
+  color: white;
+  border-radius: 10px;
+}
+
+.react-calendar__navigation__label,
+.react-calendar__navigation__arrow {
+  color: #007bff;
+}

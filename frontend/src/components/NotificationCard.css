@@ -1,15 +1,16 @@
 .notificationcard {
   --primary-color: #486d48;
-  --secondary-color: #C3EFAD;
+  --secondary-color: #c3efad;
   --border-color: #042100;
   --button-hover-color: #365936;
-  --font-family: 'Roboto', sans-serif;
+  --font-family: "Roboto", sans-serif;
 }
 
 .notificationcard {
   display: flex;
   align-items: center;
-  background-color: var(--secondary-color);
+  /* background-color: var(--secondary-color); */
+  background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 15px;
@@ -94,5 +95,5 @@
 }
 
 .notificationcard .delete-button:hover {
-  background-color :rgb(122, 1, 1);
+  background-color: rgb(122, 1, 1);
 }

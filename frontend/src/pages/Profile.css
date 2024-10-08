@@ -1,0 +1,88 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0; /* Remove padding from the container */
+  margin: 0; /* Remove margin from the container */
+  /* min-height: 100vh; Ensure it takes the full height of the viewport */
+  justify-content: center; /* Center the content vertically */
+  /* background-color: #171f39; */
+  height: auto;
+}
+
+.profile-container .profile-body {
+  font-family: Arial, sans-serif;
+  /* background-color: #171f39; */
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90.105vh;
+  width: 100vw;
+}
+
+.profile-container h2 {
+  color: #000;
+}
+
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.profile-container .profile-content {
+  display: flex;
+  flex-direction: row;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 30rem;
+}
+
+.photo-section {
+  margin-right: 30px;
+}
+
+.profile-photo {
+  border: 3px solid #007bff;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-container h2 {
+  margin-bottom: 20px;
+}
+
+.profile-container h1 {
+  color: wheat;
+}
+
+.profile-field {
+  display: flex;
+  margin-bottom: 10px;
+  width: 50rem;
+}
+
+.field-label {
+  font-weight: bold;
+  width: 150px;
+}
+
+.field-value {
+  background-color: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 5px;
+  flex: 1;
+}

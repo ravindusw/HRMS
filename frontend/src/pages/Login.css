@@ -148,6 +148,12 @@
   .right-panel {
     flex: none;
     width: 100%;
-    min-height: 50vh;
+    min-height: 50vh; /* Ensures both panels take up half height on small screens */
   }
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.9rem;
 }
