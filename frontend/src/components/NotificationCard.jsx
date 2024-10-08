@@ -6,11 +6,11 @@ export default function NotificationCard(props) {
             <div className="icon"></div>
             <div className="content">
                 <div className="header">
-                    <span className="date">12/10/2024</span>
-                    <span className="title">Title</span>
+                    <span className="date">{props.content.date}</span>
+                    <span className="title">{props.content.title}</span>
                 </div>
                 <div className="message">
-                    <p>{props.content}</p>
+                    <p>{props.content.message}</p>
                 </div>
             </div>
             <button className="read-button">Read</button>

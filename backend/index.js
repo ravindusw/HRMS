@@ -8,13 +8,13 @@ const app = express();
 import notificationRouter from './src/routes/notification.js';
 import getemployeesForEIMRouter from './src/routes/getemployeesForEIM.js';
 
-// Use all routes here
-app.use(notificationRouter);
-app.use(getemployeesForEIMRouter);
-
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Use all routes here
+app.use(notificationRouter);
+app.use(getemployeesForEIMRouter);
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello, This is backend!<h1>');
