@@ -7,12 +7,12 @@ const app = express();
 // Import all routes here
 import notificationRouter from './src/routes/notification.js';
 
-// Use all routes here
-app.use(notificationRouter);
-
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Use all routes here
+app.use(notificationRouter);
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello, This is backend!<h1>');
