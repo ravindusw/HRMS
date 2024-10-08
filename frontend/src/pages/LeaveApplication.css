@@ -9,7 +9,7 @@
   }
   
   /* Header Section */
-  .header {
+  .leave-management .header {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -20,17 +20,17 @@
 
   }
   
-  .header h1 {
+  .leave-management .header h1 {
     font-size: 20px;
     font-weight: 600;
   }
   
-  .buttons {
+  .leave-management .buttons {
     display: flex;
     gap: 10px;
   }
   
-  .profile-btn, .my-leaves-btn {
+  .leave-management .profile-btn, .my-leaves-btn {
     padding: 8px 16px;
     border: none;
     border-radius: 6px;
@@ -39,12 +39,12 @@
     font-size: 14px;
   }
   
-  .profile-btn:hover, .my-leaves-btn:hover {
+  .leave-management .profile-btn:hover, .my-leaves-btn:hover {
     background-color: #0ec00b;
   }
   
   /* Form styling */
-  .leave-form {
+  .leave-management .leave-form {
     background-color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -52,20 +52,20 @@
 
   }
   
-  .leave-form h2 {
+  .leave-management .leave-form h2 {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
   }
   
-  .leave-form label {
+  .leave-management .leave-form label {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 8px;
     display: block;
   }
   
-  .leave-form input, .leave-form select, .leave-form textarea {
+  .leave-management .leave-form input, .leave-form select, .leave-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -74,16 +74,16 @@
     font-size: 14px;
   }
   
-  .leave-form select {
+  .leave-management .leave-form select {
     cursor: pointer;
   }
   
-  .leave-form textarea {
+  .leave-management .leave-form textarea {
     height: 100px;
     resize: none;
   }
   
-  .submit-btn {
+  .leave-management .submit-btn {
     width: 100%;
     padding: 12px;
     border: none;
@@ -94,7 +94,7 @@
     font-weight: bold;
   }
   
-  .submit-btn:hover {
+  .leave-management .submit-btn:hover {
     background-color: #0ec00b;
   }
   
