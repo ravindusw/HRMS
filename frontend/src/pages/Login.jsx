@@ -1,37 +1,44 @@
-import "./Help.css";
-
 import React, { useState } from "react";
 import "./Login.css";
-import logo from "../../public/Jupiter_Logo.png";
+import logo from "../../assets/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logicd
+    setErrorMessage(""); // Clear error message before submission
+
     try {
-      const response = await axios.post("http://localhost:3000/login", {
-        email: email,
-        password: password,
+      const response = await axios.post("http://localhost:8800/login", {
+        email,
+        password,
       });
-      navigate("/profile");
+
+      // Store the user_id (employee_id) in localStorage
+      const employee_id = response.data.employee_id;
+      localStorage.setItem("employee_id", employee_id); // Overwrite any existing ID
+      console.log("Logged in with employee ID:", employee_id);
+      console.log(localStorage.getItem("employee_id"));
+      // Navigate to the dashboard page
+      navigate("/dashboard");
     } catch (err) {
-      console.log("Error occured!:", err);
+      setErrorMessage(
+        err.response && err.response.data ? err.response.data : "Login failed!"
+      );
     }
   };
 
   return (
     <div className="login-container">
-      {/* Left panel with invite message */}
       <div className="left-panel">
         <div className="network-info">
-          {/* Logo with animation */}
           <img
             src={logo}
             alt="Jupiter Apparels Logo"
@@ -49,11 +56,11 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right panel with sign-up form */}
       <div className="right-panel">
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>Welcome Aboard!</h2>
-          <h1>log in to your Account</h1>
+          <h1>Log in to your Account</h1>
+
           <label htmlFor="email" className="form-label">
             Email Address
           </label>
@@ -74,7 +81,7 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             id="password"
             className="form-input"
-            placeholder="Create a password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -89,22 +96,15 @@ const Login = () => {
             <label htmlFor="show-password">Show Password</label>
           </div>
 
-          <button
-            type="submit"
-            className="login-button"
-            // onClick={() => Navigate("/userProfile")}
-          >
-            login
-          </button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          {/* <p className="terms-text">
-            By signing up, you agree to our <a href="#">Terms of Service</a> and{" "}
-            <a href="#">Privacy Policy</a>.
-          </p> */}
+          <button type="submit" className="login-button">
+            Login
+          </button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;
