@@ -97,7 +97,7 @@ function App() {
           <Route path="/Employee_Information_Management/EditemployeeData/:id_to_edit" element={<EditemployeeData />} />
           <Route path="/Employee_Information_Management/AddEmployee" element={<AddEmployee />} />
           <Route path="/leaveapplication" element={<LeaveApplication />} />
-          <Route path = "leave-history-admin" element = {<LeaveHistory />} />
+          <Route path="/leave-history-admin" element = {<LeaveHistory />} />
         </Routes>
       </BrowserRouter>
     </>
