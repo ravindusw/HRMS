@@ -3,7 +3,7 @@ import "./addUser.css"; // Make sure the path is correct
 import axios from "axios";
 
 const AddUser = () => {
-  const [employeeId, setEmployeeId] = useState("");
+  const [employee_Id, setEmployeeId] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -11,13 +11,13 @@ const AddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the submission logic here, e.g., API call to add the user
+
     setErrorMessage("");
     try {
       const response = await axios.post(
         "http://localhost:8800/api/auth/addUser",
         {
-          employeeId,
+          employee_Id,
           userName,
           password,
           email,
@@ -41,8 +41,8 @@ const AddUser = () => {
           </label>
           <input
             type="text"
-            id="employeeId"
-            value={employeeId}
+            id="employee_Id"
+            value={employee_Id}
             onChange={(e) => setEmployeeId(e.target.value)}
             className="input-unique"
             required

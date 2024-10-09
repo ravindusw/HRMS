@@ -23,8 +23,8 @@ import AddEmployee from "./pages/AddEmployee.jsx";
 import LeaveApplication from "./pages/LeaveApplication.jsx";
 import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
 import AddUser from "./pages/AddUser.jsx";
-
 import HrView from "./pages/HrView.jsx";
+
 import "./App.css";
 
 function Layout() {
@@ -58,13 +58,16 @@ function Layout() {
               <Nav.Link as={Link} to="/dashboard">
                 Home
               </Nav.Link>
-              {/* Ensure the link includes the employee_id */}
               <Nav.Link as={Link} to={`/profile/${employee_id}`}>
                 Profile
               </Nav.Link>
               <Nav.Link as={Link} to="/report">
                 Reports
               </Nav.Link>
+              <Nav.Link as={Link} to="/addUser">
+                add_User
+              </Nav.Link>
+
               <Nav.Link as={Link} to="/addEmployee">
                 addEmployee
               </Nav.Link>
