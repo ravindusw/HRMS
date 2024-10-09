@@ -22,6 +22,7 @@ import EditemployeeData from "./pages/EditemployeeData.jsx";
 import AddEmployee from "./pages/AddEmployee.jsx";
 import LeaveApplication from "./pages/LeaveApplication.jsx";
 import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
+import AddUser from "./pages/AddUser.jsx";
 
 import HrView from "./pages/HrView.jsx";
 import "./App.css";
@@ -106,6 +107,7 @@ function App() {
           />
           <Route path="/leaveapplication" element={<LeaveApplication />} />
           <Route path="leave-history-admin" element={<LeaveHistory />} />
+          <Route path="/addUser" element={<AddUser />} />
         </Routes>
       </BrowserRouter>
     </>
