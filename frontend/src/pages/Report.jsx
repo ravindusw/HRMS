@@ -51,7 +51,6 @@ const Report = () => {
         className="left-image"
         style={{
           width: "100%",
-
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -71,7 +70,9 @@ const Report = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <report-h1>Jupiter Apparels HRMS - Reporting Module</report-h1>
+        <report-h1>Jupiter Apparels HRMS Reporting Module</report-h1>
+        <br />
+        <br />
         <h2>Generate Report</h2>
         <form>
           <div>
@@ -119,7 +120,7 @@ const Report = () => {
           </button>
         </form>
 
-        <report-h2>Generated Reports</report-h2>
+        <h2>Generated Reports</h2>
         {generatedReports.length === 0 && <p>No reports generated yet.</p>}
         <ul>
           {generatedReports.map((report, index) => (
