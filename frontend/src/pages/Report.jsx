@@ -17,6 +17,7 @@ const Report = () => {
   };
 
   const generateReport = () => {
+    s;
     const newReport = {
       type: reportType,
       customField1,
@@ -60,7 +61,7 @@ const Report = () => {
       </div>
 
       <div
-        className="form-box"
+        className="report-form-box"
         style={{
           width: "80%",
           height: "80%",
@@ -70,7 +71,7 @@ const Report = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h1>Jupiter Apparels HRMS - Reporting Module</h1>
+        <report-h1>Jupiter Apparels HRMS - Reporting Module</report-h1>
         <h2>Generate Report</h2>
         <form>
           <div>
@@ -113,12 +114,12 @@ const Report = () => {
             </>
           )}
 
-          <button type="button" onClick={generateReport}>
+          <button type="report-button" onClick={generateReport}>
             Generate Report
           </button>
         </form>
 
-        <h2>Generated Reports</h2>
+        <report-h2>Generated Reports</report-h2>
         {generatedReports.length === 0 && <p>No reports generated yet.</p>}
         <ul>
           {generatedReports.map((report, index) => (

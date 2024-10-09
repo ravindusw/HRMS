@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.form-box {
+.report-form-box {
   width: 80%;
   height: 80%;
   background-color: rgba(191, 238, 201, 0.9);
@@ -22,7 +22,7 @@
 }
 
 /* Button Styling */
-button {
+report-button {
   background-color: #4caf50;
   color: white;
   padding: 12px 25px;
@@ -34,10 +34,10 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+report-button:hover {
   background-color: #388e3c;
 }
-h1 {
+report-h1 {
   color: #2e7d32;
   font-size: 2.5em;
   margin-bottom: 20px;
