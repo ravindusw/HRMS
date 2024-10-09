@@ -17,6 +17,7 @@ const Report = () => {
   };
 
   const generateReport = () => {
+    s;
     const newReport = {
       type: reportType,
       customField1,
@@ -50,7 +51,6 @@ const Report = () => {
         className="left-image"
         style={{
           width: "100%",
-
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -60,7 +60,7 @@ const Report = () => {
       </div>
 
       <div
-        className="form-box"
+        className="report-form-box"
         style={{
           width: "80%",
           height: "80%",
@@ -70,7 +70,9 @@ const Report = () => {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h1>Jupiter Apparels HRMS - Reporting Module</h1>
+        <report-h1>Jupiter Apparels HRMS Reporting Module</report-h1>
+        <br />
+        <br />
         <h2>Generate Report</h2>
         <form>
           <div>
@@ -113,7 +115,7 @@ const Report = () => {
             </>
           )}
 
-          <button type="button" onClick={generateReport}>
+          <button type="report-button" onClick={generateReport}>
             Generate Report
           </button>
         </form>
