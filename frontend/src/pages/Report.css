@@ -1,11 +1,11 @@
 .left-image {
   background-size: cover;
   background-position: center;
-  width: 50%;
+  width: 50vw;
 }
 
 .right-container {
-  width: 50%;
+  width: 50vw;
   background-color: rgba(123, 212, 142, 0.9);
   display: flex;
   justify-content: center;
