@@ -116,7 +116,7 @@ const Profile = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:8800/profile/${employee_id}`
+          `http://localhost:8800/api/profile/${employee_id}`
         );
         setProfileData(response.data);
       } catch (error) {

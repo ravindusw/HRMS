@@ -9,29 +9,28 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Clear error message before submission
+    setErrorMessage("");
+    setIsLoading(true); // Start loading
 
     try {
-      const response = await axios.post("http://localhost:8800/login", {
-        email,
-        password,
-      });
-
-      // Store the user_id (employee_id) in localStorage
+      const response = await axios.post(
+        "http://localhost:8800/api/auth/login",
+        { email, password }
+      );
       const employee_id = response.data.employee_id;
-      localStorage.setItem("employee_id", employee_id); // Overwrite any existing ID
-      console.log("Logged in with employee ID:", employee_id);
-      console.log(localStorage.getItem("employee_id"));
-      // Navigate to the dashboard page
+      localStorage.setItem("employee_id", employee_id);
       navigate("/dashboard");
     } catch (err) {
       setErrorMessage(
         err.response && err.response.data ? err.response.data : "Login failed!"
       );
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -98,8 +97,8 @@ const LoginPage = () => {
 
           {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          <button type="submit" className="login-button">
-            Login
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
