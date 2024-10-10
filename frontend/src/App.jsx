@@ -20,10 +20,11 @@ import Report from "./pages/Report.jsx";
 import EIM from "./pages/Employee_Information_Management.jsx";
 import EditemployeeData from "./pages/EditemployeeData.jsx";
 import AddEmployee from "./pages/AddEmployee.jsx";
-import LeaveApplication from './pages/LeaveApplication.jsx';
-import LeaveHistory from './pages/LeaveHistoryAdmin.jsx'
-
+import LeaveApplication from "./pages/LeaveApplication.jsx";
+import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
+import AddUser from "./pages/AddUser.jsx";
 import HrView from "./pages/HrView.jsx";
+
 import "./App.css";
 
 function Layout() {
@@ -57,13 +58,16 @@ function Layout() {
               <Nav.Link as={Link} to="/dashboard">
                 Home
               </Nav.Link>
-              {/* Ensure the link includes the employee_id */}
               <Nav.Link as={Link} to={`/profile/${employee_id}`}>
                 Profile
               </Nav.Link>
               <Nav.Link as={Link} to="/report">
                 Reports
               </Nav.Link>
+              <Nav.Link as={Link} to="/addUser">
+                add_User
+              </Nav.Link>
+
               <Nav.Link as={Link} to="/addEmployee">
                 addEmployee
               </Nav.Link>
@@ -79,7 +83,6 @@ function Layout() {
   );
 }
 
-
 function App() {
   return (
     <>
@@ -93,11 +96,21 @@ function App() {
           <Route path="/profile/:employeeId" element={<Profile />} />
           <Route path="/report" element={<Report />} />
           <Route path="/Employee_Information_Management" element={<EIM />} />
-          <Route path="/Employee_Information_Management/HrView/:id_to_view" element={<HrView />} />
-          <Route path="/Employee_Information_Management/EditemployeeData/:id_to_edit" element={<EditemployeeData />} />
-          <Route path="/Employee_Information_Management/AddEmployee" element={<AddEmployee />} />
+          <Route
+            path="/Employee_Information_Management/HrView/:id_to_view"
+            element={<HrView />}
+          />
+          <Route
+            path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
+            element={<EditemployeeData />}
+          />
+          <Route
+            path="/Employee_Information_Management/AddEmployee"
+            element={<AddEmployee />}
+          />
           <Route path="/leaveapplication" element={<LeaveApplication />} />
-          <Route path="/leave-history-admin" element = {<LeaveHistory />} />
+          <Route path="leave-history-admin" element={<LeaveHistory />} />
+          <Route path="/addUser" element={<AddUser />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,18 +1,18 @@
 .report-container .left-image {
   background-size: cover;
   background-position: center;
-  width: 50%;
+  width: 50vw;
 }
 
 .right-container {
-  width: 50%;
+  width: 50vw;
   background-color: rgba(123, 212, 142, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.form-box {
+.report-form-box {
   width: 80%;
   height: 80%;
   background-color: rgba(191, 238, 201, 0.9);
@@ -22,7 +22,7 @@
 }
 
 /* Button Styling */
-button {
+report-button {
   background-color: #4caf50;
   color: white;
   padding: 12px 25px;
@@ -34,12 +34,13 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+report-button:hover {
   background-color: #388e3c;
 }
-h1 {
-  color: #2e7d32;
-  font-size: 2.5em;
+report-h1 {
+  color: #04790a;
+  text-align: center;
+  font-size: 3em;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }

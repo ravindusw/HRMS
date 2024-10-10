@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./LeaveHistoryAdmin.css";
 
 const LeaveHistory = () => {
-  const [employeeId, setEmployeeId] = useState('');
+  const [employeeId, setEmployeeId] = useState("");
   const [leaveData, setLeaveData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Sample mock data
   const mockLeaveData = [
-    { date: '2024-10-01', type: 'Sick Leave', status: 'Approved' },
-    { date: '2024-09-15', type: 'Casual Leave', status: 'Approved' },
-    { date: '2024-08-20', type: 'Annual Leave', status: 'Rejected' },
+    { date: "2024-10-01", type: "Sick Leave", status: "Approved" },
+    { date: "2024-09-15", type: "Casual Leave", status: "Approved" },
+    { date: "2024-08-20", type: "Annual Leave", status: "Rejected" },
   ];
 
   const fetchLeaveData = async (id) => {
     try {
       setLoading(true);
-      setError('');
-      
+      setError("");
+
       // Simulate an API call
       setTimeout(() => {
         setLeaveData(mockLeaveData); // Replace this with actual API call
         setLoading(false);
       }, 1000);
-      
     } catch (err) {
       setLoading(false);
-      setError('Failed to fetch leave data');
+      setError("Failed to fetch leave data");
     }
   };
 
@@ -39,7 +38,7 @@ const LeaveHistory = () => {
   };
 
   return (
-    <div className='leave-application'>
+    <div className="leave-application">
       <h2>Employee Leave History</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -53,7 +52,7 @@ const LeaveHistory = () => {
       </form>
 
       {loading && <p>Loading leave data...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       {leaveData.length > 0 && (
         <table border="1">

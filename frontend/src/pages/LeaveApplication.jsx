@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import './LeaveApplication.css'; // Assume the styles are stored in this file
+import React, { useState } from "react";
+import "./LeaveApplication.css"; // Assume the styles are stored in this file
 
 const LeaveApplication = () => {
-  const [leaveType, setLeaveType] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [reason, setReason] = useState('');
+  const [leaveType, setLeaveType] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [reason, setReason] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,10 @@ const LeaveApplication = () => {
       <form className="leave-form" onSubmit={handleSubmit}>
         <h2>Request for leave</h2>
         <label>Type</label>
-        <select value={leaveType} onChange={(e) => setLeaveType(e.target.value)}>
+        <select
+          value={leaveType}
+          onChange={(e) => setLeaveType(e.target.value)}
+        >
           <option value="">Select leave type</option>
           <option value="sick">Annual Leave</option>
           <option value="casual">Cassual Leave</option>
@@ -54,7 +57,9 @@ const LeaveApplication = () => {
           placeholder="Enter your reason"
         ></textarea>
 
-        <button type="submit" className="submit-btn">Done</button>
+        <button type="submit" className="submit-btn">
+          Done
+        </button>
       </form>
     </div>
   );
