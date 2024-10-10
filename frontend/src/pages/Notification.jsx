@@ -53,7 +53,7 @@ export default function Notification() {
     };
 
     return (
-        <>
+        <div className="notification-page">
             <h1>Notifications</h1>
             <div className="notificationBody" >   
                 <div className="notificationCardList" >
@@ -86,6 +86,6 @@ export default function Notification() {
                     <div> Hello World</div>
                 </div> */}
             </div>      
-        </>
+        </div>
     )
 }
