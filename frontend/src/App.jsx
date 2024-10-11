@@ -1,17 +1,5 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-  Link,
-  useNavigate,
-} from "react-router-dom";
-import { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Login from "./pages/Login.jsx";
@@ -28,63 +16,15 @@ import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
 import AddUser from "./pages/AddUser.jsx";
 import HrView from "./pages/HrView.jsx";
 import NotAuthorized from "./pages/NotAuthorized.jsx";
+import HRMSNavBar from "./components/NavBar.jsx";
 
 import "./App.css";
-
-function Layout() {
-  const location = useLocation();
-  const [employee_id, setEmployee_id] = useState(null);
-  const navigate = useNavigate();
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
-  return (
-    <>
-      {/* Conditionally render the Navbar based on the current path */}
-      {location.pathname !== "/" && location.pathname !== "/notAuthorized" && (
-        <Navbar fixed="top" bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand as={Link} to="/dashboard">
-              Jupiter
-            </Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/dashboard">
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to={`/profile`}>
-                Profile
-              </Nav.Link>
-              <Nav.Link as={Link} to="/report">
-                Reports
-              </Nav.Link>
-              <Nav.Link as={Link} to="/addUser">
-                add_User
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/addEmployee">
-                addEmployee
-              </Nav.Link>
-              <Nav.Link as={Link} to="/help">
-                help
-              </Nav.Link>
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-      )}
-    </>
-  );
-}
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Layout /> {/* Layout will conditionally render the Navbar */}
+        <HRMSNavBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
