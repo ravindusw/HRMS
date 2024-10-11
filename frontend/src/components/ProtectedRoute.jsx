@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { auth } = useAuth(); // Get the auth state from the AuthContext
 
   if (!auth.token || !allowedRoles.includes(auth.role)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/notAuthorized" replace />;
   }
 
   return children;

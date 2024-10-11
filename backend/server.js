@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import { db } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";

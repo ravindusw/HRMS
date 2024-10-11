@@ -27,6 +27,7 @@ import LeaveApplication from "./pages/LeaveApplication.jsx";
 import LeaveHistory from "./pages/LeaveHistoryAdmin.jsx";
 import AddUser from "./pages/AddUser.jsx";
 import HrView from "./pages/HrView.jsx";
+import NotAuthorized from "./pages/NotAuthorized.jsx";
 
 import "./App.css";
 
@@ -44,7 +45,7 @@ function Layout() {
   return (
     <>
       {/* Conditionally render the Navbar based on the current path */}
-      {location.pathname !== "/" && (
+      {location.pathname !== "/" && location.pathname !== "/notAuthorized" && (
         <Navbar fixed="top" bg="dark" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/dashboard">
@@ -92,6 +93,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/report" element={<Report />} />
           <Route path="/Employee_Information_Management" element={<EIM />} />
+          <Route path="/notAuthorized" element={<NotAuthorized />} />
           <Route
             path="/Employee_Information_Management/HrView/:id_to_view"
             element={
