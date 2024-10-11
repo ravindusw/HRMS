@@ -1,5 +1,49 @@
-import { db } from "../config/db.js";
+// import { db } from "../config/db.js";
+// import bcrypt from "bcrypt";
+
+// export const login = (req, res) => {
+//   const { email, password } = req.body;
+//   const query = "CALL GetUserByEmail(?)";
+
+//   db.query(query, [email], (err, results) => {
+//     if (err) {
+//       console.error("Error during stored procedure call:", err);
+//       logLoginAttempt(email, "Server error");
+//       return res.status(500).send("Server error");
+//     }
+//     console.log("Stored procedure called");
+//     console.log("Results:", results);
+
+//     if (results.length === 0) {
+//       logLoginAttempt(email, "Invalid credentials");
+//       return res.status(401).send("Invalid credentials");
+//     }
+
+//     const user = results[0][0].result;
+//     console.log(user);
+
+//     const hashedPassword = user.password;
+//     console.log(hashedPassword);
+
+//     bcrypt.compare(password, hashedPassword, (err, isMatch) => {
+//       if (err) {
+//         console.error("Error comparing passwords:", err);
+//         return res.status(500).send("Server error");
+//       }
+
+//       if (!isMatch) {
+//         logLoginAttempt(email, "Invalid credentials");
+//         return res.status(401).send("Invalid credentials");
+//       }
+
+//       res.status(200).json({ employee_id: user.employee_id });
+//     });
+//   });
+// };
+
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { db } from "../config/db.js";
 
 export const login = (req, res) => {
   const { email, password } = req.body;
@@ -12,7 +56,7 @@ export const login = (req, res) => {
       return res.status(500).send("Server error");
     }
     console.log("Stored procedure called");
-    console.log("Results:", results);
+    // console.log("Results:", results);
 
     if (results.length === 0) {
       logLoginAttempt(email, "Invalid credentials");
@@ -20,9 +64,10 @@ export const login = (req, res) => {
     }
 
     const user = results[0][0].result;
+    // console.log(user);
 
     const hashedPassword = user.password;
-    console.log(hashedPassword);
+    // console.log(hashedPassword);
 
     bcrypt.compare(password, hashedPassword, (err, isMatch) => {
       if (err) {
@@ -35,7 +80,15 @@ export const login = (req, res) => {
         return res.status(401).send("Invalid credentials");
       }
 
-      res.status(200).json({ employee_id: user.employee_id });
+      // Generate JWT token
+      const token = jwt.sign(
+        { id: user.employee_id, role: user.role },
+        "your_jwt_secret_key",
+        { expiresIn: "1h" }
+      );
+      // console.log(token);
+
+      res.status(200).json({ token });
     });
   });
 };

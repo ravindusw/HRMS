@@ -94,30 +94,30 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "react-bootstrap/Image";
-import EmployeePic from "../../assets/Employee.png";
-import { useParams, useNavigate } from "react-router-dom";
+import EmployeePic from "../assets/Employee.png";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 import "./Profile.css";
 
 const Profile = () => {
-  const { employee_id: paramEmployeeId } = useParams();
+  const { auth } = useAuth();
+  // console.log(auth.token);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState(null);
-  const [employee_id, setEmployee_id] = useState(
-    paramEmployeeId || localStorage.getItem("employee_id")
-  );
 
-  console.log(employee_id);
   useEffect(() => {
     const fetchProfileData = async () => {
-      if (!employee_id) {
-        navigate("/"); // Redirect to login if no employee_id
+      if (!auth.token) {
+        navigate("/"); // Redirect to login if no token
         return;
       }
 
       try {
-        const response = await axios.get(
-          `http://localhost:8800/api/profile/${employee_id}`
-        );
+        const response = await axios.get(`http://localhost:8800/api/profile`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
         setProfileData(response.data);
       } catch (error) {
         console.error("Error fetching profile data:", error);
@@ -125,7 +125,7 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, [employee_id, navigate]);
+  }, [auth.token, navigate]);
 
   if (!profileData) {
     return <div>Loading...</div>; // Show loading state while fetching data

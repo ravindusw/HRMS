@@ -3,6 +3,7 @@ import cors from "cors";
 import { db } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
+import { verifyToken } from "./middleWare/authMiddleware.js";
 
 const app = express();
 
@@ -13,19 +14,19 @@ app.use(cors());
 // Import all routes here
 
 // Use the login route
-
 app.use("/api/auth", authRoutes);
-app.use("/api/profile", profileRoutes);
+
+// Use the profile route with the verifyToken middleware
+app.use("/api/profile", verifyToken, profileRoutes);
 
 // Start the server
-
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
 // Error handling middleware
-// Error handling middleware
+
 app.use((err, req, res, next) => {
   console.error("Error stack:", err.stack);
   console.error("Error message:", err.message);
