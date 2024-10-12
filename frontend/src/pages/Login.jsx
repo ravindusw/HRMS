@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
-import logo from "../../assets/Jupiter_Logo.png";
+import logo from "../assets/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get the login method from the AuthContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,8 +24,8 @@ const LoginPage = () => {
         "http://localhost:8800/api/auth/login",
         { email, password }
       );
-      const employee_id = response.data.employee_id;
-      localStorage.setItem("employee_id", employee_id);
+      const { token } = response.data;
+      login(token); // Call the login method with the token
       navigate("/dashboard");
     } catch (err) {
       setErrorMessage(

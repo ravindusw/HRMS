@@ -1,14 +1,16 @@
 import { db } from "../config/db.js";
 
 export const getProfile = (req, res) => {
-  const { employee_id } = req.params;
+  const { id } = req.user;
+
   const query = `SELECT u.username, e.first_name, e.last_name, e.address, e.date_of_birth, e.email AS personal_email, e.hired_date, jt.title as job_title, d.name as Department
                  FROM users u 
                  JOIN employees e ON u.employee_id = e.employee_id 
                  LEFT JOIN job_title jt ON e.job_title_id = jt.job_title_id  
                  LEFT JOIN department d ON e.dept_id = d.dept_id
                  WHERE e.employee_id = ?`;
-  db.query(query, [employee_id], (err, results) => {
+
+  db.query(query, [id], (err, results) => {
     if (err) {
       console.error("Error fetching profile data:", err);
       return res.status(500).send("Server error");

@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.2",
+    "jwt-decode": "^4.0.0",
     "prop-types": "^15.8.1",
     "react-csv": "^2.2.2"
   }
