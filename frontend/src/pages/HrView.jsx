@@ -32,8 +32,9 @@ const HrView = () => {
       {error ? (
         <p className="error-message">{error}</p>
       ) : employee ? (
-        <div>
+        <div className='employee_Block'>
           {/* Employee Details Section */}
+          
           <section className="employee-details">
             <h2>Employee Information</h2>
             <p><strong>Employee ID:</strong> {employee.id}</p>

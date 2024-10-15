@@ -181,6 +181,12 @@ const initialEmployees = [
   },
 ];
 
+
+
+const departments = ['HR', 'Finance', 'Engineering', 'QA'];
+const JobTitles = ['HR Manager', 'Accountant', 'Software Engineer', 'QA Engineer'];
+
+
 router.get("/employees", (req, res) => {
   if (initialEmployees) {
     //console.log(initialEmployees);
@@ -201,6 +207,28 @@ router.get("/employees/:id", (req, res) => {
   }
 });
 
+
+
+
+router.get("/departments", (req, res) => {
+  if (departments) {
+    console.log(departments);
+    res.send(departments);
+  } else {
+    response.status(404).end();
+  }
+});
+ 
+
+
+router.get("/JobTitles", (req, res) => {
+  if (JobTitles) {
+    
+    res.send(JobTitles);
+  } else {
+    response.status(404).end();
+  }
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

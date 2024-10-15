@@ -3,7 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
-import getemployeesForEIMRouter from "./routes/getemployeesForEIM.js";
+import HrRouter from "./routes/HrRouter.js";
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", verifyToken, profileRoutes);
 
 
-app.use("/api/Hr", getemployeesForEIMRouter);
+app.use("/api/Hr", HrRouter);
 
 
 // Start the server

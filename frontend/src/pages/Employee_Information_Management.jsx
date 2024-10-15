@@ -10,8 +10,14 @@ import axios from 'axios';
 
 // functions for filters
 
-const Filterdepartment=()=>{
-    const departments=['All Departments','...']
+const Filterdepartment=(departments)=>{
+  
+    
+    
+  
+   
+     
+    
     return(
         <select>
         {departments.map((department)=>(
@@ -21,8 +27,8 @@ const Filterdepartment=()=>{
     )
 
 }
-const FilterJobTitle=()=>{
-    const JobTitles=['All Job Titles','HR Manager','Accountant',' Software Engineer',' QA Engineer']
+const FilterJobTitle=(JobTitles)=>{
+    
     return(
         <select>
         {JobTitles.map((JobTitle)=>(
@@ -58,6 +64,8 @@ const FilterGenders=()=>{
 const EmployeeInfoManagement = () => {
   const [employees, setEmployees] = useState([]);
   const [filterEmplooyees, setFilterEmployees] = useState([]);
+  const [departments, setdepartments] = useState(['All departments']);
+  const [JobTitles, setJobTitles] = useState(['All Job Titles']);
 
   
   const [filter, setFilter] = useState("")
@@ -74,6 +82,39 @@ const EmployeeInfoManagement = () => {
         console.error("There was an error fetching the employees!", error);
       });
   }, []);
+  
+
+  
+  // get departments from backend
+  useEffect(() => {
+    const fetchDepartments = async () => {
+        try {
+            const response = await axios.get('http://localhost:8800/api/Hr/departments');
+            setdepartments(departments.concat(response.data));
+            //console.log(response.data);
+        } catch (error) {
+            console.error("There was an error fetching the departments!", error);
+        }
+    };
+
+    fetchDepartments();
+}, []);
+
+  // get JobTitles from backend
+  useEffect(() => {
+    const fetchJobTitles = async () => {
+        try {
+            const response = await axios.get('http://localhost:8800/api/Hr/JobTitles');
+            setJobTitles(JobTitles.concat( response.data));
+            //console.log(response.data);
+        } catch (error) {
+            console.error("There was an error fetching the JobTitles!", error);
+        }
+    };
+
+    fetchJobTitles();
+}, []);
+
   
 
   
@@ -124,15 +165,15 @@ const EmployeeInfoManagement = () => {
 
 
   return (
-    <div>
-      <header>
+    <div className="header-container">
+      <header >
         <h1>Employee Information Management</h1>
         <div className="search-filters">
         
         <input id='emp_name' type="text" placeholder="Search..." onChange={changeFilter} value={filter}/>
         
-        <Filterdepartment/>
-        <FilterJobTitle/>
+        {Filterdepartment(departments)}
+        {FilterJobTitle(JobTitles)}
         <FilterGenders/>
         
         
