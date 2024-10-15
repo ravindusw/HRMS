@@ -1,37 +1,45 @@
-import "./Help.css";
-
 import React, { useState } from "react";
 import "./Login.css";
-import logo from "../../public/Jupiter_Logo.png";
+import logo from "../assets/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext.jsx";
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get the login method from the AuthContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logicd
+    setErrorMessage("");
+    setIsLoading(true); // Start loading
+
     try {
-      const response = await axios.post("http://localhost:3000/login", {
-        email: email,
-        password: password,
-      });
-      navigate("/profile");
+      const response = await axios.post(
+        "http://localhost:8800/api/auth/login",
+        { email, password }
+      );
+      const { token } = response.data;
+      login(token); // Call the login method with the token
+      navigate("/dashboard");
     } catch (err) {
-      console.log("Error occured!:", err);
+      setErrorMessage(
+        err.response && err.response.data ? err.response.data : "Login failed!"
+      );
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
   return (
     <div className="login-container">
-      {/* Left panel with invite message */}
       <div className="left-panel">
         <div className="network-info">
-          {/* Logo with animation */}
           <img
             src={logo}
             alt="Jupiter Apparels Logo"
@@ -49,11 +57,11 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right panel with sign-up form */}
       <div className="right-panel">
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>Welcome Aboard!</h2>
-          <h1>log in to your Account</h1>
+          <h1>Log in to your Account</h1>
+
           <label htmlFor="email" className="form-label">
             Email Address
           </label>
@@ -74,7 +82,7 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             id="password"
             className="form-input"
-            placeholder="Create a password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -89,22 +97,15 @@ const Login = () => {
             <label htmlFor="show-password">Show Password</label>
           </div>
 
-          <button
-            type="submit"
-            className="login-button"
-            // onClick={() => Navigate("/userProfile")}
-          >
-            login
-          </button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          {/* <p className="terms-text">
-            By signing up, you agree to our <a href="#">Terms of Service</a> and{" "}
-            <a href="#">Privacy Policy</a>.
-          </p> */}
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -1,0 +1,111 @@
+/* Reset Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Component Styles */
+.info-summary,
+.calendar-section,
+.remaining-leaves,
+.employees-info,
+.user-role-distribution,
+.quick-actions {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-summary h3,
+.calendar-section h3,
+.remaining-leaves h3,
+.employees-info h3,
+.user-role-distribution h3,
+.quick-actions h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.leave-types {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leave-card {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  flex: 1;
+  margin: 0 5px;
+}
+
+.leave-card span {
+  display: block;
+  font-size: 1.5em;
+  color: #007bff;
+}
+
+.btn-update,
+.btn-apply {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-update:hover,
+.btn-apply:hover {
+  background: #0056b3;
+}
+
+/* Calendar Styles */
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: "Arial", sans-serif;
+}
+
+.react-calendar__navigation__label,
+.react-calendar__navigation__arrow {
+  color: #007bff;
+}
+
+.react-calendar__tile--active {
+  background: #007bff;
+  color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

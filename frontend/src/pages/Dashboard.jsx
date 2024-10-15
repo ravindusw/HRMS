@@ -1,71 +1,116 @@
-import './Dashboard.css'
-import 'react-calendar/dist/Calendar.css';
+import "./Dashboard.css";
 
-import Calendar from 'react-calendar'
+import InfoSummary from "../components/ForDashboard/InfoSummary";
+import CalendarSection from "../components/ForDashboard/CalendarSection";
+import RemainingLeaves from "../components/ForDashboard/RemainingLeaves";
+import EmployeesInfo from "../components/ForDashboard/EmployeesInfo";
+import UserRoleDistribution from "../components/ForDashboard/UserRoleDistribution";
+import QuickActions from "../components/ForDashboard/QuickActions";
 
 export default function Dashboard() {
-    return (
-        <div className="dashboard-container">
-            <h1>Dashboard</h1>
-            <h2>Good Morning Alan!</h2>
-    
-            <div className="info-summary">
-                <h3>Personal Information Summary</h3>
-                <p><strong>Name:</strong> Alan Walker</p>
-                <p><strong>Job Title:</strong> Admin</p>
-                <p><strong>Department:</strong> IT</p>
-                <p><strong>Date of Birth:</strong> 05/05/1998</p>
-                <p><strong>Working Since:</strong> 12/05/2020</p>
-                <button className="btn-update">View Details</button>
-            </div>
-
-            <div className="calendar">
-                <Calendar />
-                <h3>Upcoming Meetings</h3>
-                <p>03/02/2024 - Meeting with Managers</p>
-                <p>05/10/2024 - Meeting</p>
-                <p>24/10/2024 - On Leave</p>
-            </div>
-
-            <div className="remaining-leaves">
-                <h3>Remaining Leaves</h3>
-                <div className="leave-types">
-                    <div className="leave-card">Annual <br /><span>20</span></div>
-                    <div className="leave-card">Casual <br /><span>12</span></div>
-                    <div className="leave-card">Maternity <br /><span>10</span></div>
-                    <div className="leave-card">No-pay <br /><span>35</span></div>
-                </div>
-                <button className="btn-apply">Apply For Leave</button>
-            </div>
-
-            <div className="employees-info">
-                <div className="employees-count">
-                    <h3>Total Employees</h3>
-                    <p>450</p>
-                </div>
-                <div className="employees-on-leave">
-                    <h3>Employees on Leave</h3>
-                    <p>50</p>
-                </div>
-            </div>
-
-            <div className="user-role-distribution">
-                <h3>User Role Distribution</h3>
-                <p>Admin Users: 01</p>
-                <p>HR Managers: 05</p>
-                <p>Supervisors: 25</p>
-                <p>Regular Employees: 450</p>
-            </div>
-
-            <div className="quick-actions">
-                <h3>Quick Actions</h3>
-                <p>Register New HR Manager</p>
-                <p>Register New Employee</p>
-                <p>Approve/Reject Leave Requests</p>
-                <p>Update Personal Information</p>
-            </div>
-
-            
+  return (
+    <div className="dashboard-container">
+      <h1 className="dashboard-title">Dashboard</h1>
+      <h2 className="dashboard-subtitle">Good Morning Alan!</h2>
+      <div className="dashboard-grid">
+        <InfoSummary />
+        <CalendarSection />
+        <RemainingLeaves />
+        <EmployeesInfo />
+        <UserRoleDistribution />
+        <QuickActions />
       </div>
-    )
+    </div>
+  );
 }
+
+// import React from "react";
+// import { Row, Col, Card, ProgressBar, ListGroup } from "react-bootstrap";
+// import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+
+// const data = [
+//   { name: "IT", value: 30 },
+//   { name: "HR", value: 25 },
+//   { name: "Sales", value: 20 },
+//   { name: "Finance", value: 15 },
+//   { name: "Admin", value: 10 },
+// ];
+
+// const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28FD0"];
+
+// function Dashboard() {
+//   return (
+//     <div className="dashboard-container">
+//       <Row>
+//         <Col md={4}>
+//           <Card>
+//             <Card.Body>
+//               <Card.Title>Employee Overview</Card.Title>
+//               <Card.Text>Total Employees: 100</Card.Text>
+//               <Card.Text>New Hires: 10</Card.Text>
+//               <ProgressBar now={60} label="Active Leaves: 15" />
+//             </Card.Body>
+//           </Card>
+
+//           <Card>
+//             <Card.Body>
+//               <Card.Title>Leave Balance Summary</Card.Title>
+//               <ListGroup>
+//                 <ListGroup.Item>Annual Leave: 20 Days Remaining</ListGroup.Item>
+//                 <ListGroup.Item>Sick Leave: 5 Days Remaining</ListGroup.Item>
+//               </ListGroup>
+//             </Card.Body>
+//           </Card>
+//         </Col>
+
+//         <Col md={8}>
+//           <Card>
+//             <Card.Body>
+//               <Card.Title>Department Statistics</Card.Title>
+//               <PieChart width={400} height={400}>
+//                 <Pie
+//                   data={data}
+//                   cx={200}
+//                   cy={200}
+//                   innerRadius={60}
+//                   outerRadius={120}
+//                   fill="#8884d8"
+//                   paddingAngle={5}
+//                   dataKey="value"
+//                 >
+//                   {data.map((entry, index) => (
+//                     <Cell
+//                       key={`cell-${index}`}
+//                       fill={COLORS[index % COLORS.length]}
+//                     />
+//                   ))}
+//                 </Pie>
+//                 <Tooltip />
+//                 <Legend />
+//               </PieChart>
+//             </Card.Body>
+//           </Card>
+
+//           <Card>
+//             <Card.Body>
+//               <Card.Title>Recent Activity Feed</Card.Title>
+//               <ListGroup>
+//                 <ListGroup.Item>
+//                   Jane Smith submitted a leave request
+//                 </ListGroup.Item>
+//                 <ListGroup.Item>
+//                   John Doe was added to Sales Department
+//                 </ListGroup.Item>
+//                 <ListGroup.Item>
+//                   New hire: Emily Parker (Software Engineer)
+//                 </ListGroup.Item>
+//               </ListGroup>
+//             </Card.Body>
+//           </Card>
+//         </Col>
+//       </Row>
+//     </div>
+//   );
+// }
+
+// export default Dashboard;

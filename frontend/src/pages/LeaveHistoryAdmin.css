@@ -1,90 +1,90 @@
 /* App.css */
 
 .leave-application h2 {
-    text-align: center;
-    color: #4CAF50; /* Green for headings */
-  }
-  
-  .leave-application form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-  }
-  
-  .leave-application input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
-    outline: none;
-    margin-right: 10px;
-  }
-  
-  .leave-application input[type="text"]:focus {
-    border-color: #66bb6a;
-  }
-  
-  .leave-application button {
-    padding: 10px 20px;
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .leave-application button:hover {
-    background-color: #66bb6a;
-  }
-  
-  .leave-application table {
-    width: 60%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: white; /* White table background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .leave-application th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .leave-application th {
-    background-color: #4CAF50; /* Green background for table header */
-    color: white;
-  }
-  
-  .leave-application td {
-    color: #333;
-  }
-  
-  .leave-application tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .leave-application p {
-    text-align: center;
-  }
-  
-  .leave-application p.error {
-    color: red;
-  }
-  
-  .leave-application p.loading {
-    color: #4CAF50; /* Green for loading text */
-  }
-  .leave-application{
-    /* width: 100%;height: 100%; */
-    background-image: url('https://paybooks.in/wp-content/uploads/2020/04/A-Quick-Guide-to-Leave-Rules-in-India.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    min-width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-  }
-  
+  text-align: center;
+  color: #4caf50; /* Green for headings */
+}
+
+.leave-application form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.leave-application input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #4caf50;
+  border-radius: 4px;
+  outline: none;
+  margin-right: 10px;
+}
+
+.leave-application input[type="text"]:focus {
+  border-color: #66bb6a;
+}
+
+.leave-application button {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.leave-application button:hover {
+  background-color: #66bb6a;
+}
+
+.leave-application table {
+  width: 60%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: white; /* White table background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leave-application th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.leave-application th {
+  background-color: #4caf50; /* Green background for table header */
+  color: white;
+}
+
+.leave-application td {
+  color: #333;
+}
+
+.leave-application tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.leave-application p {
+  text-align: center;
+}
+
+.leave-application p.error {
+  color: red;
+}
+
+.leave-application p.loading {
+  color: #4caf50; /* Green for loading text */
+}
+.leave-application {
+  /* width: 100%;height: 100%; */
+  background-image: url("https://paybooks.in/wp-content/uploads/2020/04/A-Quick-Guide-to-Leave-Rules-in-India.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+}
