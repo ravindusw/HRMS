@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
+import getemployeesForEIMRouter from "./routes/getemployeesForEIM.js";
 
 const app = express();
 
@@ -17,6 +18,10 @@ app.use("/api/auth", authRoutes);
 
 // Use the profile route with the verifyToken middleware
 app.use("/api/profile", verifyToken, profileRoutes);
+
+
+app.use("/api/Hr", getemployeesForEIMRouter);
+
 
 // Start the server
 const PORT = process.env.PORT || 8800;

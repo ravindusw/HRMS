@@ -37,9 +37,12 @@ function App() {
           <Route
             path="/Employee_Information_Management/HrView/:id_to_view"
             element={
-              <ProtectedRoute allowedRoles={["hr_manager"]}>
+              <HrView />
+              /*
+               <ProtectedRoute allowedRoles={["hr_manager"]}>
                 <HrView />
               </ProtectedRoute>
+              */
             }
           />
           <Route

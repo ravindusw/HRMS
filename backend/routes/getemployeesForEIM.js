@@ -181,22 +181,26 @@ const initialEmployees = [
   },
 ];
 
-router.get("/getemployeesForHR", (req, res) => {
+router.get("/employees", (req, res) => {
   if (initialEmployees) {
+    //console.log(initialEmployees);
     res.json(initialEmployees);
   } else {
     response.status(404).end();
   }
 });
 
-router.get("/getemployeesForEIM", (req, res) => {
-  if (initialEmployees) {
-    //console.log(initialEmployees);
-    res.send(initialEmployees);
+router.get("/employees/:id", (req, res) => {
+  const employeeId = req.params.id;
+  const employee = initialEmployees.find(emp => emp.id === employeeId);
+  
+  if (employee) {
+    res.json(employee);
   } else {
-    response.status(404).end();
+    res.status(404).json({ message: "Employee not found" });
   }
 });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

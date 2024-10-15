@@ -64,7 +64,7 @@ const EmployeeInfoManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8800/getemployeesForEIM')
+    axios.get('http://localhost:8800/api/Hr/employees')
       .then((response) => {
         setEmployees(response.data);
         setFilterEmployees(response.data); // Update filterEmployees when employees are fetched
