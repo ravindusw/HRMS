@@ -11,6 +11,7 @@ import EditemployeeData from './pages/EditemployeeData.jsx'
 import AddEmployee from './pages/AddEmployee.jsx'
 import LeaveApplication from './pages/LeaveApplication.jsx'
 
+import SupervisorDashboard from './pages/Supervisor.jsx'
 
 import HrView from './pages/HrView.jsx'
 import './App.css'
@@ -33,6 +34,7 @@ function App() {
           <Route path="/Employee_Information_Management/AddEmployee" element={<AddEmployee />} />
           <Route path="/leaveapplication" element={<LeaveApplication />} />
           <Route path = "leave-history-admin" element = {<LeaveHistory />} />
+          <Route path="/supervisor" element={<SupervisorDashboard />} />
         </Routes>
       </BrowserRouter>
     </>
