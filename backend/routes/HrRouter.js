@@ -212,7 +212,7 @@ router.get("/employees/:id", (req, res) => {
 
 router.get("/departments", (req, res) => {
   if (departments) {
-    console.log(departments);
+    //console.log(departments);
     res.send(departments);
   } else {
     response.status(404).end();
