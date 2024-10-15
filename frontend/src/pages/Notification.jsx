@@ -44,6 +44,7 @@ export default function Notification() {
     }));
   };
 
+
   const filterByStatus = (status) => {
     setFilterStatus(status);
     // setFilterType(''); // Reset type filter when status filter is applied
@@ -135,3 +136,4 @@ export default function Notification() {
     </>
   );
 }
+
