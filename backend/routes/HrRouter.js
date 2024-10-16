@@ -212,14 +212,21 @@ router.get("/employees/:id", (req, res) => {
 
 
 router.get("/departments", (req, res) => {
-  if (departments) {
-    console.log(departments);
-    res.send(departments);
-  } else {
-    response.status(404).end();
-  }
+
+  db.query("SELECT name,dept_id FROM hrms.department where branch_id =(select branch_id from branch where country='Sri Lanka'  );", (err, results) => {
+    if (err) {
+      console.error("Error fetching departments:", err);
+      return res.status(500).send("Server error");
+    }
+    if (results.length === 0) {
+      return res.status(404).send("Departments not found");
+    }
+    const departmentNames = results.map(department => department.name);
+    console.log(results)
+    //res.status(200).json(departmentNames);
+  });
+  
 });
- 
 
 
 router.get("/JobTitles", (req, res) => {
