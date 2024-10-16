@@ -1,10 +1,12 @@
 import mysql from "mysql2";
 
 export const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "222336699",
-  database: "db4_all",
+  host: "db-mysql-hrms-do-user-17987673-0.i.db.ondigitalocean.com",
+  user: "doadmin",
+  password: "AVNS_oGQvvIkkTUPm4xaSA_Z",
+  database: "hrms",
+  port: 25060,
+  connectTimeout: 10000,
 });
 
 db.connect((err) => {
