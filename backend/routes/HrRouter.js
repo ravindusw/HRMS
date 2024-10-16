@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { db } from "../config/db.js";
 
 const router = Router();
 
@@ -183,7 +184,7 @@ const initialEmployees = [
 
 
 
-const departments = ['HR', 'Finance', 'Engineering', 'QA'];
+
 const JobTitles = ['HR Manager', 'Accountant', 'Software Engineer', 'QA Engineer'];
 
 
@@ -212,7 +213,7 @@ router.get("/employees/:id", (req, res) => {
 
 router.get("/departments", (req, res) => {
   if (departments) {
-    //console.log(departments);
+    console.log(departments);
     res.send(departments);
   } else {
     response.status(404).end();
