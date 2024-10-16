@@ -222,20 +222,27 @@ router.get("/departments", (req, res) => {
       return res.status(404).send("Departments not found");
     }
     const departmentNames = results.map(department => department.name);
-    console.log(results)
+    //console.log(results)
     res.status(200).json(departmentNames);
   });
   
 });
 
-
 router.get("/JobTitles", (req, res) => {
-  if (JobTitles) {
-    
-    res.send(JobTitles);
-  } else {
-    response.status(404).end();
-  }
+
+  db.query("SELECT title FROM hrms.job_title;", (err, results) => {
+    if (err) {
+      console.error("Error fetching JobTitles:", err);
+      return res.status(500).send("Server error");
+    }
+    if (results.length === 0) {
+      return res.status(404).send("JobTitles not found");
+    }
+    const JobTitles = results.map(JobTitle => JobTitle.title);
+    console.log(JobTitles)
+    res.status(200).json(JobTitles);
+  });
+  
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -99,7 +99,8 @@ const ShowEmplyees=({initialEmployees})=>{
               <td className="action-buttons">
                 <button className="btn-view" onClick={() => handleViewButtonClick(employee.id)}>View</button>
                 <button className="btn-edit" onClick={() => handleEdit(employee.id)}>Edit</button>
-                <button className="btn-delete" onClick={() => handleDelete(employee.id)}>Delete</button>
+
+                {/*<button className="btn-delete" onClick={() => handleDelete(employee.id)}>Delete</button>*/}
               </td>
             </tr>
           ))}
