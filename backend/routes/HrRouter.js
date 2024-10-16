@@ -223,7 +223,7 @@ router.get("/departments", (req, res) => {
     }
     const departmentNames = results.map(department => department.name);
     console.log(results)
-    //res.status(200).json(departmentNames);
+    res.status(200).json(departmentNames);
   });
   
 });
