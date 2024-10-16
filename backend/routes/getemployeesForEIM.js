@@ -181,15 +181,16 @@ const initialEmployees = [
   },
 ];
 
-router.get("/getemployeesForHR", (req, res) => {
+router.get("/", (req, res) => {
   if (initialEmployees) {
+    console.log(initialEmployees);
     res.json(initialEmployees);
   } else {
     response.status(404).end();
   }
 });
 
-router.get("/getemployeesForEIM", (req, res) => {
+router.get("/", (req, res) => {
   if (initialEmployees) {
     //console.log(initialEmployees);
     res.send(initialEmployees);

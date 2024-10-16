@@ -1,48 +1,96 @@
+/* Wrapper */
 .add-user-wrapper {
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
-  margin-top: 100px;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
+.add-user-wrapper:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Form */
 .add-user-form-unique {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Group */
+.form-group-unique {
   display: flex;
   flex-direction: column;
 }
 
-.form-group-unique {
-  margin-bottom: 20px;
-}
-
+/* Labels */
 .label-unique {
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #444;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
 }
 
+/* Inputs */
 .input-unique {
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   width: 100%;
-  font-size: 14px;
+  font-size: 15px;
+  background-color: #fafafa;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 
+.input-unique:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+/* Submit Button */
 .submit-button-unique {
-  padding: 12px;
+  padding: 14px;
   background-color: #3498db;
-  color: white;
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 17px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
 }
 
 .submit-button-unique:hover {
-  background-color: #2980b9;
+  /* background-color: #2c81ba; */
+  transform: translateY(-2px);
+  transform: translate3d(2px);
+}
+
+.submit-button-unique:active {
+  transform: translateY(0);
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Red button styling for error */
+.submit-button-error {
+  background-color: red; /* Error red */
+  color: white;
+}
+
+/* Green button styling for success */
+.submit-button-success {
+  background-color: green;
+  color: white;
 }

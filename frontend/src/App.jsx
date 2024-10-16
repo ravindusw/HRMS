@@ -37,7 +37,7 @@ function App() {
           <Route
             path="/Employee_Information_Management/HrView/:id_to_view"
             element={
-              <ProtectedRoute allowedRoles={["hr_manager"]}>
+              <ProtectedRoute allowedRoles={["HR Manager"]}>
                 <HrView />
               </ProtectedRoute>
             }
@@ -45,7 +45,7 @@ function App() {
           <Route
             path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
             element={
-              <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
+              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
                 <EditemployeeData />
               </ProtectedRoute>
             }
@@ -53,7 +53,7 @@ function App() {
           <Route
             path="/Employee_Information_Management/AddEmployee"
             element={
-              <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
+              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
                 <AddEmployee />
               </ProtectedRoute>
             }
@@ -62,7 +62,7 @@ function App() {
           <Route
             path="/leave-history-admin"
             element={
-              <ProtectedRoute allowedRoles={["hr_manager"]}>
+              <ProtectedRoute allowedRoles={["HR Manager"]}>
                 <LeaveHistory />
               </ProtectedRoute>
             }
@@ -70,8 +70,16 @@ function App() {
           <Route
             path="/addUser"
             element={
-              <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
+              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
                 <AddUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/addEmployee"
+            element={
+              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+                <AddEmployee />
               </ProtectedRoute>
             }
           />

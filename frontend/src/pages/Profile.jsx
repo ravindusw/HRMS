@@ -101,7 +101,7 @@ import "./Profile.css";
 
 const Profile = () => {
   const { auth } = useAuth();
-  // console.log(auth.token);
+
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState(null);
 

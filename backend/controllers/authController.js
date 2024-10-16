@@ -4,16 +4,15 @@ import { db } from "../config/db.js";
 
 export const login = (req, res) => {
   const { email, password } = req.body;
-  const query = "CALL GetUserByEmail(?)";
+  const query = "CALL user_login(?)";
 
   db.query(query, [email], (err, results) => {
     if (err) {
       console.error("Error during stored procedure call:", err);
-      logLoginAttempt(email, "Server error");
+      // logLoginAttempt(email, "Server error");
       return res.status(500).send("Server error");
     }
     console.log("Stored procedure called");
-    // console.log("Results:", results);
 
     if (results.length === 0) {
       logLoginAttempt(email, "Invalid credentials");
@@ -21,10 +20,9 @@ export const login = (req, res) => {
     }
 
     const user = results[0][0].result;
-    // console.log(user);
+    console.log(user.role);
 
     const hashedPassword = user.password;
-    // console.log(hashedPassword);
 
     bcrypt.compare(password, hashedPassword, (err, isMatch) => {
       if (err) {
@@ -33,7 +31,6 @@ export const login = (req, res) => {
       }
 
       if (!isMatch) {
-        logLoginAttempt(email, "Invalid credentials");
         return res.status(401).send("Invalid credentials");
       }
 
@@ -51,14 +48,14 @@ export const login = (req, res) => {
 };
 
 export const addUser = (req, res) => {
-  const { employee_Id, userName, password, email } = req.body;
-  const query = "CALL CreateUser(?, ?, ?, ?)";
+  const { employee_Id, userName, password, email, role } = req.body;
+  const query = "CALL CreateUser(?, ?, ?, ?,?)";
   const password_hash = bcrypt.hashSync(password, 10);
-  console.log(employee_Id);
+  // console.log(employee_Id);
 
   db.query(
     query,
-    [employee_Id, userName, password_hash, email],
+    [employee_Id, userName, password_hash, email, role],
     (err, results) => {
       if (err) {
         console.error("Error during stored procedure call:", err);
