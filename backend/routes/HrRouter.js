@@ -216,7 +216,7 @@ router.get("/employees", (req, res) => {
       return res.status(404).send("employees not found");
     }
     //const employees = employees.map(employees => JobTitle.title);
-    console.log(results)
+    //console.log(results)
     res.status(200).json(results);
   });
   
