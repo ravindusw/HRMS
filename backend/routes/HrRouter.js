@@ -187,6 +187,7 @@ const initialEmployees = [
 
 const JobTitles = ['HR Manager', 'Accountant', 'Software Engineer', 'QA Engineer'];
 
+/*
 
 router.get("/employees", (req, res) => {
   if (initialEmployees) {
@@ -196,6 +197,32 @@ router.get("/employees", (req, res) => {
     response.status(404).end();
   }
 });
+*/
+
+
+router.get("/employees", (req, res) => {
+
+  db.query(
+    `SELECT employee_id as id,(CONCAT(first_name, ' ', last_name))  AS "name",job_title.title as job,hrms.department.name as department,gender,email
+    FROM employee inner join  job_title using(job_title_id) inner join department using(dept_id);
+`, 
+    
+    (err, results) => {
+    if (err) {
+      console.error("Error fetching employees:", err);
+      return res.status(500).send("Server error");
+    }
+    if (results.length === 0) {
+      return res.status(404).send("employees not found");
+    }
+    //const employees = employees.map(employees => JobTitle.title);
+    console.log(results)
+    res.status(200).json(results);
+  });
+  
+});
+
+
 
 router.get("/employees/:id", (req, res) => {
   const employeeId = req.params.id;
@@ -239,7 +266,7 @@ router.get("/JobTitles", (req, res) => {
       return res.status(404).send("JobTitles not found");
     }
     const JobTitles = results.map(JobTitle => JobTitle.title);
-    console.log(JobTitles)
+    //console.log(JobTitles)
     res.status(200).json(JobTitles);
   });
   

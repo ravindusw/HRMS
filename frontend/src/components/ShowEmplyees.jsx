@@ -82,8 +82,9 @@ const ShowEmplyees=({initialEmployees})=>{
           <tr>
             <th>Employee ID</th>
             <th>Name</th>
-            <th>Gender</th>
             <th>Job Title</th>
+            <th>Department</th>
+            <th>Gender</th>
             <th>Email</th>
             <th>Actions</th>
           </tr>
@@ -93,8 +94,10 @@ const ShowEmplyees=({initialEmployees})=>{
             <tr key={employee.id}>
               <td >{employee.id}</td>
               <td>{employee.name}</td>
-              <td>{employee.gender}</td>
               <td>{employee.job}</td>
+              <td>{employee.department}</td>
+              <td>{employee.gender}</td>
+              
               <td>{employee.email}</td>
               <td className="action-buttons">
                 <button className="btn-view" onClick={() => handleViewButtonClick(employee.id)}>View</button>
