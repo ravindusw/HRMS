@@ -181,7 +181,7 @@ const EmployeeInfoManagement = () => {
       </header>
       
       
-      <button id="add-employee" onClick={() => handleAddNewEmployeeButtonClick()}>Add Employee</button>
+      {/*<button id="add-employee" onClick={() => handleAddNewEmployeeButtonClick()}>Add Employee</button> */}
       <ShowSilteredEmployees/>
       
       
