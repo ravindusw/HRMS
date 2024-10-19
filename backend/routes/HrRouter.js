@@ -5,59 +5,25 @@ const router = Router();
 
 
 
-
-/*
-
-router.get("/employees", (req, res) => {
-  if (initialEmployees) {
-    //console.log(initialEmployees);
-    res.json(initialEmployees);
-  } else {
-    response.status(404).end();
-  }
-});
-*/
-
+// get all employeeslist from the database by calling the stored procedure GetEmployeeList
 
 router.get("/employees", (req, res) => {
+  const query = 'CALL GetEmployeeList()';
 
-  db.query(
-   `SELECT employee_id as id, (CONCAT(first_name, ' ', last_name)) AS "name", job_title.title as job, hrms.department.name as department, gender, email
-    FROM employee 
-    INNER JOIN job_title USING(job_title_id) 
-    INNER JOIN department USING(dept_id) 
-    ORDER BY first_name, last_name;`, 
-    
-    (err, results) => {
+  db.query(query, (err, results) => {
     if (err) {
-      console.error("Error fetching employees:", err);
+      console.error("Error fetching employee list:", err);
       return res.status(500).send("Server error");
     }
-    if (results.length === 0) {
-      return res.status(404).send("employees not found");
-    }
-    //const employees = employees.map(employees => JobTitle.title);
-    //console.log(results)
-    res.status(200).json(results);
+
+    res.status(200).json(results[0]);
   });
-  
 });
 
 
-/*
-router.get("/employees/:id", (req, res) => {
-  const employeeId = req.params.id;
-  const employee = initialEmployees.find(emp => emp.id === employeeId);
-  
-  if (employee) {
-    res.json(employee);
-  } else {
-    res.status(404).json({ message: "Employee not found" });
-  }
-});
-*/
+// get all employeedata from the database by calling the stored procedure GetEmployeeDataForView and GetDependentDetails
 
-// GET Employee datas BY ID
+
 
 router.get("/employees/:id", (req, res) => {
   const employeeId = req.params.id;
@@ -121,24 +87,27 @@ router.get("/employees/:id", (req, res) => {
   });
 });
 
+// get all employeedata from the database by calling the stored procedure GetEmployeeDataForView and GetDependentDetails
 
-
+// Existing route to get departments
 router.get("/departments", (req, res) => {
+  const countryName = 'Sri Lanka';
 
-  db.query("SELECT name,dept_id FROM hrms.department where branch_id =(select branch_id from branch where country='Sri Lanka'  );", (err, results) => {
+  const query = 'CALL GetDepartmentsByCountry(?)';
+
+  db.query(query, [countryName], (err, results) => {
     if (err) {
       console.error("Error fetching departments:", err);
       return res.status(500).send("Server error");
     }
-    if (results.length === 0) {
+    if (results[0].length === 0) {
       return res.status(404).send("Departments not found");
     }
-    const departmentNames = results.map(department => department.name);
-    //console.log(results)
+    const departmentNames = results[0].map(department => department.name);
     res.status(200).json(departmentNames);
   });
-  
 });
+
 
 router.get("/JobTitles", (req, res) => {
 
