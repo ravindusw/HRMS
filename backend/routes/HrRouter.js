@@ -238,89 +238,69 @@ router.get("/employees/:id", (req, res) => {
 });
 */
 
-
+// GET Employee datas BY ID
 
 router.get("/employees/:id", (req, res) => {
   const employeeId = req.params.id;
 
-  const query = `
-    SELECT 
-    employee.employee_id as id, 
-    CONCAT(employee.first_name, ' ', employee.last_name) AS name, 
-    employee.NIC,
-    user.username,
-    employee.date_of_birth as birthday,
-    employee.gender, 
-    job_title.title as job_title, 
-    pay_grade.name as pay_grade,
-    hrms.department.name as department, 
-    branch.country as branch,
-    employee.hired_date,
-    employment_state.employment_type as employment_status,
-    employee.marital_state,
-    employee.email,
-    employee.address,
-    dependent.name as dependent_name,
-    dependent.date_of_birth as dependent_birthday,
-    dependent.gender as dependent_gender,
-    dependent.phone_number as dependent_phone_number
-FROM 
-    employee 
-    INNER JOIN job_title USING(job_title_id) 
-    INNER JOIN department USING(dept_id)
-    INNER JOIN employment_state USING(employment_state_id)
-    INNER JOIN pay_grade USING(pay_grade_id)
-    INNER JOIN branch USING(branch_id)
-    LEFT JOIN user USING(employee_id)
-    LEFT JOIN dependent ON employee.employee_id = dependent.employee_id
-WHERE 
-    employee.employee_id = ?;
-  `;
+  const employeeQuery = 'CALL GetEmployeeDataForView(?)';
+  const dependentQuery = 'CALL GetDependentDetails(?)';
 
-  db.query(query, [employeeId], (err, results) => {
+  db.query(employeeQuery, [employeeId], (err, employeeResults) => {
     if (err) {
       console.error("Error fetching employee data:", err);
       return res.status(500).send("Server error");
     }
 
-    if (results.length === 0) {
+    if (employeeResults[0].length === 0) {
       return res.status(404).send("Employee not found");
     }
-    
+
     const employee = {
-      id: results[0].id,
-      name: results[0].name,
-      NIC: results[0].NIC,
-      username: results[0].username,
-      birthday: results[0].birthday,
-      gender: results[0].gender,
-      job_title: results[0].job_title,
-      pay_grade: results[0].pay_grade,
-      department: results[0].department,
-      branch: results[0].branch,
-      hired_date: results[0].hired_date,
-      employment_status: results[0].employment_status,
-      marital_state: results[0].marital_state,
-      email: results[0].email,
-      address: results[0].address,
+      id: employeeResults[0][0].id,
+      name: employeeResults[0][0].name,
+      NIC: employeeResults[0][0].NIC,
+      username: employeeResults[0][0].username,
+      birthday: employeeResults[0][0].birthday,
+      gender: employeeResults[0][0].gender,
+      job_title: employeeResults[0][0].job_title,
+      pay_grade: employeeResults[0][0].pay_grade,
+      department: employeeResults[0][0].department,
+      branch: employeeResults[0][0].branch,
+      hired_date: employeeResults[0][0].hired_date,
+      employment_status: employeeResults[0][0].employment_status,
+      marital_state: employeeResults[0][0].marital_state,
+      email: employeeResults[0][0].email,
+      address: employeeResults[0][0].address,
+      phone_numbers: [],
       dependents: []
     };
-    
-    results.forEach(row => {
-      if (row.dependent_name) {
-        employee.dependents.push({
-          name: row.dependent_name,
-          relation: row.dependent_relation,
-          age: row.dependent_age
-        });
+
+    employeeResults[0].forEach(row => {
+      if (row.phone_number) {
+        employee.phone_numbers.push(row.phone_number);
       }
     });
-    console.log(employee)
-    //res.status(200).json(employee);
+
+    db.query(dependentQuery, [employeeId], (err, dependentResults) => {
+      if (err) {
+        console.error("Error fetching dependent data:", err);
+        return res.status(500).send("Server error");
+      }
+
+      dependentResults[0].forEach(row => {
+        employee.dependents.push({
+          name: row.dependent_name,
+          date_of_birth: row.dependent_birthday,
+          gender: row.dependent_gender,
+          phone_number: row.dependent_phone_number
+        });
+      });
+      console.log(employee)
+      res.status(200).json(employee);
+    });
   });
 });
-
-
 
 
 
