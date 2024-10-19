@@ -225,7 +225,7 @@ router.get("/employees", (req, res) => {
 });
 
 
-
+/*
 router.get("/employees/:id", (req, res) => {
   const employeeId = req.params.id;
   const employee = initialEmployees.find(emp => emp.id === employeeId);
@@ -236,6 +236,90 @@ router.get("/employees/:id", (req, res) => {
     res.status(404).json({ message: "Employee not found" });
   }
 });
+*/
+
+
+
+router.get("/employees/:id", (req, res) => {
+  const employeeId = req.params.id;
+
+  const query = `
+    SELECT 
+    employee.employee_id as id, 
+    CONCAT(employee.first_name, ' ', employee.last_name) AS name, 
+    employee.NIC,
+    user.username,
+    employee.date_of_birth as birthday,
+    employee.gender, 
+    job_title.title as job_title, 
+    pay_grade.name as pay_grade,
+    hrms.department.name as department, 
+    branch.country as branch,
+    employee.hired_date,
+    employment_state.employment_type as employment_status,
+    employee.marital_state,
+    employee.email,
+    employee.address,
+    dependent.name as dependent_name,
+    dependent.date_of_birth as dependent_birthday,
+    dependent.gender as dependent_gender,
+    dependent.phone_number as dependent_phone_number
+FROM 
+    employee 
+    INNER JOIN job_title USING(job_title_id) 
+    INNER JOIN department USING(dept_id)
+    INNER JOIN employment_state USING(employment_state_id)
+    INNER JOIN pay_grade USING(pay_grade_id)
+    INNER JOIN branch USING(branch_id)
+    LEFT JOIN user USING(employee_id)
+    LEFT JOIN dependent ON employee.employee_id = dependent.employee_id
+WHERE 
+    employee.employee_id = ?;
+  `;
+
+  db.query(query, [employeeId], (err, results) => {
+    if (err) {
+      console.error("Error fetching employee data:", err);
+      return res.status(500).send("Server error");
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send("Employee not found");
+    }
+    
+    const employee = {
+      id: results[0].id,
+      name: results[0].name,
+      NIC: results[0].NIC,
+      username: results[0].username,
+      birthday: results[0].birthday,
+      gender: results[0].gender,
+      job_title: results[0].job_title,
+      pay_grade: results[0].pay_grade,
+      department: results[0].department,
+      branch: results[0].branch,
+      hired_date: results[0].hired_date,
+      employment_status: results[0].employment_status,
+      marital_state: results[0].marital_state,
+      email: results[0].email,
+      address: results[0].address,
+      dependents: []
+    };
+    
+    results.forEach(row => {
+      if (row.dependent_name) {
+        employee.dependents.push({
+          name: row.dependent_name,
+          relation: row.dependent_relation,
+          age: row.dependent_age
+        });
+      }
+    });
+    console.log(employee)
+    //res.status(200).json(employee);
+  });
+});
+
 
 
 
