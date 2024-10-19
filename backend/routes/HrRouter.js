@@ -126,6 +126,21 @@ router.get("/JobTitles", (req, res) => {
   
 });
 
+
+router.get("/pay_grades", (req, res) => {
+  db.query('CALL GetPayGradeNames()', (err, results) => {
+    if (err) {
+      console.error("Error fetching pay grades:", err);
+      return res.status(500).send("Server error");
+    }
+    if (results[0].length === 0) {
+      return res.status(404).send("Pay grades not found");
+    }
+    const pay_grades = results[0].map(payGrade => payGrade.name);
+    res.status(200).json(pay_grades);
+  });
+});
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export default router;

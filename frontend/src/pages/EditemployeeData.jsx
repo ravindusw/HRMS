@@ -27,9 +27,6 @@ const EditemployeeData = () => {
     pay_grade: false
   });
 
-
-
-
   useEffect(() => {
     // Fetch employee data from the server
     fetch(`/api/employees/${id_to_edit}`)
@@ -39,16 +36,16 @@ const EditemployeeData = () => {
 
     // Fetch job titles, departments, and pay grades from the server
     fetch('http://localhost:8800/api/Hr/JobTitles')
-    .then(response => response.json())
-    .then(data => setJobTitles(data))
-    .catch(error => console.error('Error fetching job titles:', error));
+      .then(response => response.json())
+      .then(data => setJobTitles(data))
+      .catch(error => console.error('Error fetching job titles:', error));
 
     fetch('http://localhost:8800/api/Hr/departments')
       .then(response => response.json())
       .then(data => setDepartments(data))
       .catch(error => console.error('Error fetching departments:', error));
 
-    fetch('/api/pay_grades')
+    fetch('http://localhost:8800/api/Hr/pay_grades')
       .then(response => response.json())
       .then(data => setPayGrades(data))
       .catch(error => console.error('Error fetching pay grades:', error));
@@ -106,7 +103,12 @@ const EditemployeeData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log('Employee data to submit:', employee);
+    alert('Employee data ready to submit!');
+    //give success message here
     // Submit updated employee data to the server
+    /*
     fetch(`/api/employees/${id_to_edit}`, {
       method: 'PUT',
       headers: {
@@ -115,9 +117,16 @@ const EditemployeeData = () => {
       body: JSON.stringify(employee)
     })
       .then(response => response.json())
-      .then(data => console.log('Employee updated:', data))
+      .then(data => {
+        console.log('Employee updated:', data);
+        setSuccessMessage('Employee data updated successfully!');
+        setEmployee(initialEmployeeState); // Clear the form
+        setTimeout(() => setSuccessMessage(''), 3000); // Clear the success message after 3 seconds
+      })
       .catch(error => console.error('Error updating employee:', error));
+      */
   };
+
 
   return (
     <div className="edit-employee-container">
@@ -142,12 +151,14 @@ const EditemployeeData = () => {
         <label>
           Marital State:
           {editableFields.marital_state ? (
-            <input
-              type="text"
+            <select
               name="marital_state"
               value={employee.marital_state}
               onChange={handleChange}
-            />
+            >
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+            </select>
           ) : (
             <span>{employee.marital_state}</span>
           )}
@@ -253,6 +264,7 @@ const EditemployeeData = () => {
                 value={dependent.phone_number}
                 onChange={(e) => handleDependentChange(index, 'phone_number', e.target.value)}
               />
+              <br /><br />
             </div>
           ))}
           <button type="button" onClick={addDependent}>Add Dependent</button>
