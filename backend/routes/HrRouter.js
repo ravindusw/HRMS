@@ -81,7 +81,7 @@ router.get("/employees/:id", (req, res) => {
           phone_number: row.dependent_phone_number
         });
       });
-      console.log(employee)
+      //console.log(employee)
       res.status(200).json(employee);
     });
   });

@@ -48,9 +48,12 @@ function App() {
           <Route
             path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
             element={
+              <EditemployeeData />
+              /*
               <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
                 <EditemployeeData />
               </ProtectedRoute>
+              */
             }
           />
           <Route

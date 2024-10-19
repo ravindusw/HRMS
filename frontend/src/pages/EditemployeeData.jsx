@@ -1,331 +1,266 @@
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-const EditemployeeData=()=>{
-    const {id_to_edit} = useParams();
-    //console.log(id_to_edit)
-    return(
-        <div>
-            <h1>Edit Employee {id_to_edit} Data</h1>
-        </div>
-    )
-
-}
-export default EditemployeeData
-
-/*
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import Axios from 'axios';
-
 import './EditemployeeData.css'; // Import the CSS file
 
+const EditemployeeData = () => {
+  const { id_to_edit } = useParams();
+  const [employee, setEmployee] = useState({
+    name: '',
+    email: '',
+    job_title: '',
+    department: '',
+    phone_numbers: [],
+    address: '',
+    marital_state: '',
+    pay_grade: '',
+    dependents: []
+  });
+
+  const [jobTitles, setJobTitles] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [payGrades, setPayGrades] = useState([]);
+  const [editableFields, setEditableFields] = useState({
+    address: false,
+    marital_state: false,
+    job_title: false,
+    department: false,
+    pay_grade: false
+  });
 
 
-function EditemployeeData() {
-  const { id_to_transfer, id_to_edit } = useParams();
-  const navigate = useNavigate();
 
-  const [employeeData, setEmployeeData] = useState(null);
-  const [contactNumbers, setContactNumbers] = useState(null);
 
   useEffect(() => {
-    // Fetch employee data based on id_to_edit when the component mounts
-    Axios.get(`http://localhost:3000/viewEmployee/${id_to_edit}`)
-      .then(response => {
-        // Set the fetched data to the state
-        setEmployeeData(response.data.employee);
+    // Fetch employee data from the server
+    fetch(`/api/employees/${id_to_edit}`)
+      .then(response => response.json())
+      .then(data => setEmployee(data))
+      .catch(error => console.error('Error fetching employee data:', error));
 
-        // Set the contact numbers to the state
-        const initialContactNumbers = response.data.contact.map(contact => contact.Contact_Number);
-        setContactNumbers(initialContactNumbers || []);
-      })
-      .catch(error => {
-        console.error('Error fetching employee data:', error);
-      });
+    // Fetch job titles, departments, and pay grades from the server
+    fetch('http://localhost:8800/api/Hr/JobTitles')
+    .then(response => response.json())
+    .then(data => setJobTitles(data))
+    .catch(error => console.error('Error fetching job titles:', error));
+
+    fetch('http://localhost:8800/api/Hr/departments')
+      .then(response => response.json())
+      .then(data => setDepartments(data))
+      .catch(error => console.error('Error fetching departments:', error));
+
+    fetch('/api/pay_grades')
+      .then(response => response.json())
+      .then(data => setPayGrades(data))
+      .catch(error => console.error('Error fetching pay grades:', error));
   }, [id_to_edit]);
 
-  const [employmentStatusOptions, setEmploymentStatusOptions] = useState([]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmployee(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/addEmployee/employmentStatus")
-      .then(response => {
-        setEmploymentStatusOptions(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  const handlePhoneChange = (index, value) => {
+    const newPhoneNumbers = [...employee.phone_numbers];
+    newPhoneNumbers[index] = value;
+    setEmployee(prevState => ({
+      ...prevState,
+      phone_numbers: newPhoneNumbers
+    }));
+  };
 
-  const [payGradeOptions, setPayGradeOptions] = useState([]);
+  const handleDependentChange = (index, field, value) => {
+    const newDependents = [...employee.dependents];
+    newDependents[index] = {
+      ...newDependents[index],
+      [field]: value
+    };
+    setEmployee(prevState => ({
+      ...prevState,
+      dependents: newDependents
+    }));
+  };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/addEmployee/payGrade")
-      .then(response => {
-        setPayGradeOptions(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  const addPhoneNumber = () => {
+    setEmployee(prevState => ({
+      ...prevState,
+      phone_numbers: [...prevState.phone_numbers, '']
+    }));
+  };
 
-  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const addDependent = () => {
+    setEmployee(prevState => ({
+      ...prevState,
+      dependents: [...prevState.dependents, { name: '', relation: '', age: '', phone_number: '' }]
+    }));
+  };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/addEmployee/department")
-      .then(response => {
-        setDepartmentOptions(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  const toggleEditable = (field) => {
+    setEditableFields(prevState => ({
+      ...prevState,
+      [field]: !prevState[field]
+    }));
+  };
 
-  const [branchOptions, setBranchOptions] = useState([]);
-
-  useEffect(() => {
-    Axios.get("http://localhost:3000/addEmployee/branch")
-      .then(response => {
-        setBranchOptions(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  if (employeeData === null || contactNumbers === null) {
-    return <div>Loading...</div>;
-  }
-
-  const formattedDate = format(parseISO(employeeData.Birthday), 'yyyy-MM-dd');
-  
-  const initialEmployeeData = {
-    employeeID: employeeData.Employee_ID,
-    firstName: employeeData.First_Name,
-    lastName: employeeData.Last_Name,
-    gender: employeeData.Gender,
-    maritalStatus: employeeData.Marital_Status,
-    birthday: formattedDate,
-    contact: contactNumbers,
-    email: employeeData.Email || "",
-    employmentStatus: employeeData.Employment_Status,
-    jobTitle: employeeData.Job_Title,
-    payGrade: employeeData.Pay_Grade,
-    department: employeeData.Dept_Name,
-    branch: employeeData.Branch_Name,
-
-    dependentID: employeeData.Dependent_ID,
-    dFirstName: employeeData.dFirst_Name,
-    dLastName: employeeData.dLast_Name,
-    dGender: employeeData.dGender,
-    age: employeeData.Age,
-    relation: employeeData.Relation
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Submit updated employee data to the server
+    fetch(`/api/employees/${id_to_edit}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(employee)
+    })
+      .then(response => response.json())
+      .then(data => console.log('Employee updated:', data))
+      .catch(error => console.error('Error updating employee:', error));
+  };
 
   return (
-    <div>
-        <div className="container">
-        <Form autoComplete="off" style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-                <div>
-                <h4 style={{ marginBottom: '30px', marginTop: '40px' }}>Employee Information</h4>
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputEmployeeID" style={{marginTop: '15px'}}>Employee ID</label>
-                    <Field type="text" className="form-control" id="inputEmployeeID" name="employeeID" placeholder="Employee ID" disabled={true} />
-                    <ErrorMessage name="employeeID" component="div" className="error-message" />
-                </div>
-                <div className="row">
-                <div className="form-group col-md-6">
-                    <label htmlFor="inputFirstName" style={{marginTop: '15px'}}>First Name</label>
-                    <Field type="text" className="form-control" id="inputFirstName" name="firstName" placeholder="First Name" />
-                    <ErrorMessage name="firstName" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-6">
-                    <label htmlFor="inputLastName" style={{marginTop: '15px'}}>Last Name</label>
-                    <Field type="text" className="form-control" id="inputLastName" name="lastName" placeholder="Last Name" />
-                    <ErrorMessage name="lastName" component="div" className="error-message" />
-                </div>
-                </div>
-                <div className="row">
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputGender" style={{marginTop: '15px'}}>Gender</label>
-                    <Field as='select' className="form-control" id="inputGender" name="gender" >
-                    <option>Choose...</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                    <option>Prefer not to say</option>
-                    </Field>
-                    <ErrorMessage name="gender" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputMaritalStatus" style={{marginTop: '15px'}}>Marital Status</label>
-                    <Field as='select' className="form-control" id="inputMaritalStatus" name="maritalStatus" >
-                    <option>Choose...</option>
-                    <option>Married</option>
-                    <option>Unmarried</option>
-                    <option>Other</option>
-                    <option>Prefer not to say</option>
-                    </Field>
-                    <ErrorMessage name="maritalStatus" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputBirthday" style={{marginTop: '15px'}}>Birthday</label>
-                    <Field type="date" className="form-control" id="inputBirthday" name="birthday" placeholder="Birthday" />
-                    <ErrorMessage name="birthday" component="div" className="error-message" />
-                </div>
-                </div>
-
-                <div className="form-group col-md-5">
-                <FieldArray name="contact">{
-                    (fieldArrayProps) => {
-                    const { push, remove, form } = fieldArrayProps;
-                    const { values } = form;
-                    const { contact } = values;
-                    return <div>
-                        <label style={{marginTop: '15px'}}>Contact Numbers</label>
-                        {contact.map((number, index) => (
-                        <div key={index}>
-                            
-                          <div className="d-flex justify-content-between">
-                            <Field type="text" className="form-control col-md-4" id={`inputContact[${index}]`} name={`contact[${index}]`} placeholder="Contact Number" value={contact[index] || ''} style={{marginTop: "5px", marginBottom: "0px"}} />
-                            {
-                              index > 0 &&
-                              <div className="col">
-                                <button type="button" className="btn btn-secondary" style={{marginLeft: "5px", marginTop: "5px"}} onClick={() => remove(index)}><BsFillTelephoneMinusFill /></button>
-                              </div>
-                            }
-                            <div className="col">
-                              <button type="button" className="btn btn-secondary" style={{marginLeft: "5px", marginTop: "5px"}} onClick={() => push('')}><BsTelephonePlusFill /></button>
-                            </div>
-                          </div>
-                          <ErrorMessage name={`contact[${index}]`} component="div" className="error-message" />
-                        </div>
-                        ))}
-                    </div>
-                    }
-                }</FieldArray>
-                </div>
-
-                <div className="form-group col-md-6">
-                <label htmlFor="inputEmail" style={{marginTop: '15px'}}>Email</label>
-                <Field type="email" className="form-control" id="inputEmail" name="email" placeholder="Email" />
-                <ErrorMessage name="email" component="div" className="error-message" />
-                </div>
-                <div className="row">
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputEmploymentStatus" style={{marginTop: '15px'}}>Employment Status</label>
-                    <Field as='select' className="form-control" id="inputEmploymentStatus" name="employmentStatus" >
-                    <option>Choose...</option>
-                    {employmentStatusOptions.map(option => (
-                        <option key={option.Status_ID}>
-                        {option.Status}
-                        </option>
-                    ))}
-                    </Field>
-                    <ErrorMessage name="employmentStatus" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputJobTitle" style={{marginTop: '15px'}}>Job Title</label>
-                    <Field as='select' className="form-control" id="inputJobTitle" name="jobTitle" disabled={true} >
-                    <option>Choose...</option>
-                    <option>HR Manager</option>
-                    <option>Accountant</option>
-                    <option>Software Engineer</option>
-                    <option>QA Engineer</option>
-                    </Field>
-                    <ErrorMessage name="jobTitle" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-4">
-                    <label htmlFor="inputPayGrade" style={{marginTop: '15px'}}>Pay Grade</label>
-                    <Field as='select' className="form-control" id="inputPayGrade" name="payGrade" >
-                    <option>Choose...</option>
-                    {payGradeOptions.map(option => (
-                        <option key={option.Pay_Grade_ID}>
-                        {option.Pay_Grade}
-                        </option>
-                    ))}
-                    </Field>
-                    <ErrorMessage name="payGrade" component="div" className="error-message" />
-                </div>
-                </div>
-                <div className="form-group col-md-5">
-                <label htmlFor="inputDepartment" style={{marginTop: '15px'}}>Department</label>
-                <Field as='select' className="form-control" id="inputDepartment" name="department" >
-                    <option>Choose...</option>
-                    {departmentOptions.map(option => (
-                    <option key={option.Dept_ID}>
-                        {option.Dept_Name}
-                    </option>
-                    ))}
-                </Field>
-                <ErrorMessage name="department" component="div" className="error-message" />
-                </div>
-                <div className="form-group col-md-5">
-                <label htmlFor="inputBranch" style={{marginTop: '15px'}}>Branch</label>
-                <Field as='select' className="form-control" id="inputBranch" name="branch" >
-                    <option>Choose...</option>
-                    {branchOptions.map(option => (
-                    <option key={option.Branch_ID}>
-                        {option.Branch_Name}
-                    </option>
-                    ))}
-                </Field>
-                <ErrorMessage name="branch" component="div" className="error-message" />
-                </div>
-
-                {employeeData.Dependent_ID != null ? (
-                    <div>
-                        <div>
-                            <h4 style={{ marginBottom: '30px', marginTop: '50px' }}>Dependent Information</h4>
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="inputDependentID" style={{marginTop: '15px'}}>Dependent ID</label>
-                            <Field type="text" className="form-control" id="inputDependentID" name="dependentID" placeholder="Dependent ID" disabled={true} />
-                            <ErrorMessage name="dependentID" component="div" className="error-message" />
-                        </div>
-                        <div className="row">
-                            <div className="form-group col-md-6">
-                                <label htmlFor="inputDependentFirstName" style={{ marginTop: '15px' }}>First Name</label>
-                                <Field type="text" className="form-control" id="inputDependentFirstName" name="dFirstName" placeholder="Dependent's First Name" />
-                                <ErrorMessage name="dFirstName" component="div" className="error-message" />
-                            </div>
-                            
-                            <div className="form-group col-md-6">
-                                <label htmlFor="inputDependentLastName" style={{ marginTop: '15px' }}>Last Name</label>
-                                <Field type="text" className="form-control" id="inputDependentLastName" name="dLastName" placeholder="Dependent's Last Name" />
-                                <ErrorMessage name="dLastName" component="div" className="error-message" />
-                            </div>
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="inputDependentGender" style={{ marginTop: '15px' }}>Gender</label>
-                            <Field as='select' id="inputDependentGender" name="dGender" className="form-control" >
-                                <option>Choose...</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                                <option>Prefer not to say</option>
-                            </Field>
-                            <ErrorMessage name="dGender" component="div" className="error-message" />
-                        </div>
-                        
-                        <div className="form-group col-md-5">
-                            <label htmlFor="inputDependentAge" style={{ marginTop: '15px' }}>Age</label>
-                            <Field type="number" className="form-control" id="inputDependentAge" name="age" placeholder="Age" />
-                            <ErrorMessage name="age" component="div" className="error-message" />
-                        </div>
-                        
-                        <div className="form-group col-md-5">
-                            <label htmlFor="inputRelation" style={{ marginTop: '15px' }}>Relation</label>
-                            <Field type="text" className="form-control" id="inputRelation" name="relation" placeholder="Relation" />
-                            <ErrorMessage name="relation" component="div" className="error-message" />
-                        </div>
-                    </div>
-                ) : null }
-                
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginBottom: '50px', marginTop: '30px' }}>Submit</button>
-            </Form>
-        </div>
+    <div className="edit-employee-container">
+      <h1>Edit Employee {id_to_edit} Data</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Address:
+          {editableFields.address ? (
+            <input
+              type="text"
+              name="address"
+              value={employee.address}
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{employee.address}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('address')}>
+            {editableFields.address ? 'Save Address' : 'Change Address'}
+          </button>
+        </label>
+        <label>
+          Marital State:
+          {editableFields.marital_state ? (
+            <input
+              type="text"
+              name="marital_state"
+              value={employee.marital_state}
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{employee.marital_state}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('marital_state')}>
+            {editableFields.marital_state ? 'Save Marital State' : 'Change Marital State'}
+          </button>
+        </label>
+        <label>
+          Job Title:
+          {editableFields.job_title ? (
+            <select
+              name="job_title"
+              value={employee.job_title}
+              onChange={handleChange}
+            >
+              {jobTitles.map((title, index) => (
+                <option key={index} value={title}>{title}</option>
+              ))}
+            </select>
+          ) : (
+            <span>{employee.job_title}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('job_title')}>
+            {editableFields.job_title ? 'Save Job Title' : 'Change Job Title'}
+          </button>
+        </label>
+        <label>
+          Department:
+          {editableFields.department ? (
+            <select
+              name="department"
+              value={employee.department}
+              onChange={handleChange}
+            >
+              {departments.map((dept, index) => (
+                <option key={index} value={dept}>{dept}</option>
+              ))}
+            </select>
+          ) : (
+            <span>{employee.department}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('department')}>
+            {editableFields.department ? 'Save Department' : 'Change Department'}
+          </button>
+        </label>
+        <label>
+          Pay Grade:
+          {editableFields.pay_grade ? (
+            <select
+              name="pay_grade"
+              value={employee.pay_grade}
+              onChange={handleChange}
+            >
+              {payGrades.map((grade, index) => (
+                <option key={index} value={grade}>{grade}</option>
+              ))}
+            </select>
+          ) : (
+            <span>{employee.pay_grade}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('pay_grade')}>
+            {editableFields.pay_grade ? 'Save Pay Grade' : 'Change Pay Grade'}
+          </button>
+        </label>
+        <label>
+          Phone Numbers:
+          {employee.phone_numbers.map((phone, index) => (
+            <div key={index}>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => handlePhoneChange(index, e.target.value)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={addPhoneNumber}>Add Phone Number</button>
+        </label>
+        <label>
+          Dependents:
+          {employee.dependents.map((dependent, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={dependent.name}
+                onChange={(e) => handleDependentChange(index, 'name', e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Relation"
+                value={dependent.relation}
+                onChange={(e) => handleDependentChange(index, 'relation', e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Age"
+                value={dependent.age}
+                onChange={(e) => handleDependentChange(index, 'age', e.target.value)}
+              />
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={dependent.phone_number}
+                onChange={(e) => handleDependentChange(index, 'phone_number', e.target.value)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={addDependent}>Add Dependent</button>
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
     </div>
   );
-}
+};
 
-export default EditemployeeData; */
+export default EditemployeeData;
