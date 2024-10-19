@@ -7,7 +7,7 @@ const router = Router();
 
 const initialEmployees = [
   {
-    id: "EMP0002",
+    id: "6bf38b67-8b5d-11ef-acee-4a6a3b2083d6",
     name: "Jane Smith",
     gender: "Female",
     job: "Software Engineer",
@@ -15,7 +15,7 @@ const initialEmployees = [
     dependents: null,
   },
   {
-    id: "EMP0003",
+    id: "6bf363e8-8b5d-11ef-acee-4a6a3b2083d6",
     name: "Michael Johnson",
     gender: "Male",
     job: "Accountant",
@@ -23,7 +23,7 @@ const initialEmployees = [
     dependents: [{ name: "Emma Johnson", relation: "Daughter", age: 5 }],
   },
   {
-    id: "EMP0004",
+    id: "6bf3854f-8b5d-11ef-acee-4a6a3b2083d6",
     name: "Emily Davis",
     gender: "Female",
     job: "QA Engineer",
@@ -31,7 +31,7 @@ const initialEmployees = [
     dependents: null,
   },
   {
-    id: "EMP0005",
+    id: "e1d57e09-8b5b-11ef-acee-4a6a3b2083d6",
     name: "David Wilson",
     gender: "Male",
     job: "Data Scientist",
@@ -203,9 +203,11 @@ router.get("/employees", (req, res) => {
 router.get("/employees", (req, res) => {
 
   db.query(
-    `SELECT employee_id as id,(CONCAT(first_name, ' ', last_name))  AS "name",job_title.title as job,hrms.department.name as department,gender,email
-    FROM employee inner join  job_title using(job_title_id) inner join department using(dept_id);
-`, 
+   `SELECT employee_id as id, (CONCAT(first_name, ' ', last_name)) AS "name", job_title.title as job, hrms.department.name as department, gender, email
+    FROM employee 
+    INNER JOIN job_title USING(job_title_id) 
+    INNER JOIN department USING(dept_id) 
+    ORDER BY first_name, last_name;`, 
     
     (err, results) => {
     if (err) {
