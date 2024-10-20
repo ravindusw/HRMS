@@ -253,17 +253,18 @@ const EditemployeeData = () => {
                 onChange={(e) => handleDependentChange(index, 'relation', e.target.value)}
               />
               <input
-                type="text"
-                placeholder="Age"
-                value={dependent.age}
-                onChange={(e) => handleDependentChange(index, 'age', e.target.value)}
-              />
-              <input
                 type="tel"
                 placeholder="Phone Number"
                 value={dependent.phone_number}
                 onChange={(e) => handleDependentChange(index, 'phone_number', e.target.value)}
               />
+              <input
+                type="date"
+                placeholder="Birthday"
+                value={dependent.birthday}
+                onChange={(e) => handleDependentChange(index, 'birthday', e.target.value)}
+              />
+              
               <br /><br />
             </div>
           ))}
