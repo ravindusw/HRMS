@@ -34,6 +34,10 @@ const HrView = () => {
     fetchEmployee();
   }, [id_to_view]);
 
+  if (!employee) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="hr-view-container">
       <header className="hr-view-header">
@@ -71,6 +75,18 @@ const HrView = () => {
             <ul>
               {employee.phone_numbers.map((phone, index) => (
                 <li key={index}>{phone}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+            {employee.emergency_contacts && employee.emergency_contacts.length > 0 && (
+          <div>
+            <p><strong>Emergency Contacts</strong></p>
+            <ul>
+              {employee.emergency_contacts.map((contact, index) => (
+                <li key={index}>
+                  {contact.name} ({contact.relationship}) {contact.phone}
+                </li>
               ))}
             </ul>
           </div>

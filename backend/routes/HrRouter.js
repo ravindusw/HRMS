@@ -30,6 +30,8 @@ router.get("/employees/:id", (req, res) => {
 
   const employeeQuery = 'CALL GetEmployeeDataForView(?)';
   const dependentQuery = 'CALL GetDependentDetails(?)';
+  const emergencyContactQuery = 'CALL GetEmergencyContacts(?)';
+
 
   db.query(employeeQuery, [employeeId], (err, employeeResults) => {
     if (err) {
@@ -58,7 +60,8 @@ router.get("/employees/:id", (req, res) => {
       email: employeeResults[0][0].email,
       address: employeeResults[0][0].address,
       phone_numbers: [],
-      dependents: []
+      dependents: [],
+      emergency_contacts: []
     };
 
     employeeResults[0].forEach(row => {
@@ -72,6 +75,7 @@ router.get("/employees/:id", (req, res) => {
         console.error("Error fetching dependent data:", err);
         return res.status(500).send("Server error");
       }
+      //console.log(dependentResults)
 
       dependentResults[0].forEach(row => {
         employee.dependents.push({
@@ -81,8 +85,26 @@ router.get("/employees/:id", (req, res) => {
           phone_number: row.dependent_phone_number
         });
       });
-      //console.log(employee)
-      res.status(200).json(employee);
+
+      db.query(emergencyContactQuery, [employeeId], (err, emergencyContactResults) => {
+        if (err) {
+          console.error("Error fetching emergency contact data:", err);
+          return res.status(500).send("Server error");
+        }
+
+        if (Array.isArray(emergencyContactResults[0])) {
+          emergencyContactResults[0].forEach(row => {
+            employee.emergency_contacts.push({
+              name: row.name,
+              phone: row.phone,
+              relationship: row.relationship
+            });
+          });
+        }
+
+        console.log(employee);
+        res.status(200).json(employee);
+      });
     });
   });
 });
