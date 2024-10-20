@@ -13,7 +13,8 @@ const EditemployeeData = () => {
     address: '',
     marital_state: '',
     pay_grade: '',
-    dependents: []
+    dependents: [],
+    emergency_contacts: []
   });
 
   const [jobTitles, setJobTitles] = useState([]);
@@ -26,6 +27,7 @@ const EditemployeeData = () => {
     department: false,
     pay_grade: false
   });
+  const [showEmergencyContact, setShowEmergencyContact] = useState(false);
 
   useEffect(() => {
     // Fetch employee data from the server
@@ -80,6 +82,18 @@ const EditemployeeData = () => {
     }));
   };
 
+  const handleEmergencyContactChange = (index, field, value) => {
+    const newEmergencyContacts = [...employee.emergency_contacts];
+    newEmergencyContacts[index] = {
+      ...newEmergencyContacts[index],
+      [field]: value
+    };
+    setEmployee(prevState => ({
+      ...prevState,
+      emergency_contacts: newEmergencyContacts
+    }));
+  };
+
   const addPhoneNumber = () => {
     setEmployee(prevState => ({
       ...prevState,
@@ -91,6 +105,13 @@ const EditemployeeData = () => {
     setEmployee(prevState => ({
       ...prevState,
       dependents: [...prevState.dependents, { name: '', relation: '', age: '', phone_number: '' }]
+    }));
+  };
+  
+  const addEmergencyContact = () => {
+    setEmployee(prevState => ({
+      ...prevState,
+      emergency_contacts: [...prevState.emergency_contacts, { name: '', phone: '', relationship: '' }]
     }));
   };
 
@@ -270,6 +291,35 @@ const EditemployeeData = () => {
           ))}
           <button type="button" onClick={addDependent}>Add Dependent</button>
         </label>
+        <label>
+          Emergency Contacts:
+          {employee.emergency_contacts.map((contact, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={contact.name}
+                onChange={(e) => handleEmergencyContactChange(index, 'name', e.target.value)}
+              />
+              <input
+                type="tel"
+                placeholder="Phone"
+                value={contact.phone}
+                onChange={(e) => handleEmergencyContactChange(index, 'phone', e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Relationship"
+                value={contact.relationship}
+                onChange={(e) => handleEmergencyContactChange(index, 'relationship', e.target.value)}
+              />
+              <br /><br />
+            </div>
+          ))}
+          <button type="button" onClick={addEmergencyContact}>Add Emergency Contact</button>
+        </label>
+        
+        
         <button type="submit">Save Changes</button>
       </form>
     </div>
