@@ -31,10 +31,7 @@ const EditemployeeData = () => {
 
   useEffect(() => {
     // Fetch employee data from the server
-    fetch(`/api/employees/${id_to_edit}`)
-      .then(response => response.json())
-      .then(data => setEmployee(data))
-      .catch(error => console.error('Error fetching employee data:', error));
+    
 
     // Fetch job titles, departments, and pay grades from the server
     fetch('http://localhost:8800/api/Hr/JobTitles')

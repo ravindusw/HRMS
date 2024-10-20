@@ -102,7 +102,7 @@ router.get("/employees/:id", (req, res) => {
           });
         }
 
-        console.log(employee);
+        //console.log(employee);
         res.status(200).json(employee);
       });
     });
