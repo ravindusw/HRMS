@@ -1,10 +1,8 @@
 .hr-view-container {
-
-    
   width: 80%;
   align-items: center;
   margin: 20px auto;
-  
+
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -27,7 +25,6 @@
   font-size: 2rem;
   color: #333;
 }
-
 
 .employee_Block h2 {
   margin-top: 20px;
@@ -59,20 +56,18 @@ strong {
   width: 60%;
   margin-left: 20%;
 }
-.employee-details{
+.employee-details {
   margin-top: 20px;
   align-items: center flex;
   width: 60%;
   margin-left: 20%;
   border: 1px solid #00ff44;
-  
 }
 
 .dependents-box {
   padding: 10px;
   border: 1px solid #00ff44;
   border-radius: 5px;
-  
 }
 
 .dependents-box ul {
