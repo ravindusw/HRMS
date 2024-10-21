@@ -1,445 +1,447 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import "./AddEmployee.css"; // Import the CSS file
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
-    nic: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    dob: "",
-    maritalStatus: "",
-    gender: "",
-    address: "",
-    contactDetails: "",
-    emergencyContact: { name: "", phone: "", relationship: "" },
-    jobTitle: "",
-    payGrade: "",
-    employmentState: { employmentType: "", workSchedule: "" },
-    supervisorId: "",
-    department: "",
-    hiredDate: "",
-    terminationDate: "",
-    dependents: [
-      { name: "", relationship: "", dob: "", gender: "", phoneNumber: "" },
-    ],
+    NIC: "",
+    First_Name: "",
+    Last_Name: "",
+    Email: "",
+    DOB: "",
+    Gender: "",
+    Address: "",
+    Marital_Status: "",
+    Department: "",
+    Supervisor_ID: "",
+    Job_Title: "",
+    Pay_Grade: "",
+    Employment_Type: "",
+    Work_Schedule: "",
+    Hired_Date: "",
+    Termination_Date: "",
+    Contact_Number: "",
+    Emergency_Contact_Name: "",
+    Emergency_Contact_Number: "",
+    Emergency_Contact_Relationship: "",
+    Dependant_Name: "",
+    Dependant_Relationship: "",
+    Dependant_DOB: "",
+    Dependant_Gender: "",
+    Dependent_Contact_Number: "",
   });
 
+  const { auth } = useAuth();
   const [supervisors, setSupervisors] = useState([]);
-  const [departments, setDepartments] = useState([]);
+  const { token } = auth;
+  const [message, setMessage] = useState("Submit");
+  const [buttonColor, setButtonColor] = useState("");
 
   useEffect(() => {
-    // Fetch supervisors and departments from backend
-    axios
-      .get("/api/supervisors")
-      .then((response) => setSupervisors(response.data));
-    axios
-      .get("/api/departments")
-      .then((response) => setDepartments(response.data));
-  }, []);
+    if (token) {
+      console.log("Token is available:", token);
+      axios
+        .get("http://localhost:8800/api/auth/getSupervisors", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setSupervisors(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching supervisors:", error);
+        });
+    } else {
+      console.error("No token available");
+    }
+  }, [token]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmployeeData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setEmployeeData({
+      ...employeeData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("/api/employees", employeeData)
-      .then((response) => alert("Employee Added Successfully!"))
-      .catch((error) => alert("Error: " + error));
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/api/auth/addEmployee",
+        employeeData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Employee added successfully:", response.data);
+      setMessage(response.data.message);
+      setButtonColor("green");
+    } catch (error) {
+      console.error("There was an error adding the employee!", error);
+      setMessage("Failed to add Employee");
+      setButtonColor("red");
+    } finally {
+      setTimeout(() => {
+        setMessage("Submit");
+        setButtonColor("");
+      }, 2000);
+    }
   };
 
   return (
-    <Container>
-      <h2>Add Employee</h2>
-      <Form onSubmit={handleSubmit}>
-        {/* Personal Information */}
-        <Row>
-          <Col>
-            <Form.Group controlId="nic">
-              <Form.Label>NIC</Form.Label>
-              <Form.Control
-                type="text"
-                name="nic"
-                value={employeeData.nic}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="firstName"
-                value={employeeData.firstName}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="lastName"
-                value={employeeData.lastName}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={employeeData.email}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="dob">
-              <Form.Label>Date of Birth</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                value={employeeData.dob}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Group controlId="maritalStatus">
-              <Form.Label>Marital Status</Form.Label>
-              <Form.Control
-                as="select"
-                name="maritalStatus"
-                value={employeeData.maritalStatus}
-                onChange={handleChange}
-                required
-              >
-                <option>Single</option>
-                <option>Married</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="gender">
-              <Form.Label>Gender</Form.Label>
-              <Form.Control
-                as="select"
-                name="gender"
-                value={employeeData.gender}
-                onChange={handleChange}
-                required
-              >
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+    <div className="addEmployee-container">
+      {" "}
+      <form className="employee-form" onSubmit={handleSubmit}>
+        <h2 className="employee-form-title">Add New Employee</h2>
 
-        {/* Address and Contact */}
-        <Form.Group controlId="address">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
+        <div className="form-group">
+          <label className="form-label">NIC:</label>
+          <input
+            className="form-input"
             type="text"
-            name="address"
-            value={employeeData.address}
+            name="NIC"
+            value={employeeData.NIC}
             onChange={handleChange}
-            required
           />
-        </Form.Group>
-        <Form.Group controlId="contactDetails">
-          <Form.Label>Contact Details (Phone Number)</Form.Label>
-          <Form.Control
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">First Name:</label>
+          <input
+            className="form-input"
             type="text"
-            name="contactDetails"
-            value={employeeData.contactDetails}
+            name="First_Name"
+            value={employeeData.First_Name}
             onChange={handleChange}
-            required
           />
-        </Form.Group>
+        </div>
 
-        {/* Emergency Contact */}
-        <h5>Emergency Contact</h5>
-        <Row>
-          <Col>
-            <Form.Group controlId="emergencyContactName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="emergencyContactName"
-                value={employeeData.emergencyContact.name}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="emergencyContactPhone">
-              <Form.Label>Phone</Form.Label>
-              <Form.Control
-                type="text"
-                name="emergencyContactPhone"
-                value={employeeData.emergencyContact.phone}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="emergencyContactRelationship">
-              <Form.Label>Relationship</Form.Label>
-              <Form.Control
-                type="text"
-                name="emergencyContactRelationship"
-                value={employeeData.emergencyContact.relationship}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-group">
+          <label className="form-label">Last Name:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Last_Name"
+            value={employeeData.Last_Name}
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* Job Title and Pay Grade */}
-        <Row>
-          <Col>
-            <Form.Group controlId="jobTitle">
-              <Form.Label>Job Title</Form.Label>
-              <Form.Control
-                as="select"
-                name="jobTitle"
-                value={employeeData.jobTitle}
-                onChange={handleChange}
-                required
-              >
-                <option>Factory Manager</option>
-                <option>Accountant</option>
-                <option>Mechanical Engineer</option>
-                <option>QA Engineer</option>
-                <option>Fashion Designer</option>
-                <option>Textile Designer</option>
-                <option>Pattern Maker</option>
-                <option>Garment Technologist</option>
-                <option>Production Planner</option>
-                <option>Sewing Machine Operator</option>
-                <option>Quality Control Manager</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="payGrade">
-              <Form.Label>Pay Grade</Form.Label>
-              <Form.Control
-                as="select"
-                name="payGrade"
-                value={employeeData.payGrade}
-                onChange={handleChange}
-                required
-              >
-                <option>Level 1</option>
-                <option>Level 2</option>
-                <option>Level 3</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-group">
+          <label className="form-label">Email:</label>
+          <input
+            className="form-input"
+            type="email"
+            name="Email"
+            value={employeeData.Email}
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* Employment Type and Schedule */}
-        <Row>
-          <Col>
-            <Form.Group controlId="employmentType">
-              <Form.Label>Employment Type</Form.Label>
-              <Form.Control
-                as="select"
-                name="employmentType"
-                value={employeeData.employmentState.employmentType}
-                onChange={handleChange}
-                required
-              >
-                <option>Intern</option>
-                <option>Contract</option>
-                <option>Permanent</option>
-                <option>Freelance</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="workSchedule">
-              <Form.Label>Work Schedule</Form.Label>
-              <Form.Control
-                as="select"
-                name="workSchedule"
-                value={employeeData.employmentState.workSchedule}
-                onChange={handleChange}
-                required
-              >
-                <option>Fulltime</option>
-                <option>Parttime</option>
-                <option>Flexible</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-group">
+          <label className="form-label">Date of Birth:</label>
+          <input
+            className="form-input"
+            type="date"
+            name="DOB"
+            value={employeeData.DOB}
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* Supervisor and Department */}
-        <Row>
-          <Col>
-            <Form.Group controlId="supervisorId">
-              <Form.Label>Supervisor</Form.Label>
-              <Form.Control
-                as="select"
-                name="supervisorId"
-                value={employeeData.supervisorId}
-                onChange={handleChange}
-                required
-              >
-                {supervisors.map((supervisor) => (
-                  <option key={supervisor.id} value={supervisor.id}>
-                    {supervisor.id}:{supervisor.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="department">
-              <Form.Label>Department</Form.Label>
-              <Form.Control
-                as="select"
-                name="department"
-                value={employeeData.department}
-                onChange={handleChange}
-                required
-              >
-                {departments.map((department) => (
-                  <option key={department.id} value={department.id}>
-                    {department.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-group">
+          <label className="form-label">Gender:</label>
+          <select
+            className="form-input"
+            name="Gender"
+            value={employeeData.Gender}
+            onChange={handleChange}
+          >
+            <option value="" hidden disabled></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="prefer-not-to-say">Prefer not to say</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-        {/* Dates */}
-        <Row>
-          <Col>
-            <Form.Group controlId="hiredDate">
-              <Form.Label>Hired Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="hiredDate"
-                value={employeeData.hiredDate}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="terminationDate">
-              <Form.Label>Termination Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="terminationDate"
-                value={employeeData.terminationDate}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-group">
+          <label className="form-label">Address:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Address"
+            value={employeeData.Address}
+            onChange={handleChange}
+          />
+        </div>
 
-        {/* Dependents */}
-        <h5>Dependents</h5>
-        {employeeData.dependents.map((dependent, index) => (
-          <div key={index}>
-            <Row>
-              <Col>
-                <Form.Group controlId={`dependentName_${index}`}>
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name={`dependentName_${index}`}
-                    value={dependent.name}
-                    onChange={(e) => handleDependentChange(e, index)}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId={`dependentRelationship_${index}`}>
-                  <Form.Label>Relationship</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name={`dependentRelationship_${index}`}
-                    value={dependent.relationship}
-                    onChange={(e) => handleDependentChange(e, index)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group controlId={`dependentDob_${index}`}>
-                  <Form.Label>Date of Birth</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name={`dependentDob_${index}`}
-                    value={dependent.dob}
-                    onChange={(e) => handleDependentChange(e, index)}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId={`dependentGender_${index}`}>
-                  <Form.Label>Gender</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name={`dependentGender_${index}`}
-                    value={dependent.gender}
-                    onChange={(e) => handleDependentChange(e, index)}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId={`dependentPhone_${index}`}>
-                  <Form.Label>Phone Number</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name={`dependentPhone_${index}`}
-                    value={dependent.phoneNumber}
-                    onChange={(e) => handleDependentChange(e, index)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-          </div>
-        ))}
+        <div className="form-group">
+          <label className="form-label">Marital Status:</label>
+          <select
+            className="form-input"
+            name="Marital_Status"
+            value={employeeData.Marital_Status}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden></option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Widowed">Widowed</option>
+          </select>
+        </div>
 
-        <Button type="submit" variant="primary">
-          Add Employee
-        </Button>
-      </Form>
-    </Container>
+        <div className="form-group">
+          <label className="form-label">Department:</label>
+          <select
+            className="form-input"
+            name="Department"
+            value={employeeData.Department}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden></option>
+            <option value="IT">IT</option>
+            <option value="HR">HR</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+            <option value="Production">Production</option>
+            <option value="Supply Chain">Supply Chain</option>
+            <option value="Merchandising">Merchandising</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Warehouse">Warehouse</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Supervisor ID:</label>
+          <select
+            className="form-input"
+            name="Supervisor_ID"
+            value={employeeData.Supervisor_ID}
+            onChange={handleChange}
+          >
+            <option value="" disabled>
+              Select Supervisor
+            </option>
+            {supervisors.map((supervisor) => (
+              <option key={supervisor.id} value={supervisor.id}>
+                {supervisor.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Job Title:</label>
+          <select
+            className="form-input"
+            name="Job_Title"
+            value={employeeData.Job_Title}
+            onChange={handleChange}
+          >
+            <option value="" disable hidden></option>
+            <option value="Accountant">Accountant</option>
+            <option value="CEO">CEO</option>
+            <option value="Fashion Designer">Fashion Designer</option>
+            <option value="HR Manager">HR Manager</option>
+            <option value="IT Manager">IT Manager</option>
+            <option value="Marketing Manager">Marketing Manager</option>
+            <option value="Packaging Assistant">Packaging Assistant</option>
+            <option value="Project Manager">Project Manager</option>
+            <option value="Quality Control Inspector">
+              Quality Control Inspector
+            </option>
+            <option value="Retail Assistant">Retail Assistant</option>
+            <option value="Sales Manager">Sales Manager</option>
+            <option value="Sewing Machine Operator">
+              Sewing Machine Operator
+            </option>
+            <option value="Supply Chain Manager">Supply Chain Manager</option>
+            <option value="Warehouse Worker">Warehouse Worker</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Pay Grade:</label>
+          <select
+            className="form-input"
+            name="Pay_Grade"
+            value={employeeData.Pay_Grade}
+            onChange={handleChange}
+          >
+            <option value="Level-1" disable hidden></option>
+            <option value="Level-1">Level-1</option>
+            <option value="Level-2">Level-2</option>
+            <option value="Level-3">Level-3</option>
+            <option value="Level-4">Level-4</option>
+            <option value="Level-5">Level-5</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Employment Type:</label>
+          <select
+            className="form-input"
+            name="Employment_Type"
+            value={employeeData.Employment_Type}
+            onChange={handleChange}
+          >
+            <option value="" hidden disable></option>
+            <option value="Intern">Intern</option>
+            <option value="Contract">Contract</option>
+            <option value="Permanent">Permanent</option>
+            <option value="Freelance">Freelance</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Work Schedule:</label>
+          <select
+            className="form-input"
+            name="Work_Schedule"
+            value={employeeData.Work_Schedule}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden></option>
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Hired Date:</label>
+          <input
+            className="form-input"
+            type="date"
+            name="Hired_Date"
+            value={employeeData.Hired_Date}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Termination Date:</label>
+          <input
+            className="form-input"
+            type="date"
+            name="Termination_Date"
+            value={employeeData.Termination_Date}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Contact Number:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Contact_Number"
+            value={employeeData.Contact_Number}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Emergency Contact Name:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Emergency_Contact_Name"
+            value={employeeData.Emergency_Contact_Name}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Emergency Contact Number:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Emergency_Contact_Number"
+            value={employeeData.Emergency_Contact_Number}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Emergency Contact Relationship:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Emergency_Contact_Relationship"
+            value={employeeData.Emergency_Contact_Relationship}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Dependant Name:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Dependant_Name"
+            value={employeeData.Dependant_Name}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Dependant Relationship:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Dependant_Relationship"
+            value={employeeData.Dependant_Relationship}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Dependant DOB:</label>
+          <input
+            className="form-input"
+            type="date"
+            name="Dependant_DOB"
+            value={employeeData.Dependant_DOB}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Dependant Gender:</label>
+          <select
+            className="form-input"
+            name="Dependant_Gender"
+            value={employeeData.Dependant_Gender}
+            onChange={handleChange}
+          >
+            <option value="" disabled hidden></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Dependant Contact Number:</label>
+          <input
+            className="form-input"
+            type="text"
+            name="Dependent_Contact_Number"
+            value={employeeData.Dependent_Contact_Number}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button className={`submit-btn ${buttonColor}`} type="submit">
+          {message}
+        </button>
+      </form>
+    </div>
   );
 };
 

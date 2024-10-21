@@ -8,9 +8,22 @@ export const getSupervisors = (req, res) => {
       console.error("Error fetching supervisors:", err);
       return res.status(500).send("Server error");
     }
-    // MySQL stored procedures return results in an array, so we need to access the first element
-    console.log(results);
+
+    // Check if there are any results
+    if (!results[0] || !results[0][0]) {
+      return res.status(404).json({ message: "No supervisors found." });
+    }
+
     const supervisors = results[0][0].supervisors;
-    res.status(200).json(JSON.parse(supervisors));
+
+    // Check the type of supervisors and respond accordingly
+    if (Array.isArray(supervisors)) {
+      res.status(200).json(supervisors); // Send the array directly
+    } else {
+      // Handle unexpected format
+      res
+        .status(500)
+        .json({ message: "Unexpected format for supervisors data." });
+    }
   });
 };

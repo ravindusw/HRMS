@@ -85,12 +85,12 @@
 
 /* Red button styling for error */
 .submit-button-error {
-  background-color: red; /* Error red */
+  background-color: #dc3545; /* Error red */
   color: white;
 }
 
 /* Green button styling for success */
 .submit-button-success {
-  background-color: green;
+  background-color: #28a745;
   color: white;
 }
