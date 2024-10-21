@@ -4,6 +4,7 @@ import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
+import HrRouter from "./routes/HrRouter.js";
 
 const app = express();
 
@@ -17,13 +18,19 @@ app.use("/api/auth", authRoutes);
 // Use the profile route with the verifyToken middleware
 app.use("/api/profile", verifyToken, profileRoutes);
 
-// Use the notification route
+
+// Use the routes
 app.use("/api/notification", notificationRoutes);
+app.use("/api/Hr", HrRouter);
 
 // Default route
 app.get("/", (req, res) => {
   res.send("Welcome to the server");
 });
+
+
+
+
 
 // Start the server
 const PORT = process.env.PORT || 8800;
