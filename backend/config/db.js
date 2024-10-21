@@ -1,11 +1,14 @@
 import mysql from "mysql2";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const db = mysql.createConnection({
-  host: "db-mysql-hrms-do-user-17987673-0.i.db.ondigitalocean.com",
-  user: "doadmin",
-  password: "AVNS_oGQvvIkkTUPm4xaSA_Z",
-  database: "hrms",
-  port: 25060,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
   connectTimeout: 10000,
 });
 
