@@ -1,6 +1,10 @@
 .hr-view-container {
-  width: 100%;
+
+    
+  width: 80%;
+  align-items: center;
   margin: 20px auto;
+  
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -14,6 +18,7 @@
   text-align: center;
   width: 800px;
   align-items: center;
+  margin-top: 25px;
   margin-bottom: 100px;
   background-color: #e6f5e8;
 }
@@ -23,35 +28,51 @@
   color: #333;
 }
 
-.hr-view-container h2 {
+
+.employee_Block h2 {
   margin-top: 20px;
   font-size: 1.5rem;
   color: #444;
+  align-items: center;
 }
 
-.hr-view-container p {
+p {
   font-size: 1rem;
   color: #666;
   margin: 5px 0;
 }
 
-.hr-view-container strong {
+strong {
   color: #333;
 }
 
 .employee-details {
   border-bottom: 1px solid #ccc;
   padding-bottom: 15px;
+  padding-left: 15px;
+  align-items: center;
 }
 
 .dependents-section {
   margin-top: 20px;
+  align-items: center flex;
+  width: 60%;
+  margin-left: 20%;
+}
+.employee-details{
+  margin-top: 20px;
+  align-items: center flex;
+  width: 60%;
+  margin-left: 20%;
+  border: 1px solid #00ff44;
+  
 }
 
 .dependents-box {
   padding: 10px;
   border: 1px solid #00ff44;
   border-radius: 5px;
+  
 }
 
 .dependents-box ul {
