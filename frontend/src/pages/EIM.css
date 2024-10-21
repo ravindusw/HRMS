@@ -1,183 +1,171 @@
-
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
 }
 .header-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    background-color: #f5f5f5;
-    
-    
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  background-color: #f5f5f5;
+
+  width: 100%;
 }
 
 .header-container header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    padding-top: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding-top: 2px;
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
-.header-container h1{
-    margin-bottom: 20px;
-    font-size: 24px;
-
+.header-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
 }
-
-
-
 
 .search-filters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-input[type="text"], select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px; /* Add margin-bottom to lift up the input field */
+input[type="text"],
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px; /* Add margin-bottom to lift up the input field */
 }
 
 button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button#search-btn {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
 button#add-employee {
-    margin-bottom: 20px;
-    background-color: #4CAF50;
-    color: white;
+  margin-bottom: 20px;
+  background-color: #4caf50;
+  color: white;
 }
 button#add-employee:hover {
-    background-color:  #59c45c;
-  }
-
-
-
-
+  background-color: #59c45c;
+}
 
 table {
-    width: 100%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 thead {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 thead th {
-    padding: 12px;
-    text-align: left;
-    font-weight: bold;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
 }
 
 tbody td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
-
 .action-buttons button {
-    padding: 6px 12px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 6px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-view {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 .btn-view:hover {
-    background-color: rgb(7, 170, 7) ;
-  }
+  background-color: rgb(7, 170, 7);
+}
 .btn-edit {
-    background-color: rgb(185, 185, 56);
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+  background-color: rgb(185, 185, 56);
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 .btn-edit:hover {
-    background-color: rgb(255, 255, 0) ;
-  }
-
+  background-color: rgb(255, 255, 0);
+}
 
 .btn-delete {
-    background-color: rgb(185, 5, 5);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+  background-color: rgb(185, 5, 5);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 .btn-delete:hover {
-    background-color: rgb(240, 5, 5);
-  }
+  background-color: rgb(240, 5, 5);
+}
 
 /* navigaton below the page*/
 .nav {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .nav button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    margin: 0 5px;
-    border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  margin: 0 5px;
+  border-radius: 5px;
 }
 
 .nav span {
-    font-size: 14px;
-    margin: 0 10px;
+  font-size: 14px;
+  margin: 0 10px;
 }
-input{
-    background-color:#cff7d3;
-    margin-top: 12px;
-    
+input {
+  background-color: #cff7d3;
+  margin-top: 12px;
 }
