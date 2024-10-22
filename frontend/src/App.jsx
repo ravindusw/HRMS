@@ -37,23 +37,21 @@ function App() {
           <Route
             path="/Employee_Information_Management/HrView/:id_to_view"
             element={
-              <HrView />
-              /*
+              
                <ProtectedRoute allowedRoles={["hr_manager"]}>
                 <HrView />
               </ProtectedRoute>
-              */
+              
             }
           />
           <Route
             path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
             element={
-              <EditemployeeData />
-              /*
-              <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
+              
+              <ProtectedRoute allowedRoles={[+ "hr_manager"]}>
                 <EditemployeeData />
               </ProtectedRoute>
-              */
+              
             }
           />
           <Route
