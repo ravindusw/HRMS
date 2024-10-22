@@ -47,10 +47,7 @@
     transition: background-color 0.3s ease;
 }
 
-.react-calendar__tile--active {
-    background: #007bff !important;
-    color: #fff !important;
-}
+
 
 .react-calendar__tile--now {
     background: #e0f7fa !important;
@@ -72,4 +69,9 @@
 
 .react-calendar__month-view__days__day--neighboringMonth {
     color: #ccc;
+}
+
+.react-calendar__tile--active {
+    background: #007bff !important;
+    color: #fff !important;
 }
