@@ -14,8 +14,8 @@ export default function Dashboard() {
       <h2 className="dashboard-subtitle">Good Morning Alan!</h2>
       <div className="dashboard-grid">
         <InfoSummary />
-        <CalendarSection />
         <RemainingLeaves />
+        <CalendarSection />
         <EmployeesInfo />
         <UserRoleDistribution />
         <QuickActions />
