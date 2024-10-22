@@ -3,6 +3,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import NotificationBellIcon from "./NotificationBellIcon";
+import profileIcon from "../assets/profile-icon.svg";
 
 const HRMSNavBar = () => {
   const location = useLocation();
@@ -27,9 +28,7 @@ const HRMSNavBar = () => {
               <Nav.Link as={Link} to="/dashboard">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to={`/profile`}>
-                Profile
-              </Nav.Link>
+              
               <Nav.Link as={Link} to="/help">
                 help
               </Nav.Link>
@@ -56,6 +55,13 @@ const HRMSNavBar = () => {
             <Nav>
               <Nav.Link as={Link} to="/notification">
                 <NotificationBellIcon />
+              </Nav.Link>
+              <Nav.Link as={Link} to={`/profile`}>
+                <img
+                  src={profileIcon}
+                  alt="profile"
+                  style={{ width: "32px", height: "32px" }}
+                />
               </Nav.Link>
             </Nav>
           </Container>
