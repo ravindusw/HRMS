@@ -59,14 +59,15 @@ function App() {
             }
           />
           <Route path="/leaveapplication" element={<LeaveApplication />} />
-          <Route
+          <Route path="/leave-history-admin" element={<LeaveHistory />} />
+          {/* <Route
             path="/leave-history-admin"
             element={
               <ProtectedRoute allowedRoles={["HR Manager"]}>
                 <LeaveHistory />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/addUser"
             element={
