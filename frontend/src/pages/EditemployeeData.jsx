@@ -34,17 +34,17 @@ const EditemployeeData = () => {
     
 
     // Fetch job titles, departments, and pay grades from the server
-    fetch('http://localhost:8800/api/Hr/auth/JobTitles')
+    fetch('http://localhost:8800/api/auth/Hr/JobTitles')
       .then(response => response.json())
       .then(data => setJobTitles(data))
       .catch(error => console.error('Error fetching job titles:', error));
 
-    fetch('http://localhost:8800/api/Hr/auth/departments')
+    fetch('http://localhost:8800/api/auth/Hr/departments')
       .then(response => response.json())
       .then(data => setDepartments(data))
       .catch(error => console.error('Error fetching departments:', error));
 
-    fetch('http://localhost:8800/api/Hr/auth/pay_grades')
+    fetch('http://localhost:8800/api/auth/Hr/pay_grades')
       .then(response => response.json())
       .then(data => setPayGrades(data))
       .catch(error => console.error('Error fetching pay grades:', error));
