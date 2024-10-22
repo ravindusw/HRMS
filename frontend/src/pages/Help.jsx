@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Accordion } from "react-bootstrap";
 import "./Help.css";
-
+import Footer from "../components/Footer";
 const AfterSubmit = (e) => {
   e.preventDefault();
   alert("Thank you for contacting us! We will get back to you soon.");
@@ -32,6 +32,7 @@ const Help = () => {
   ]);
 
   return (
+      
     <Container className="support-container mt-5">
       <h1 className="text-center mb-5">Help & Support</h1>
 
@@ -98,7 +99,9 @@ const Help = () => {
           </div>
         </Col>
       </Row>
+      <Footer/>
     </Container>
+    
   );
 };
 
