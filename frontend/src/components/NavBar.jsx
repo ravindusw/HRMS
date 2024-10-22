@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import NotificationBellIcon from "./NotificationBellIcon";
 
 const HRMSNavBar = () => {
   const location = useLocation();
@@ -50,8 +51,12 @@ const HRMSNavBar = () => {
                   Employee Information Management
                 </NavDropdown.Item>
               </NavDropdown>
-
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link as={Link} to="/notification">
+                <NotificationBellIcon />
+              </Nav.Link>
             </Nav>
           </Container>
         </Navbar>

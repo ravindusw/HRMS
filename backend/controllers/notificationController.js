@@ -1,7 +1,14 @@
 import { db } from "../config/db.js";
 
+// User ID can be get from req.user
+// const userId = req.user.id; OR const { id } = req.user;
+
 export const fetchNotificationsAll = (req, res) => {
     const query = "CALL get_notification_all();";
+
+    // const { id } = req.user;
+    console.log("Came here");
+    console.log(req.user);
 
     db.query(query, (err, results) => {
         if (err) {
@@ -184,4 +191,23 @@ export const createNotification = (req, res) => {
     else {
         res.status(400).send("Invalid type");
     }
+};
+
+export const getUnreadNotificationCount = (req, res) => {
+    const query = "SELECT get_unread_notification_count(?) AS unreadCount;";
+    const { userId } = req.params;
+
+    db.query(query, [userId],(err, results) => {
+        if (err) {
+            console.error("Error fetching notifications count:", err);
+            return res.status(500).send("Server error");
+        }
+
+        if (results.length === 0) {
+            return res.json({ unreadCount: 0 });
+        }
+
+        console.log("Results:", results);
+        res.json(results[0]);
+    });
 };

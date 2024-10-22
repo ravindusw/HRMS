@@ -5,6 +5,8 @@ import markread from "../assets/mark-as-read.svg";
 import deleteIcon from "../assets/delete.svg";
 import markunread from "../assets/mark-as-unread.svg";
 
+// import NotificationBellIcon from "../components/NotificationBellIcon";
+
 import NotificationPopupDelete from "../components/NotificationPopupDelete";
 
 const Notification = () => {
@@ -15,6 +17,7 @@ const Notification = () => {
   const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
+  // Need to fetch by user ID. IMPORTANT !!
   const fetchNotifications = async () => {
     try {
       const response = await axios.get("http://localhost:8800/api/notification/fetch-notification-all");
@@ -100,6 +103,7 @@ const Notification = () => {
   return (
     <div className="notification-container">
       <h2 className="notification-header">Notifications</h2>
+      {/* <div style={{backgroundColor: 'green', height: "100px"}}><NotificationBellIcon /></div> */}
       
       {/* Filter buttons */}
       <div className="filter-buttons">
