@@ -43,6 +43,9 @@ const HRMSNavBar = () => {
                 <NavDropdown.Item as={Link} to="/report">
                   Report Generation
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/Employee_Information_Management">
+                  View Employees Information
+                </NavDropdown.Item>
               </NavDropdown>
 
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
