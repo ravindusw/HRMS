@@ -4,6 +4,7 @@ import { addUser, addEmployee } from "../controllers/authController.js";
 import { verifyToken, authorizeRoles } from "../middleWare/authMiddleware.js";
 import { getSupervisors } from "../controllers/employeeControler.js";
 
+
 const router = Router();
 
 router.post("/login", login);
@@ -28,5 +29,7 @@ router.post(
   // authorizeRoles("HR Manager"),
   addEmployee
 );
+
+
 
 export default router;

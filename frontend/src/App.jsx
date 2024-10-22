@@ -32,17 +32,29 @@ function App() {
           <Route path="/notification" element={<Notification />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/report" element={<Report />} />
-          <Route path="/Employee_Information_Management" element={<EIM />} />
+          
           <Route path="/notAuthorized" element={<NotAuthorized />} />
+          <Route path="/Employee_Information_Management" 
+          element={
+            <EIM />
+            /*
+            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+                <EIM />
+              </ProtectedRoute>
+              */
+          }
+          />
+
           <Route
             path="/Employee_Information_Management/HrView/:id_to_view"
             element={
               <HrView />
               /*
-               <ProtectedRoute allowedRoles={["hr_manager"]}>
+               <ProtectedRoute allowedRoles={["HR Manager"]}>
                 <HrView />
               </ProtectedRoute>
               */
+              
             }
           />
           <Route
@@ -50,7 +62,7 @@ function App() {
             element={
               <EditemployeeData />
               /*
-              <ProtectedRoute allowedRoles={["admin", "hr_manager"]}>
+              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
                 <EditemployeeData />
               </ProtectedRoute>
               */

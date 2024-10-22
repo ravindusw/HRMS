@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { db } from "../config/db.js";
+import { getJobTitles, getPayGrades, getDepartments } from '../controllers/metadataController.js';
 
 const router = Router();
 
@@ -111,6 +112,7 @@ router.get("/employees/:id", (req, res) => {
 
 // get all employeedata from the database by calling the stored procedure GetEmployeeDataForView and GetDependentDetails
 
+/*
 // Existing route to get departments
 router.get("/departments", (req, res) => {
   const countryName = 'Sri Lanka';
@@ -162,7 +164,17 @@ router.get("/pay_grades", (req, res) => {
     res.status(200).json(pay_grades);
   });
 });
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Route to get job titles
+router.get("/JobTitles", getJobTitles);
+
+// Route to get pay grades
+router.get("/pay_grades", getPayGrades);
+
+// Route to get departments
+router.get("/departments", getDepartments);
+
 
 export default router;

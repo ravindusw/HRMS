@@ -23,7 +23,7 @@ const HrView = () => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/api/Hr/employees/${id_to_view}`
+          `http://localhost:8800/api/Hr/auth/employees/${id_to_view}`
         );
         setEmployee(response.data);
       } catch (error) {

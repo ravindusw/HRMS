@@ -20,7 +20,7 @@ app.use("/api/profile", verifyToken, profileRoutes);
 
 // Use the routes
 app.use("/api/notification", notificationRoutes);
-app.use("/api/Hr", HrRouter);
+app.use("/api/Hr/auth", HrRouter);
 
 // Default route
 app.get("/", (req, res) => {
