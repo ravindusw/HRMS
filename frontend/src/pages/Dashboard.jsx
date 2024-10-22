@@ -11,7 +11,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="dashboard-hero">
-        <h1>Welcome to Jupiter HRMS</h1>
+        <h1>Welcome to Jupiter HRMS &#128075;</h1>
         <h2>
           Good Morning Alan!
         </h2>

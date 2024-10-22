@@ -14,7 +14,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    background-color: #f9f9f9 !important;
+    background-color: #f9f9f9;
 }
 
 .react-calendar__navigation {
@@ -27,7 +27,8 @@
 .react-calendar__navigation__label,
 .react-calendar__navigation__arrow {
     color: #007bff !important;
-    font-size: 0.8em;
+    font-size: 0.7em;
+    font-weight: bold;
 }
 
 .react-calendar__navigation__arrow {
