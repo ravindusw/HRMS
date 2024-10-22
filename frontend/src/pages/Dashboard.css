@@ -16,7 +16,19 @@ body {
 .dashboard-container {
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 75px auto;
+}
+
+.dashboard-hero {
+  margin-bottom: 20px;
+  background-image: url("../assets/dashboard.jpg");
+  background-size: cover;
+  min-height: 240px;
+  padding: 80px 20px;
+  color: #f4f4f9;
+  align-items: center;
+  border-radius: 10px;
+
 }
 
 /* Grid Layout */

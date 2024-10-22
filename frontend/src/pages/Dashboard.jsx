@@ -10,8 +10,13 @@ import QuickActions from "../components/ForDashboard/QuickActions";
 export default function Dashboard() {
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Dashboard</h1>
-      <h2 className="dashboard-subtitle">Good Morning Alan!</h2>
+      <div className="dashboard-hero">
+        <h1>Welcome to Jupiter HRMS</h1>
+        <h2>
+          Good Morning Alan!
+        </h2>
+      </div>
+      
       <div className="dashboard-grid">
         <InfoSummary />
         <RemainingLeaves />
