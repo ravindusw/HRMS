@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosInstance from "../utils/AxiosInstance";
 import "./Notification.css";
 import markread from "../assets/mark-as-read.svg";
 import deleteIcon from "../assets/delete.svg";
@@ -20,7 +21,7 @@ const Notification = () => {
   // Need to fetch by user ID. IMPORTANT !!
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("http://localhost:8800/api/notification/fetch-notification-all");
+      const response = await axiosInstance.get("/notification/fetch-notification-by-user-id");
       setNotifications(response.data);
       console.log("Notifications fetched:", response.data);
     } catch (err) {
@@ -34,7 +35,7 @@ const Notification = () => {
 
   const handleMarkAsRead = async (id) => {
     try {
-      const response = await axios.post(`http://localhost:8800/api/notification/update-notification-status`, {
+      const response = await axiosInstance.post(`/notification/update-notification-status`, {
         notificationId: id,
         status: "read",
       });
@@ -48,7 +49,7 @@ const Notification = () => {
 
   const handleMarkAsUnread = async (id) => {
     try {
-      const response = await axios.post(`http://localhost:8800/api/notification/update-notification-status`, {
+      const response = await axiosInstance.post(`/notification/update-notification-status`, {
         notificationId: id,
         status: "unread",
       });
@@ -72,7 +73,7 @@ const Notification = () => {
   
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8800/api/notification/delete-notification/${deleteId}`);
+      const response = await axiosInstance.delete(`/notification/delete-notification/${deleteId}`);
       console.log(`Notification with id: ${deleteId} is deleted...`);
       console.log("Response:", response.data);
       fetchNotifications();

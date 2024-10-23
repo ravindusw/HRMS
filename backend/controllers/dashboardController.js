@@ -1,13 +1,13 @@
 import { db } from "../config/db.js";
 
 export const fetchRemainingLeaveCount = (req, res) => {
-    const id = req.params.id;
-    
+    const { e_id } = req.user;
     const query = "CALL get_remaining_leave_count(?, ?);";
 
     console.log(new Date().getFullYear());
+    console.log("e_id is ", e_id);
 
-    db.query(query, [id, new Date().getFullYear()], (err, results) => {
+    db.query(query, [e_id, new Date().getFullYear()], (err, results) => {
         if (err) {
             console.error("Error fetching remaining leave count:", err);
             return res.status(500).send("Server error");

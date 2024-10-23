@@ -22,14 +22,12 @@ export const fetchNotificationsAll = (req, res) => {
 };
 
 export const fetchNotificationByUserId = (req, res) => {
-    if (!req.params.userId) {
-        return res.status(400).send("User ID is required");
-    }
+    const { u_id } = req.user;
     
-    const { userId } = req.params;
+    // const { userId } = req.params;
     const query = "CALL get_notification_by_user_id(?);";
 
-    db.query(query, [userId], (err, results) => {
+    db.query(query, [u_id], (err, results) => {
         if (err) {
             console.error("Error fetching notifications:", err);
             return res.status(500).send("Server error");
@@ -195,9 +193,11 @@ export const createNotification = (req, res) => {
 
 export const getUnreadNotificationCount = (req, res) => {
     const query = "SELECT get_unread_notification_count(?) AS unreadCount;";
-    const { userId } = req.params;
+    const { u_id } = req.user;
 
-    db.query(query, [userId],(err, results) => {
+    console.log("u_id is ", u_id);
+
+    db.query(query, [u_id],(err, results) => {
         if (err) {
             console.error("Error fetching notifications count:", err);
             return res.status(500).send("Server error");

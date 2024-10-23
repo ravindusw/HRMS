@@ -29,14 +29,15 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "./RemainingLeaves.css"; // Custom CSS for this component
 import { useState, useEffect } from "react";
 import axios from "axios";
+import axiosInstance from "../../utils/AxiosInstance";
 
 // Sample data for the Pie Chart
-const data = [
-  { name: "Annual", value: 20 },
-  { name: "Casual", value: 12 },
-  { name: "Maternity", value: 10 },
-  { name: "No-pay", value: 35 },
-];
+// const data = [
+//   { name: "Annual", value: 20 },
+//   { name: "Casual", value: 12 },
+//   { name: "Maternity", value: 10 },
+//   { name: "No-pay", value: 35 },
+// ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -44,12 +45,19 @@ export default function RemainingLeaves() {
   
   const [remainingLeaves, setRemainingLeaves] = useState([]);
 
+  const data = remainingLeaves.map((leave) => {
+    return {
+      name: leave.type,
+      value: leave.balance,
+    };
+  });
+
   useEffect(() => {
-    const id = "6bf363e8-8b5d-11ef-acee-4a6a3b2083d6"; // Hardcoded employee id
+    // const id = "6bf363e8-8b5d-11ef-acee-4a6a3b2083d6"; // Hardcoded employee id
     
     const fetchRemainingLeaves = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/api/dashboard/get-remaining-leave-count/${id}`);
+        const response = await axiosInstance.get(`/dashboard/get-remaining-leave-count`);
         console.log(response.data);
         setRemainingLeaves(response.data);
       } catch (error) {
