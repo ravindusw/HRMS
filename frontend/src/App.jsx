@@ -108,6 +108,7 @@ import AddUser from "./pages/AddUser.jsx";
 import HrView from "./pages/HrView.jsx";
 import NotAuthorized from "./pages/NotAuthorized.jsx";
 import HRMSNavBar from "./components/NavBar.jsx";
+import EmployeeReport from "./components/EmployeeReport.jsx";
 
 import "./App.css";
 
@@ -124,6 +125,8 @@ function App() {
         <Route path="/report" element={<Report />} />
         <Route path="/Employee_Information_Management" element={<EIM />} />
         <Route path="/notAuthorized" element={<NotAuthorized />} />
+        <Route path="/employee-report" element={<EmployeeReport />} />
+
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
