@@ -2,30 +2,29 @@ import React, { useState } from "react";
 import "./Login.css";
 import logo from "../assets/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "../context/AuthContext.jsx";
+import axiosInstance from "../utils/AxiosInstance";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get the login method from the AuthContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8800/api/auth/login",
-        { email, password }
-      );
+      const response = await axiosInstance.post("/auth/login", {
+        email,
+        password,
+      });
       const { token } = response.data;
-      login(token); // Call the login method with the token
+      Cookies.set("authToken", token, { expires: 7 });
       navigate("/dashboard");
     } catch (err) {
       setErrorMessage(

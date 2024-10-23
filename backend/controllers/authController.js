@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { db } from "../config/db.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const login = (req, res) => {
   const { email, password } = req.body;
@@ -37,8 +39,8 @@ export const login = (req, res) => {
       }
 
       const token = jwt.sign(
-        { id: user.employee_id, role: user.role },
-        "your_jwt_secret_key",
+        { e_id: user.employee_id, role: user.role, u_id: user.user_id },
+        process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
 
@@ -51,6 +53,7 @@ export const addUser = (req, res) => {
   const { employee_Id, userName, password, email, role } = req.body;
   const query = "CALL CreateUser(?, ?, ?, ?,?)";
   const password_hash = bcrypt.hashSync(password, 10);
+
   // console.log(employee_Id);
 
   db.query(
@@ -108,10 +111,6 @@ export const addEmployee = (req, res) => {
     Dependent_Contact_Number, // Corresponds to DEPENDENT_CONTACT_NUMBER
   } = req.body;
 
-  // After extracting the parameters, you would then call the stored procedure,
-  // pass these parameters, and handle the response (success or error).
-
-  // Example call to database to execute the stored procedure:
   const query = `
     CALL add_Employee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;

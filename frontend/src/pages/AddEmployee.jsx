@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useAuth } from "../context/AuthContext";
-import "./AddEmployee.css"; // Import the CSS file
+import axiosInstance from "../utils/AxiosInstance";
+import "./AddEmployee.css";
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -32,31 +31,20 @@ const AddEmployee = () => {
     Dependent_Contact_Number: "",
   });
 
-  const { auth } = useAuth();
   const [supervisors, setSupervisors] = useState([]);
-  const { token } = auth;
   const [message, setMessage] = useState("Submit");
   const [buttonColor, setButtonColor] = useState("");
 
   useEffect(() => {
-    if (token) {
-      console.log("Token is available:", token);
-      axios
-        .get("http://localhost:8800/api/auth/getSupervisors", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setSupervisors(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching supervisors:", error);
-        });
-    } else {
-      console.error("No token available");
-    }
-  }, [token]);
+    axiosInstance
+      .get("/auth/getSupervisors")
+      .then((response) => {
+        setSupervisors(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching supervisors:", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setEmployeeData({
@@ -68,14 +56,9 @@ const AddEmployee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8800/api/auth/addEmployee",
-        employeeData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await axiosInstance.post(
+        "/auth/addEmployee",
+        employeeData
       );
       console.log("Employee added successfully:", response.data);
       setMessage(response.data.message);
