@@ -1,129 +1,20 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import Image from "react-bootstrap/Image";
-// import EmployeePic from "../assets/Employee.png";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext.jsx";
-// import "./Profile.css";
-
-// const Profile = () => {
-//   const { auth } = useAuth();
-
-//   const navigate = useNavigate();
-//   const [profileData, setProfileData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchProfileData = async () => {
-//       if (!auth.token) {
-//         navigate("/"); // Redirect to login if no token
-//         return;
-//       }
-
-//       try {
-//         const response = await axios.get(`http://localhost:8800/api/profile`, {
-//           headers: {
-//             Authorization: `Bearer ${auth.token}`,
-//           },
-//         });
-//         setProfileData(response.data);
-//       } catch (error) {
-//         console.error("Error fetching profile data:", error);
-//       }
-//     };
-
-//     fetchProfileData();
-//   }, [auth.token, navigate]);
-
-//   if (!profileData) {
-//     return <div>Loading...</div>; // Show loading state while fetching data
-//   }
-
-//   return (
-//     <div className="profile-container">
-//       <div className="profile-header">
-//         <h1>Profile</h1>
-//       </div>
-//       <div className="profile-body">
-//         <div className="profile-content">
-//           <div className="photo-section">
-//             <Image
-//               className="profile-photo"
-//               src={EmployeePic}
-//               roundedCircle
-//               width="150"
-//               height="150"
-//             />
-//           </div>
-//           <div className="info-section">
-//             <h2>
-//               {profileData.first_name} {profileData.last_name}
-//             </h2>
-//             <div className="profile-field">
-//               <label className="field-label">Name:</label>
-//               <div className="field-value">
-//                 {profileData.first_name} {profileData.last_name}
-//               </div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Company Email:</label>
-//               <div className="field-value">{profileData.email}</div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Personal Email:</label>
-//               <div className="field-value">{profileData.personal_email}</div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Address:</label>
-//               <div className="field-value">{profileData.address}</div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Date of Birth:</label>
-//               <div className="field-value">
-//                 {new Date(profileData.date_of_birth).toLocaleDateString()}
-//               </div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Position:</label>
-//               <div className="field-value">{profileData.job_title}</div>
-//             </div>
-//             <div className="profile-field">
-//               <label className="field-label">Department:</label>
-//               <div className="field-value">{profileData.Department}</div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/AxiosInstance";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import EmployeePic from "../assets/Employee.png";
-import { useNavigate } from "react-router-dom";
 import "./Profile.css";
-import Cookies from "js-cookie";
 
 const Profile = () => {
-  const token = Cookies.get("authToken");
-  const navigate = useNavigate();
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
       try {
-        const response = await axios.get(`http://localhost:8800/api/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axiosInstance.get(`/profile`);
         setProfileData(response.data);
       } catch (error) {
         console.error("Error fetching profile data:", error);
@@ -131,68 +22,99 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, [token, navigate]);
+  }, []);
 
   if (!profileData) {
-    return <div>Loading...</div>; // Show loading state while fetching data
+    return <div className="loading">Loading...</div>;
   }
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <h1>Profile</h1>
-      </div>
-      <div className="profile-body">
-        <div className="profile-content">
-          <div className="photo-section">
+    <Container className="profile-page">
+      <Card className="profile-card shadow-sm">
+        <Row className="profile-header">
+          <Col md={4} className="profile-photo-container">
             <Image
               className="profile-photo"
               src={EmployeePic}
               roundedCircle
-              width="150"
-              height="150"
+              width="160"
+              height="160"
+              alt="Employee"
             />
-          </div>
-          <div className="info-section">
-            <h2>
-              {profileData.first_name} {profileData.last_name}
-            </h2>
-            <div className="profile-field">
-              <label className="field-label">Name:</label>
-              <div className="field-value">
-                {profileData.first_name} {profileData.last_name}
+          </Col>
+          <Col md={8} className="profile-name">
+            <h1>
+              {profileData?.first_name} {profileData?.last_name}
+            </h1>
+            <p className="job-title">{profileData?.job_title}</p>
+          </Col>
+        </Row>
+
+        <Card.Body>
+          <Row className="profile-details">
+            <Col md={6}>
+              <div className="profile-field">
+                <span>Email:</span> {profileData?.email}
               </div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Company Email:</label>
-              <div className="field-value">{profileData.email}</div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Personal Email:</label>
-              <div className="field-value">{profileData.personal_email}</div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Address:</label>
-              <div className="field-value">{profileData.address}</div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Date of Birth:</label>
-              <div className="field-value">
-                {new Date(profileData.date_of_birth).toLocaleDateString()}
+              <div className="profile-field">
+                <span>NIC:</span> {profileData?.nic}
               </div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Position:</label>
-              <div className="field-value">{profileData.job_title}</div>
-            </div>
-            <div className="profile-field">
-              <label className="field-label">Department:</label>
-              <div className="field-value">{profileData.Department}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              <div className="profile-field">
+                <span>Department:</span> {profileData?.department}
+              </div>
+              <div className="profile-field">
+                <span>Date of Birth:</span>{" "}
+                {new Date(profileData?.date_of_birth).toLocaleDateString()}
+              </div>
+              <div className="profile-field">
+                <span>Pay Grade:</span> {profileData?.pay_grade}
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="profile-field">
+                <span>Marital Status:</span> {profileData?.marital_state}
+              </div>
+              <div className="profile-field">
+                <span>Gender:</span> {profileData?.gender}
+              </div>
+              <div className="profile-field">
+                <span>Address:</span> {profileData?.address}
+              </div>
+              <div className="profile-field">
+                <span>Employment Type:</span> {profileData?.employment_type}
+              </div>
+              <div className="profile-field">
+                <span>Work Schedule:</span> {profileData?.work_schedule}
+              </div>
+            </Col>
+          </Row>
+
+          <Row className="profile-section">
+            <Col md={6}>
+              <h5>Emergency Contact</h5>
+              <div className="profile-field">
+                <span>Name:</span>{" "}
+                {profileData?.emergency_contact?.name || "N/A"}
+              </div>
+              <div className="profile-field">
+                <span>Phone:</span>{" "}
+                {profileData?.emergency_contact?.phone || "N/A"}
+              </div>
+              <div className="profile-field">
+                <span>Relationship:</span>{" "}
+                {profileData?.emergency_contact?.relationship || "N/A"}
+              </div>
+            </Col>
+            <Col md={6}>
+              <h5>Dependent</h5>
+              <div className="profile-field">
+                <span>Name:</span> {profileData?.dependent?.name || "N/A"}
+              </div>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
 

@@ -1,88 +1,80 @@
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0; /* Remove padding from the container */
-  margin: 0; /* Remove margin from the container */
-  /* min-height: 100vh; Ensure it takes the full height of the viewport */
-  justify-content: center; /* Center the content vertically */
-  /* background-color: #171f39; */
-  height: auto;
+.profile-page {
+  margin-top: 2rem;
+  padding: 40px 0;
 }
 
-.profile-container .profile-body {
-  font-family: Arial, sans-serif;
-  /* background-color: #171f39; */
-  background-color: whitesmoke;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90.105vh;
-  width: 100vw;
-}
-
-.profile-container h2 {
-  color: #000;
+.profile-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 15px;
+  background-color: #f8f9fa;
 }
 
 .profile-header {
-  margin-bottom: 20px;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #dee2e6;
 }
 
-.profile-body {
+.profile-photo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
-}
-
-.profile-container .profile-content {
-  display: flex;
-  flex-direction: row;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 30rem;
-}
-
-.photo-section {
-  margin-right: 30px;
 }
 
 .profile-photo {
-  border: 3px solid #007bff;
+  border: 4px solid #007bff;
 }
 
-.info-section {
-  display: flex;
-  flex-direction: column;
+.profile-name {
+  text-align: left;
 }
 
-.profile-container h2 {
-  margin-bottom: 20px;
+.profile-name h2 {
+  font-size: 1.75rem;
+  align-items: normal;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+  color: #343a40;
 }
 
-.profile-container h1 {
-  color: wheat;
+.job-title {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.profile-details {
+  padding: 20px;
 }
 
 .profile-field {
-  display: flex;
   margin-bottom: 10px;
-  width: 50rem;
+  font-size: 1rem;
 }
 
-.field-label {
+.profile-field strong {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.profile-section h5 {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
   font-weight: bold;
-  width: 150px;
+  color: #007bff;
 }
 
-.field-value {
-  background-color: #e9ecef;
-  padding: 5px 10px;
-  border-radius: 5px;
-  flex: 1;
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+  }
+
+  .profile-name {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .profile-field {
+    font-size: 0.95rem;
+  }
 }
