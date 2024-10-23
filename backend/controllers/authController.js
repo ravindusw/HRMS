@@ -110,10 +110,6 @@ export const addEmployee = (req, res) => {
     Dependent_Contact_Number, // Corresponds to DEPENDENT_CONTACT_NUMBER
   } = req.body;
 
-  // After extracting the parameters, you would then call the stored procedure,
-  // pass these parameters, and handle the response (success or error).
-
-  // Example call to database to execute the stored procedure:
   const query = `
     CALL add_Employee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
