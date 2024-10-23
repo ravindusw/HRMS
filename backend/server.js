@@ -20,7 +20,7 @@ app.use("/api/profile", profileRoutes);
 
 // Use the routes
 app.use("/api/notification", notificationRoutes);
-app.use("/api/Hr", HrRouter);
+//app.use("/api/Hr", HrRouter);
 
 // Default route
 app.get("/", (req, res) => {
