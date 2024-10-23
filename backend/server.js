@@ -15,12 +15,12 @@ app.use(express.json());
 // Use the login route
 app.use("/api/auth", authRoutes);
 
-// Use the profile route with the verifyToken middleware
-app.use("/api/profile", verifyToken, profileRoutes);
+// Use the profile route
+app.use("/api/profile", profileRoutes);
 
 // Use the routes
 app.use("/api/notification", notificationRoutes);
-app.use("/api/Hr", HrRouter);
+//app.use("/api/Hr", HrRouter);
 
 // Default route
 app.get("/", (req, res) => {

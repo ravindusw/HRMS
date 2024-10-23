@@ -1,20 +1,9 @@
 import React, { useState } from "react";
-// import { jsPDF } from "jspdf";
-// import { CSVLink } from "react-csv";
-// import axios from "axios";
-import "./Report.css";
 import { useNavigate } from "react-router-dom";
+import "./Report.css";
 
 const Report = () => {
-  const backgroundImageStyle = {
-    backgroundImage: `url(src/assets/report.jpg)`, // Example for images in the public folder
-    height: "100vh",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-  };
   const [reportType, setReportType] = useState("");
-  //const [generatedReports, setGeneratedReports] = useState([]);
   const navigate = useNavigate();
 
   const handleReportChange = (e) => {
@@ -32,28 +21,46 @@ const Report = () => {
       navigate("/custom-fields-report");
     }
   };
+  const backgroundImageStyle1 = {
+    backgroundImage: `url(src/assets/appreal.png)`, // Example for images in the public folder
+    height: "100vh",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  };
+  const backgroundImageStyle2 = {
+    backgroundImage: `url(src/assets/report.jpg)`, // Example for images in the public folder
+    height: "100vh",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  };
 
   return (
-    //<div style={backgroundImageStyle}>
-    <div className="reportcontainer" style={backgroundImageStyle}>
-      <h1>Jupiter Apparels HRMS - Reporting Module</h1>
-      <h2>Generate Report</h2>
-      <form>
-        <div>
-          <label>Select Report Type:</label>
-          <select value={reportType} onChange={handleReportChange}>
-            <option value="">-- Select Report --</option>
-            <option value="Employee Report">Employee Report</option>
-            <option value="Leave Report">Leave Report</option>
-            <option value="Salary Report">Salary Report</option>
-            <option value="Custom Fields Report">
-              Reports Based on Custom Fields
-            </option>
-          </select>
+    <div className="report-page">
+      <div className="report-container">
+        <div className="reportcontainer-1" style={backgroundImageStyle2}>
+          <h1>Jupiter Apparels Reporting Module</h1>
+          {/* <h1> Reporting Module </h1> */}
+          <h2> Generate Report </h2>
+          <form>
+            <div>
+              <label>Select Report Type:</label>
+              <select value={reportType} onChange={handleReportChange}>
+                <option value="">-- Select Report --</option>
+                <option value="Employee Report">Employee Report</option>
+                <option value="Leave Report">Leave Report</option>
+                <option value="Salary Report">Salary Report</option>
+                <option value="Custom Fields Report">
+                  Reports Based on Custom Fields
+                </option>
+              </select>
+            </div>
+          </form>
         </div>
-      </form>
+        <div className="reportcontainer-2" style={backgroundImageStyle1}></div>
+      </div>
     </div>
-    // </div>
   );
 };
 

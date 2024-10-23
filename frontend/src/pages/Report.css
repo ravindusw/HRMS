@@ -1,101 +1,51 @@
-/* General Styling */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* background-color: #013b29; */
-  /* background-image: url("src\assets\report-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; */
-
-  margin: 0;
-  padding: 0;
+  background-position: center;
 }
 
-.reportcontainer {
-  max-width: 10000px;
-  height: 200px;
-  margin: 40px auto;
-  align-items: right;
-  padding: 20px;
-  /* background-color: #051605; */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  text-align: center;
-}
-
-/* Headings Styling */
-reportcontainer.h1 {
-  font-size: 3rem;
-  color: #343a40;
-  margin-bottom: 1rem;
-}
-
-reportcontainer.h2 {
-  font-size: 2rem;
-  color: #495057;
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-
-/* Form Styling */
-reportType.form {
+.report-page {
   display: flex;
-
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
-label {
+.report-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.reportcontainer-1,
+.reportcontainer-2 {
+  flex: 1;
+  padding: 20px;
+}
+.reportcontainer-1.h1 {
+  color: white;
+  font-size: larger;
+}
+.reportcontainer-1.h2 {
+  color: white;
+  font-size: large;
+}
+
+.reportcontainer-1 {
+  background-color: rgb(9, 74, 9);
   font-size: 1.5rem;
-  color: #6c757d;
-  margin-bottom: 0.5rem;
+  color: rgb(109, 106, 106);
 }
 
-/* Dropdown Styling */
-select {
-  width: 80%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  background-color: #929992;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.report-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
-
-select:focus {
-  border-color: #b1f3e8;
-  background-color: #aad7c8;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Option Styling */
-option {
-  font-size: 1rem;
-}
-
-/* Hover Effect */
-select:hover {
-  border-color: #6c757d;
-  background-color: #96c3d4;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .reportcontainer {
-    width: 90%;
-  }
-
-  .reportcontainer.h1 {
-    font-size: 3rem;
-  }
-
-  .reportcontainer.h2 {
-    font-size: 1.3rem;
-  }
-
-  select {
-    width: 100%;
-  }
+.reportcontainer-2 {
+  background-image: url("src/assets/appreal.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
