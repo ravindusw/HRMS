@@ -40,6 +40,8 @@ const FilterGenders = () => {
 const EmployeeInfoManagement = () => {
   const [employees, setEmployees] = useState([]);
   const [filterEmplooyees, setFilterEmployees] = useState([]);
+  const [departments, setdepartments] = useState(['All departments']);
+  const [JobTitles, setJobTitles] = useState(['All Job Titles']);
 
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
