@@ -40,13 +40,15 @@ const FilterGenders = () => {
 const EmployeeInfoManagement = () => {
   const [employees, setEmployees] = useState([]);
   const [filterEmplooyees, setFilterEmployees] = useState([]);
+  const [departments, setdepartments] = useState(['All departments']);
+  const [JobTitles, setJobTitles] = useState(['All Job Titles']);
 
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("http://localhost:8800/api/Hr/employees")
+      .get("http://localhost:8800/api/auth/Hr/employees")
       .then((response) => {
         setEmployees(response.data);
         setFilterEmployees(response.data); // Update filterEmployees when employees are fetched
@@ -62,7 +64,7 @@ const EmployeeInfoManagement = () => {
     const fetchDepartments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8800/api/Hr/departments"
+          "http://localhost:8800/api/auth/Hr/departments"
         );
         setdepartments(departments.concat(response.data));
         //console.log(response.data);
@@ -79,7 +81,7 @@ const EmployeeInfoManagement = () => {
     const fetchJobTitles = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8800/api/Hr/JobTitles"
+          "http://localhost:8800/api/auth/Hr/JobTitles"
         );
         setJobTitles(JobTitles.concat(response.data));
         //console.log(response.data);
