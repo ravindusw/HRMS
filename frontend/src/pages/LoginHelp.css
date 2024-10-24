@@ -1,0 +1,97 @@
+/* LoginHelp.css */
+
+/* General styles */
+.login-help-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 80vw; /* Set a maximum width for better readability */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add some padding around the container */
+}
+
+.login-help-title {
+  color: #2c3e50; /* Dark blue color for the main title */
+  font-size: 2.5rem; /* Size for the main title */
+  font-weight: 700; /* Bold weight for emphasis */
+}
+
+.faq-wrapper,
+.contact-wrapper {
+  border-radius: 10px; /* Rounded corners for both sections */
+  background-color: #f7f9fc; /* Light background for contrast */
+  border-style: none; /* Remove any border styles */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 30px; /* Padding inside the wrapper */
+  margin-bottom: 30px; /* Space between sections */
+}
+
+.faq-header {
+  color: #34495e; /* Darker grey color for subheadings */
+  font-size: 1.8rem; /* Size for the FAQ header */
+}
+
+.contact-header {
+  color: #34495e; /* Same color as the FAQ header */
+  font-size: 1.8rem; /* Size for the contact header */
+}
+
+.faq-accordion {
+  margin-top: 20px; /* Space between header and accordion */
+}
+
+.faq-item {
+  border-radius: 10px; /* Rounded corners for each FAQ item */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for items */
+  margin-bottom: 15px; /* Space between each FAQ item */
+}
+
+.faq-question {
+  font-size: 1.2rem; /* Size for the FAQ question */
+  font-weight: 600; /* Bold weight for emphasis */
+}
+
+.faq-answer {
+  font-size: 1rem; /* Size for the FAQ answer */
+  color: #555; /* Medium grey color for answers */
+}
+
+.contact-label {
+  font-weight: bold; /* Bold weight for labels */
+  color: #2c3e50; /* Same dark blue as the main title */
+}
+
+.contact-input {
+  border-radius: 5px; /* Rounded corners for input fields */
+}
+
+.contact-input:focus {
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Blue shadow on focus */
+}
+
+.contact-submit-button {
+  border-radius: 30px; /* Rounded corners for the submit button */
+  font-weight: 600; /* Bold weight for button text */
+  background-color: #3498db; /* Blue background for the button */
+  border: none; /* Remove border */
+}
+
+.contact-submit-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Additional styles for cards */
+.card {
+  border: 1px solid #e1e1e1; /* Subtle border for cards */
+  border-radius: 10px; /* Rounded corners for cards */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for cards */
+}
+
+.card-header {
+  background-color: #f7f7f7; /* Light background for card headers */
+  font-weight: bold; /* Bold weight for card header text */
+  font-size: 1.25rem; /* Size for card header text */
+}
+
+.card-body {
+  padding: 20px; /* Padding inside the card body */
+}

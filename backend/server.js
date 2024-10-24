@@ -3,8 +3,12 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+
+import supportRoutes from "./routes/SupportRoutes.js";
+
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
+
 import HrRouter from "./routes/HrRouter.js";
 
 const app = express();
@@ -26,6 +30,10 @@ app.use("/api/Hr", HrRouter);
 app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);
+
+
+app.use("/api/help", supportRoutes);
+
 
 
 // Default route

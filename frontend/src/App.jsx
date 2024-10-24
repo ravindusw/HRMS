@@ -18,6 +18,12 @@ import NotAuthorized from "./pages/NotAuthorized.jsx";
 import HRMSNavBar from "./components/NavBar.jsx";
 import EmployeeReport from "./components/EmployeeReport.jsx";
 
+import SalaryReport from "./components/SalaryReport.jsx";
+import LeaveReport from "./components/LeaveReport.jsx";
+
+import LoginHelp from "./pages/LoginHelp.jsx";
+
+
 import "./App.css";
 
 function App() {
@@ -35,6 +41,12 @@ function App() {
         <Route path="/notAuthorized" element={<NotAuthorized />} />
         <Route path="/employee-report" element={<EmployeeReport />} />
 
+        <Route path="/salary-report" element={<SalaryReport />} />
+        <Route path="/leave-report" element={<LeaveReport />} />
+
+        <Route path="/loginHelp" element={<LoginHelp />} />
+
+
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
@@ -46,7 +58,7 @@ function App() {
         <Route
           path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
           element={
-            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
               <EditemployeeData />
             </ProtectedRoute>
           }
@@ -54,7 +66,7 @@ function App() {
         <Route
           path="/Employee_Information_Management/AddEmployee"
           element={
-            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
               <AddEmployee />
             </ProtectedRoute>
           }
