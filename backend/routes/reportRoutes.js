@@ -8,9 +8,8 @@ import {
 
 const router = Router();
 
-router.get("/employees-report", EmployeeReport);
-router.get("/leave-report", LeaveReport);
-router.get("/salary-report", SalaryReport);
-router.get("/custom-fields-report", CustomFieldsReport);
+router.get("/EmployeeReport", EmployeeReport);
+router.get("/LeaveReport", LeaveReport);
+router.get("/SalaryReport", SalaryReport);
 
 export default router;
