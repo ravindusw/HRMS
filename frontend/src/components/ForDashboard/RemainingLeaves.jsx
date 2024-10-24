@@ -41,7 +41,7 @@ import axiosInstance from "../../utils/AxiosInstance";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-export default function RemainingLeaves() {
+export default function RemainingLeaves({ role }) {
   
   const [remainingLeaves, setRemainingLeaves] = useState([]);
 
@@ -77,32 +77,15 @@ export default function RemainingLeaves() {
       <div className="leave-content">
         {/* Leave Types Cards */}
         <div className="leave-types">
-          {remainingLeaves.map((leave, index) => {
-            return (
-              <div key={index} className="leave-card">
-                {leave.type} <br />
-                <span>{leave.balance}</span>
-              </div>
-            );
-          })}
-          
-          
-          {/* <div className="leave-card">
-            Annual <br />
-            <span>20</span>
-          </div>
-          <div className="leave-card">
-            Casual <br />
-            <span>12</span>
-          </div>
-          <div className="leave-card">
-            Maternity <br />
-            <span>10</span>
-          </div>
-          <div className="leave-card">
-            No-pay <br />
-            <span>35</span>
-          </div> */}
+          {remainingLeaves.length > 0 ? 
+            remainingLeaves.map((leave, index) => {
+              return (
+                <div key={index} className="leave-card">
+                  {leave.type} <br />
+                  <span>{leave.balance}</span>
+                </div>
+              );
+            }) : <p className="error-fetchingData">Seems like there is an issue fetching the data</p>}
         </div>
 
         {/* Pie Chart for leave types */}
@@ -131,7 +114,8 @@ export default function RemainingLeaves() {
         </div>
       </div>
 
-      <button className="btn-apply">Apply For Leave</button>
+      <button className="btn-apply">Apply For a Leave</button>
+      {role == "Supervisor" ? <button className="btn-apply">View Leave Requests</button> : null}
     </div>
   );
 }

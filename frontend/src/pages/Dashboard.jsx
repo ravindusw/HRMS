@@ -9,11 +9,28 @@ import QuickActions from "../components/ForDashboard/QuickActions";
 
 import { useState, useEffect } from "react";
 import axiosInstance from "../utils/AxiosInstance";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export default function Dashboard() {
-  
+  const token = Cookies.get("authToken");
   const [profileData, setProfileData] = useState(null);
+  const [role, setRole] = useState(null);
 
+  useEffect(() => {
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.role) {
+          console.log("Role:", decodedToken.role);
+          setRole(decodedToken.role);
+        }
+      } catch (error) {
+        console.error("Failed to decode token:", error);
+      }
+    }
+  }, [role]);
+  
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -39,11 +56,11 @@ export default function Dashboard() {
       
       <div className="dashboard-grid">
         <InfoSummary profileData={profileData}/>
-        <RemainingLeaves />
-        <CalendarSection />
-        <EmployeesInfo />
-        <UserRoleDistribution />
-        <QuickActions />
+        <RemainingLeaves role={role}/>
+        <CalendarSection profile={profileData}/>
+        {role == "HR Manager" || role == "Admin" ? <EmployeesInfo /> : null}
+        {role == "HR Manager" || role == "Admin" ? <UserRoleDistribution /> : null}
+        {role == "HR Manager" || role == "Admin" ? <QuickActions /> : null}
       </div>
     </div>
   );
