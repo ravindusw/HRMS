@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 
 export default function Dashboard() {
   const role = Cookies.get("role");
-  console.log("Role:", role);
+  // console.log("Role:", role);
 
   const [profileData, setProfileData] = useState(null);
   

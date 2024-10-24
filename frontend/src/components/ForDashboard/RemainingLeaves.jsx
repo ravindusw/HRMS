@@ -58,7 +58,7 @@ export default function RemainingLeaves({ role }) {
     const fetchRemainingLeaves = async () => {
       try {
         const response = await axiosInstance.get(`/dashboard/get-remaining-leave-count`);
-        console.log(response.data);
+        // console.log(response.data);
         setRemainingLeaves(response.data);
       } catch (error) {
         console.error("Error fetching remaining leaves:", error);
