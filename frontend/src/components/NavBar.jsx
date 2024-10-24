@@ -70,14 +70,10 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/Jupiter_Logo.png";
 import Cookies from "js-cookie";
 
-
 import NotificationBellIcon from "./NotificationBellIcon";
 import profileIcon from "../assets/profile-icon.svg";
 
-
 const token = Cookies.get("authToken");
-
-
 
 const HRMSNavBar = () => {
   const location = useLocation();
@@ -141,18 +137,18 @@ const HRMSNavBar = () => {
                 )}
               </Nav>
               <Nav>
-                <Nav.Link onClick={handleLogout} className="ms-auto">
-                  Logout
-                </Nav.Link>
                 <Nav.Link as={Link} to="/notification">
-                    <NotificationBellIcon />
+                  <NotificationBellIcon />
                 </Nav.Link>
                 <Nav.Link as={Link} to={`/profile`}>
-                    <img
+                  <img
                     src={profileIcon}
                     alt="profile"
                     style={{ width: "32px", height: "32px" }}
-                    />
+                  />
+                </Nav.Link>
+                <Nav.Link onClick={handleLogout} className="ms-auto">
+                  Logout
                 </Nav.Link>
               </Nav>
             </Container>
