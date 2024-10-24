@@ -36,15 +36,17 @@ const EmployeeInfoManagement = () => {
 
     axiosInstance.get('/auth/Hr/departments')
       .then(response => {
-        setdepartments(['All Departments', ...response.data]);
+        const departments = response.data.map(department => department.name);
+        setdepartments(['All Departments', ...departments]);
       })
       .catch(error => {
         console.error('There was an error fetching the departments!', error);
       });
 
-    axiosInstance.get('/auth/Hr/JobTitles')
+      axiosInstance.get('/auth/Hr/JobTitles')
       .then(response => {
-        setJobTitles(['All Job Titles', ...response.data]);
+        const titles = response.data.map(job => job.title);
+        setJobTitles(['All Job Titles', ...titles]);
       })
       .catch(error => {
         console.error('There was an error fetching the JobTitles!', error);
