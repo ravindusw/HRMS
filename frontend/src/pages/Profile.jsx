@@ -112,6 +112,16 @@ const Profile = () => {
               </div>
             </Col>
           </Row>
+
+          {/* Simplified Supervisor section */}
+          <Row className="profile-section">
+            <Col md={6}>
+              <h5>Supervisor</h5>
+              <div className="profile-field">
+                <span>Name:</span> {profileData?.supervisor || "N/A"}
+              </div>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Container>

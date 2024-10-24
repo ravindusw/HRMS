@@ -65,9 +65,13 @@ import Container from "react-bootstrap/Container";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import NotificationBellIcon from "./NotificationBellIcon";
+import profileIcon from "../assets/profile-icon.svg";
+
 import Cookies from "js-cookie";
 
 const token = Cookies.get("authToken");
+
 
 const HRMSNavBar = () => {
   const location = useLocation();
@@ -91,9 +95,7 @@ const HRMSNavBar = () => {
               <Nav.Link as={Link} to="/dashboard">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to={`/profile`}>
-                Profile
-              </Nav.Link>
+              
               <Nav.Link as={Link} to="/help">
                 help
               </Nav.Link>
@@ -112,8 +114,19 @@ const HRMSNavBar = () => {
                   View Employees Information
                 </NavDropdown.Item>
               </NavDropdown>
-
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link as={Link} to="/notification">
+                <NotificationBellIcon />
+              </Nav.Link>
+              <Nav.Link as={Link} to={`/profile`}>
+                <img
+                  src={profileIcon}
+                  alt="profile"
+                  style={{ width: "32px", height: "32px" }}
+                />
+              </Nav.Link>
             </Nav>
           </Container>
         </Navbar>

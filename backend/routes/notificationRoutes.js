@@ -1,11 +1,13 @@
 import { Router } from "express";
+import { verifyToken } from "../middleWare/authMiddleware.js";
 import { 
   fetchNotificationsAll, 
   fetchNotificationByUserId, 
   fetchNotificationByNotificationId, 
   updateNotificationStatus,
   deleteNotification,
-  createNotification
+  createNotification,
+  getUnreadNotificationCount
 } from "../controllers/notificationController.js";
 
 const router = Router();
@@ -55,7 +57,8 @@ const notificationList = [
 
 router.get("/fetch-notification-all", fetchNotificationsAll);
 router.get("/fetch-notification-by-notification-id/:notificationId", fetchNotificationByNotificationId);
-router.get("/fetch-notification-by-user-id/:userId", fetchNotificationByUserId);
+router.get("/fetch-notification-by-user-id", verifyToken, fetchNotificationByUserId);
+router.get("/get-unread-notification-count", verifyToken, getUnreadNotificationCount);
 router.post("/update-notification-status", updateNotificationStatus);
 router.delete("/delete-notification/:id", deleteNotification);
 router.put("/create-notification", createNotification);
