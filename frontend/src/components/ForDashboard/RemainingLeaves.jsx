@@ -27,18 +27,49 @@
 
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "./RemainingLeaves.css"; // Custom CSS for this component
+import { useState, useEffect } from "react";
+import axios from "axios";
+import axiosInstance from "../../utils/AxiosInstance";
 
 // Sample data for the Pie Chart
-const data = [
-  { name: "Annual", value: 20 },
-  { name: "Casual", value: 12 },
-  { name: "Maternity", value: 10 },
-  { name: "No-pay", value: 35 },
-];
+// const data = [
+//   { name: "Annual", value: 20 },
+//   { name: "Casual", value: 12 },
+//   { name: "Maternity", value: 10 },
+//   { name: "No-pay", value: 35 },
+// ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function RemainingLeaves() {
+  
+  const [remainingLeaves, setRemainingLeaves] = useState([]);
+
+  const data = remainingLeaves.map((leave) => {
+    return {
+      name: leave.type,
+      value: leave.balance,
+    };
+  });
+
+  useEffect(() => {
+    // const id = "6bf363e8-8b5d-11ef-acee-4a6a3b2083d6"; // Hardcoded employee id
+    
+    const fetchRemainingLeaves = async () => {
+      try {
+        const response = await axiosInstance.get(`/dashboard/get-remaining-leave-count`);
+        console.log(response.data);
+        setRemainingLeaves(response.data);
+      } catch (error) {
+        console.error("Error fetching remaining leaves:", error);
+      }
+    };
+
+    fetchRemainingLeaves();
+
+  }, []);
+
+  
   return (
     <div className="remaining-leaves-card">
       <h3>Remaining Leaves</h3>
@@ -46,7 +77,17 @@ export default function RemainingLeaves() {
       <div className="leave-content">
         {/* Leave Types Cards */}
         <div className="leave-types">
-          <div className="leave-card">
+          {remainingLeaves.map((leave, index) => {
+            return (
+              <div key={index} className="leave-card">
+                {leave.type} <br />
+                <span>{leave.balance}</span>
+              </div>
+            );
+          })}
+          
+          
+          {/* <div className="leave-card">
             Annual <br />
             <span>20</span>
           </div>
@@ -61,7 +102,7 @@ export default function RemainingLeaves() {
           <div className="leave-card">
             No-pay <br />
             <span>35</span>
-          </div>
+          </div> */}
         </div>
 
         {/* Pie Chart for leave types */}
