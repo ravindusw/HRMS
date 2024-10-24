@@ -207,7 +207,7 @@ const EditemployeeData = () => {
 
   return (
     <div className="edit-employee-container">
-      <h1>Edit Employee {id_to_edit} Data</h1>
+      <h1>Edit {employee.name}' Data</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Address:

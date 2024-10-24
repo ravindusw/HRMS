@@ -34,13 +34,26 @@ function App() {
         <Route path="/Employee_Information_Management" element={<EIM />} />
         <Route path="/notAuthorized" element={<NotAuthorized />} />
         <Route path="/employee-report" element={<EmployeeReport />} />
+        <Route path="/Employee_Information_Management" 
+          
+          //element={<EIM />}
+          element={
+            <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
+              <EIM />
+            </ProtectedRoute>
+          }
 
+
+           />
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
-            <ProtectedRoute allowedRoles={["HR Manager"]}>
+            <HrView />
+            /*
+            <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
               <HrView />
             </ProtectedRoute>
+            */
           }
         />
         <Route
