@@ -26,7 +26,7 @@ const LoginPage = () => {
       const decodedToken = jwtDecode(token);
       Cookies.set("authToken", token, { expires: 7 });
       Cookies.set("role", decodedToken.role, { expires: 7 });
-      console.log(decodedToken.role);
+      // console.log(decodedToken.role);
       navigate("/dashboard");
     } catch (err) {
       setErrorMessage(err.response?.data || "Login failed!");
