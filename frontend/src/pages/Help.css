@@ -144,7 +144,7 @@ textarea {
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-button {
+.support-container button {
   border-radius: 30px;
   font-weight: 600;
 }

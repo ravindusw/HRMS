@@ -18,6 +18,13 @@
   margin-bottom: 20px;
 }
 
+.leave-types {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* Styling for individual leave cards */
 .leave-card {
   flex: 1;
@@ -32,6 +39,7 @@
   margin: 10px;
   text-align: center;
   max-width: 150px;
+  border: 2px solid #007bff;
 }
 
 .leave-card span {
