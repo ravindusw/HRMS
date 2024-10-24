@@ -8,6 +8,7 @@ const EditemployeeData = () => {
   const { id_to_edit } = useParams();
   const [deletedEmergencyContacts, setDeletedEmergencyContacts] = useState([]);
   const [deletedDependents, setDeletedDependents] = useState([]);
+  const [deletedPhoneNumbers, setDeletedPhoneNumbers] = useState([]);
   const [employee, setEmployee] = useState({
     name: '',
     email: '',
@@ -155,12 +156,12 @@ const EditemployeeData = () => {
       for (const contact of deletedEmergencyContacts) {
         await axiosInstance.delete('/auth/Hr/emergency_contacts', { data: { employee_id: id_to_edit, contact_id: contact.contact_id } });
       }
-      /*
+      
       // Delete phone numbers
       for (const phone_number of deletedPhoneNumbers) {
         await axiosInstance.delete('/auth/Hr/phone_numbers', { data: { employee_id: id_to_edit, phone_number } });
       }
-        */
+        
 
       console.log("Employee data updated successfully");
     } catch (error) {
@@ -200,6 +201,7 @@ const EditemployeeData = () => {
       phone_numbers: updatedPhoneNumbers,
     }));
   };
+
 
   
   
@@ -309,6 +311,7 @@ const EditemployeeData = () => {
                 value={phone}
                 onChange={(e) => handlePhoneChange(index, e.target.value)}
               />
+              <button type="button" onClick={() => handleDeletePhoneNumber(index)}>Delete Number</button>
             </div>
           ))}
           <button type="button" onClick={addPhoneNumber}>Add Phone Number</button>
@@ -341,7 +344,7 @@ const EditemployeeData = () => {
                 value={formatDate(dependent.birthday)}
                 onChange={(e) => handleDependentChange(index, 'birthday', e.target.value)}
               />
-              <button type="button" onClick={() => handleDeleteDependent(index, employee, setEmployee, setDeletedDependents)}>Delete Dependent</button>
+              <button type="button" onClick={() => handleDeleteDependent(index)}>Delete Dependent</button>
 
               
               <br /><br />

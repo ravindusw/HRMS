@@ -12,8 +12,9 @@
 }
 
 .edit-employee-container h1 {
-  color: #007bff;
+  color: #000000;
   text-align: center;
+  
 }
 
 .edit-employee-container form {
@@ -66,7 +67,7 @@ input[type="date"] {
 }
 
 .edit-employee-container button[type="button"] {
-  background-color: #7197f5; /* Different shade for button */
+  background-color: #a1bbfa; /* Different shade for button */
   color: #666;
 }
 
