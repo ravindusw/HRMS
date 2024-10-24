@@ -3,7 +3,7 @@ import { db } from "../config/db.js";
 import { getJobTitles, getPayGrades, getDepartments } from '../controllers/metadataController.js';
 import { getAllEmployees } from '../controllers/employeesController.js';
 import { getEmployeeByIdForHr } from '../controllers/employeesController.js';
-import { deleteDependent,deleteEmergencyContact } from '../controllers/updateEmployeeDataController.js';
+import { deleteDependent,deleteEmergencyContact ,updateEmployeeData} from '../controllers/updateEmployeeDataController.js';
 
 const router = Router();
 
@@ -20,7 +20,7 @@ router.get("/employees", getAllEmployees)
 
 router.get("/employees/:id",getEmployeeByIdForHr)
 
-
+router.put("/employees/:id",updateEmployeeData)
 
 // Route to get job titles
 router.get("/JobTitles", getJobTitles);

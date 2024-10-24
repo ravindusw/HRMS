@@ -6,9 +6,9 @@ import axiosInstance from '../utils/AxiosInstance';
 
 const EditemployeeData = () => {
   const { id_to_edit } = useParams();
-  const [deletedEmergencyContacts, setDeletedEmergencyContacts] = useState([]);
-  const [deletedDependents, setDeletedDependents] = useState([]);
-  const [deletedPhoneNumbers, setDeletedPhoneNumbers] = useState([]);
+  const [EmergencyContacts, setEmergencyContacts] = useState([]);
+  const [Dependents, setDependents] = useState([]);
+  const [PhoneNumbers, setPhoneNumbers] = useState([]);
   const [employee, setEmployee] = useState({
     name: '',
     email: '',
@@ -19,7 +19,8 @@ const EditemployeeData = () => {
     marital_state: '',
     pay_grade: '',
     dependents: [],
-    emergency_contacts: []
+    emergency_contacts: [],
+    employment_status: ''
   });
 
   
@@ -42,6 +43,9 @@ const EditemployeeData = () => {
         // Fetch employee data from the server
         const employeeResponse = await axiosInstance.get(`/auth/Hr/employees/${id_to_edit}`);
         setEmployee(employeeResponse.data);
+        setEmergencyContacts(employeeResponse.data.emergency_contacts);
+        setDependents(employeeResponse.data.dependents);
+        setPhoneNumbers(employeeResponse.data.phone_numbers);
 
         // Fetch job titles, departments, and pay grades from the server
         const jobTitlesResponse = await axiosInstance.get('/auth/Hr/JobTitles');
@@ -78,12 +82,13 @@ const EditemployeeData = () => {
     return `${year}-${month}-${day}`;
   };
 
-  const handlePhoneChange = (index, value) => {
+  const handlePhoneChange = (number, value) => {
     const newPhoneNumbers = [...employee.phone_numbers];
-    newPhoneNumbers[index] = value;
+    
+    const updatedPhoneNumbers = newPhoneNumbers.map(phone => phone === number ? value : phone);
     setEmployee(prevState => ({
       ...prevState,
-      phone_numbers: newPhoneNumbers
+      phone_numbers: updatedPhoneNumbers
     }));
   };
 
@@ -118,7 +123,7 @@ const EditemployeeData = () => {
   const addDependent = () => {
     setEmployee(prevState => ({
       ...prevState,
-      dependents: [...prevState.dependents, { name: '', relation: '', age: '', phone_number: '' }]
+      dependents: [...prevState.dependents, { name: '', relationship: '', age: '', phone_number: '' }]
     }));
   };
   
@@ -136,33 +141,21 @@ const EditemployeeData = () => {
     }));
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isConfirmed = window.confirm('Are you sure you want to make these changes?');
     if (!isConfirmed) {
       return;
     }
+    console.log(employee);
+
     try {
       // Update employee data
-      //await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employee);
+      await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employee);
 
-      // Delete dependents
-      for (const dependent of deletedDependents) {
-        await axiosInstance.delete('/auth/Hr/dependents', { data: { employee_id: id_to_edit, name: dependent.name } });
-      }
-
-      // Delete emergency contacts
       
-      for (const contact of deletedEmergencyContacts) {
-        await axiosInstance.delete('/auth/Hr/emergency_contacts', { data: { employee_id: id_to_edit, contact_id: contact.contact_id } });
-      }
-      
-      // Delete phone numbers
-      for (const phone_number of deletedPhoneNumbers) {
-        await axiosInstance.delete('/auth/Hr/phone_numbers', { data: { employee_id: id_to_edit, phone_number } });
-      }
-        
-
+      alert("Employee data updated successfully");
       console.log("Employee data updated successfully");
     } catch (error) {
       console.error("There was an error updating the employee data!", error);
@@ -173,32 +166,33 @@ const EditemployeeData = () => {
 
 
 
-  const handleDeleteDependent = (index) => {
-    const dependent = employee.dependents[index];
-    setDeletedDependents((prevDeleted) => [...prevDeleted, dependent]);
-    const updatedDependents = employee.dependents.filter((_, i) => i !== index);
-    setEmployee((prevEmployee) => ({
-      ...prevEmployee,
-      dependents: updatedDependents,
+  const handleDeleteDependent = (name) => {
+    const updatedDependents = Dependents.filter(dependent => dependent.name !== name);
+    
+    setDependents(updatedDependents)
+    setEmployee(prevState => ({
+      ...prevState,
+      dependents: updatedDependents
     }));
   };
 
-  const handleDeleteEmergencyContact = (index) => {
-    const contact = employee.emergency_contacts[index];
-    setDeletedEmergencyContacts((prevDeleted) => [...prevDeleted, contact]);
-    const updatedEmergencyContacts = employee.emergency_contacts.filter((_, i) => i !== index);
-    setEmployee((prevEmployee) => ({
-      ...prevEmployee,
-      emergency_contacts: updatedEmergencyContacts,
+  const handleDeleteEmergencyContact = (name) => {
+    
+    const updatedEmergencyContacts = EmergencyContacts.filter(contact => contact.name !== name);
+    setEmergencyContacts(updatedEmergencyContacts)
+    setEmployee(prevState => ({
+      ...prevState,
+      emergency_contacts: updatedEmergencyContacts
     }));
   };
 
   const handleDeletePhoneNumber = (phone_number) => {
-    setDeletedPhoneNumbers((prevDeleted) => [...prevDeleted, phone_number]);
-    const updatedPhoneNumbers = employee.phone_numbers.filter(number => number !== phone_number);
-    setEmployee((prevEmployee) => ({
-      ...prevEmployee,
-      phone_numbers: updatedPhoneNumbers,
+    
+    const updatedPhoneNumbers = PhoneNumbers.filter(phone => phone !== phone_number);
+    setPhoneNumbers(updatedPhoneNumbers)
+    setEmployee(prevState => ({
+      ...prevState,
+      phone_numbers: updatedPhoneNumbers
     }));
   };
 
@@ -304,21 +298,21 @@ const EditemployeeData = () => {
         </label>
         <label>
           Phone Numbers:
-          {employee.phone_numbers.map((phone, index) => (
+          {PhoneNumbers.map((phone, index) => (
             <div key={index}>
               <input
                 type="tel"
                 value={phone}
-                onChange={(e) => handlePhoneChange(index, e.target.value)}
+                onChange={(e) => handlePhoneChange(phone, e.target.value)}
               />
-              <button type="button" onClick={() => handleDeletePhoneNumber(index)}>Delete Number</button>
+              <button type="button" onClick={() => handleDeletePhoneNumber(phone)}>Delete Number</button>
             </div>
           ))}
           <button type="button" onClick={addPhoneNumber}>Add Phone Number</button>
         </label>
         <label>
           Dependents:
-          {employee.dependents.map((dependent, index) => (
+          {Dependents.map((dependent, index) => (
             <div key={index}>
               <input
                 type="text"
@@ -330,7 +324,7 @@ const EditemployeeData = () => {
                 type="text"
                 placeholder="Relation"
                 value={dependent.relationship}
-                onChange={(e) => handleDependentChange(index, 'relation', e.target.value)}
+                onChange={(e) => handleDependentChange(index, 'relationship', e.target.value)}
               />
               <input
                 type="tel"
@@ -344,7 +338,7 @@ const EditemployeeData = () => {
                 value={formatDate(dependent.birthday)}
                 onChange={(e) => handleDependentChange(index, 'birthday', e.target.value)}
               />
-              <button type="button" onClick={() => handleDeleteDependent(index)}>Delete Dependent</button>
+              <button type="button" onClick={() => handleDeleteDependent(dependent.name)}>Delete Dependent</button>
 
               
               <br /><br />
@@ -354,7 +348,7 @@ const EditemployeeData = () => {
         </label>
         <label>
           Emergency Contacts:
-          {employee.emergency_contacts.map((contact, index) => (
+          {EmergencyContacts.map((contact, index) => (
             <div key={index}>
               <input
                 type="text"
@@ -370,11 +364,11 @@ const EditemployeeData = () => {
               />
               <input
                 type="text"
-                placeholder="Relationship"
+                placeholder="relationship"
                 value={contact.relationship}
                 onChange={(e) => handleEmergencyContactChange(index, 'relationship', e.target.value)}
               />
-              <button type="button" onClick={() => handleDeleteEmergencyContact(index, employee, setEmployee, setDeletedEmergencyContacts)}>Delete This Contact</button>
+              <button type="button" onClick={() => handleDeleteEmergencyContact(contact.name)}>Delete This Contact</button>
               <br /><br />
             </div>
           ))}
