@@ -48,6 +48,7 @@ export const getAllEmployees = (req, res) => {
             marital_state: employeeResults[0][0].marital_state,
             email: employeeResults[0][0].email,
             address: employeeResults[0][0].address,
+            supervisor_name: employeeResults[0][0].supervisor_name,
             phone_numbers: [],
             dependents: [],
             emergency_contacts: []
@@ -93,7 +94,7 @@ export const getAllEmployees = (req, res) => {
                 });
               }
       
-              //console.log(employee);
+              console.log(employee);
               res.status(200).json(employee);
             });
           });

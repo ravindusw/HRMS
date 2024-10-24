@@ -27,8 +27,8 @@ export const deleteDependent = (req, res) => {
 
   export const deleteEmergencyContact = (req, res) => {
     const { employee_id, contact_id } = req.body;
-    //console.log( employee_id,contact_id);
-    
+    console.log( employee_id,contact_id);
+    /*
     const query = `
       DELETE FROM emergency_contact
       WHERE contact_id = ?;
@@ -42,6 +42,7 @@ export const deleteDependent = (req, res) => {
   
       res.status(200).send("Emergency contact deleted successfully");
     });
+    */
     
   };
 

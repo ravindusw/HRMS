@@ -104,6 +104,9 @@ const HrView = () => {
             <div className="profile-field">
               <span>Employment Type:</span> {employee.employment_status}
             </div>
+            <div className="profile-field">
+              <span>Supervisor:</span> {employee.supervisor_name}
+            </div>
           </Col>
           <Col md={6}>
             <div className="profile-field">
