@@ -11,18 +11,18 @@
   margin-top: 70px;
 }
 
-h1 {
+.edit-employee-container h1 {
   color: #000000;
   text-align: center;
 }
 
-form {
+.edit-employee-container form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-label {
+.edit-employee-container label {
   display: flex;
   flex-direction: column;
   font-weight: bold;
@@ -48,7 +48,7 @@ select:focus {
 input[type="date"] {
   width: 38%;
 }
-button {
+.edit-employee-container button {
   padding: 10px 15px;
   background-color: rgb(7, 170, 7);
   border: none;
@@ -58,20 +58,20 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.edit-employee-container button:hover {
   background-color: #cff7d3; /* Darker shade on hover */
 }
 
-button[type="button"] {
+.edit-employee-container button[type="button"] {
   background-color: #cff7d3; /* Different shade for button */
   color: #666;
 }
 
-button[type="button"]:hover {
+.edit-employee-container button[type="button"]:hover {
   background-color: #cff7d3; /* Darker shade on hover */
 }
 
-span {
+.edit-employee-container span {
   margin-top: 5px;
   color: #666;
 }

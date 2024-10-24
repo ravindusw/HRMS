@@ -1,7 +1,14 @@
 import { db } from "../config/db.js";
 
+// User ID can be get from req.user
+// const userId = req.user.id; OR const { id } = req.user;
+
 export const fetchNotificationsAll = (req, res) => {
     const query = "CALL get_notification_all();";
+
+    // const { id } = req.user;
+    console.log("Came here");
+    console.log(req.user);
 
     db.query(query, (err, results) => {
         if (err) {
@@ -15,14 +22,12 @@ export const fetchNotificationsAll = (req, res) => {
 };
 
 export const fetchNotificationByUserId = (req, res) => {
-    if (!req.params.userId) {
-        return res.status(400).send("User ID is required");
-    }
+    const { u_id } = req.user;
     
-    const { userId } = req.params;
+    // const { userId } = req.params;
     const query = "CALL get_notification_by_user_id(?);";
 
-    db.query(query, [userId], (err, results) => {
+    db.query(query, [u_id], (err, results) => {
         if (err) {
             console.error("Error fetching notifications:", err);
             return res.status(500).send("Server error");
@@ -184,4 +189,25 @@ export const createNotification = (req, res) => {
     else {
         res.status(400).send("Invalid type");
     }
+};
+
+export const getUnreadNotificationCount = (req, res) => {
+    const query = "SELECT get_unread_notification_count(?) AS unreadCount;";
+    const { u_id } = req.user;
+
+    console.log("u_id is ", u_id);
+
+    db.query(query, [u_id],(err, results) => {
+        if (err) {
+            console.error("Error fetching notifications count:", err);
+            return res.status(500).send("Server error");
+        }
+
+        if (results.length === 0) {
+            return res.json({ unreadCount: 0 });
+        }
+
+        console.log("Results:", results);
+        res.json(results[0]);
+    });
 };
