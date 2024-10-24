@@ -71,7 +71,8 @@ export const getAllEmployees = (req, res) => {
                 name: row.dependent_name,
                 date_of_birth: row.dependent_birthday,
                 gender: row.dependent_gender,
-                phone_number: row.dependent_phone_number
+                phone_number: row.dependent_phone_number,
+                relationship: row.relationship
               });
             });
       
@@ -85,6 +86,7 @@ export const getAllEmployees = (req, res) => {
                 emergencyContactResults[0].forEach(row => {
                   employee.emergency_contacts.push({
                     name: row.name,
+                    contact_id: row.contact_id,
                     phone: row.phone,
                     relationship: row.relationship
                   });

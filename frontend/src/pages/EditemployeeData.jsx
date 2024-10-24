@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './EditemployeeData.css'; // Import the CSS file
+import axiosInstance from '../utils/AxiosInstance';
+//import {handleDeleteDependent,handleDeleteEmergencyContact} from '../components/EditemployeeDataComponents';
 
 const EditemployeeData = () => {
   const { id_to_edit } = useParams();
+  const [deletedEmergencyContacts, setDeletedEmergencyContacts] = useState([]);
+  const [deletedDependents, setDeletedDependents] = useState([]);
   const [employee, setEmployee] = useState({
     name: '',
     email: '',
@@ -17,6 +21,8 @@ const EditemployeeData = () => {
     emergency_contacts: []
   });
 
+  
+
   const [jobTitles, setJobTitles] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [payGrades, setPayGrades] = useState([]);
@@ -27,35 +33,48 @@ const EditemployeeData = () => {
     department: false,
     pay_grade: false
   });
-  const [showEmergencyContact, setShowEmergencyContact] = useState(false);
+  
 
   useEffect(() => {
-    // Fetch employee data from the server
-    
+    const fetchData = async () => {
+      try {
+        // Fetch employee data from the server
+        const employeeResponse = await axiosInstance.get(`/auth/Hr/employees/${id_to_edit}`);
+        setEmployee(employeeResponse.data);
 
-    // Fetch job titles, departments, and pay grades from the server
-    fetch('http://localhost:8800/api/auth/Hr/JobTitles')
-      .then(response => response.json())
-      .then(data => setJobTitles(data))
-      .catch(error => console.error('Error fetching job titles:', error));
+        // Fetch job titles, departments, and pay grades from the server
+        const jobTitlesResponse = await axiosInstance.get('/auth/Hr/JobTitles');
+        setJobTitles(jobTitlesResponse.data);
 
-    fetch('http://localhost:8800/api/auth/Hr/departments')
-      .then(response => response.json())
-      .then(data => setDepartments(data))
-      .catch(error => console.error('Error fetching departments:', error));
+        const departmentsResponse = await axiosInstance.get('/auth/Hr/departments');
+        setDepartments(departmentsResponse.data);
 
-    fetch('http://localhost:8800/api/auth/Hr/pay_grades')
-      .then(response => response.json())
-      .then(data => setPayGrades(data))
-      .catch(error => console.error('Error fetching pay grades:', error));
+        const payGradesResponse = await axiosInstance.get('/auth/Hr/pay_grades');
+        setPayGrades(payGradesResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
+      }
+    };
+
+    fetchData();
   }, [id_to_edit]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmployee(prevState => ({
       ...prevState,
       [name]: value
     }));
+  };
+
+
+  const formatDate = (date) => {
+    if (!date) return '';
+    const d = new Date(date);
+    const month = `${d.getMonth() + 1}`.padStart(2, '0');
+    const day = `${d.getDate()}`.padStart(2, '0');
+    const year = d.getFullYear();
+    return `${year}-${month}-${day}`;
   };
 
   const handlePhoneChange = (index, value) => {
@@ -68,14 +87,11 @@ const EditemployeeData = () => {
   };
 
   const handleDependentChange = (index, field, value) => {
-    const newDependents = [...employee.dependents];
-    newDependents[index] = {
-      ...newDependents[index],
-      [field]: value
-    };
-    setEmployee(prevState => ({
-      ...prevState,
-      dependents: newDependents
+    const updatedDependents = [...employee.dependents];
+    updatedDependents[index][field] = value;
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      dependents: updatedDependents,
     }));
   };
 
@@ -119,31 +135,74 @@ const EditemployeeData = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const isConfirmed = window.confirm('Are you sure you want to make these changes?');
+    if (!isConfirmed) {
+      return;
+    }
+    try {
+      // Update employee data
+      //await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employee);
 
-    console.log('Employee data to submit:', employee);
-    alert('Employee data ready to submit!');
-    //give success message here
-    // Submit updated employee data to the server
-    /*
-    fetch(`/api/employees/${id_to_edit}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(employee)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Employee updated:', data);
-        setSuccessMessage('Employee data updated successfully!');
-        setEmployee(initialEmployeeState); // Clear the form
-        setTimeout(() => setSuccessMessage(''), 3000); // Clear the success message after 3 seconds
-      })
-      .catch(error => console.error('Error updating employee:', error));
-      */
+      // Delete dependents
+      for (const dependent of deletedDependents) {
+        await axiosInstance.delete('/auth/Hr/dependents', { data: { employee_id: id_to_edit, name: dependent.name } });
+      }
+
+      // Delete emergency contacts
+      
+      for (const contact of deletedEmergencyContacts) {
+        await axiosInstance.delete('/auth/Hr/emergency_contacts', { data: { employee_id: id_to_edit, contact_id: contact.contact_id } });
+      }
+      /*
+      // Delete phone numbers
+      for (const phone_number of deletedPhoneNumbers) {
+        await axiosInstance.delete('/auth/Hr/phone_numbers', { data: { employee_id: id_to_edit, phone_number } });
+      }
+        */
+
+      console.log("Employee data updated successfully");
+    } catch (error) {
+      console.error("There was an error updating the employee data!", error);
+      setError("There was an error updating the employee data!");
+    }
   };
+
+
+
+
+  const handleDeleteDependent = (index) => {
+    const dependent = employee.dependents[index];
+    setDeletedDependents((prevDeleted) => [...prevDeleted, dependent]);
+    const updatedDependents = employee.dependents.filter((_, i) => i !== index);
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      dependents: updatedDependents,
+    }));
+  };
+
+  const handleDeleteEmergencyContact = (index) => {
+    const contact = employee.emergency_contacts[index];
+    setDeletedEmergencyContacts((prevDeleted) => [...prevDeleted, contact]);
+    const updatedEmergencyContacts = employee.emergency_contacts.filter((_, i) => i !== index);
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      emergency_contacts: updatedEmergencyContacts,
+    }));
+  };
+
+  const handleDeletePhoneNumber = (phone_number) => {
+    setDeletedPhoneNumbers((prevDeleted) => [...prevDeleted, phone_number]);
+    const updatedPhoneNumbers = employee.phone_numbers.filter(number => number !== phone_number);
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      phone_numbers: updatedPhoneNumbers,
+    }));
+  };
+
+  
+  
 
 
   return (
@@ -189,7 +248,7 @@ const EditemployeeData = () => {
           {editableFields.job_title ? (
             <select
               name="job_title"
-              value={employee.job_title}
+              value={employee.job_title || ''}
               onChange={handleChange}
             >
               {jobTitles.map((title, index) => (
@@ -267,7 +326,7 @@ const EditemployeeData = () => {
               <input
                 type="text"
                 placeholder="Relation"
-                value={dependent.relation}
+                value={dependent.relationship}
                 onChange={(e) => handleDependentChange(index, 'relation', e.target.value)}
               />
               <input
@@ -279,9 +338,11 @@ const EditemployeeData = () => {
               <input
                 type="date"
                 placeholder="Birthday"
-                value={dependent.birthday}
+                value={formatDate(dependent.birthday)}
                 onChange={(e) => handleDependentChange(index, 'birthday', e.target.value)}
               />
+              <button type="button" onClick={() => handleDeleteDependent(index, employee, setEmployee, setDeletedDependents)}>Delete Dependent</button>
+
               
               <br /><br />
             </div>
@@ -310,6 +371,7 @@ const EditemployeeData = () => {
                 value={contact.relationship}
                 onChange={(e) => handleEmergencyContactChange(index, 'relationship', e.target.value)}
               />
+              <button type="button" onClick={() => handleDeleteEmergencyContact(index, employee, setEmployee, setDeletedEmergencyContacts)}>Delete This Contact</button>
               <br /><br />
             </div>
           ))}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./EIM.css";
 import ShowEmployees from "../components/ShowEmplyees.jsx";
 
-import axios from "axios";
+
 import axiosInstance from '../utils/AxiosInstance';
 // functions for filters
 

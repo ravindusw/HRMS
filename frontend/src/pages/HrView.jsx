@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from '../utils/AxiosInstance';
 
 import "./HrView.css";
 const calculateAge = (dateOfBirth) => {
@@ -22,8 +22,8 @@ const HrView = () => {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8800/api/auth/Hr/employees/${id_to_view}`
+        const response = await axiosInstance.get(
+          `/auth/Hr/employees/${id_to_view}`
         );
         setEmployee(response.data);
       } catch (error) {
@@ -139,6 +139,9 @@ const HrView = () => {
                     <li key={index}>
                       <p>
                         <strong>Name:</strong> {dependent.name}
+                      </p>
+                      <p>
+                        <strong>relationship:</strong> {dependent.relationship}
                       </p>
                       <p>
                         <strong>age:</strong>{" "}

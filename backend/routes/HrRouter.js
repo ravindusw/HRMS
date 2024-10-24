@@ -3,6 +3,7 @@ import { db } from "../config/db.js";
 import { getJobTitles, getPayGrades, getDepartments } from '../controllers/metadataController.js';
 import { getAllEmployees } from '../controllers/employeesController.js';
 import { getEmployeeByIdForHr } from '../controllers/employeesController.js';
+import { deleteDependent,deleteEmergencyContact } from '../controllers/updateEmployeeDataController.js';
 
 const router = Router();
 
@@ -30,5 +31,11 @@ router.get("/pay_grades", getPayGrades);
 // Route to get departments
 router.get("/departments", getDepartments);
 
+// Route to delete a dependent 
+router.delete('/dependents', deleteDependent);
+
+
+// Route to delete an emergency contact
+router.delete('/emergency_contacts', deleteEmergencyContact);
 
 export default router;
