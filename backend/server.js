@@ -3,7 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
-import { verifyToken } from "./middleWare/authMiddleware.js";
+import supportRoutes from "./routes/SupportRoutes.js";
 import HrRouter from "./routes/HrRouter.js";
 
 const app = express();
@@ -21,6 +21,8 @@ app.use("/api/profile", profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 //app.use("/api/Hr", HrRouter);
+
+app.use("/api/help", supportRoutes);
 
 // Default route
 app.get("/", (req, res) => {

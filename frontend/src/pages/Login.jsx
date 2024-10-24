@@ -4,6 +4,7 @@ import logo from "../assets/Jupiter_Logo.png";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/AxiosInstance";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -19,19 +20,18 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await axiosInstance.post("/auth/login", {
-        email,
-        password,
-      });
-      const { token } = response.data;
+      const {
+        data: { token },
+      } = await axiosInstance.post("/auth/login", { email, password });
+      const decodedToken = jwtDecode(token);
       Cookies.set("authToken", token, { expires: 7 });
+      Cookies.set("role", decodedToken.role, { expires: 7 });
+      console.log(decodedToken.role);
       navigate("/dashboard");
     } catch (err) {
-      setErrorMessage(
-        err.response && err.response.data ? err.response.data : "Login failed!"
-      );
+      setErrorMessage(err.response?.data || "Login failed!");
     } finally {
-      setIsLoading(false); // End loading
+      setIsLoading(false);
     }
   };
 
@@ -50,8 +50,8 @@ const LoginPage = () => {
             Join our growing network of 10 million+ members. We invite you to
             become part of our tribe.
           </p>
-          <a href="/login" className="login-link">
-            Already have an account? <strong>Sign in</strong>
+          <a href="/loginHelp" className="login-link">
+            Can't sign in to your Jupiter Account?
           </a>
         </div>
       </div>
