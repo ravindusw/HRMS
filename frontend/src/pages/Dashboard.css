@@ -16,7 +16,19 @@ body {
 .dashboard-container {
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 75px auto;
+}
+
+.dashboard-hero {
+  margin-bottom: 20px;
+  background-image: url("../assets/dashboard.jpg");
+  background-size: cover;
+  min-height: 240px;
+  padding: 80px 40px;
+  color: #f4f4f9;
+  align-items: center;
+  border-radius: 10px;
+
 }
 
 /* Grid Layout */
@@ -41,7 +53,7 @@ body {
 
 .info-summary h3,
 .calendar-section h3,
-.remaining-leaves h3,
+.remaining-leaves-card h3,
 .employees-info h3,
 .user-role-distribution h3,
 .quick-actions h3 {
@@ -84,23 +96,6 @@ body {
 .btn-update:hover,
 .btn-apply:hover {
   background: #0056b3;
-}
-
-/* Calendar Styles */
-.react-calendar {
-  width: 100%;
-  border: none;
-  font-family: "Arial", sans-serif;
-}
-
-.react-calendar__navigation__label,
-.react-calendar__navigation__arrow {
-  color: #007bff;
-}
-
-.react-calendar__tile--active {
-  background: #007bff;
-  color: #fff;
 }
 
 /* Responsive Design */

@@ -7,15 +7,40 @@ import EmployeesInfo from "../components/ForDashboard/EmployeesInfo";
 import UserRoleDistribution from "../components/ForDashboard/UserRoleDistribution";
 import QuickActions from "../components/ForDashboard/QuickActions";
 
+import { useState, useEffect } from "react";
+import axiosInstance from "../utils/AxiosInstance";
+
 export default function Dashboard() {
+  
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axiosInstance.get(`/profile`);
+        setProfileData(response.data);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+  
+
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Dashboard</h1>
-      <h2 className="dashboard-subtitle">Good Morning Alan!</h2>
+      <div className="dashboard-hero">
+        <h2>
+          Good {new Date().getHours() < 12 ? "Morning" : "Evening"} {profileData?.first_name},
+        </h2>
+        <h1>Welcome to Jupiter HRMS &#128075;</h1>
+      </div>
+      
       <div className="dashboard-grid">
-        <InfoSummary />
-        <CalendarSection />
+        <InfoSummary profileData={profileData}/>
         <RemainingLeaves />
+        <CalendarSection />
         <EmployeesInfo />
         <UserRoleDistribution />
         <QuickActions />

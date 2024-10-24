@@ -33,13 +33,13 @@
   align-items: center;
 }
 
-p {
+.hr-view-container p {
   font-size: 1rem;
   color: #666;
   margin: 5px 0;
 }
 
-strong {
+.hr-view-container strong {
   color: #333;
 }
 
