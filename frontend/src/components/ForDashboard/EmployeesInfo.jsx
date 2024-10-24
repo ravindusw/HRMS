@@ -1,3 +1,5 @@
+import "./EmployeesInfo.css";
+
 export default function EmployeesInfo() {
   return (
     <div className="employees-info">
