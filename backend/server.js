@@ -22,7 +22,7 @@ app.use("/api/profile", profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 
-app.use("/api/Hr", HrRouter);
+
 app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);
