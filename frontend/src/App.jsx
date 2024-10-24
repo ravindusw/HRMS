@@ -49,12 +49,11 @@ function App() {
         <Route path="/Employee_Information_Management" 
         
         element={
-          <EIM />
-          /*
+          
           <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
             <EIM />
           </ProtectedRoute>
-          */
+          
         }
         
         />
