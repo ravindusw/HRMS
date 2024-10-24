@@ -73,6 +73,7 @@ import Cookies from "js-cookie";
 
 import NotificationBellIcon from "./NotificationBellIcon";
 import profileIcon from "../assets/profile-icon.svg";
+import logoutIcon from "../assets/logout.svg";
 
 
 const token = Cookies.get("authToken");
@@ -104,7 +105,7 @@ const HRMSNavBar = () => {
                   Home
                 </Nav.Link>
                 <Nav.Link as={Link} to="/help">
-                  help
+                  Help
                 </Nav.Link>
                 {(role === "Admin" || role === "HR Manager") && (
                   <NavDropdown
@@ -141,9 +142,6 @@ const HRMSNavBar = () => {
                 )}
               </Nav>
               <Nav>
-                <Nav.Link onClick={handleLogout} className="ms-auto">
-                  Logout
-                </Nav.Link>
                 <Nav.Link as={Link} to="/notification">
                     <NotificationBellIcon />
                 </Nav.Link>
@@ -152,7 +150,16 @@ const HRMSNavBar = () => {
                     src={profileIcon}
                     alt="profile"
                     style={{ width: "32px", height: "32px" }}
+                    title="Profile"
                     />
+                </Nav.Link>
+                <Nav.Link onClick={handleLogout} className="ms-auto">
+                  <img
+                    src={logoutIcon}
+                    alt="logout"
+                    style={{ width: "32px", height: "32px" }}
+                    title="Logout"
+                  />
                 </Nav.Link>
               </Nav>
             </Container>

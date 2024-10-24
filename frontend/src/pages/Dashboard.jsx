@@ -9,11 +9,14 @@ import QuickActions from "../components/ForDashboard/QuickActions";
 
 import { useState, useEffect } from "react";
 import axiosInstance from "../utils/AxiosInstance";
+import Cookies from "js-cookie";
 
 export default function Dashboard() {
-  
-  const [profileData, setProfileData] = useState(null);
+  const role = Cookies.get("role");
+  // console.log("Role:", role);
 
+  const [profileData, setProfileData] = useState(null);
+  
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -39,11 +42,11 @@ export default function Dashboard() {
       
       <div className="dashboard-grid">
         <InfoSummary profileData={profileData}/>
-        <RemainingLeaves />
-        <CalendarSection />
-        <EmployeesInfo />
-        <UserRoleDistribution />
-        <QuickActions />
+        <RemainingLeaves role={role}/>
+        <CalendarSection profile={profileData}/>
+        {role == "HR Manager" || role == "Admin" ? <EmployeesInfo /> : null}
+        {role == "HR Manager" || role == "Admin" ? <UserRoleDistribution /> : null}
+        {role == "HR Manager" || role == "Admin" ? <QuickActions /> : null}
       </div>
     </div>
   );

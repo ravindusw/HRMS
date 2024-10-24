@@ -38,3 +38,10 @@
     /* transform: translateY(-5px); Lift the count container on hover */
     background-color: #e0f0ff; /* Slightly darker background on hover */
 }
+
+/* Icon styling */
+.employees-info img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+  }

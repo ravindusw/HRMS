@@ -32,7 +32,7 @@ const NotificationBellIcon = () => {
 
   return (
     <div className="notification-bell-icon" onClick={handleClick}>
-      <img src={bellicon} alt="Notifications" className="bell-icon" />
+      <img src={bellicon} alt="Notifications" className="bell-icon" title="Notifications"/>
       {unreadCount > 0 && (
         <span className="unread-count">{unreadCount}</span>
       )}

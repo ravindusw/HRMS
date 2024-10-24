@@ -1,0 +1,23 @@
+/* Container styling */
+.info-summary {
+    padding: 20px; /* Padding inside the container */
+    text-align: center; /* Center the text */
+  }
+  
+  /* Heading styling */
+  .info-summary h3 {
+    margin-bottom: 15px; /* Margin below the heading */
+  }
+  
+  /* Paragraph styling */
+  .info-summary p {
+    margin: 10px 0; /* Margin above and below paragraphs */
+    font-size: 1em; /* Font size */
+    color: #333; /* Text color */
+  }
+  
+  /* Strong text styling */
+  .info-summary p strong {
+    color: #007bff; /* Blue color for strong text */
+  }
+  
