@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EIM.css";
+import axiosInstance from "../utils/AxiosInstance.jsx";
 import ShowEmployees from "../components/ShowEmplyees.jsx";
 
 import axios from "axios";
@@ -40,13 +41,15 @@ const FilterGenders = () => {
 const EmployeeInfoManagement = () => {
   const [employees, setEmployees] = useState([]);
   const [filterEmplooyees, setFilterEmployees] = useState([]);
+  const [departments, setdepartments] = useState(["All departments"]);
+  const [JobTitles, setJobTitles] = useState(["All Job Titles"]);
 
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8800/api/Hr/employees")
+    axiosInstance
+      .get("/Hr/employees")
       .then((response) => {
         setEmployees(response.data);
         setFilterEmployees(response.data); // Update filterEmployees when employees are fetched
@@ -61,9 +64,7 @@ const EmployeeInfoManagement = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8800/api/Hr/departments"
-        );
+        const response = await axiosInstance.get("/Hr/departments");
         setdepartments(departments.concat(response.data));
         //console.log(response.data);
       } catch (error) {
@@ -78,9 +79,7 @@ const EmployeeInfoManagement = () => {
   useEffect(() => {
     const fetchJobTitles = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8800/api/Hr/JobTitles"
-        );
+        const response = await axiosInstance.get("/Hr/JobTitles");
         setJobTitles(JobTitles.concat(response.data));
         //console.log(response.data);
       } catch (error) {
