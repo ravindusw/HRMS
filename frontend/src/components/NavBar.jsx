@@ -157,9 +157,6 @@ const HRMSNavBar = () => {
                     title="Logout"
                   />
                 </Nav.Link>
-                <Nav.Link onClick={handleLogout} className="ms-auto">
-                  Logout
-                </Nav.Link>
               </Nav>
             </Container>
           </Navbar>
