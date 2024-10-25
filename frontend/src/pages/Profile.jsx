@@ -89,6 +89,21 @@ const Profile = () => {
             </Col>
           </Row>
 
+          {/* Display contact numbers */}
+          <Row className="profile-section">
+            <Col md={12}>
+              <h5>Contact Numbers</h5>
+              <div className="profile-field">
+                <span>Primary:</span>{" "}
+                {profileData?.contact_numbers?.primary || "N/A"}
+              </div>
+              <div className="profile-field">
+                <span>Secondary:</span>{" "}
+                {profileData?.contact_numbers?.secondary || "N/A"}
+              </div>
+            </Col>
+          </Row>
+
           <Row className="profile-section">
             <Col md={6}>
               <h5>Emergency Contact</h5>

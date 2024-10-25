@@ -18,7 +18,7 @@ const AddUser = () => {
     setSuccessMessage("");
 
     try {
-      const response = axiosInstance.post("/auth/addUser", {
+      const response = await axiosInstance.post("/auth/addUser", {
         employee_Id,
         userName,
         password,
