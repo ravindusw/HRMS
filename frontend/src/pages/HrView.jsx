@@ -7,7 +7,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import EmployeePic from "../assets/Employee.png";
+import { useNavigate } from 'react-router-dom';
 import "./HrView.css";
+
+
 const calculateAge = (dateOfBirth) => {
   const birthYear = new Date(dateOfBirth).getFullYear();
   const currentYear = new Date().getFullYear();
@@ -20,6 +23,7 @@ const HrView = () => {
   const { id_to_view } = useParams();
   const [employee, setEmployee] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEmployee = async () => {
@@ -40,6 +44,21 @@ const HrView = () => {
   if (!employee) {
     return <div>Loading...</div>;
   }
+  const handleEdit = (id) => {
+      
+    const userConfirm = window.confirm('Are you sure you want to edit this employee?');
+    if(userConfirm){
+      
+      
+      
+      //alert(`Editing details of ${employee.name}`);
+      const id_to_edit=id;
+      navigate(`/Employee_Information_Management/EditemployeeData/${id_to_edit}`);
+      
+      
+      }
+    
+  };
 
   return (
     
@@ -62,6 +81,7 @@ const HrView = () => {
           </h1>
           <h5>{employee.id}</h5>
           <p className="job-title">{employee.job_title}</p>
+          <button className="btn-edit" onClick={() => handleEdit(employee.id)}>Edit</button>
         </Col>
       </Row>
 
