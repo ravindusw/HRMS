@@ -73,9 +73,9 @@ const CustomFieldReport = () => {
                 <tr key={index}>
                   <td>{emp.employee_id}</td>
                   <td>{emp.first_name}</td>
-                  <td>{emp.value1}</td>
-                  <td>{emp.value2}</td>
-                  <td>{emp.value3}</td>
+                  <td>{emp.attribute1_value}</td>
+                  <td>{emp.attribute2_value}</td>
+                  <td>{emp.attribute3_value}</td>
                 </tr>
               ))}
             </tbody>
