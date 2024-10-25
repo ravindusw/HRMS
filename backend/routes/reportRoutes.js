@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   getEmployeeReport,
-  LeaveReport,
+  getLeaveReport,
   getLeaveBalanceReport,
 } from "../controllers/reportController.js";
 
