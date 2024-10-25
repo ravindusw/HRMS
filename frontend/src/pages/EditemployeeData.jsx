@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './EditemployeeData.css'; // Import the CSS file
 import axiosInstance from '../utils/AxiosInstance';
+import { useNavigate } from 'react-router-dom';
 //import {handleDeleteDependent,handleDeleteEmergencyContact} from '../components/EditemployeeDataComponents';
 
 const EditemployeeData = () => {
   const { id_to_edit } = useParams();
   
   const [employee, setEmployee] = useState(null);
+  const navigate = useNavigate();
 
   
 
@@ -66,6 +68,11 @@ const EditemployeeData = () => {
       ...prevEmployee,
       [name]: value,
     }));
+  };
+
+  const handleViewButtonClick = (id) => {
+    const id_to_view=id;
+    navigate(`/Employee_Information_Management/HrView/${id_to_view}`);
   };
 
 
@@ -278,7 +285,9 @@ const EditemployeeData = () => {
 
   return (
     <div className="edit-employee-container">
+      <button className="btn-view" onClick={() => handleViewButtonClick(employee.id)}>View</button>
       <h1>Edit {employee.name}'s Data</h1>
+      
       <form onSubmit={handleSubmit}>
 
 

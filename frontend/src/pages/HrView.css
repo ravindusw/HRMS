@@ -79,13 +79,13 @@
   }
 }
 
-.btn-edit{
+.profile-name button{
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   
 }
-.btn-edit:hover{
+.profile-name button:hover{
   background-color: #0056b3;
 }
