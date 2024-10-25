@@ -1,56 +1,52 @@
 import { db } from "../config/db.js";
+export const getEmployeeReport = (req, res) => {
+  const department = req.params.department;
 
-// export const EmployeeReport = (req, res) => {
-//   const query = `SELECT e.employee_id, e.first_name, e.last_name, e.email, e.phone, e.address, e.date_of_birth, e.hired_date, jt.title as job_title, d.name as department
-//                    FROM employees e
-//                    LEFT JOIN job_title jt ON e.job_title_id = jt.job_title_id
-//                    LEFT JOIN department d ON e.dept_id = d.dept_id`;
+  const query = "CALL GetEmployeeReport(?)";
 
-//   db.query(query, (err, results) => {
-//     if (err) {
-//       console.error("Error fetching employee report data:", err);
-//       return res.status(500).send("Server error");
-//     }
-//     res.status(200).json(results);
-//   });
-//};
-exports.getEmployeeReport = async (req, res) => {
-  try {
-    const department = await db.query("CALL GetEmployeeList()");
+  db.query(query, [department], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Error generating employee report" });
+    }
 
-    res.status(200).json(employees[0]);
-  } catch (error) {
-    res.status(500).json({ error: "Error generating employee report" });
-  }
+    try {
+      if (results.length === 0) {
+        return res.status(404).json({ message: "No employees found" });
+      }
+
+      res.status(200).json(results[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error generating employee report" });
+    }
+  });
 };
 
-exports.getLeaveReport = async (req, res) => {
-  try {
-    const query = `
-        SELECT e.first_name, e.last_name, lt.type AS leave_type, lr.start_date, lr.end_date, lr.status
-        FROM leave_record lr
-        JOIN employee e ON lr.employee_id = e.employee_id
-        JOIN leave_type lt ON lr.leave_type_id = lt.leave_type_id;
-      `;
-    const leaveRecords = await db.query("CALL GetLeaveReport()");
-    res.status(200).json(leaveRecords);
-  } catch (error) {
-    res.status(500).json({ error: "Error generating leave report" });
-  }
+export const getLeaveBalanceReport = (req, res) => {
+  const { department, leaveType } = req.params;
+
+  const query = `CALL GetLeaveBalance(?, ?)`;
+
+  db.query(query, [department, leaveType], (error, results) => {
+    if (error) {
+      console.error("Error fetching leave balance:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    res.json(results[0]); // Return the result of the stored procedure
+  });
 };
 
-exports.getSalaryReport = async (req, res) => {
-  try {
-    const query = `
-        SELECT e.first_name, e.last_name, d.name AS department, jt.title AS job_title, pg.name AS pay_grade
-        FROM employee e
-        JOIN department d ON e.dept_id = d.dept_id
-        JOIN job_title jt ON e.job_title_id = jt.job_title_id
-        JOIN pay_grade pg ON e.pay_grade_id = pg.pay_grade_id;
-      `;
-    const salaries = await db.query("CALL GetSalaryReport()");
-    res.status(200).json(salaries);
-  } catch (error) {
-    res.status(500).json({ error: "Error generating salary report" });
-  }
+export const getLeaveReport = (req, res) => {
+  const query = "CALL GetLeaveReport()";
+
+  db.query(query, [department], (error, results) => {
+    if (error) {
+      console.error("Error fetching leave report:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    res.json(results[0]); // Return the result of the stored procedure
+  });
 };

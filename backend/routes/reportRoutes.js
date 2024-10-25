@@ -1,15 +1,17 @@
 import { Router } from "express";
 import {
-  EmployeeReport,
-  LeaveReport,
-  SalaryReport,
-  CustomFieldsReport,
+  getEmployeeReport,
+  getLeaveReport,
+  getLeaveBalanceReport,
 } from "../controllers/reportController.js";
 
 const router = Router();
 
-router.get("/EmployeeReport", EmployeeReport);
-router.get("/LeaveReport", LeaveReport);
-router.get("/SalaryReport", SalaryReport);
+router.get("/employee-report/:department", getEmployeeReport);
+router.get("/leave-report", getLeaveReport);
+router.get(
+  "/report/LeaveBalanceReport/:department/:leaveType",
+  getLeaveBalanceReport
+);
 
 export default router;
