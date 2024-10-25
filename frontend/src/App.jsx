@@ -45,6 +45,19 @@ function App() {
 
         <Route path="/loginHelp" element={<LoginHelp />} />
 
+        <Route path="/Employee_Information_Management"
+
+          element={
+
+            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+              <EIM />
+            </ProtectedRoute>
+
+          }
+
+        />
+
+        
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
