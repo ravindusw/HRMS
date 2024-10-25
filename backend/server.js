@@ -10,7 +10,6 @@ import supportRoutes from "./routes/SupportRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
 
-import HrRouter from "./routes/HrRouter.js";
 
 const app = express();
 
@@ -27,7 +26,7 @@ app.use("/api/profile", profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 
-app.use("/api/Hr", HrRouter);
+
 app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);

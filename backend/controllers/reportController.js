@@ -25,7 +25,7 @@ export const getEmployeeReport = (req, res) => {
   });
 };
 
-const getLeaveBalanceReport = (req, res) => {
+export const getLeaveBalanceReport = (req, res) => {
   const { department, leaveType } = req.params;
 
   const query = `CALL GetLeaveBalance(?, ?)`;
@@ -39,6 +39,14 @@ const getLeaveBalanceReport = (req, res) => {
   });
 };
 
-module.exports = {
-  getLeaveBalanceReport,
+export const getLeaveReport = (req, res) => {
+  const query = "CALL GetLeaveReport()";
+
+  db.query(query, [department], (error, results) => {
+    if (error) {
+      console.error("Error fetching leave report:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    res.json(results[0]); // Return the result of the stored procedure
+  });
 };
