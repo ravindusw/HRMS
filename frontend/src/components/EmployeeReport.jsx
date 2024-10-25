@@ -80,17 +80,27 @@ const EmployeeReport = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>First_Name</th>
+                <th>Last_Name</th>
+                <th>Date_of_Birth</th>
+                <th>Address</th>
                 <th>Position</th>
                 <th>Email</th>
+                <th>Pay_Grade</th>
               </tr>
             </thead>
             <tbody>
               {employees.map((emp, index) => (
                 <tr key={index}>
-                  <td>{emp.name}</td>
-                  <td>{emp.position}</td>
+                  <td>{emp.employee_id}</td>
+                  <td>{emp.first_name}</td>
+                  <td>{emp.last_name}</td>
+                  <td>{emp.date_of_birth}</td>
+                  <td>{emp.address}</td>
+                  <td>{emp.job_title}</td>
                   <td>{emp.email}</td>
+                  <td>{emp.pay_grade}</td>
                 </tr>
               ))}
             </tbody>
