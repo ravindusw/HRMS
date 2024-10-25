@@ -4,16 +4,25 @@ import { db } from '../config/db.js';
 export const updateEmployeeData = (req, res) => {
   const employeeId = req.params.id;
   const {first_name,last_name,NIC, birthday,dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state,phone_numbers,dependents,emergency_contacts } = req.body;
-  console.log( req.body);
+  //console.log( req.body);
   
   
-  const query1 = `
-    UPDATE employee
-    SET first_name = ? ,last_name = ?,NIC = ?,date_of_birth = ?, dept_id = ?, job_title_id = ?, pay_grade_id = ?,employment_state_id=?, address = ?, marital_state = ?
-    WHERE employee_id = ?
-  `;
+  const query1 = `CALL UpdateEmployee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  const values = [first_name,last_name,NIC, birthday,dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state, employeeId];
+  const values = [
+    employeeId,
+    first_name,
+    last_name,
+    NIC,
+    birthday,
+    dept_id,
+    job_title_id,
+    pay_grade_id,
+    employment_state_id,
+    address,
+    marital_state
+  ];
+
 
   db.query(query1, values, (err, results) => {
     if (err) {
