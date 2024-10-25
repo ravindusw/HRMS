@@ -112,10 +112,10 @@ const Report = () => {
       navigate("/employee-report");
     } else if (selectedReport === "Leave Report") {
       navigate("/leave-report");
-    } else if (selectedReport === "Salary Report") {
-      navigate("/salary-report");
-      // } else if (selectedReport === "Custom Fields Report") {
-      //   navigate("/custom-fields-report");
+    } else if (selectedReport === "Leave Balance Report") {
+      navigate("/leavebalance-report");
+    } else if (selectedReport === "Custom Fields Report") {
+      navigate("/custom-fields-report");
     }
   };
 
@@ -132,10 +132,12 @@ const Report = () => {
                 <option value="">-- Select Report --</option>
                 <option value="Employee Report">Employee Report</option>
                 <option value="Leave Report">Leave Report</option>
-                <option value="Salary Report">Salary Report</option>
-                {/* <option value="Custom Fields Report">
+                <option value="Leave Balance Report">
+                  Leave Balance Report
+                </option>
+                <option value="Custom Fields Report">
                   Reports Based on Custom Fields
-                </option> */}
+                </option>
               </select>
             </div>
           </form>

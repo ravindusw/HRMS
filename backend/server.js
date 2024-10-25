@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import reportRoutes from "./routes/ReportRoutes.js";
 
 import supportRoutes from "./routes/SupportRoutes.js";
 
@@ -31,10 +32,8 @@ app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);
 
-
 app.use("/api/help", supportRoutes);
-
-
+app.use("/api/report", reportRoutes);
 
 // Default route
 app.get("/", (req, res) => {
