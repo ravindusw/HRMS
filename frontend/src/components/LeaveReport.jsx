@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
+import "./ReportSubpage.css";
 
 const LeaveReport = () => {
   const [department, setDepartment] = useState("");

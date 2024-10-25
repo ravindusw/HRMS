@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
+import "./ReportSubpage.css";
 
 const LeaveBalanceReport = () => {
   const [department, setDepartment] = useState("");
@@ -62,7 +63,7 @@ const LeaveBalanceReport = () => {
   };
 
   return (
-    <div className="container">
+    <div className="subrep-container">
       <h1>Jupiter Apparels HRMS - Leave Balance Report</h1>
       <div>
         <label>Select Department:</label>
