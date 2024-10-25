@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import reportRoutes from "./routes/ReportRoutes.js";
 
 import supportRoutes from "./routes/SupportRoutes.js";
 
@@ -10,6 +11,10 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
 
 import HrRouter from "./routes/HrRouter.js";
+import leaveRoutes from "./routes/leaveRoutes.js";
+
+
+
 
 const app = express();
 
@@ -26,15 +31,15 @@ app.use("/api/profile", profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 
-app.use("/api/Hr", HrRouter);
+
 app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);
 
-
 app.use("/api/help", supportRoutes);
+app.use("/api/report", reportRoutes);
 
-
+app.use("/api/leave", leaveRoutes);
 
 // Default route
 app.get("/", (req, res) => {

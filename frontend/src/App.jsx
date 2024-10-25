@@ -18,11 +18,10 @@ import NotAuthorized from "./pages/NotAuthorized.jsx";
 import HRMSNavBar from "./components/NavBar.jsx";
 import EmployeeReport from "./components/EmployeeReport.jsx";
 
-import SalaryReport from "./components/SalaryReport.jsx";
+import LeaveBalanceReport from "./components/LeaveBalanceReport.jsx";
 import LeaveReport from "./components/LeaveReport.jsx";
 
 import LoginHelp from "./pages/LoginHelp.jsx";
-
 
 import "./App.css";
 
@@ -37,22 +36,37 @@ function App() {
         <Route path="/notification" element={<Notification />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/report" element={<Report />} />
-        <Route path="/Employee_Information_Management" element={<EIM />} />
+
         <Route path="/notAuthorized" element={<NotAuthorized />} />
         <Route path="/employee-report" element={<EmployeeReport />} />
 
-        <Route path="/salary-report" element={<SalaryReport />} />
+        <Route path="/leavebalance-report" element={<LeaveBalanceReport />} />
         <Route path="/leave-report" element={<LeaveReport />} />
 
         <Route path="/loginHelp" element={<LoginHelp />} />
 
+        <Route path="/Employee_Information_Management"
 
+          element={
+
+            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+              <EIM />
+            </ProtectedRoute>
+
+          }
+
+        />
+
+        
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
-            <ProtectedRoute allowedRoles={["HR Manager"]}>
+            <HrView />
+            /*
+            <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
               <HrView />
             </ProtectedRoute>
+            */
           }
         />
         <Route

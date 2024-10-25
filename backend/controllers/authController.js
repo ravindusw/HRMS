@@ -11,7 +11,7 @@ export const login = (req, res) => {
   db.query(query, [email], (err, results) => {
     if (err) {
       console.error("Error during stored procedure call:", err);
-      // logLoginAttempt(email, "Server error");
+      logLoginAttempt(email, "Server error");
       return res.status(500).send("Server error");
     }
 
@@ -21,7 +21,8 @@ export const login = (req, res) => {
     console.log(user.role);
     console.log(login_status);
 
-    if (login_status === "Invalid credentials") {
+    if (results.length === 0) {
+      logLoginAttempt(email, "Invalid credentials");
       return res.status(401).send("Invalid credentials");
     }
 
