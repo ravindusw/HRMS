@@ -5,6 +5,7 @@ import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
 import HrRouter from "./routes/HrRouter.js";
+import leaveRoutes from "./routes/leaveRoutes.js";
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use("/api/profile", verifyToken, profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 app.use("/api/Hr", HrRouter);
+
+app.use("/api/leave", leaveRoutes);
 
 // Default route
 app.get("/", (req, res) => {
