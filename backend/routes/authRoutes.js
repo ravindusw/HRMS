@@ -13,8 +13,8 @@ router.post("/login", login);
 
 router.use(
   "/Hr",
-  //verifyToken,
-  //authorizeRoles("Admin", "HR Manager"),
+  verifyToken,
+  authorizeRoles("Admin", "HR Manager"),
   HrRouter
 );
 
