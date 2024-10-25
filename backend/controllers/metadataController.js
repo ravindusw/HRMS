@@ -55,3 +55,17 @@ export const getDepartments = (req, res) => {
       res.status(200).json(results[0]);
     });
   };
+  export const employmentStats = (req, res) => {
+    const query = `SELECT employment_state_id,CONCAT(employment_state.employment_type, ' ', employment_state.work_schedule) as employment_status 
+                  FROM hrms.employment_state;`
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error("Error fetching employment stats:", err);
+        return res.status(500).send("Server error");
+      }
+      if (results[0].length === 0) {
+        return res.status(404).send("Employment stats not found");
+      }
+      res.status(200).json(results);
+    });
+  }

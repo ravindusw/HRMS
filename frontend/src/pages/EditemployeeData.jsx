@@ -14,12 +14,14 @@ const EditemployeeData = () => {
   const [jobTitles, setJobTitles] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [payGrades, setPayGrades] = useState([]);
+  const [employmentStatus, setEmploymentStats] = useState([]);
   const [editableFields, setEditableFields] = useState({
     address: false,
     marital_state: false,
     job_title: false,
     department: false,
-    pay_grade: false
+    pay_grade: false,
+    employment_status: false
   });
   
 
@@ -42,6 +44,9 @@ const EditemployeeData = () => {
         const payGradesResponse = await axiosInstance.get('/auth/Hr/pay_grades');
         setPayGrades(payGradesResponse.data);
         //console.log(payGradesResponse.data);
+        const employmentStatsResponse = await axiosInstance.get('/auth/Hr/employmentStats');
+        setEmploymentStats(employmentStatsResponse.data);
+        //console.log(employmentStatsResponse.data);
         
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -95,14 +100,13 @@ const EditemployeeData = () => {
     }));
   };
 
-  const handleEmergencyContactChange = (name, field, value) => {
+  const handleEmergencyContactChange = (index, field, value) => {
     const newEmergencyContacts = [...employee.emergency_contacts];
-    const ChangeEmergencyContact= newEmergencyContacts.filter(contact => contact.name === name );
-    ChangeEmergencyContact.field = value;
-    const updatedEmergencyContacts = newEmergencyContacts.map(contact => contact.name === name ? ChangeEmergencyContact : contact);
+    newEmergencyContacts[index][field]= value
+    
     setEmployee(prevState => ({
       ...prevState,
-      emergency_contacts: updatedEmergencyContacts
+      emergency_contacts: newEmergencyContacts
     }));
   };
 
@@ -116,7 +120,7 @@ const EditemployeeData = () => {
   const addDependent = () => {
     setEmployee(prevState => ({
       ...prevState,
-      dependents: [...prevState.dependents, { name: '', relationship: '', age: '', phone_number: '' }]
+      dependents: [...prevState.dependents, { name: '', relationship: '', date_of_birth: '',gender: '', phone_number: '' }]
     }));
   };
   
@@ -134,6 +138,7 @@ const EditemployeeData = () => {
     }));
   };
 
+
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,17 +149,19 @@ const EditemployeeData = () => {
     //console.log(employee);
 
     const employeeChanges = {
-      
+      dept_id: employee.dept_id,
+      job_title_id: employee.job_title_id,
+      pay_grade_id: employee.pay_grade_id,
+      employment_state_id: employee.employment_state_id,
       address: employee.address,
       marital_state: employee.marital_state,
       phone_numbers: employee.phone_numbers,
       dependents: employee.dependents,
-      emergency_contacts: employee.emergency_contacts,
+      emergency_contacts: employee.emergency_contacts
 
-      dept_id: employee.dept_id,
-      job_title_id: employee.job_title_id,
-      pay_grade_id: employee.pay_grade_id
+      
     };
+    console.log(employeeChanges);
     try {
       // Update employee data
       await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employeeChanges);
@@ -224,6 +231,13 @@ const EditemployeeData = () => {
     }));
   };
 
+  const handleEmploymentStatusChange= (e) => {
+    const selectedEmploymentStatus = employmentStatus.find(status => status.employment_state_id === e.target.value);
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      employment_state_id: selectedEmploymentStatus.employment_state_id
+    }));
+  }
 
 
   
@@ -325,6 +339,31 @@ const EditemployeeData = () => {
             {editableFields.pay_grade ? 'Save Pay Grade' : 'Change Pay Grade'}
           </button>
         </label>
+
+
+
+        <label>
+        Employment Status:
+          {editableFields.employment_status ? (
+            <select
+              name="employment_status"
+              value={employee.employment_state_id}
+              onChange={handleEmploymentStatusChange}
+            >
+              {employmentStatus.map((status) => (
+                <option key={status.employment_state_id} value={status.employment_state_id}>{status.employment_status}</option>
+              ))}
+            </select>
+          ) : (
+            <span>{employee.employment_status}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('employment_status')}>
+            {editableFields.employment_status ? 'Save employment Status' : 'Change employment Status'}
+          </button>
+        </label>
+
+
+
         <label>
           Phone Numbers:
           {employee.phone_numbers.map((phone, index) => (
@@ -351,6 +390,12 @@ const EditemployeeData = () => {
               />
               <input
                 type="text"
+                placeholder="Gender"
+                value={dependent.gender}
+                onChange={(e) => handleDependentChange(index, 'gender', e.target.value)}
+              />
+              <input
+                type="text"
                 placeholder="Relation"
                 value={dependent.relationship}
                 onChange={(e) => handleDependentChange(index, 'relationship', e.target.value)}
@@ -364,8 +409,8 @@ const EditemployeeData = () => {
               <input
                 type="date"
                 placeholder="Birthday"
-                value={formatDate(dependent.birthday)}
-                onChange={(e) => handleDependentChange(index, 'birthday', e.target.value)}
+                value={dependent.date_of_birth}
+                onChange={(e) => handleDependentChange(index, 'date_of_birth', e.target.value)}
               />
               <button type="button" onClick={() => handleDeleteDependent(dependent.name)}>Delete Dependent</button>
 
@@ -383,19 +428,19 @@ const EditemployeeData = () => {
                 type="text"
                 placeholder="Name"
                 value={contact.name}
-                onChange={(e) => handleEmergencyContactChange(contact.name, 'name', e.target.value)}
+                onChange={(e) => handleEmergencyContactChange(index, 'name', e.target.value)}
               />
               <input
                 type="tel"
                 placeholder="Phone"
                 value={contact.phone}
-                onChange={(e) => handleEmergencyContactChange(contact.name, 'phone', e.target.value)}
+                onChange={(e) => handleEmergencyContactChange(index, 'phone', e.target.value)}
               />
               <input
                 type="text"
                 placeholder="relationship"
                 value={contact.relationship}
-                onChange={(e) => handleEmergencyContactChange(contact.name, 'relationship', e.target.value)}
+                onChange={(e) => handleEmergencyContactChange(index, 'relationship', e.target.value)}
               />
               <button type="button" onClick={() => handleDeleteEmergencyContact(contact.name)}>Delete This Contact</button>
               <br /><br />

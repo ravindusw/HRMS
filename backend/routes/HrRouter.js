@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db } from "../config/db.js";
-import { getJobTitles, getPayGrades, getDepartments } from '../controllers/metadataController.js';
+import { getJobTitles, getPayGrades, getDepartments ,employmentStats} from '../controllers/metadataController.js';
 import { getAllEmployees } from '../controllers/employeesController.js';
 import { getEmployeeByIdForHr } from '../controllers/employeesController.js';
 import { updateEmployeeData} from '../controllers/updateEmployeeDataController.js';
@@ -30,6 +30,8 @@ router.get("/pay_grades", getPayGrades);
 
 // Route to get departments
 router.get("/departments", getDepartments);
+
+router.get("/employmentStats",employmentStats)
 
 
 

@@ -14,10 +14,7 @@ const calculateAge = (dateOfBirth) => {
   return currentYear - birthYear;
 };
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-CA"); // 'en-CA' format is "YYYY-MM-DD"
-};
+
 
 const HrView = () => {
   const { id_to_view } = useParams();
@@ -99,7 +96,7 @@ const HrView = () => {
           
             
             <div className="profile-field">
-              <span>Hired Date:</span> {formatDate(employee.hired_date)}
+              <span>Hired Date:</span> {employee.hired_date}
             </div>
             <div className="profile-field">
               <span>Employment Type:</span> {employee.employment_status}
@@ -110,7 +107,7 @@ const HrView = () => {
           </Col>
           <Col md={6}>
             <div className="profile-field">
-              <span>Birthday:</span> {formatDate(employee.birthday)}
+              <span>Birthday:</span> {employee.birthday}
             </div>
             <div className="profile-field">
               <span>Marital Status:</span> {employee.marital_state}

@@ -1,5 +1,12 @@
 import { db } from '../config/db.js';
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export const getAllEmployees = (req, res) => {
     const query = 'CALL GetEmployeeList()';
@@ -37,7 +44,7 @@ export const getAllEmployees = (req, res) => {
             name: employeeResults[0][0].name,
             NIC: employeeResults[0][0].NIC,
             username: employeeResults[0][0].username,
-            birthday: employeeResults[0][0].birthday,
+            birthday:formatDate(employeeResults[0][0].birthday) ,
             gender: employeeResults[0][0].gender,
             job_title_id: employeeResults[0][0].job_title_id,
             job_title: employeeResults[0][0].job_title,
@@ -46,7 +53,8 @@ export const getAllEmployees = (req, res) => {
             dept_id: employeeResults[0][0].dept_id,
             department: employeeResults[0][0].department,
             branch: employeeResults[0][0].branch,
-            hired_date: employeeResults[0][0].hired_date,
+            hired_date: formatDate(employeeResults[0][0].hired_date),
+            employment_state_id: employeeResults[0][0].employment_state_id,
             employment_status: employeeResults[0][0].employment_status,
             marital_state: employeeResults[0][0].marital_state,
             email: employeeResults[0][0].email,
@@ -73,7 +81,7 @@ export const getAllEmployees = (req, res) => {
             dependentResults[0].forEach(row => {
               employee.dependents.push({
                 name: row.dependent_name,
-                date_of_birth: row.dependent_birthday,
+                date_of_birth: formatDate(row.dependent_birthday),
                 gender: row.dependent_gender,
                 phone_number: row.dependent_phone_number,
                 relationship: row.relationship
@@ -97,7 +105,7 @@ export const getAllEmployees = (req, res) => {
                 });
               }
       
-              //console.log(employee);
+              console.log(employee.birthday);
               res.status(200).json(employee);
             });
           });
