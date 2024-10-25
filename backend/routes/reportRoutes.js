@@ -10,7 +10,7 @@ const router = Router();
 router.get("/employee-report/:department", getEmployeeReport);
 router.get("/leave-report", getLeaveReport);
 router.get(
-  "/report/LeaveBalanceReport/:department/:leaveType",
+  "/report/leavebalance-report/:department/:leaveType",
   getLeaveBalanceReport
 );
 
