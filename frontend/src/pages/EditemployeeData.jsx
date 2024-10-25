@@ -169,12 +169,13 @@ const EditemployeeData = () => {
       await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employeeChanges);
 
       
-      alert("Employee data updated successfully");
+      
       console.log("Employee data updated successfully");
     } catch (error) {
       console.error("There was an error updating the employee data!", error);
       setError("There was an error updating the employee data!");
     }
+    alert("Employee data updated successfully");
       
   };
 
