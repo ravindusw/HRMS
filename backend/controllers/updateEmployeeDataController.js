@@ -4,7 +4,7 @@ import { db } from '../config/db.js';
 export const updateEmployeeData = (req, res) => {
   const employeeId = req.params.id;
   const { dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state,phone_numbers,dependents,emergency_contacts } = req.body;
-  console.log( req.body);
+  //console.log( req.body);
   
   
   const query1 = `
@@ -74,7 +74,7 @@ export const updateEmployeeData = (req, res) => {
         const dependentsValues = dependents.map(dependent => [employeeId, dependent.name, dependent.relationship, dependent.date_of_birth, dependent.gender, dependent.phone_number]);
 
         dependentsValues.forEach(dependent => {
-          console.log(dependent);
+          //console.log(dependent);
           if(dependent[1] !== ''){
             console.log('ok');
             
