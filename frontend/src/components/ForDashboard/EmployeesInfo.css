@@ -1,0 +1,47 @@
+/* Container styling */
+.employees-info {
+    padding: 20px; /* Padding inside the container */
+    text-align: center; /* Center the text */
+}
+
+/* Heading styling */
+.employees-info h3 {
+    color: #007bff; /* Blue color */
+    font-size: 1.5em; /* Font size */
+    margin-bottom: 15px; /* Margin below the heading */
+}
+
+/* Paragraph styling */
+.employees-info p {
+    margin: 10px 0; /* Margin above and below paragraphs */
+    font-size: 1.2em; /* Font size */
+    color: #333; /* Text color */
+    font-weight: bold; /* Bold text */
+}
+
+/* Count styling */
+.employees-info .employees-count,
+.employees-info .employees-on-leave {
+    /* background-color: #f0f8ff; Light background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Padding inside the count container */
+    margin-bottom: 10px; /* Margin below each count container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s ease-in-out; /* Smooth transition */
+    color: #007bff; /* Text color */
+    border: 2px solid #007bff;
+}
+
+/* Hover effect for count containers */
+.employees-info .employees-count:hover,
+.employees-info .employees-on-leave:hover {
+    /* transform: translateY(-5px); Lift the count container on hover */
+    background-color: #e0f0ff; /* Slightly darker background on hover */
+}
+
+/* Icon styling */
+.employees-info img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+  }

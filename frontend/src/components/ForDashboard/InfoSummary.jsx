@@ -1,23 +1,27 @@
-export default function InfoSummary() {
+import { Link } from "react-router-dom";
+import "./InfoSummary.css";
+
+export default function InfoSummary({profileData}) {
+
   return (
     <div className="info-summary">
       <h3>Personal Information Summary</h3>
       <p>
-        <strong>Name:</strong> Alan Walker
+        <strong>Name:</strong> {profileData?.first_name} {profileData?.last_name}
       </p>
       <p>
-        <strong>Job Title:</strong> Admin
+        <strong>Job Title:</strong> {profileData?.job_title}
       </p>
       <p>
-        <strong>Department:</strong> IT
+        <strong>Department:</strong> {profileData?.department}
       </p>
       <p>
-        <strong>Date of Birth:</strong> 05/05/1998
+        <strong>Date of Birth:</strong> {profileData?.date_of_birth}
       </p>
-      <p>
+      {/* <p>
         <strong>Working Since:</strong> 12/05/2020
-      </p>
-      <button className="btn-update">View Details</button>
+      </p> */}
+      <button className="btn-update"><Link to="/profile" style={{ all: 'unset' }}>View Details</Link></button>
     </div>
   );
 }

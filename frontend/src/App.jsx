@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Login from "./pages/Login.jsx";
@@ -17,76 +16,103 @@ import AddUser from "./pages/AddUser.jsx";
 import HrView from "./pages/HrView.jsx";
 import NotAuthorized from "./pages/NotAuthorized.jsx";
 import HRMSNavBar from "./components/NavBar.jsx";
+import EmployeeReport from "./components/EmployeeReport.jsx";
+
+import SalaryReport from "./components/SalaryReport.jsx";
+import LeaveReport from "./components/LeaveReport.jsx";
+
+import LoginHelp from "./pages/LoginHelp.jsx";
+
 
 import "./App.css";
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <HRMSNavBar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/report" element={<Report />} />
-          <Route path="/Employee_Information_Management" element={<EIM />} />
-          <Route path="/notAuthorized" element={<NotAuthorized />} />
-          <Route
-            path="/Employee_Information_Management/HrView/:id_to_view"
-            element={
-              <ProtectedRoute allowedRoles={["HR Manager"]}>
-                <HrView />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
-            element={
-              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
-                <EditemployeeData />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/Employee_Information_Management/AddEmployee"
-            element={
-              <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
-                <AddEmployee />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/leaveapplication" element={<LeaveApplication />} />
-          <Route path="/leave-history-admin" element={<LeaveHistory />} />
-          {/* <Route
-            path="/leave-history-admin"
-            element={
-              <ProtectedRoute allowedRoles={["HR Manager"]}>
-                <LeaveHistory />
-              </ProtectedRoute>
-            }
-          /> */}
-          <Route
-            path="/addUser"
-            element={
-              <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-                <AddUser />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/addEmployee"
-            element={
-              <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-                <AddEmployee />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+<BrowserRouter>
+      <HRMSNavBar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/notification" element={<Notification />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/report" element={<Report />} />
+        
+        <Route path="/notAuthorized" element={<NotAuthorized />} />
+        <Route path="/employee-report" element={<EmployeeReport />} />
+
+        <Route path="/salary-report" element={<SalaryReport />} />
+        <Route path="/leave-report" element={<LeaveReport />} />
+
+        <Route path="/loginHelp" element={<LoginHelp />} />
+        
+        <Route path="/Employee_Information_Management" 
+        
+        element={
+          
+          <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
+            <EIM />
+          </ProtectedRoute>
+          
+        }
+        
+        />
+
+        <Route
+          path="/Employee_Information_Management/HrView/:id_to_view"
+          element={
+            <HrView />
+            /*
+            <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
+              <HrView />
+            </ProtectedRoute>
+            */
+          }
+        />
+        <Route
+          path="/Employee_Information_Management/EditemployeeData/:id_to_edit"
+          element={
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
+              <EditemployeeData />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Employee_Information_Management/AddEmployee"
+          element={
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
+              <AddEmployee />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/leaveapplication" element={<LeaveApplication />} />
+        <Route path="/leave-history-admin" element={<LeaveHistory />} />
+        {/* <Route
+          path="/leave-history-admin"
+          element={
+            <ProtectedRoute allowedRoles={["HR Manager"]}>
+              <LeaveHistory />
+            </ProtectedRoute>
+          }
+        /> */}
+        <Route
+          path="/addUser"
+          element={
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
+              <AddUser />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/addEmployee"
+          element={
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
+              <AddEmployee />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

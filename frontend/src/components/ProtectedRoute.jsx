@@ -1,15 +1,26 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx"; // Import the useAuth hook
+import Cookies from "js-cookie";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { auth } = useAuth(); // Get the auth state from the AuthContext
+  const role = Cookies.get("role");
 
-  if (!auth.token || !allowedRoles.includes(auth.role)) {
-    return <Navigate to="/notAuthorized" replace />;
+  if (!role) {
+    return <Navigate to="/login" replace />;
   }
 
-  return children;
+  try {
+    console.log(role);
+
+    if (!allowedRoles.includes(role)) {
+      return <Navigate to="/notAuthorized" replace />;
+    }
+
+    return children;
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+    return <Navigate to="/login" replace />;
+  }
 };
 
 export default ProtectedRoute;
