@@ -9,6 +9,11 @@ import supportRoutes from "./routes/SupportRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { verifyToken } from "./middleWare/authMiddleware.js";
 
+import HrRouter from "./routes/HrRouter.js";
+import leaveRoutes from "./routes/leaveRoutes.js";
+
+
+
 
 const app = express();
 
@@ -34,6 +39,8 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/help", supportRoutes);
 
 
+
+app.use("/api/leave", leaveRoutes);
 
 // Default route
 app.get("/", (req, res) => {
