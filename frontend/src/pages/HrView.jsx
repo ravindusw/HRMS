@@ -172,20 +172,20 @@ const HrView = () => {
                 {employee.dependents.map((dependent, index) => (
                   <li key={index}>
                     <p>
-                      <strong>Name:</strong> {dependent.name}
+                    Name: {dependent.name}
                     </p>
                     <p>
-                      <strong>Relationship:</strong> {dependent.relationship}
+                    Relationship:{dependent.relationship}
                     </p>
                     <p>
-                      <strong>Age:</strong> {calculateAge(dependent.date_of_birth)}
+                    Age: {calculateAge(dependent.date_of_birth)}
                     </p>
                     <p>
-                      <strong>Gender:</strong> {dependent.gender}
+                    Gender: {dependent.gender}
                     </p>
                     {dependent.phone_number && (
                       <p>
-                        <strong>Phone Number:</strong> {dependent.phone_number}
+                        Phone Number: {dependent.phone_number}
                       </p>
                     )}
                   </li>
