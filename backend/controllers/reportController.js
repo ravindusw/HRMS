@@ -1,16 +1,22 @@
 import { db } from "../config/db.js";
 export const getEmployeeReport = (req, res) => {
-  const { re_id } = req.params.department;
+  const department = req.params.department;
 
   const query = "CALL GetEmployeeReport(?)";
 
-  db.query(query, [re_id], (err, results) => {
+  db.query(query, [department], (err, results) => {
+    
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error generating employee report" });
+    }
+    
     try {
-      if (rows.length === 0) {
+      if (results.length === 0) {
         return res.status(404).json({ message: "No employees found" });
       }
 
-      res.status(200).json(rows);
+      res.status(200).json(results[0]);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Error generating employee report" });

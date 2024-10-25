@@ -28,7 +28,7 @@ const EmployeeReport = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/report/EmployeeReport/${department}`
+        `http://localhost:8800/api/report/employee-report/${department}`
       );
       setEmployees(response.data);
     } catch (error) {
