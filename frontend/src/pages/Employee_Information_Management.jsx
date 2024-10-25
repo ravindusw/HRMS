@@ -151,7 +151,7 @@ const EmployeeInfoManagement = () => {
           <input
             id="emp_name"
             type="text"
-            placeholder="Search..."
+            placeholder="Search Name..."
             onChange={changeFilter}
             value={filter}
           />
