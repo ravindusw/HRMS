@@ -32,7 +32,7 @@ const LeaveBalanceReport = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/report/LeaveBalanceReport/${department}/${leaveType}`
+        `http://localhost:8800/api/report/leavebalance-report/${department}/${leaveType}`
       );
       setLeaveBalances(response.data);
     } catch (error) {

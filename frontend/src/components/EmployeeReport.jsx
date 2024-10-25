@@ -53,7 +53,7 @@ const EmployeeReport = () => {
   };
 
   return (
-    <div className="container">
+    <div className="subrep-container">
       <h1>Jupiter Apparels HRMS - Departmental Employee Report</h1>
       <div>
         <label>Select Department:</label>
@@ -111,9 +111,14 @@ const EmployeeReport = () => {
           <CSVLink
             data={employees}
             headers={[
-              { label: "Name", key: "name" },
-              { label: "Position", key: "position" },
+              { label: "ID", key: "employee_id" },
+              { label: "First_Name", key: "first_name" },
+              { label: "Last_Name", key: "last_name" },
+              { label: "Date_of_Birth", key: "date_of_birth" },
+              { label: "Address", key: "address" },
+              { label: "Position", key: "job_title" },
               { label: "Email", key: "email" },
+              { label: "Pay_Grade", key: "pay_grade" },
             ]}
             filename={`${department}-employees-report.csv`}
           >

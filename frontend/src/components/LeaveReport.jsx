@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { jsPDF } from "jspdf";
+import { CSVLink } from "react-csv";
 
 const LeaveReport = () => {
   const [department, setDepartment] = useState("");
@@ -26,7 +28,7 @@ const LeaveReport = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/report/LeaveReport/${department}`
+        `http://localhost:8800/api/report/leave-report/${department}`
       );
       setLeaves(response.data);
     } catch (error) {
@@ -35,9 +37,21 @@ const LeaveReport = () => {
       setLoading(false);
     }
   };
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.text(`Department: ${department} Leave Report`, 10, 10);
+    employees.forEach((leave, index) => {
+      doc.text(
+        `${index + 1}. ${leave.employee_name} - ${leave.job_title}`,
+        10,
+        20 + index * 10
+      );
+    });
+    doc.save(`${department}-leave-report.pdf`);
+  };
 
   return (
-    <div>
+    <div className="subrep-container">
       <h1>Jupiter Apparels HRMS - Departmental Leave Report</h1>
       <div>
         <label>Select Department:</label>
@@ -84,6 +98,21 @@ const LeaveReport = () => {
                 ))}
               </tbody>
             </table>
+            <button onClick={generatePDF}>Download PDF</button>
+
+            <CSVLink
+              data={leaves}
+              headers={[
+                { label: "Name", key: "employee_name" },
+                { label: "Position", key: "job_title" },
+                { label: "Leave start date", key: "leave_start_date" },
+                { label: "Requested Type", key: "leave_type" },
+                { label: "Status", key: "leave_status" },
+              ]}
+              filename={`${department}-employees-report.csv`}
+            >
+              Download CSV
+            </CSVLink>
           </>
         )}
       </div>
