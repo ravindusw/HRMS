@@ -6,7 +6,7 @@ import RemainingLeaves from "../components/ForDashboard/RemainingLeaves";
 import EmployeesInfo from "../components/ForDashboard/EmployeesInfo";
 import UserRoleDistribution from "../components/ForDashboard/UserRoleDistribution";
 import QuickActions from "../components/ForDashboard/QuickActions";
-
+import Footer from "../components/footer";
 export default function Dashboard() {
   return (
     <div className="dashboard-container">
@@ -19,6 +19,7 @@ export default function Dashboard() {
         <EmployeesInfo />
         <UserRoleDistribution />
         <QuickActions />
+        <Footer />
       </div>
     </div>
   );
