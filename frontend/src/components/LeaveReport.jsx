@@ -67,17 +67,19 @@ const LeaveReport = () => {
                 <tr>
                   <th>Name</th>
                   <th>Position</th>
-                  <th>Requested Leaves</th>
-                  <th>Approved Leaves</th>
+                  <th>Leave start date</th>
+                  <th>Requested Type</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {leaves.map((leave, index) => (
                   <tr key={index}>
-                    <td>{leave.name}</td>
-                    <td>{leave.position}</td>
-                    <td>{leave.requestedLeaves}</td>
-                    <td>{leave.approvedLeaves}</td>
+                    <td>{leave.employee_name}</td>
+                    <td>{leave.job_title}</td>
+                    <td>{leave.leave_start_date}</td>
+                    <td>{leave.leave_type}</td>
+                    <td>{leave.leave_status}</td>
                   </tr>
                 ))}
               </tbody>

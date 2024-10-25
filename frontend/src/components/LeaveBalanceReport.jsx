@@ -106,14 +106,16 @@ const LeaveBalanceReport = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>First_Name</th>
                 <th>Leave Balance</th>
               </tr>
             </thead>
             <tbody>
               {leaveBalances.map((emp, index) => (
                 <tr key={index}>
-                  <td>{emp.name}</td>
+                  <td>{emp.employee_id}</td>
+                  <td>{emp.name} </td>
                   <td>{emp.leaveBalance} days</td>
                 </tr>
               ))}
