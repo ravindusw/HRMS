@@ -1,3 +1,5 @@
+import "./QuickActions.css";
+
 export default function QuickActions() {
   return (
     <div className="quick-actions">
@@ -5,7 +7,7 @@ export default function QuickActions() {
       <p>Register New HR Manager</p>
       <p>Register New Employee</p>
       <p>Approve/Reject Leave Requests</p>
-      <p>Update Personal Information</p>
+      <p>Update Employee Information</p>
     </div>
   );
 }

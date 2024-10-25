@@ -29,7 +29,7 @@ body {
   padding-top: 2px;
 }
 
-h1 {
+.header-container h1 {
   margin-bottom: 20px;
   font-size: 24px;
 }
@@ -153,7 +153,7 @@ tbody tr:nth-child(even) {
 }
 
 .nav button {
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -166,6 +166,6 @@ tbody tr:nth-child(even) {
   margin: 0 10px;
 }
 input {
-  background-color: #cff7d3;
+  background-color: #b7dbf8;
   margin-top: 12px;
 }

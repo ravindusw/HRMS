@@ -22,7 +22,8 @@
 }
 
 .notification-header {
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: bold;
   margin-bottom: 15px;
   color: var(--primary-color);
   text-align: center;
@@ -109,6 +110,7 @@
   font-size: 18px;
   color: #444;
   margin: 0;
+  font-weight: bold;
 }
 
 .notification-message {
