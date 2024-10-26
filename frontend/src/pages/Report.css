@@ -10,12 +10,14 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  /* margin-top: 10rem; */
 }
 
 .report-container {
   display: flex;
   width: 100%;
   height: 100%;
+  margin-top: 5rem;
 }
 
 .reportcontainer-1,
@@ -25,22 +27,31 @@ body {
 }
 .reportcontainer-1.h1 {
   color: white;
-  font-size: larger;
+  font-size: 4 rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  justify-content: center;
 }
 .reportcontainer-1.h2 {
   color: white;
-  font-size: large;
+  font-size: 1.8 rem;
+  padding-top: 2px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  justify-content: center;
 }
 
 .reportcontainer-1 {
   background-color: rgb(9, 74, 9);
   font-size: 1.5rem;
+  justify-content: center;
   color: rgb(109, 106, 106);
 }
 
 .report-title {
   font-size: 2rem;
   font-weight: bold;
+  padding-top: 2px;
   margin-bottom: 20px;
 }
 .reportcontainer-2 {
