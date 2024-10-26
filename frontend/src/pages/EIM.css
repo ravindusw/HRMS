@@ -165,11 +165,14 @@ tbody tr:nth-child(even) {
   font-size: 14px;
   margin: 0 10px;
 }
-input {
+.header-container input {
   background-color: #b7dbf8;
-  margin-top: 12px;
+  padding-top: 15px;
+  margin-top: 15px;
 }
-
+.header-container select{
+  margin-top: 20px;
+}
 
 
 .action-buttons btn-edit button{
@@ -183,5 +186,11 @@ input {
   background-color: #0056b3;
 }
 .Table-row th{
-  background-color: #000000;
+  background-color: #ffffff;
+  color: #000000;
+  
+}
+
+.Table-row table{
+  size-adjust: flex;
 }
