@@ -9,11 +9,11 @@ import {
 const router = Router();
 
 router.get("/employee-report/:department", getEmployeeReport);
-router.get("/leave-report", getLeaveReport);
+router.get("/leave-report/:department", getLeaveReport);
 router.get(
-  "/report/leavebalance-report/:department/:leaveType",
+  "/leavebalance-report/:department/:leaveType",
   getLeaveBalanceReport
 );
-router.get("/report/custom-fields-report", getCustomFieldReport);
+router.get("/custom-fields-report", getCustomFieldReport);
 
 export default router;
