@@ -42,7 +42,7 @@ const ShowEmplyees=({initialEmployees})=>{
       const userConfirm = window.confirm('Are you sure you want to edit this employee?');
       if(userConfirm){
         
-        const employee = employees.find(emp => emp.id === id);
+        
         
         //alert(`Editing details of ${employee.name}`);
         const id_to_edit=id;

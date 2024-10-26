@@ -41,6 +41,8 @@ export const getAllEmployees = (req, res) => {
       
           const employee = {
             id: employeeResults[0][0].id,
+            first_name: employeeResults[0][0].first_name,
+            last_name: employeeResults[0][0].last_name,
             name: employeeResults[0][0].name,
             NIC: employeeResults[0][0].NIC,
             username: employeeResults[0][0].username,

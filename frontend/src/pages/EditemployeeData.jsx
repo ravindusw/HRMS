@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './EditemployeeData.css'; // Import the CSS file
 import axiosInstance from '../utils/AxiosInstance';
+import { useNavigate } from 'react-router-dom';
 //import {handleDeleteDependent,handleDeleteEmergencyContact} from '../components/EditemployeeDataComponents';
 
 const EditemployeeData = () => {
   const { id_to_edit } = useParams();
   
   const [employee, setEmployee] = useState(null);
+  const navigate = useNavigate();
 
   
 
@@ -21,7 +23,10 @@ const EditemployeeData = () => {
     job_title: false,
     department: false,
     pay_grade: false,
-    employment_status: false
+    birthday: false,
+    NIC: false,
+    first_name: false,
+    last_name: false
   });
   
 
@@ -65,6 +70,11 @@ const EditemployeeData = () => {
     }));
   };
 
+  const handleViewButtonClick = (id) => {
+    const id_to_view=id;
+    navigate(`/Employee_Information_Management/HrView/${id_to_view}`);
+  };
+
 
 
   if (!employee) {
@@ -72,14 +82,7 @@ const EditemployeeData = () => {
   }
 
 
-  const formatDate = (date) => {
-    if (!date) return '';
-    const d = new Date(date);
-    const month = `${d.getMonth() + 1}`.padStart(2, '0');
-    const day = `${d.getDate()}`.padStart(2, '0');
-    const year = d.getFullYear();
-    return `${year}-${month}-${day}`;
-  };
+
 
   const handlePhoneChange = (number, value) => {
     const newPhoneNumbers = [...employee.phone_numbers];
@@ -149,6 +152,10 @@ const EditemployeeData = () => {
     //console.log(employee);
 
     const employeeChanges = {
+      first_name: employee.first_name,
+      last_name: employee.last_name,
+      NIC: employee.NIC,
+      birthday: employee.birthday,
       dept_id: employee.dept_id,
       job_title_id: employee.job_title_id,
       pay_grade_id: employee.pay_grade_id,
@@ -161,18 +168,22 @@ const EditemployeeData = () => {
 
       
     };
-    console.log(employeeChanges);
+    //console.log(employeeChanges);
+    
     try {
       // Update employee data
+      
       await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employeeChanges);
 
       
-      alert("Employee data updated successfully");
+      
       console.log("Employee data updated successfully");
     } catch (error) {
       console.error("There was an error updating the employee data!", error);
       setError("There was an error updating the employee data!");
     }
+    alert("Employee data updated successfully");
+      
   };
 
 
@@ -223,6 +234,8 @@ const EditemployeeData = () => {
     }));
   };
 
+
+
   const handlePayGradeChange = (e) => {
     const selectedPayGrade = payGrades.find(grade => grade.pay_grade_id === e.target.value);
     setEmployee((prevEmployee) => ({
@@ -239,6 +252,32 @@ const EditemployeeData = () => {
     }));
   }
 
+  const handleBirthdayChange = (e) => {
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      birthday: e.target.value
+    }));
+  }
+
+  const handleNICChange = (e) => {
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      NIC: e.target.value
+    }));
+  }
+  const handleFirstNameChange = (e) => {
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      first_name: e.target.value
+    }));
+  }
+
+  const handleLastNameChange = (e) => {
+    setEmployee((prevEmployee) => ({
+      ...prevEmployee,
+      last_name: e.target.value
+    }));
+  }
 
   
   
@@ -246,8 +285,78 @@ const EditemployeeData = () => {
 
   return (
     <div className="edit-employee-container">
-      <h1>Edit {employee.name}' Data</h1>
+      <button className="btn-view" onClick={() => handleViewButtonClick(employee.id)}>View</button>
+      <h1>Edit {employee.name}'s Data</h1>
+      
       <form onSubmit={handleSubmit}>
+
+
+      <label>
+          First Name:
+          {editableFields.first_name ? (
+            <input
+              type="text"
+              name="first_name"
+              value={employee.first_name}
+              onChange={handleFirstNameChange}
+            />
+          ) : (
+            <span>{employee.first_name}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('first_name')}>
+            {editableFields.first_name ? 'Save First Name' : 'Change First Name'}
+          </button>
+        </label>
+
+        <label>
+          Last Name:
+          {editableFields.last_name ? (
+            <input
+              type="text"
+              name="last_name"
+              value={employee.last_name}
+              onChange={handleLastNameChange}
+            />
+          ) : (
+            <span>{employee.last_name}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('last_name')}>
+            {editableFields.last_name ? 'Save Last Name' : 'Change Last Name'}
+          </button>
+        </label>
+
+      <label>
+          NIC:
+          {editableFields.NIC ? (
+            <input
+              type="text"
+              name="NIC"
+              value={employee.NIC}
+              onChange={handleNICChange}
+            />
+          ) : (
+            <span>{employee.NIC}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('NIC')}>
+            {editableFields.NIC ? 'Save NIC' : 'Change NIC'}
+          </button>
+        </label>
+      <label>
+          Birthday:
+          {editableFields.birthday ? (
+            <input
+              type="date"
+              name="birthday"
+              value={employee.birthday}
+              onChange={handleBirthdayChange}
+            />
+          ) : (
+            <span>{employee.birthday}</span>
+          )}
+          <button type="button" className="change-button" onClick={() => toggleEditable('birthday')}>
+            {editableFields.birthday ? 'Save Birthday' : 'Change Birthday'}
+          </button>
+        </label>
         <label>
           Address:
           {editableFields.address ? (
