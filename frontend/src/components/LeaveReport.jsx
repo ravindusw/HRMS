@@ -41,15 +41,19 @@ const LeaveReport = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.text(`Department: ${department} Leave Report`, 10, 10);
-    employees.forEach((leave, index) => {
-      doc.text(
-        `${index + 1}. ${leave.employee_name} - ${leave.job_title} - ${
-          leave.leave_start_date
-        } -  ${leave.leave_type} - ${leave.leave_status}`,
-        10,
-        20 + index * 10
-      );
+    leaves.forEach((leave, index) => {
+      doc.text(`${index + 1}.`, 10, 20 + index * 70);
+      doc.text(`Name: ${leave.employee_name}`, 10, 30 + index * 70);
+      doc.text(`Employee Position: ${leave.job_title}`, 10, 40 + index * 70);
+      doc.text(`Leave Start: ${leave.leave_start_date}`, 10, 50 + index * 70);
+      doc.text(`Leave Type: ${leave.leave_type}`, 10, 60 + index * 70);
+      doc.text(`Leave Status: ${leave.leave_status}`, 10, 70 + index * 70);
+      if (index > 0 && index % 3 === 0) {
+        doc.addPage();
+      }
+      // doc.text("\n", 10, 30 + index * 10);
     });
+
     doc.save(`${department}-leave-report.pdf`);
   };
 
