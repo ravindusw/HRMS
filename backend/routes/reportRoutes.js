@@ -3,15 +3,17 @@ import {
   getEmployeeReport,
   getLeaveReport,
   getLeaveBalanceReport,
+  getCustomFieldReport,
 } from "../controllers/reportController.js";
 
 const router = Router();
 
 router.get("/employee-report/:department", getEmployeeReport);
-router.get("/leave-report", getLeaveReport);
+router.get("/leave-report/:department", getLeaveReport);
 router.get(
-  "/report/LeaveBalanceReport/:department/:leaveType",
+  "/leavebalance-report/:department/:leaveType",
   getLeaveBalanceReport
 );
+router.get("/custom-fields-report", getCustomFieldReport);
 
 export default router;

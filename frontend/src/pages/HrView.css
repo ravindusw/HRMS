@@ -78,3 +78,14 @@
     font-size: 0.95rem;
   }
 }
+
+.profile-name button{
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  
+}
+.profile-name button:hover{
+  background-color: #0056b3;
+}

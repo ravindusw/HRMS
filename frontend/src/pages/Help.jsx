@@ -14,11 +14,7 @@ const Help = () => {
   });
 
   const [EmployeeFAQs] = useState([
-    {
-      question: "Why can't I log in?",
-      answer:
-        "Please ensure that your user id and password are entered correctly. If you forgot the password, please select the option of forgot password on the Digital HRMS login page.",
-    },
+    
     {
       question: "What to do if I have forgotten my password?",
       answer:

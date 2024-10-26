@@ -20,6 +20,7 @@ import EmployeeReport from "./components/EmployeeReport.jsx";
 
 import LeaveBalanceReport from "./components/LeaveBalanceReport.jsx";
 import LeaveReport from "./components/LeaveReport.jsx";
+import CustomFieldReport from "./components/CustomFieldReport.jsx";
 
 import LoginHelp from "./pages/LoginHelp.jsx";
 
@@ -42,31 +43,27 @@ function App() {
 
         <Route path="/leavebalance-report" element={<LeaveBalanceReport />} />
         <Route path="/leave-report" element={<LeaveReport />} />
+        <Route path="/custom-fields-report" element={<CustomFieldReport />} />
 
         <Route path="/loginHelp" element={<LoginHelp />} />
 
-        <Route path="/Employee_Information_Management"
-
+        <Route
+          path="/Employee_Information_Management"
           element={
-
             <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
               <EIM />
             </ProtectedRoute>
-
           }
-
         />
 
-        
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
-            <HrView />
-            /*
+            
             <ProtectedRoute allowedRoles={["admin","HR Manager"]}>
               <HrView />
             </ProtectedRoute>
-            */
+            
           }
         />
         <Route

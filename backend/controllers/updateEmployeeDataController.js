@@ -3,17 +3,26 @@ import { db } from '../config/db.js';
 
 export const updateEmployeeData = (req, res) => {
   const employeeId = req.params.id;
-  const { dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state,phone_numbers,dependents,emergency_contacts } = req.body;
-  console.log( req.body);
+  const {first_name,last_name,NIC, birthday,dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state,phone_numbers,dependents,emergency_contacts } = req.body;
+  //console.log( req.body);
   
   
-  const query1 = `
-    UPDATE employee
-    SET dept_id = ?, job_title_id = ?, pay_grade_id = ?,employment_state_id=?, address = ?, marital_state = ?
-    WHERE employee_id = ?
-  `;
+  const query1 = `CALL UpdateEmployee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  const values = [dept_id, job_title_id, pay_grade_id,employment_state_id, address, marital_state, employeeId];
+  const values = [
+    employeeId,
+    first_name,
+    last_name,
+    NIC,
+    birthday,
+    dept_id,
+    job_title_id,
+    pay_grade_id,
+    employment_state_id,
+    address,
+    marital_state
+  ];
+
 
   db.query(query1, values, (err, results) => {
     if (err) {
@@ -22,9 +31,9 @@ export const updateEmployeeData = (req, res) => {
     }
     res.status(200).json({ message: 'Employee updated successfully!' });
   });
-  const deletePhoneNumbersQuery = 'DELETE FROM contact_detail WHERE employee_id = ?';
-  const deleteDependentsQuery = 'DELETE FROM dependent WHERE employee_id = ?';
-  const deleteEmergencyContactsQuery = 'DELETE FROM emergency_contact WHERE employee_id = ?';
+  const deletePhoneNumbersQuery = `CALL DeletePhoneNumbers(?)`;
+  const deleteDependentsQuery =  `CALL DeleteDependents(?)`;
+  const deleteEmergencyContactsQuery = `CALL DeleteEmergencyContacts(?)`;
 
     db.query(deletePhoneNumbersQuery, [employeeId], (err) => {
       if (err) {
@@ -48,20 +57,20 @@ export const updateEmployeeData = (req, res) => {
         });
 
         
-        const insertPhoneNumbersQuery = 'INSERT INTO contact_detail (employee_id, phone_number) VALUES (?)';
-        const insertDependentsQuery = 'INSERT INTO dependent (employee_id, name, relationship, date_of_birth, gender, phone_number) VALUES (?)';
-        const insertEmergencyContactsQuery = 'INSERT INTO emergency_contact (employee_id, name, phone, relationship) VALUES(?)';
+        const insertPhoneNumbersQuery = `CALL InsertPhoneNumber(?, ?)`;
+        const insertDependentsQuery = `CALL InsertDependent(?, ?, ?, ?, ?, ?)`;
+        const insertEmergencyContactsQuery = `CALL InsertEmergencyContact(?, ?, ?, ?)`;
         
         
-        const phoneNumbersValues = phone_numbers.map(phone => [employeeId, phone]);
+        
 
         
-        phoneNumbersValues.forEach(phones => {
-          
+        phone_numbers.forEach(phones => {
+          const phoneNumberValues = [employeeId, phones];
           if(phones[1] != ""){
             console.log(phones);
             
-            db.query(insertPhoneNumbersQuery, [phones], (err) => {
+            db.query(insertPhoneNumbersQuery, phoneNumberValues, (err) => {
               if (err) {
                 console.error('Error inserting phone numbers:', err);
                 return res.status(500).send('Server error');
@@ -71,14 +80,24 @@ export const updateEmployeeData = (req, res) => {
           
         }});
         
-        const dependentsValues = dependents.map(dependent => [employeeId, dependent.name, dependent.relationship, dependent.date_of_birth, dependent.gender, dependent.phone_number]);
+        
 
-        dependentsValues.forEach(dependent => {
-          console.log(dependent);
-          if(dependent[1] !== ''){
-            console.log('ok');
+        dependents.forEach(dependent => {
+
+          const dependentValues = [
+            employeeId,
+            dependent.name,
+            dependent.relationship,
+            dependent.date_of_birth,
+            dependent.gender,
+            dependent.phone_number
+          ];
+
+          //console.log(dependent);
+          if(dependentValues.name !== ''){
+            //console.log('ok');
             
-            db.query(insertDependentsQuery, [dependent], (err) => {
+            db.query(insertDependentsQuery, dependentValues, (err) => {
               if (err) {
                 console.error('Error inserting phone dependents:', err);
                 return res.status(500).send('Server error');
@@ -94,14 +113,20 @@ export const updateEmployeeData = (req, res) => {
 
 
         
-        const emergencyContactsValues = emergency_contacts.map(contact => [employeeId, contact.name,contact.phone, contact.relationship]);
+        
 
-        emergencyContactsValues.forEach(contact => {
+        emergency_contacts.forEach(contact => {
+          const emergencyContactValues = [
+            employeeId,
+            contact.name,
+            contact.phone,
+            contact.relationship
+          ];
 
-          if(contact[1] !== '' && contact[2] !== '' && contact[3] !== ''){
+          if(emergencyContactValues.name !== '' && emergencyContactValues.phone !== '' ){
             console.log(contact);
             
-            db.query(insertEmergencyContactsQuery, [contact], (err) => {
+            db.query(insertEmergencyContactsQuery,emergencyContactValues, (err) => {
               if (err) {
                 console.error('Error inserting emergency contacts:', err);
                 return res.status(500).send('Server error');
@@ -112,6 +137,7 @@ export const updateEmployeeData = (req, res) => {
           }
 
         });
+        
          
       
     

@@ -30,23 +30,69 @@ export const getLeaveBalanceReport = (req, res) => {
 
   const query = `CALL GetLeaveBalance(?, ?)`;
 
-  db.query(query, [department, leaveType], (error, results) => {
-    if (error) {
-      console.error("Error fetching leave balance:", error);
-      return res.status(500).json({ error: "Internal server error" });
+  db.query(query, [department, leaveType], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Error generating leave balance report" });
     }
-    res.json(results[0]); // Return the result of the stored procedure
+
+    try {
+      if (results.length === 0) {
+        return res.status(404).json({ message: "No leave balance found" });
+      }
+
+      res.status(200).json(results[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error generating leave balance report" });
+    }
   });
 };
 
 export const getLeaveReport = (req, res) => {
-  const query = "CALL GetLeaveReport()";
+  const department = req.params.department;
+  const query = "CALL GetLeaveReport(?)";
 
-  db.query(query, [department], (error, results) => {
-    if (error) {
-      console.error("Error fetching leave report:", error);
-      return res.status(500).json({ error: "Internal server error" });
+  db.query(query, [department], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error fetching leave report" });
     }
-    res.json(results[0]); // Return the result of the stored procedure
+    try {
+      if (results.length === 0) {
+        return res.status(404).json({ message: "No leave found" });
+      }
+
+      res.status(200).json(results[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error generating leave report" });
+    }
+  });
+};
+
+export const getCustomFieldReport = (req, res) => {
+  const query = "CALL GetCustomFieldReport()";
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Error generating custom field report" });
+    }
+
+    try {
+      if (results.length === 0) {
+        return res.status(404).json({ message: "No custom fields found" });
+      }
+
+      res.status(200).json(results[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error generating custom field report" });
+    }
   });
 };
