@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import EmployeePic from "../assets/Employee.png";
 import { useNavigate } from 'react-router-dom';
-import "./HrView.css";
+//import "./HrView.css";
 
 
 const calculateAge = (dateOfBirth) => {
@@ -81,7 +81,7 @@ const HrView = () => {
           </h1>
           <h5>{employee.id}</h5>
           <p className="job-title">{employee.job_title}</p>
-          <button className="btn-edit" onClick={() => handleEdit(employee.id)}>Edit</button>
+          <button className="btn btn-warning " onClick={() => handleEdit(employee.id)}>Edit</button>
         </Col>
       </Row>
 

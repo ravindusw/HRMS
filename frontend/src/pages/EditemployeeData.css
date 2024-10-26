@@ -14,6 +14,8 @@
 .edit-employee-container h1 {
   color: #000000;
   text-align: center;
+  font-size: 32px;
+  margin: 20px;
   
 }
 
@@ -27,6 +29,7 @@
   display: flex;
   flex-direction: column;
   font-weight: bold;
+  
 }
 .edit-employee-container input{
   background-color: rgb(255, 255, 255);
@@ -91,4 +94,9 @@ input[type="date"] {
 }
 .btn-edit:hover{
   background-color: #0056b3;
+}
+
+.form-label{
+  font-weight: bold;
+  font-size: 16px;
 }

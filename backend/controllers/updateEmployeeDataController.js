@@ -68,7 +68,7 @@ export const updateEmployeeData = (req, res) => {
         phone_numbers.forEach(phones => {
           const phoneNumberValues = [employeeId, phones];
           if(phones[1] != ""){
-            console.log(phones);
+            //console.log(phones);
             
             db.query(insertPhoneNumbersQuery, phoneNumberValues, (err) => {
               if (err) {
@@ -92,10 +92,14 @@ export const updateEmployeeData = (req, res) => {
             dependent.gender,
             dependent.phone_number
           ];
+          
 
           //console.log(dependent);
-          if(dependentValues.name !== ''){
-            //console.log('ok');
+          if(dependentValues[1] !== '' && dependentValues[2] !== '' && dependentValues[3] !== '' && dependentValues[4] !== '' ){
+            
+            //console.log(dependentValues);
+            //console.log('valid');
+            
             
             db.query(insertDependentsQuery, dependentValues, (err) => {
               if (err) {
@@ -103,6 +107,7 @@ export const updateEmployeeData = (req, res) => {
                 return res.status(500).send('Server error');
               }
             });
+            
             
             
           }
@@ -123,7 +128,7 @@ export const updateEmployeeData = (req, res) => {
             contact.relationship
           ];
 
-          if(emergencyContactValues.name !== '' && emergencyContactValues.phone !== '' ){
+          if(emergencyContactValues[1] !== '' && emergencyContactValues[2] !== '' ){
             //console.log(contact);
             
             db.query(insertEmergencyContactsQuery,emergencyContactValues, (err) => {

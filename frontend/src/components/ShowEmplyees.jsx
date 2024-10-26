@@ -85,7 +85,7 @@ const ShowEmplyees=({initialEmployees})=>{
         
         <div className="mb-3 d-flex align-items-center">
         
-        <label htmlFor="rowsPerPage" className="form-label">Rows per page:  </label>
+        <label htmlFor="rowsPerPage" className="form-label">Rows per page :  </label>
         <select id="rowsPerPage" className="form-select" value={rowsPerPage} onChange={handleRowsPerPageChange}>
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -109,7 +109,7 @@ const ShowEmplyees=({initialEmployees})=>{
           <tbody>
             {currentEmployees.map(employee => (
               <tr key={employee.id}>
-                <td>{employee.id}</td>
+                <td className="id-columnid">{employee.id}</td>
                 <td>{employee.name}</td>
                 <td>{employee.job}</td>
                 <td>{employee.department}</td>
