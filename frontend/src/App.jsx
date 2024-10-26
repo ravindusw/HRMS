@@ -23,6 +23,7 @@ import LeaveReport from "./components/LeaveReport.jsx";
 import CustomFieldReport from "./components/CustomFieldReport.jsx";
 
 import LoginHelp from "./pages/LoginHelp.jsx";
+import OrganizationInfoManagement from "./pages/OrganizationInfoManagement.jsx";
 
 import "./App.css";
 
@@ -48,9 +49,18 @@ function App() {
         <Route path="/loginHelp" element={<LoginHelp />} />
 
         <Route
+          path="/organization-information-management"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <OrganizationInfoManagement />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/Employee_Information_Management"
           element={
-            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
               <EIM />
             </ProtectedRoute>
           }
@@ -59,7 +69,7 @@ function App() {
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
-            <ProtectedRoute allowedRoles={["admin", "HR Manager"]}>
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
               <HrView />
             </ProtectedRoute>
           }

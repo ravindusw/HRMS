@@ -80,6 +80,13 @@ const HRMSNavBar = () => {
                       </NavDropdown.Item>
                     )}
 
+                    {/* Only Admin can access organization info management */}
+                    {role === "Admin" && (
+                      <NavDropdown.Item as={Link} to="/organization-information-management">
+                        Organization Information Management
+                      </NavDropdown.Item>
+                    )}
+
                     {/* Only HR manager can access Employee Information Management */}
                     {role === "HR Manager" && (
                       <NavDropdown.Item
