@@ -77,9 +77,9 @@ const ShowEmplyees=({initialEmployees})=>{
     return(
       <div>
         <div>{employees.length} of results</div>
-        <table>
+        <table className='Table-row'>
         <thead>
-          <tr>
+          <tr >
             <th>Employee ID</th>
             <th>Name</th>
             <th>Job Title</th>
