@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Accordion } from "react-bootstrap";
+import axiosInstance from "../utils/AxiosInstance";
 import "./Help.css";
 
-const AfterSubmit = (e) => {
-  e.preventDefault();
-  alert("Thank you for contacting us! We will get back to you soon.");
-};
-
 const Help = () => {
+  const [message, setMessage] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    description: "",
+    type: "login",
+    reply_status: false,
+  });
+
   const [EmployeeFAQs] = useState([
     
     {
@@ -26,6 +31,25 @@ const Help = () => {
         "If your attendance record is incorrect, contact the HR or attendance management team.",
     },
   ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      axiosInstance.post("/help", message);
+      alert("Thank you for contacting us! We will get back to you soon.");
+    } catch (error) {
+      console.error("Error in sending message:", error);
+      alert("There was an error sending your message. Please try again later.");
+    }
+    setMessage({
+      name: "",
+      email: "",
+      subject: "",
+      description: "",
+      type: "In Site",
+      reply_status: false,
+    });
+  };
 
   return (
     <Container className="support-container mt-5">
@@ -53,13 +77,17 @@ const Help = () => {
         <Col md={6}>
           <div className="contact_us">
             <h2 className="mb-4">Contact Support</h2>
-            <Form onSubmit={AfterSubmit}>
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter your name"
                   required
+                  value={message.name}
+                  onChange={(e) =>
+                    setMessage({ ...message, name: e.target.value })
+                  }
                 />
               </Form.Group>
 
@@ -69,12 +97,24 @@ const Help = () => {
                   type="email"
                   placeholder="Enter your email"
                   required
+                  value={message.email}
+                  onChange={(e) =>
+                    setMessage({ ...message, email: e.target.value })
+                  }
                 />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formSubject">
                 <Form.Label>Subject</Form.Label>
-                <Form.Control type="text" placeholder="Subject" required />
+                <Form.Control
+                  type="text"
+                  placeholder="Subject"
+                  required
+                  value={message.subject}
+                  onChange={(e) =>
+                    setMessage({ ...message, subject: e.target.value })
+                  }
+                />
               </Form.Group>
 
               <Form.Group className="mb-4" controlId="formDescription">
@@ -84,10 +124,18 @@ const Help = () => {
                   rows={4}
                   placeholder="Describe your issue"
                   required
+                  value={message.description}
+                  onChange={(e) =>
+                    setMessage({ ...message, description: e.target.value })
+                  }
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" block>
+              <Button
+                variant="primary"
+                type="submit"
+                className="contact-submit-button w-100"
+              >
                 Submit
               </Button>
             </Form>

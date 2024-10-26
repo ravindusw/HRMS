@@ -1,91 +1,125 @@
-/* AddEmployeeForm.css */
-
-.addEmployee-container {
-  font-family: "Arial", sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  margin-top: 168vh;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
 }
 
-.employee-form {
-  background-color: #fff;
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Start slightly to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* End at original position */
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px); /* Start slightly lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+.addEmployee-container {
+  margin-top: 11vh;
+  margin-bottom: 1vh;
+  width: 65vw;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  width: 50vw;
+  border: 1px solid lightblue; /* Light grey border */
+  border-radius: 12px;
+  background-color: white; /* Subtle off-white background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-in; /* Adjust duration and easing as needed */
+}
+
+.addEmployee-container:hover {
+  /* transform: translateY(-5px); */
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12); /* Slightly more prominent shadow */
 }
 
 .employee-form-title {
   text-align: center;
-  font-size: 24px;
-  color: #333;
   margin-bottom: 20px;
+  color: #1f2937; /* Dark grey */
+  font-size: 26px;
+  font-weight: 700;
 }
 
-.form-group {
+.employee-form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
 }
 
-.form-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
+.employee-form h1 {
+  font-size: 24px;
+  font-weight: 700;
+  background-color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeInUp 0.5s ease-in; /* Fade in up animation */
 }
 
-.form-input {
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.form-input:focus {
-  border-color: #66afe9; /* Light Blue */
-  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5); /* Soft blue glow */
-  outline: none; /* Remove default browser outline */
-}
-
-.submit-btn {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+.employee-form .form-group {
   margin-top: 20px;
-  width: 100%;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  margin-bottom: 20px;
+  animation: slideIn 0.5s ease-in; /* Slide in animation */
 }
 
-.submit-btn:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  transform: translate3d(2px);
+.employee-form label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #374151; /* Medium-dark grey */
 }
 
-.submit-btn.green {
-  background-color: #28a745;
-  color: #fff;
+.employee-form select,
+.employee-form input {
+  border: 1px solid #cbd5e0; /* Light border */
+  border-radius: 6px;
+  padding: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff; /* White for high contrast */
 }
 
-.submit-btn.red {
-  background-color: #dc3545;
-  color: #fff;
+.employee-form select:focus,
+.employee-form input:focus {
+  border-color: #3b82f6; /* Bright blue for focus */
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); /* Matching shadow */
+  outline: none;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .employee-form {
-    width: 100%;
+  .addEmployee-container {
     padding: 15px;
   }
+
+  .employee-form-title {
+    font-size: 22px;
+  }
+}
+
+/* Additional adjustments */
+.employee-form label {
+  color: #4b5563; /* Slightly darker grey for labels */
+}
+
+.employee-form select,
+.employee-form input {
+  background-color: #f9fafb; /* Light grey background */
+}
+
+.employee-form-title {
+  background-color: #f4f6f8; /* Subtle off-white background */
 }

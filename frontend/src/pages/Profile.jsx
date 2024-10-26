@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <Container className="profile-page">
-      <Card className="profile-card shadow-sm">
+      <Card className="profile-card shadow-sm" border="info" text="dark">
         <Row className="profile-header">
           <Col md={4} className="profile-photo-container">
             <Image
@@ -85,6 +85,21 @@ const Profile = () => {
               </div>
               <div className="profile-field">
                 <span>Work Schedule:</span> {profileData?.work_schedule}
+              </div>
+            </Col>
+          </Row>
+
+          {/* Display contact numbers */}
+          <Row className="profile-section">
+            <Col md={12}>
+              <h5>Contact Numbers</h5>
+              <div className="profile-field">
+                <span>Primary:</span>{" "}
+                {profileData?.contact_numbers?.primary || "N/A"}
+              </div>
+              <div className="profile-field">
+                <span>Secondary:</span>{" "}
+                {profileData?.contact_numbers?.secondary || "N/A"}
               </div>
             </Col>
           </Row>

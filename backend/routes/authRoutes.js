@@ -36,7 +36,7 @@ router.get(
 router.post(
   "/addEmployee",
   verifyToken,
-  authorizeRoles("HR Manager"),
+  authorizeRoles("Admin", "HR Manager"),
   addEmployee
 );
 

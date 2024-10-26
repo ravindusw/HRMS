@@ -3,7 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
-import reportRoutes from "./routes/ReportRoutes.js";
+import reportRoutes from "./routes/reportRoutes.js";
 
 import supportRoutes from "./routes/SupportRoutes.js";
 
@@ -12,6 +12,7 @@ import { verifyToken } from "./middleWare/authMiddleware.js";
 
 import HrRouter from "./routes/HrRouter.js";
 import leaveRoutes from "./routes/leaveRoutes.js";
+import organizationInfoRoutes from "./routes/organizationInfoRoutes.js";
 
 
 
@@ -40,6 +41,7 @@ app.use("/api/help", supportRoutes);
 app.use("/api/report", reportRoutes);
 
 app.use("/api/leave", leaveRoutes);
+app.use("/api/organization-info", organizationInfoRoutes);
 
 // Default route
 app.get("/", (req, res) => {
