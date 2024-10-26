@@ -54,7 +54,7 @@ const LeaveBalanceReport = () => {
     );
     leaveBalances.forEach((emp, index) => {
       doc.text(
-        `${index + 1}. ${emp.name} - ${emp.leaveBalance} days`,
+        `${index + 1}. ${emp.name}-${emp.employee_id} - ${emp.leaveBalance} days`,
         10,
         20 + index * 10
       );

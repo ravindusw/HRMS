@@ -79,3 +79,38 @@ export const approveleaverequest = (req, res) => {
     res.status(200).json({ message: "Leave request approved successfully" ,data: results});
   });
 }
+
+export const getLeaveTypes = (req, res) => {
+  const query = `CALL get_leave_types();`;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching leave types:", err);
+      return res.status(500).send("Server error");
+    }
+
+    res.status(200).json(results[0]);
+  });
+};
+
+export const applyLeave = (req, res) => {
+  const { leave_type_id, start_date, end_date, reason } = req.body;
+  const { e_id } = req.user;
+  const applied_date = new Date().toISOString().split('T')[0];
+  console.log(applied_date);
+
+  if (!leave_type_id || !start_date || !end_date || !reason) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const query = `CALL insert_leave_record(?, ?, ?, ?, ?);`;
+
+  db.query(query, [e_id, leave_type_id, start_date, end_date, applied_date], (err, results) => {
+    if (err) {
+      console.error("Error applying for leave:", err);
+      return res.status(500).send("Server error");
+    }
+    console.log(results);
+    res.status(200).json({ message: "Leave application submitted successfully"});
+  });
+};
