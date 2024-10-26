@@ -9,25 +9,21 @@ const CustomFieldReport = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCustomFieldDetails = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await axios.get(
-          `http://localhost:8800/api/report/custom-fields-report`
-        );
-        setAttributeData(response.data);
-      } catch (error) {
-        setError("Failed to fetch custom attribute details");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCustomFieldDetails();
-  }, []);
+  const fetchCustomFieldDetails = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(
+        `http://localhost:8800/api/report/custom-fields-report`
+      );
+      setAttributeData(response.data);
+    } catch (error) {
+      setError("Failed to fetch custom attribute details");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Generate PDF report for custom attributes
   const generatePDF = () => {
@@ -50,7 +46,7 @@ const CustomFieldReport = () => {
       <h1>Jupiter Apparels HRMS - Custom Field Report</h1>
       <div>
         <h2>Custom Field Report</h2>
-        <button onClick={fetchCustomFieldDetail}>Fetch Custom Field</button>
+        <button onClick={fetchCustomFieldDetails}>Fetch Custom Field</button>
       </div>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
