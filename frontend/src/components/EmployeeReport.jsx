@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
+import "./ReportSubpage.css";
 
 const EmployeeReport = () => {
   const [department, setDepartment] = useState("");
@@ -53,7 +54,7 @@ const EmployeeReport = () => {
   };
 
   return (
-    <div className="container">
+    <div className="subrep-container">
       <h1>Jupiter Apparels HRMS - Departmental Employee Report</h1>
       <div>
         <label>Select Department:</label>
@@ -80,17 +81,27 @@ const EmployeeReport = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>First_Name</th>
+                <th>Last_Name</th>
+                <th>Date_of_Birth</th>
+                <th>Address</th>
                 <th>Position</th>
                 <th>Email</th>
+                <th>Pay_Grade</th>
               </tr>
             </thead>
             <tbody>
               {employees.map((emp, index) => (
                 <tr key={index}>
-                  <td>{emp.name}</td>
-                  <td>{emp.position}</td>
+                  <td>{emp.employee_id}</td>
+                  <td>{emp.first_name}</td>
+                  <td>{emp.last_name}</td>
+                  <td>{emp.date_of_birth}</td>
+                  <td>{emp.address}</td>
+                  <td>{emp.job_title}</td>
                   <td>{emp.email}</td>
+                  <td>{emp.pay_grade}</td>
                 </tr>
               ))}
             </tbody>
@@ -101,9 +112,14 @@ const EmployeeReport = () => {
           <CSVLink
             data={employees}
             headers={[
-              { label: "Name", key: "name" },
-              { label: "Position", key: "position" },
+              { label: "ID", key: "employee_id" },
+              { label: "First_Name", key: "first_name" },
+              { label: "Last_Name", key: "last_name" },
+              { label: "Date_of_Birth", key: "date_of_birth" },
+              { label: "Address", key: "address" },
+              { label: "Position", key: "job_title" },
               { label: "Email", key: "email" },
+              { label: "Pay_Grade", key: "pay_grade" },
             ]}
             filename={`${department}-employees-report.csv`}
           >

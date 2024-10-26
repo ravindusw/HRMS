@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
+import "./ReportSubpage.css";
 
 const LeaveBalanceReport = () => {
   const [department, setDepartment] = useState("");
@@ -32,7 +33,7 @@ const LeaveBalanceReport = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/report/LeaveBalanceReport/${department}/${leaveType}`
+        `http://localhost:8800/api/report/leavebalance-report/${department}/${leaveType}`
       );
       setLeaveBalances(response.data);
     } catch (error) {
@@ -62,7 +63,7 @@ const LeaveBalanceReport = () => {
   };
 
   return (
-    <div className="container">
+    <div className="subrep-container">
       <h1>Jupiter Apparels HRMS - Leave Balance Report</h1>
       <div>
         <label>Select Department:</label>
@@ -106,14 +107,16 @@ const LeaveBalanceReport = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>First_Name</th>
                 <th>Leave Balance</th>
               </tr>
             </thead>
             <tbody>
               {leaveBalances.map((emp, index) => (
                 <tr key={index}>
-                  <td>{emp.name}</td>
+                  <td>{emp.employee_id}</td>
+                  <td>{emp.name} </td>
                   <td>{emp.leaveBalance} days</td>
                 </tr>
               ))}
