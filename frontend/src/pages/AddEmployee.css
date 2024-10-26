@@ -1,20 +1,60 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Start slightly to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* End at original position */
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px); /* Start slightly lower */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
 .addEmployee-container {
   margin-top: 11vh;
-  /* max-width: 800px; Set a maximum width for the form container */
+  margin-bottom: 1vh;
   width: 65vw;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f8f9fa; /* Light background for better contrast */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid lightblue; /* Light grey border */
+  border-radius: 12px;
+  background-color: white; /* Subtle off-white background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Softer shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-in; /* Adjust duration and easing as needed */
+}
+
+.addEmployee-container:hover {
+  /* transform: translateY(-5px); */
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12); /* Slightly more prominent shadow */
 }
 
 .employee-form-title {
   text-align: center;
   margin-bottom: 20px;
-  color: #343a40; /* Darker text color for better visibility */
-  font-size: 24px;
-  font-weight: 600;
+  color: #1f2937; /* Dark grey */
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .employee-form {
@@ -22,48 +62,64 @@
   flex-direction: column;
 }
 
+.employee-form h1 {
+  font-size: 24px;
+  font-weight: 700;
+  background-color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeInUp 0.5s ease-in; /* Fade in up animation */
+}
+
 .employee-form .form-group {
   margin-top: 20px;
-  margin-bottom: 20px; /* Increased space between form groups */
+  margin-bottom: 20px;
+  animation: slideIn 0.5s ease-in; /* Slide in animation */
 }
 
 .employee-form label {
-  margin-top: 20px;
-  font-weight: 500; /* Make label text slightly bolder */
-  margin-bottom: 10px; /* Increased space between label and input */
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #374151; /* Medium-dark grey */
 }
 
 .employee-form select,
 .employee-form input {
-  border: 1px solid #ced4da; /* Lighter border for inputs */
-  border-radius: 4px; /* Rounded corners for inputs */
-  padding: 10px; /* Space inside inputs */
-  transition: border-color 0.3s ease; /* Smooth transition on focus */
+  border: 1px solid #cbd5e0; /* Light border */
+  border-radius: 6px;
+  padding: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff; /* White for high contrast */
 }
 
 .employee-form select:focus,
 .employee-form input:focus {
-  border-color: #80bdff; /* Highlight border on focus */
-  outline: none; /* Remove default outline */
-}
-
-.submit-btn {
-  margin-top: 20px; /* Space above the submit button */
-  width: 100%; /* Full-width button */
-  font-weight: 500; /* Make button text slightly bolder */
-}
-
-.submit-btn:hover {
-  opacity: 0.9; /* Slight opacity change on hover for effect */
+  border-color: #3b82f6; /* Bright blue for focus */
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); /* Matching shadow */
+  outline: none;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .addEmployee-container {
-    padding: 10px; /* Reduce padding on smaller screens */
+    padding: 15px;
   }
 
   .employee-form-title {
-    font-size: 20px; /* Smaller title on small screens */
+    font-size: 22px;
   }
+}
+
+/* Additional adjustments */
+.employee-form label {
+  color: #4b5563; /* Slightly darker grey for labels */
+}
+
+.employee-form select,
+.employee-form input {
+  background-color: #f9fafb; /* Light grey background */
+}
+
+.employee-form-title {
+  background-color: #f4f6f8; /* Subtle off-white background */
 }

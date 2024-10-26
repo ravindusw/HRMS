@@ -22,7 +22,6 @@ export const login = (req, res) => {
     console.log(login_status);
 
     if (results.length === 0) {
-      logLoginAttempt(email, "Invalid credentials");
       return res.status(401).send("Invalid credentials");
     }
 
@@ -31,7 +30,7 @@ export const login = (req, res) => {
     bcrypt.compare(password, hashedPassword, (err, isMatch) => {
       if (err) {
         console.error("Error comparing passwords:", err);
-        return res.status(500).send("Server error");
+        return res.status(500).send("user not found!");
       }
 
       if (!isMatch) {
@@ -101,7 +100,8 @@ export const addEmployee = (req, res) => {
     Work_Schedule,
     Hired_Date,
     Termination_Date,
-    Contact_Number,
+    Contact_Number1,
+    Contact_Number2,
     Emergency_Contact_Name,
     Emergency_Contact_Number,
     Emergency_Contact_Relationship,
@@ -112,42 +112,44 @@ export const addEmployee = (req, res) => {
     Dependent_Contact_Number,
   } = req.body;
 
-  // Ensure that date fields are either valid or set to NULL
   const formatDate = (date) =>
     date ? new Date(date).toISOString().slice(0, 10) : null;
 
+  const makeNullIfEmpty = (value) => (value === "" ? null : value);
+
   const query = `
-    CALL add_Employee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    CALL add_Employee(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?);
   `;
 
   const values = [
-    NIC,
-    First_Name,
-    Last_Name,
-    Email,
-    formatDate(DOB),
-    Gender,
-    Address,
-    Marital_Status,
-    Department,
-    Supervisor_ID,
-    Job_Title,
-    Pay_Grade,
-    Employment_Type,
-    Work_Schedule,
-    formatDate(Hired_Date),
-    formatDate(Termination_Date),
-    Contact_Number,
-    Emergency_Contact_Name,
-    Emergency_Contact_Number,
-    Emergency_Contact_Relationship,
-    Dependant_Name,
-    Dependant_Relationship,
-    formatDate(Dependant_DOB),
-    Dependant_Gender,
-    Dependent_Contact_Number,
+    makeNullIfEmpty(NIC),
+    makeNullIfEmpty(First_Name),
+    makeNullIfEmpty(Last_Name),
+    makeNullIfEmpty(Email),
+    formatDate(makeNullIfEmpty(DOB)),
+    makeNullIfEmpty(Gender),
+    makeNullIfEmpty(Address),
+    makeNullIfEmpty(Marital_Status),
+    makeNullIfEmpty(Department),
+    makeNullIfEmpty(Supervisor_ID),
+    makeNullIfEmpty(Job_Title),
+    makeNullIfEmpty(Pay_Grade),
+    makeNullIfEmpty(Employment_Type),
+    makeNullIfEmpty(Work_Schedule),
+    formatDate(makeNullIfEmpty(Hired_Date)),
+    formatDate(makeNullIfEmpty(Termination_Date)),
+    makeNullIfEmpty(Contact_Number1),
+    makeNullIfEmpty(Contact_Number2),
+    makeNullIfEmpty(Emergency_Contact_Name),
+    makeNullIfEmpty(Emergency_Contact_Number),
+    makeNullIfEmpty(Emergency_Contact_Relationship),
+    makeNullIfEmpty(Dependant_Name),
+    makeNullIfEmpty(Dependant_Relationship),
+    formatDate(makeNullIfEmpty(Dependant_DOB)),
+    makeNullIfEmpty(Dependant_Gender),
+    makeNullIfEmpty(Dependent_Contact_Number),
   ];
-  console.log(values);
+  console.log(req.body);
 
   db.query(query, values, (error, results) => {
     if (error) {

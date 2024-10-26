@@ -9,6 +9,8 @@
   border-radius: 15px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .add-user-wrapper:hover {
@@ -45,6 +47,7 @@
   font-size: 15px;
   background-color: #fafafa;
   transition: border 0.2s, box-shadow 0.2s;
+  animation: slideIn 0.5s ease-in-out;
 }
 
 .input-unique:focus {
@@ -63,12 +66,11 @@
   font-size: 17px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  animation: bounce 1s ease-in-out infinite;
 }
 
 .submit-button-unique:hover {
-  /* background-color: #2c81ba; */
   transform: translateY(-2px);
-  transform: translate3d(2px);
 }
 
 .submit-button-unique:active {
@@ -81,6 +83,7 @@
   font-size: 14px;
   margin-top: 10px;
   text-align: center;
+  animation: shake 0.5s ease-in-out;
 }
 
 /* Red button styling for error */
@@ -93,4 +96,39 @@
 .submit-button-success {
   background-color: #28a745;
   color: white;
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
 }

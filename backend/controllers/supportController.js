@@ -2,7 +2,7 @@ import { db } from "../config/db.js";
 
 export const setSupport = (req, res) => {
   const { name, email, subject, description, type, reply_status } = req.body;
-  console.log(req.body);
+  console.log("adawd", req.body);
   const query = "CALL insert_inquiry(?,?,?,?,?,?)";
   db.query(
     query,

@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <Container className="profile-page">
-      <Card className="profile-card shadow-sm">
+      <Card className="profile-card shadow-sm" border="info" text="dark">
         <Row className="profile-header">
           <Col md={4} className="profile-photo-container">
             <Image

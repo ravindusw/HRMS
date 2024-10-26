@@ -1,13 +1,25 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .profile-page {
   margin-top: 2rem;
   padding: 40px 0;
 }
 
 .profile-card {
+  border: 2px solid #add8e6; /* Light blue border */
   max-width: 900px;
   margin: 0 auto;
   border-radius: 15px;
   background-color: #f8f9fa;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
 }
 
 .profile-header {
