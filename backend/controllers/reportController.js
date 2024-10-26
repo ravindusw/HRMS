@@ -53,7 +53,7 @@ export const getLeaveBalanceReport = (req, res) => {
 
 export const getLeaveReport = (req, res) => {
   const department = req.params.department;
-  const query = "CALL GetLeaveReport()";
+  const query = "CALL GetLeaveReport(?)";
 
   db.query(query, [department], (err, results) => {
     if (err) {
@@ -69,6 +69,30 @@ export const getLeaveReport = (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Error generating leave report" });
+    }
+  });
+};
+
+export const getCustomFieldReport = (req, res) => {
+  const query = "CALL GetCustomFieldReport()";
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: "Error generating custom field report" });
+    }
+
+    try {
+      if (results.length === 0) {
+        return res.status(404).json({ message: "No custom fields found" });
+      }
+
+      res.status(200).json(results[0]);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error generating custom field report" });
     }
   });
 };
