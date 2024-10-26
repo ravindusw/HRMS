@@ -45,7 +45,11 @@ const EmployeeReport = () => {
     doc.text(`Department: ${department} Employee Report`, 10, 10);
     employees.forEach((emp, index) => {
       doc.text(
-        `${index + 1}. ${emp.name} - ${emp.position}`,
+        `${index + 1}. ${emp.employee_id} - ${emp.first_name} - ${
+          emp.last_name
+        } - ${emp.date_of_birth} - ${emp.address} - ${emp.job_title} - ${
+          emp.email
+        } - ${emp.pay_grade}`,
         10,
         20 + index * 10
       );
