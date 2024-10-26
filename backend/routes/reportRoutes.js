@@ -14,6 +14,6 @@ router.get(
   "/leavebalance-report/:department/:leaveType",
   getLeaveBalanceReport
 );
-router.get("/report/custom-fields-report", getCustomFieldReport);
+//router.get("/report/custom-fields-report", getCustomFieldReport);
 
 export default router;
