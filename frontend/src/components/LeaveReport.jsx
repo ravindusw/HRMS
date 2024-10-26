@@ -43,7 +43,9 @@ const LeaveReport = () => {
     doc.text(`Department: ${department} Leave Report`, 10, 10);
     employees.forEach((leave, index) => {
       doc.text(
-        `${index + 1}. ${leave.employee_name} - ${leave.job_title}`,
+        `${index + 1}. ${leave.employee_name} - ${leave.job_title} - ${
+          leave.leave_start_date
+        } -  ${leave.leave_type} - ${leave.leave_status}`,
         10,
         20 + index * 10
       );
