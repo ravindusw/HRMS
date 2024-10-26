@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
+import '../pages/EIM.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // untill data get from backend
@@ -94,16 +94,16 @@ const ShowEmplyees=({initialEmployees})=>{
         </select>
         <div className="results-count">{employees.length} results</div>
         </div>
-        <table className="table table-striped table-bordered">
+        <table className="table table-striped table-bordered w-100">
           <thead className="thead-dark">
             <tr>
-              <th>Employee ID</th>
-              <th>Name</th>
-              <th>Job Title</th>
-              <th>Department</th>
-              <th>Gender</th>
-              <th>Email</th>
-              <th>Actions</th>
+              <th className="id-column1">Employee ID</th>
+              <th className="id-column2">Name</th>
+              <th className="id-column3">Job Title</th>
+              <th className="id-column4">Department</th>
+              <th className="id-column5">Gender</th>
+              <th className="id-column6">Email</th>
+              <th className="id-column7">Actions</th>
             </tr>
           </thead>
           <tbody>

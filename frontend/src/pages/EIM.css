@@ -199,3 +199,24 @@ tbody tr:nth-child(even) {
   margin: 10px;
 }
 
+.id-column1 {
+  width: 150px; /* Adjust the width as needed */
+}
+.id-column2 {
+  width: 200px; /* Adjust the width as needed */
+}
+.id-column3 {
+  width: 150px; /* Adjust the width as needed */
+}
+.id-column4 {
+  width: 100px; /* Adjust the width as needed */
+}
+.id-column5 {
+  width: 50px; /* Adjust the width as needed */
+}
+.id-column6 {
+  width: 120px; /* Adjust the width as needed */
+}
+.id-column7 {
+  width: 150px; /* Adjust the width as needed */
+}
