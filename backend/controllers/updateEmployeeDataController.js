@@ -124,7 +124,7 @@ export const updateEmployeeData = (req, res) => {
           ];
 
           if(emergencyContactValues.name !== '' && emergencyContactValues.phone !== '' ){
-            console.log(contact);
+            //console.log(contact);
             
             db.query(insertEmergencyContactsQuery,emergencyContactValues, (err) => {
               if (err) {
