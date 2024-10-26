@@ -44,15 +44,17 @@ const EmployeeReport = () => {
     const doc = new jsPDF();
     doc.text(`Department: ${department} Employee Report`, 10, 10);
     employees.forEach((emp, index) => {
-      doc.text(
-        `${index + 1}. ${emp.employee_id} - ${emp.first_name} - ${
-          emp.last_name
-        } - ${emp.date_of_birth} - ${emp.address} - ${emp.job_title} - ${
-          emp.email
-        } - ${emp.pay_grade}`,
-        10,
-        20 + index * 10
-      );
+      const yOffset = 20 + index * 90; // Increased vertical spacing
+      // doc.text(`${index + 1}.`, 10, yOffset);
+      doc.text(`${index + 1}.`, 10, yOffset);
+      doc.text(`Employee ID: ${emp.employee_id}`, 10, yOffset + 10);
+      doc.text(`First Name: ${emp.first_name}`, 10, yOffset + 20);
+      doc.text(`Last Name: ${emp.last_name}`, 10, yOffset + 30);
+      doc.text(`Date of Birth: ${emp.date_of_birth}`, 10, yOffset + 40);
+      doc.text(`Address: ${emp.address}`, 10, yOffset + 50);
+      doc.text(`Position: ${emp.job_title}`, 10, yOffset + 60);
+      doc.text(`Email: ${emp.email}`, 10, yOffset + 70);
+      doc.text(`Pay Grade: ${emp.pay_grade}`, 10, yOffset + 80);
     });
     doc.save(`${department}-employees-report.pdf`);
   };
