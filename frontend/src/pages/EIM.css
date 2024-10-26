@@ -194,3 +194,8 @@ tbody tr:nth-child(even) {
 .Table-row table{
   size-adjust: flex;
 }
+.results-count {
+  
+  margin: 10px;
+}
+

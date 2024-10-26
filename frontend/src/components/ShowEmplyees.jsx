@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const ShowEmplyees=({initialEmployees})=>{
     const [employees, setEmployees] = useState(initialEmployees);
     const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const navigate = useNavigate();
 
 
@@ -55,7 +56,7 @@ const ShowEmplyees=({initialEmployees})=>{
   
   
   
-    const rowsPerPage = 10; // only 10 employees per page
+     // only 10 employees per page
   
     const totalPages = Math.ceil(employees.length / rowsPerPage);
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -73,10 +74,26 @@ const ShowEmplyees=({initialEmployees})=>{
         setCurrentPage(currentPage + 1);
       }
     };
-  
+    const handleRowsPerPageChange = (event) => {
+      setRowsPerPage(Number(event.target.value));
+      setCurrentPage(1);
+      
+    };
+
     return (
       <div className="container mt-4">
-        <div className="mb-3">{employees.length} results</div>
+        
+        <div className="mb-3 d-flex align-items-center">
+        
+        <label htmlFor="rowsPerPage" className="form-label">Rows per page:  </label>
+        <select id="rowsPerPage" className="form-select" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+        </select>
+        <div className="results-count">{employees.length} results</div>
+        </div>
         <table className="table table-striped table-bordered">
           <thead className="thead-dark">
             <tr>
