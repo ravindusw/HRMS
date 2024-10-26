@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./LeaveHistoryAdmin.css";
+import axios from "axios";
 
 const LeaveHistory = () => {
   const [employeeId, setEmployeeId] = useState("");
@@ -7,27 +8,28 @@ const LeaveHistory = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Sample mock data
-  const mockLeaveData = [
-    { date: "2024-10-01", type: "Sick Leave", status: "Approved" },
-    { date: "2024-09-15", type: "Casual Leave", status: "Approved" },
-    { date: "2024-08-20", type: "Annual Leave", status: "Rejected" },
-  ];
+
 
   const fetchLeaveData = async (id) => {
-    try {
-      setLoading(true);
-      setError("");
-
-      // Simulate an API call
-      setTimeout(() => {
-        setLeaveData(mockLeaveData); // Replace this with actual API call
-        setLoading(false);
-      }, 1000);
-    } catch (err) {
-      setLoading(false);
+    axios.get(`http://localhost:8800/api/employee/getLeaveInfo/${employeeId}`).then((response) => {
+      setLeaveData(response.data);
+      console.log(response.data);
+    }).catch((error) => {
       setError("Failed to fetch leave data");
-    }
+    });
+    // try {
+    //   setLoading(true);
+    //   setError("");
+
+    //   // Simulate an API call
+    //   setTimeout(() => {
+    //     setLeaveData(mockLeaveData); // Replace this with actual API call     
+    //     setLoading(false);
+    //   }, 1000);
+    // } catch (err) {
+    //   setLoading(false);
+    //   setError("Failed to fetch leave data");
+    // }
   };
 
   const handleSubmit = (e) => {
@@ -66,7 +68,7 @@ const LeaveHistory = () => {
           <tbody>
             {leaveData.map((leave, index) => (
               <tr key={index}>
-                <td>{leave.date}</td>
+                <td>{leave.start_date}</td>
                 <td>{leave.type}</td>
                 <td>{leave.status}</td>
               </tr>

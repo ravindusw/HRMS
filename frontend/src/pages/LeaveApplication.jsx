@@ -1,17 +1,38 @@
 import React, { useState } from "react";
 import "./LeaveApplication.css"; // Assume the styles are stored in this file
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 const LeaveApplication = () => {
   const [leaveType, setLeaveType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [reason, setReason] = useState("");
+  const { id } = useAuth();
+  console.log(id);  
+  
+  const Leaveapp= async()=>{
+    axios.post("http://localhost:8800/api/leave/applyleave",{
+      employee_id:id,
+      leave_type:leaveType,
+      start_date:startDate,
+      end_date:endDate,
+      reason:reason
+    }).then((response)=>{
+      console.log(response.data);
+    }).catch((error)=>{
+      console.log(error);
+    });
 
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // Handle form submission logic
+    Leaveapp();
     console.log({ leaveType, startDate, endDate, reason });
   };
+
 
   return (
     <div className="leave-management">
@@ -30,10 +51,10 @@ const LeaveApplication = () => {
           onChange={(e) => setLeaveType(e.target.value)}
         >
           <option value="">Select leave type</option>
-          <option value="sick">Annual Leave</option>
-          <option value="casual">Cassual Leave</option>
-          <option value="annual">Maternity Leave</option>
-          <option value="annual">No-pay Leave</option>
+          <option value="Annual">Annual Leave</option>
+          <option value="Casual">Cassual Leave</option>
+          <option value="Maternity">Maternity Leave</option>
+          <option value="No-pay">No-pay Leave</option>
         </select>
 
         <label>Start Date</label>
