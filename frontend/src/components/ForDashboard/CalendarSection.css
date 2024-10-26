@@ -65,6 +65,10 @@
     font-weight: bold;
 }
 
+.react-calendar__month-view__days__day {
+    color: #333;
+}
+
 .react-calendar__month-view__days__day--weekend {
     color: #ff5722 !important;
 }
