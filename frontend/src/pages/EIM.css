@@ -215,8 +215,17 @@ tbody tr:nth-child(even) {
   width: 50px; /* Adjust the width as needed */
 }
 .id-column6 {
-  width: 120px; /* Adjust the width as needed */
+  width: 100px; /* Adjust the width as needed */
 }
 .id-column7 {
-  width: 150px; /* Adjust the width as needed */
+  width: 120px; /* Adjust the width as needed */
+}
+
+
+.form-label{
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #000000;
 }
