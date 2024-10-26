@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./LeaveHistoryAdmin.css";
+import axiosInstance from "../utils/AxiosInstance";
 
 const LeaveHistory = () => {
   const [employeeId, setEmployeeId] = useState("");
@@ -20,12 +21,15 @@ const LeaveHistory = () => {
       setError("");
 
       // Simulate an API call
-      setTimeout(() => {
-        setLeaveData(mockLeaveData); // Replace this with actual API call
-        setLoading(false);
-      }, 1000);
+      const response = await axiosInstance.get(`/leave/getLeaveInfo/${id}`);
+      console.log(response.data);
+      setLeaveData(response.data);
+
+      setLoading(false);
+      
     } catch (err) {
       setLoading(false);
+      setLeaveData([]);
       setError("Failed to fetch leave data");
     }
   };
@@ -38,7 +42,7 @@ const LeaveHistory = () => {
   };
 
   return (
-    <div className="leave-application">
+    <div className="leave-history">
       <h2>Employee Leave History</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -58,7 +62,8 @@ const LeaveHistory = () => {
         <table border="1">
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Start Date</th>
+              <th>End Date</th>
               <th>Leave Type</th>
               <th>Status</th>
             </tr>
@@ -66,7 +71,8 @@ const LeaveHistory = () => {
           <tbody>
             {leaveData.map((leave, index) => (
               <tr key={index}>
-                <td>{leave.date}</td>
+                <td>{new Date(leave.start_date).toLocaleDateString()}</td>
+                <td>{new Date(leave.end_date).toLocaleDateString()}</td>
                 <td>{leave.type}</td>
                 <td>{leave.status}</td>
               </tr>
