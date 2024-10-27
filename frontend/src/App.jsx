@@ -24,6 +24,8 @@ import CustomFieldReport from "./components/CustomFieldReport.jsx";
 
 import LoginHelp from "./pages/LoginHelp.jsx";
 import OrganizationInfoManagement from "./pages/OrganizationInfoManagement.jsx";
+import LeaveRequests from "./pages/LeaveRequests.jsx";
+import MyLeaves from "./pages/MyLeaves.jsx";
 
 import "./App.css";
 
@@ -93,6 +95,10 @@ function App() {
           }
         />
         <Route path="/leaveapplication" element={<LeaveApplication />} />
+
+        <Route path="/myleaves" element={<MyLeaves />} />
+        <Route path="/leaverequests" element={<LeaveRequests />} />
+
         <Route
           path="/leave-history-admin"
           element={
