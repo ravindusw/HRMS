@@ -27,6 +27,8 @@ import OrganizationInfoManagement from "./pages/OrganizationInfoManagement.jsx";
 import LeaveRequests from "./pages/LeaveRequests.jsx";
 import MyLeaves from "./pages/MyLeaves.jsx";
 
+import Configurations from "./pages/Configurations.jsx";
+
 import "./App.css";
 
 function App() {
@@ -59,6 +61,15 @@ function App() {
           }
         />
 
+        <Route
+          path="/configurations"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <Configurations />
+            </ProtectedRoute>
+          }
+        />
+    
         <Route
           path="/Employee_Information_Management"
           element={
