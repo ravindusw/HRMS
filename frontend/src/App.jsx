@@ -25,6 +25,8 @@ import CustomFieldReport from "./components/CustomFieldReport.jsx";
 import LoginHelp from "./pages/LoginHelp.jsx";
 import OrganizationInfoManagement from "./pages/OrganizationInfoManagement.jsx";
 
+import Configurations from "./pages/Configurations.jsx";
+
 import "./App.css";
 
 function App() {
@@ -53,6 +55,15 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["Admin"]}>
               <OrganizationInfoManagement />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/configurations"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <Configurations />
             </ProtectedRoute>
           }
         />

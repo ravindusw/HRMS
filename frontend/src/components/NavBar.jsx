@@ -35,7 +35,10 @@ const HRMSNavBar = () => {
                 <img src={Logo} alt="Jupiter Logo" style={{ height: "40px" }} />
               </Navbar.Brand>
               <Nav className="me-auto ms-3">
-                <Nav.Link as={Link} to="/dashboard">
+                
+              </Nav>
+              <Nav className="me-auto ms-3">
+              <Nav.Link as={Link} to="/dashboard">
                   <img
                     src={homeIcon}
                     alt="Home"
@@ -43,14 +46,7 @@ const HRMSNavBar = () => {
                     title="Home"
                   />
                 </Nav.Link>
-                <Nav.Link as={Link} to="/help">
-                  <img
-                    src={helpIcon}
-                    alt="Help"
-                    style={{ width: "32px", height: "32px" }}
-                    title="Help"
-                  />
-                </Nav.Link>
+                
                 {(role === "Admin" || role === "HR Manager") && (
                   <NavDropdown
                     title={
@@ -96,10 +92,28 @@ const HRMSNavBar = () => {
                         Employee Information Management
                       </NavDropdown.Item>
                     )}
+
+                    {/* Only Admin can access configurations */}
+                    {role === "Admin" && (
+                      <NavDropdown.Item as={Link} to="/configurations">
+                        Job & Leave Configurations 
+                      </NavDropdown.Item>
+                    )}
+
                   </NavDropdown>
                 )}
+
+              <Nav.Link as={Link} to="/help">
+                <img
+                  src={helpIcon}
+                  alt="Help"
+                  style={{ width: "32px", height: "32px" }}
+                  title="Help"
+                />
+              </Nav.Link>
               </Nav>
               <Nav>
+              
                 <Nav.Link as={Link} to="/notification">
                   <NotificationBellIcon />
                 </Nav.Link>
