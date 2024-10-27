@@ -17,7 +17,7 @@
 .faq-wrapper,
 .contact-wrapper {
   border-radius: 10px; /* Rounded corners for both sections */
-  background-color: #f7f9fc; /* Light background for contrast */
+  background-color: lightgrey;
   border-style: none; /* Remove any border styles */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   padding: 30px; /* Padding inside the wrapper */

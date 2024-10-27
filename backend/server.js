@@ -13,6 +13,7 @@ import { verifyToken } from "./middleWare/authMiddleware.js";
 import HrRouter from "./routes/HrRouter.js";
 import leaveRoutes from "./routes/leaveRoutes.js";
 import organizationInfoRoutes from "./routes/organizationInfoRoutes.js";
+import configurationRoutes from "./routes/configurationRoutes.js";
 
 
 
@@ -42,6 +43,8 @@ app.use("/api/report", reportRoutes);
 
 app.use("/api/leave", leaveRoutes);
 app.use("/api/organization-info", organizationInfoRoutes);
+
+app.use("/api/configuration", configurationRoutes)
 
 // Default route
 app.get("/", (req, res) => {

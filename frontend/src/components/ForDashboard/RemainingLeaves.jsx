@@ -28,9 +28,9 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "./RemainingLeaves.css"; // Custom CSS for this component
 import { useState, useEffect } from "react";
-import axios from "axios";
-import axiosInstance from "../../utils/AxiosInstance";
 
+import axiosInstance from "../../utils/AxiosInstance";
+import { useNavigate } from "react-router-dom";
 // Sample data for the Pie Chart
 // const data = [
 //   { name: "Annual", value: 20 },
@@ -42,7 +42,7 @@ import axiosInstance from "../../utils/AxiosInstance";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function RemainingLeaves({ role }) {
-  
+  const navigate = useNavigate();
   const [remainingLeaves, setRemainingLeaves] = useState([]);
 
   const data = remainingLeaves.map((leave) => {
@@ -114,8 +114,8 @@ export default function RemainingLeaves({ role }) {
         </div>
       </div>
 
-      <button className="btn-apply">Apply For a Leave</button>
-      {role == "Supervisor" ? <button className="btn-apply">View Leave Requests</button> : null}
+      <button className="btn-apply" onClick={() => navigate("/leaveapplication")}>Apply For a Leave</button>
+      {role == "Supervisor" ? <button className="btn-apply" onClick={() => navigate("/leaverequests")}>View Leave Requests</button> : null}
     </div>
   );
 }

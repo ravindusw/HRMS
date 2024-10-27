@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import axios from "axios";
 import "./ReportSubpage.css";
+import axiosInstance from "../utils/AxiosInstance";
 
 const LeaveBalanceReport = () => {
   const [department, setDepartment] = useState("");
@@ -32,8 +32,8 @@ const LeaveBalanceReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        `http://localhost:8800/api/report/leavebalance-report/${department}/${leaveType}`
+      const response = await axiosInstance.get(
+        `/report/leavebalance-report/${department}/${leaveType}`
       );
       setLeaveBalances(response.data);
     } catch (error) {
@@ -53,11 +53,11 @@ const LeaveBalanceReport = () => {
       10
     );
     leaveBalances.forEach((emp, index) => {
-      doc.text(
-        `${index + 1}. ${emp.name}-${emp.employee_id} - ${emp.leaveBalance} days`,
-        10,
-        20 + index * 10
-      );
+      doc.text(`${index + 1}.`, 10, 20 + index * 50);
+      doc.text(`Name: ${emp.name}`, 10, 30 + index * 50);
+      doc.text(`Employee ID: ${emp.employee_id}`, 10, 40 + index * 50);
+      doc.text(`Leave Balance: ${emp.leaveBalance} days`, 10, 50 + index * 50);
+      doc.text("\n", 10, 50 + index * 10); // Add a new line after each entry
     });
     doc.save(`${department}-leave-balance-report-${leaveType}.pdf`);
   };

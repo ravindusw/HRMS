@@ -24,6 +24,10 @@ import CustomFieldReport from "./components/CustomFieldReport.jsx";
 
 import LoginHelp from "./pages/LoginHelp.jsx";
 import OrganizationInfoManagement from "./pages/OrganizationInfoManagement.jsx";
+import LeaveRequests from "./pages/LeaveRequests.jsx";
+import MyLeaves from "./pages/MyLeaves.jsx";
+
+import Configurations from "./pages/Configurations.jsx";
 
 import "./App.css";
 
@@ -56,7 +60,16 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
+        <Route
+          path="/configurations"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <Configurations />
+            </ProtectedRoute>
+          }
+        />
+    
         <Route
           path="/Employee_Information_Management"
           element={
@@ -69,11 +82,9 @@ function App() {
         <Route
           path="/Employee_Information_Management/HrView/:id_to_view"
           element={
-            
-            <ProtectedRoute allowedRoles={["Admin","HR Manager"]}>
+            <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
               <HrView />
             </ProtectedRoute>
-            
           }
         />
         <Route
@@ -93,6 +104,10 @@ function App() {
           }
         />
         <Route path="/leaveapplication" element={<LeaveApplication />} />
+
+        <Route path="/myleaves" element={<MyLeaves />} />
+        <Route path="/leaverequests" element={<LeaveRequests />} />
+
         <Route
           path="/leave-history-admin"
           element={
