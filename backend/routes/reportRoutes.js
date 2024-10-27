@@ -2,13 +2,13 @@ import { Router } from "express";
 import {
   getEmployeeReport,
   getLeaveReport,
-  getLeaveBalanceReport
-  //getCustomFieldReport
+  getLeaveBalanceReport,
 } from "../controllers/reportController.js";
+import { verifyToken, authorizeRoles } from "../middleWare/authMiddleware.js";
 
 const router = Router();
 
-router.get("/employee-report/:department", getEmployeeReport);
+router.get("/employee-report/:department", verifyToken, getEmployeeReport);
 router.get("/leave-report/:department", getLeaveReport);
 router.get(
   "/leavebalance-report/:department/:leaveType",

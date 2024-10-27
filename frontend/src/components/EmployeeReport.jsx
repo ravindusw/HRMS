@@ -3,6 +3,7 @@ import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import "./ReportSubpage.css";
+import axiosInstance from "../utils/AxiosInstance";
 
 const EmployeeReport = () => {
   const [department, setDepartment] = useState("");
@@ -28,8 +29,8 @@ const EmployeeReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        `http://localhost:8800/api/report/employee-report/${department}`
+      const response = await axiosInstance.get(
+        `/report/employee-report/${department}`
       );
       setEmployees(response.data);
     } catch (error) {

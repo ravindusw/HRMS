@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import axios from "axios";
 import "./ReportSubpage.css";
+import axiosInstance from "../utils/AxiosInstance";
 
 const LeaveBalanceReport = () => {
   const [department, setDepartment] = useState("");
@@ -32,8 +32,8 @@ const LeaveBalanceReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        `http://localhost:8800/api/report/leavebalance-report/${department}/${leaveType}`
+      const response = await axiosInstance.get(
+        `/report/leavebalance-report/${department}/${leaveType}`
       );
       setLeaveBalances(response.data);
     } catch (error) {

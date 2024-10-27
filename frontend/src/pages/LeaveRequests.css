@@ -1,0 +1,61 @@
+/* LeaveRequests.css */
+.leave-requests-container {
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .leave-requests-container .title {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .leave-requests-container .requests-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .requests-table th,
+  .requests-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .leave-requests-container .requests-table th {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .requests-table tr.status-approved {
+    background-color: #e0f5e0; /* Light green for approved */
+  }
+  
+  .requests-table tr.status-rejected {
+    background-color: #f5e0e0; /* Light red for rejected */
+  }
+  
+  .leave-requests-container .approve-btn,
+  .reject-btn {
+    padding: 8px 16px;
+    margin: 0 4px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .leave-requests-container .approve-btn {
+    background-color: #28a745; /* Green color */
+  }
+  
+  .leave-requests-container .reject-btn {
+    background-color: #dc3545; /* Red color */
+  }
+  
+  .leave-requests-container .approve-btn:hover,
+  .reject-btn:hover { 
+    opacity: 0.9;
+  }
+  

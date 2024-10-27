@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import axios from "axios";
 import "./ReportSubpage.css";
+import axiosInstance from "../utils/AxiosInstance";
 
 const CustomFieldReport = () => {
   const [attributeData, setAttributeData] = useState([]);
@@ -13,9 +13,7 @@ const CustomFieldReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
-        `http://localhost:8800/api/report/custom-fields-report`
-      );
+      const response = await axiosInstance.get(`/report/custom-fields-report`);
       setAttributeData(response.data);
     } catch (error) {
       setError("Failed to fetch custom attribute details");
