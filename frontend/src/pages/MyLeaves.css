@@ -1,0 +1,56 @@
+/* MyLeaves.css */
+
+.my-leaves {
+    background-color: #fff;
+    padding: 20px;
+    padding-top: 80px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    max-width: 600px;
+    margin: 20px auto;
+    
+  }
+  
+  .my-leaves h2 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .leave-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .leave-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .leave-type,
+  .leave-dates {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .leave-status {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .leave-status.approved {
+    color: #28a745; /* Green for approved */
+  }
+  
+  .leave-status.rejected {
+    color: #dc3545; /* Red for rejected */
+  }
+  

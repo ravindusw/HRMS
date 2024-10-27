@@ -1,0 +1,104 @@
+/* Container styling */
+.custom-attribute-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  padding: 20px;
+  width: 100%;
+  border: 1px solid #ddd; /* Optional: add a border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a box shadow */
+
+  margin-top: 5 rem;
+}
+
+/* Form styling */
+.custom-attribute-form {
+  background-color: #ffffff;
+  border: 1px solid #d1e7dd;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.15);
+}
+
+/* Form header styling */
+.custom-attribute-form h2 {
+  text-align: center;
+  color: #1d643b;
+  font-family: Arial, sans-serif;
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+/* Label styling */
+.form-group label {
+  display: block;
+  color: #2c6d44;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+/* Input field styling */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1e7dd;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+/* Input focus styling */
+.form-control:focus {
+  border-color: #28a745;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 128, 0, 0.3);
+}
+
+/* Button styling */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: #ffffff;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Button hover styling */
+.btn-primary:hover {
+  background-color: #218838;
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.3);
+}
+
+/* Button focus styling */
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .custom-attribute-form {
+    padding: 20px;
+  }
+
+  .custom-attribute-form h2 {
+    font-size: 1.5em;
+  }
+}

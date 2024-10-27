@@ -37,12 +37,13 @@ export const getemployeeleavedetail = (req, res) => {
 };
 
 export const getpendingleavedetail = (req, res) => {
+  const { e_id } = req.user;
   // SQL query to call the stored procedure
-  const query = `CALL get_pending_leaves();`;
+  const query = `CALL get_pending_leaves(?);`;
 
   // Execute the query
 
-  db.query(query, (err, results) => {
+  db.query(query,[e_id] ,(err, results) => {
     if(err){
       console.error("Error fetching pending leave detail:", err);
       return res.status(500).send("Server error");
@@ -114,3 +115,26 @@ export const applyLeave = (req, res) => {
     res.status(200).json({ message: "Leave application submitted successfully"});
   });
 };
+
+export const getLeaveHistory = (req, res) => { 
+  const { e_id } = req.user;
+  const query = `CALL GetLeaveDetails(?);`;
+
+  db.query(query, [e_id], (err, results) => {
+    if (err) {
+      console.error("Error fetching leave history:", err);
+      return res.status(500).send("Server error");
+    }
+    if (!results[0] || !results[0][0]) {
+      return res.status(404).json({ message: "No leave history found." });
+    }
+
+    const leaveHistory = results[0]; // Stored procedure should return leave history directly
+    if (Array.isArray(leaveHistory)) {
+      res.status(200).json(leaveHistory); // Send the array of leave history directly
+    } else {
+      // Handle unexpected format
+      res.status(500).json({ message: "Unexpected format for leave history data." });
+    }
+  });
+}

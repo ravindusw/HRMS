@@ -1,31 +1,30 @@
-import React, { useState , useEffect } from "react";
-import "./LeaveApplication.css"; // Assume the styles are stored in this file
+import React, { useState, useEffect } from "react";
+import "./LeaveApplication.css";
 import axiosInstance from "../utils/AxiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const LeaveApplication = () => {
   const [leaveType, setLeaveType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [reason, setReason] = useState("");
-
   const [leaveTypes, setLeaveTypes] = useState([]);
+
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    // console.log({ leaveType, startDate, endDate, reason });
 
     const data = {
       leave_type_id: leaveType,
       start_date: startDate,
       end_date: endDate,
-      reason: reason
+      reason: reason,
     };
 
     const submitLeaveApplication = async () => {
       try {
         const response = await axiosInstance.post("/leave/apply-leave", data);
-        // console.log("Leave application response:", response.data);
         alert("Leave application submitted successfully");
       } catch (error) {
         console.error("Error submitting leave application:", error);
@@ -39,15 +38,12 @@ const LeaveApplication = () => {
     setStartDate("");
     setEndDate("");
     setReason("");
-
-
   };
 
   useEffect(() => {
     const fetchLeaveTypes = async () => {
       try {
         const response = await axiosInstance.get("/leave/get-leave-types");
-        // console.log("Leave types:", response.data);
         setLeaveTypes(response.data);
       } catch (error) {
         console.error("Error fetching leave types:", error);
@@ -59,30 +55,28 @@ const LeaveApplication = () => {
 
   return (
     <div className="leave-application">
-      
       <header className="header">
         <h1>Leave Management | Leave Application</h1>
         <div className="buttons">
-          <button className="profile-btn">Profile</button>
-          <button className="my-leaves-btn">My Leaves</button>
+          <button className="profile-btn" onClick={() => navigate("/profile")}>
+            Profile
+          </button>
+          <button className="my-leaves-btn" onClick={() => navigate("/myleaves")}>My Leaves</button>
         </div>
       </header>
-      
+
       <form className="leave-form" onSubmit={handleSubmit}>
         <h2>Request for leave</h2>
-        
-        <label>Type</label>
-        <select
-          value={leaveType}
-          onChange={(e) => setLeaveType(e.target.value)}
-        >
-          <option value="">Select leave type</option>
-          {leaveTypes && leaveTypes.map((type) => (
-            <option key={type.leave_type_id} value={type.leave_type_id}>
-              {type.type}
-            </option>
-          ))}
 
+        <label>Type</label>
+        <select value={leaveType} onChange={(e) => setLeaveType(e.target.value)}>
+          <option value="">Select leave type</option>
+          {leaveTypes &&
+            leaveTypes.map((type) => (
+              <option key={type.leave_type_id} value={type.leave_type_id}>
+                {type.type}
+              </option>
+            ))}
         </select>
 
         <label>Start Date</label>
@@ -110,8 +104,6 @@ const LeaveApplication = () => {
           Submit
         </button>
       </form>
-
-
     </div>
   );
 };
