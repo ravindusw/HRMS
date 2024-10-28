@@ -16,7 +16,7 @@
   margin: 100px auto;
   padding: 20px;
   border-radius: var(--border-radius);
-  /* background: var(--gradient-bg); */
+  background: var(--secondary-color);
   box-shadow: var(--box-shadow);
   font-family: var(--font-family);
 }
