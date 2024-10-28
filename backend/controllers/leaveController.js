@@ -43,7 +43,7 @@ export const getpendingleavedetail = (req, res) => {
 
   // Execute the query
 
-  db.query(query,[e_id] ,(err, results) => {
+  db.query(query ,[e_id],(err, results) => {
     if(err){
       console.error("Error fetching pending leave detail:", err);
       return res.status(500).send("Server error");
@@ -51,6 +51,7 @@ export const getpendingleavedetail = (req, res) => {
     if(!results[0] || !results[0][0]){
       return res.status(404).json({ message: "No pending leave detail found." });
     }
+
     const pendingleavedetail = results[0]; // Stored procedure should return pending leave details directly
 
     if (Array.isArray(pendingleavedetail)) {
@@ -65,6 +66,7 @@ export const getpendingleavedetail = (req, res) => {
 
 export const approveleaverequest = (req, res) => {
   const { leave_record_id } = req.params;
+
   if (!leave_record_id) {
     return res.status(400).json({ message: "Leave Record ID is required" });
   }
@@ -80,6 +82,26 @@ export const approveleaverequest = (req, res) => {
     res.status(200).json({ message: "Leave request approved successfully" ,data: results});
   });
 }
+
+export const rejectleaverequest = (req, res) => {
+  const { leave_record_id } = req.params;
+
+  if (!leave_record_id) {
+    return res.status(400).json({ message: "Leave Record ID is required" });
+  }
+
+  const query = `CALL reject_leave_record(?);`;
+
+  db.query(query, [leave_record_id], (err, results) => {
+    if (err) {
+      console.error("Error rejecting leave request:", err);
+      return res.status(500).send("Server error");
+    }
+
+    res.status(200).json({ message: "Leave request rejected successfully" });
+  });
+}
+
 
 export const getLeaveTypes = (req, res) => {
   const query = `CALL get_leave_types();`;

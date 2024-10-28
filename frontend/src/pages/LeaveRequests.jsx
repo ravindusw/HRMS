@@ -28,32 +28,46 @@ const LeaveRequests = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   
+  const fetchLeaveRequests = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const response = await axiosInstance.get("/leave/pendingLeaveREQUEST");
+      console.log("Response data:", response.data);
+      setRequests(response.data);
+    } catch (err) {
+      console.error("Error fetching leave requests:", err); 
+      setError("Failed to fetch leave requests");
+      setRequests([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchLeaveRequests = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        const response = await axiosInstance.get("/leave/pendingLeaveREQUEST");
-        setRequests(response.data);
-      } catch (err) {
-        setError("Failed to fetch leave requests");
-        setRequests([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchLeaveRequests();
   }, []);
-  const handleApproval = (id, decision) => {
-    setRequests(requests.map(request => 
-      request.id === id ? { ...request, status: decision } : request
-    ));
+
+  const handleApproval = async (leaveRecordId, status) => {
+    if (status == "Approved") {
+      const response = await axiosInstance.put(`/leave/approveLeaveREQUEST/${leaveRecordId}`);
+      console.log(response.data);
+      fetchLeaveRequests();
+    }
+    if (status == "Rejected") {
+      const response = await axiosInstance.put(`/leave/rejectLeaveREQUEST/${leaveRecordId}`);
+      console.log(response.data);
+      fetchLeaveRequests();
+    }
   };
+
+
 
   return (
     <div className="leave-requests-container">
       <h2 className="title">Leave Requests</h2>
+      {loading && <p>Loading leave requests...</p>}
+      {error && <p className="error-message">{error}</p>}
       <table className="requests-table">
         <thead>
           <tr>
@@ -61,30 +75,29 @@ const LeaveRequests = () => {
             <th>Leave Type</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Status</th>
+            
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {requests.map((request) => (
-            <tr key={request.id} className={`status-${request.status.toLowerCase()}`}>
+          {requests.map((request,index) => (
+            <tr key={index} className={`status-${request.status}`}>
               <td>{request.first_name}</td>
               <td>{request.type}</td>
-              <td>{request.start_date}</td>
-              <td>{request.end_date}</td>
-              <td>{request.status}</td>
+              <td>{new Date(request.start_date).toLocaleDateString()}</td>
+              <td>{new Date(request.end_date).toLocaleDateString()}</td>
               <td>
-                {request.status === 'Pending' && (
+                {request && (
                   <>
                     <button
                       className="approve-btn"
-                      onClick={() => handleApproval(request.id, 'Approved')}
+                      onClick={() => handleApproval(request.leave_record_id, 'Approved')}
                     >
                       Approve
                     </button>
                     <button
                       className="reject-btn"
-                      onClick={() => handleApproval(request.id, 'Rejected')}
+                      onClick={() => handleApproval(request.leave_record_id, 'Rejected')}
                     >
                       Reject
                     </button>

@@ -102,7 +102,7 @@ function App() {
         <Route
           path="/leave-history-admin"
           element={
-            <ProtectedRoute allowedRoles={["HR Manager"]}>
+            <ProtectedRoute allowedRoles={["HR Manager","Admin"]}>
               <LeaveHistory />
             </ProtectedRoute>
           }
