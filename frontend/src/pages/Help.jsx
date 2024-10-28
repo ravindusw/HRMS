@@ -14,7 +14,6 @@ const Help = () => {
   });
 
   const [EmployeeFAQs] = useState([
-    
     {
       question: "What to do if I have forgotten my password?",
       answer:

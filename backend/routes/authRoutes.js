@@ -3,21 +3,15 @@ import { login } from "../controllers/authController.js";
 import { addUser, addEmployee } from "../controllers/authController.js";
 import { verifyToken, authorizeRoles } from "../middleWare/authMiddleware.js";
 import { getSupervisors } from "../controllers/employeeControler.js";
+import { fetchJobTitles } from "../controllers/configurationController.js";
+
 import HrRouter from "./HrRouter.js";
-
-
 
 const router = Router();
 
 router.post("/login", login);
 
-router.use(
-  "/Hr",
-  verifyToken,
-  authorizeRoles("Admin", "HR Manager"),
-  HrRouter
-);
-
+router.use("/Hr", verifyToken, authorizeRoles("Admin", "HR Manager"), HrRouter);
 
 router.post(
   "/addUser",
@@ -33,6 +27,13 @@ router.get(
   getSupervisors
 );
 
+router.get(
+  "/getJobTitles",
+  verifyToken,
+  authorizeRoles("Admin", "HR Manager"),
+  fetchJobTitles
+);
+
 router.post(
   "/addEmployee",
   verifyToken,
@@ -40,6 +41,6 @@ router.post(
   addEmployee
 );
 
-
+0;
 
 export default router;

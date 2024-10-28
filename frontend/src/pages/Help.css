@@ -3,6 +3,8 @@
   padding-top: 20px; /* Adjust this value based on your Navbar height */
   font-family: "Poppins", sans-serif;
   /* min-height: calc(100vh - 0px); */
+
+  background-color: transparent; /* Or match the FAQ background */
 }
 
 .support-container h1 {
@@ -28,10 +30,10 @@
   border-style: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 50px;
+  margin-bottom: 20px;
 }
 
 .accordion-item {
-  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
 }
