@@ -24,7 +24,7 @@ const AddEmployee = () => {
     Marital_Status: "",
     Department: "",
     Supervisor_ID: "",
-    Job_Title: "",
+    Job_Title_ID: "",
     Pay_Grade: "",
     Employment_Type: "",
     Work_Schedule: "",
@@ -45,6 +45,7 @@ const AddEmployee = () => {
   const [supervisors, setSupervisors] = useState([]);
   const [message, setMessage] = useState("Submit");
   const [buttonColor, setButtonColor] = useState("");
+  const [jobTitles, setJobTitles] = useState([]);
 
   useEffect(() => {
     axiosInstance
@@ -54,6 +55,15 @@ const AddEmployee = () => {
       })
       .catch((error) => {
         console.error("Error fetching supervisors:", error);
+      });
+
+    axiosInstance
+      .get("/auth/getJobTitles")
+      .then((response) => {
+        setJobTitles(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching jobTitles", error);
       });
   }, []);
 
@@ -263,35 +273,18 @@ const AddEmployee = () => {
                   <Form.Label>Job Title:</Form.Label>
                   <InputGroup>
                     <Form.Select
-                      name="Job_Title"
+                      name="Job_Title_ID"
                       onChange={handleChange}
                       required
                     >
-                      <option value="" disable hidden></option>
-                      <option value="Accountant">Accountant</option>
-                      <option value="CEO">CEO</option>
-                      <option value="Fashion Designer">Fashion Designer</option>
-                      <option value="HR Manager">HR Manager</option>
-                      <option value="IT Manager">IT Manager</option>
-                      <option value="Marketing Manager">
-                        Marketing Manager
+                      <option value="" disabled>
+                        Select Job Title
                       </option>
-                      <option value="Packaging Assistant">
-                        Packaging Assistant
-                      </option>
-                      <option value="Project Manager">Project Manager</option>
-                      <option value="Quality Control Inspector">
-                        Quality Control Inspector
-                      </option>
-                      <option value="Retail Assistant">Retail Assistant</option>
-                      <option value="Sales Manager">Sales Manager</option>
-                      <option value="Sewing Machine Operator">
-                        Sewing Machine Operator
-                      </option>
-                      <option value="Supply Chain Manager">
-                        Supply Chain Manager
-                      </option>
-                      <option value="Warehouse Worker">Warehouse Worker</option>
+                      {jobTitles.map((job) => (
+                        <option key={job.job_title_id} value={job.job_title_id}>
+                          {job.title}
+                        </option>
+                      ))}
                     </Form.Select>
                   </InputGroup>
                 </Form.Group>
