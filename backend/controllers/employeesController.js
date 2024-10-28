@@ -16,7 +16,7 @@ export const getAllEmployees = (req, res) => {
         console.error("Error fetching employee list:", err);
         return res.status(500).send("Server error");
       }
-  
+      
       res.status(200).json(results[0]);
     });
   };
