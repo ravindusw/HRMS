@@ -12,6 +12,8 @@ export const login = (req, res) => {
     if (err) {
       console.error("Error during stored procedure call:", err);
 
+      // logLoginAttempt(email, "Server error");
+
       return res.status(500).send("Server error");
     }
 
