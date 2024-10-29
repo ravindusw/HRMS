@@ -13,7 +13,8 @@ const CustomFieldReport = () => {
 
   const fetchAttribute = async () => {
     try {
-      const response = await axiosInstance.get("/getCustomAttributes");
+      const response = await axiosInstance.get("/auth/customAttributes");
+      console.log(response.data);
       setAttributeOptions(response.data);
     } catch (error) {
       setError("Failed to fetch attribute");
@@ -23,9 +24,10 @@ const CustomFieldReport = () => {
   const fetchCustomFieldDetails = async () => {
     setLoading(true);
     setError(null);
+    console.log(attribute);
     try {
       const response = await axiosInstance.get(
-        `/report/custom-fields-report/${attribute_name}`
+        `/report/custom-fields-report/${attribute}`
       );
       setAttributeData(response.data);
     } catch (error) {
@@ -46,7 +48,7 @@ const CustomFieldReport = () => {
     doc.text("Custom Field Report for Last 3 Attributes", 10, 10);
     attributeData.forEach((emp, index) => {
       doc.text(`${index + 1}.`, 10, 20 + index * 60);
-      doc.text(`ID: ${em.employee_id}`, 10, 30 + index * 60);
+      doc.text(`ID: ${emp.employee_id}`, 10, 30 + index * 60);
       doc.text(`First_Name: ${emp.first_name}`, 10, 40 + index * 60);
       doc.text(`Last_Name: ${emp.last_name}`, 10, 50 + index * 60);
       doc.text(`Attribute_Value: ${emp.attribute_value}`, 10, 60 + index * 60);
@@ -63,13 +65,13 @@ const CustomFieldReport = () => {
       <h1>Jupiter Apparels HRMS - Custom Field Report</h1>
       <div>
         <label>Select Custom Field:</label>
-        <select>
+        <select 
           value={attribute}
-          onChange={(e) => setAttribute(e.target.value)}
+          onChange={(e) => setAttribute(e.target.value)} >
           <option value="">-- Select Attribute --</option>
-          {attributeOptions.map((attribute) => (
-            <option key={attribute.id} value={attribute.id}>
-              {attribute.name}
+          {attributeOptions.map((attribute_i) => (
+            <option key={attribute_i.attribute_id} value={attribute_i.attribute_name}>
+              {attribute_i.attribute_name}
             </option>
           ))}
         </select>

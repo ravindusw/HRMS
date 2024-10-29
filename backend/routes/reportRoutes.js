@@ -17,7 +17,7 @@ router.get(
   getLeaveBalanceReport
 );
 router.get(
-  "/report/custom-fields-report/:attribute_name",
+  "/custom-fields-report/:attribute_name",
   getCustomFieldReport
 );
 
