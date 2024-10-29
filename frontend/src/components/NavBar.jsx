@@ -12,8 +12,6 @@ import homeIcon from "../assets/Home.svg";
 import helpIcon from "../assets/Help.svg";
 import authorizedIcon from "../assets/AuthorizedActions.svg";
 
-const token = Cookies.get("authToken");
-
 const HRMSNavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,11 +32,9 @@ const HRMSNavBar = () => {
               <Navbar.Brand as={Link} to="/dashboard">
                 <img src={Logo} alt="Jupiter Logo" style={{ height: "40px" }} />
               </Navbar.Brand>
+              <Nav className="me-auto ms-3"></Nav>
               <Nav className="me-auto ms-3">
-                
-              </Nav>
-              <Nav className="me-auto ms-3">
-              <Nav.Link as={Link} to="/dashboard">
+                <Nav.Link as={Link} to="/dashboard">
                   <img
                     src={homeIcon}
                     alt="Home"
@@ -46,7 +42,7 @@ const HRMSNavBar = () => {
                     title="Home"
                   />
                 </Nav.Link>
-                
+
                 {(role === "Admin" || role === "HR Manager") && (
                   <NavDropdown
                     title={
@@ -75,10 +71,18 @@ const HRMSNavBar = () => {
                         Report Generation
                       </NavDropdown.Item>
                     )}
+                    {role === "Admin" && (
+                      <NavDropdown.Item as={Link} to="/customAttributes">
+                        Custom Attributes
+                      </NavDropdown.Item>
+                    )}
 
                     {/* Only Admin can access organization info management */}
                     {role === "Admin" && (
-                      <NavDropdown.Item as={Link} to="/organization-information-management">
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/organization-information-management"
+                      >
                         Organization Information Management
                       </NavDropdown.Item>
                     )}
@@ -96,24 +100,22 @@ const HRMSNavBar = () => {
                     {/* Only Admin can access configurations */}
                     {role === "Admin" && (
                       <NavDropdown.Item as={Link} to="/configurations">
-                        Job & Leave Configurations 
+                        Job & Leave Configurations
                       </NavDropdown.Item>
                     )}
-
                   </NavDropdown>
                 )}
 
-              <Nav.Link as={Link} to="/help">
-                <img
-                  src={helpIcon}
-                  alt="Help"
-                  style={{ width: "32px", height: "32px" }}
-                  title="Help"
-                />
-              </Nav.Link>
+                <Nav.Link as={Link} to="/help">
+                  <img
+                    src={helpIcon}
+                    alt="Help"
+                    style={{ width: "32px", height: "32px" }}
+                    title="Help"
+                  />
+                </Nav.Link>
               </Nav>
               <Nav>
-              
                 <Nav.Link as={Link} to="/notification">
                   <NotificationBellIcon />
                 </Nav.Link>

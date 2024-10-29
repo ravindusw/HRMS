@@ -8,15 +8,10 @@ import reportRoutes from "./routes/reportRoutes.js";
 import supportRoutes from "./routes/SupportRoutes.js";
 
 import dashboardRoutes from "./routes/dashboardRoutes.js";
-import { verifyToken } from "./middleWare/authMiddleware.js";
 
-import HrRouter from "./routes/HrRouter.js";
 import leaveRoutes from "./routes/leaveRoutes.js";
 import organizationInfoRoutes from "./routes/organizationInfoRoutes.js";
 import configurationRoutes from "./routes/configurationRoutes.js";
-
-
-
 
 const app = express();
 
@@ -33,7 +28,6 @@ app.use("/api/profile", profileRoutes);
 // Use the routes
 app.use("/api/notification", notificationRoutes);
 
-
 app.use("/api/dashboard", dashboardRoutes);
 
 //app.use("/api/Hr", HrRouter);
@@ -44,7 +38,7 @@ app.use("/api/report", reportRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use("/api/organization-info", organizationInfoRoutes);
 
-app.use("/api/configuration", configurationRoutes)
+app.use("/api/configuration", configurationRoutes);
 
 // Default route
 app.get("/", (req, res) => {
