@@ -115,7 +115,7 @@ export default function RemainingLeaves({ role }) {
       </div>
 
       <button className="btn-apply" onClick={() => navigate("/leaveapplication")}>Apply For a Leave</button>
-      {role == "Supervisor" ? <button className="btn-apply" onClick={() => navigate("/leaverequests")}>View Leave Requests</button> : null}
+      {(role == "Supervisor") ? <button className="btn-apply" onClick={() => navigate("/leaverequests")}>View Leave Requests</button> : null}
     </div>
   );
 }

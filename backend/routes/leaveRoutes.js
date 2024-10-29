@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {getemployeeleavedetail, getpendingleavedetail,approveleaverequest, getLeaveTypes, applyLeave ,getLeaveHistory} from "../controllers/leaveController.js";
+import {getemployeeleavedetail, getpendingleavedetail,approveleaverequest, getLeaveTypes, applyLeave ,getLeaveHistory, rejectleaverequest} from "../controllers/leaveController.js";
 import { verifyToken } from "../middleWare/authMiddleware.js";
 
 import { login } from "../controllers/authController.js";
@@ -13,7 +13,8 @@ router.get("/get-leave-types", getLeaveTypes);
 
 router.post("/apply-leave", verifyToken, applyLeave);
 
-router.put("/approveLeaveREQUEST/:leave_record_id", approveleaverequest);
+router.put("/approveLeaveREQUEST/:leave_record_id",verifyToken, approveleaverequest);
+router.put("/rejectLeaveREQUEST/:leave_record_id", verifyToken, rejectleaverequest);
 
 router.get("/get-leave-history",verifyToken, getLeaveHistory);
 export default router;
