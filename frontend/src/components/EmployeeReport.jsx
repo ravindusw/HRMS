@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
@@ -10,18 +10,16 @@ const EmployeeReport = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [departmentOptions, setDepartmentOptions] = useState([]);
 
-  const departmentOptions = [
-    "IT",
-    "HR",
-    "Marketing",
-    "Finance",
-    "Production",
-    "Supply Chain",
-    "Merchandising",
-    "Maintenance",
-    "Warehouse",
-  ];
+  const fetchDepartments = async () => {
+    try {
+      const response = await axiosInstance.get("/auth/Hr/departments");
+      setDepartmentOptions(response.data);
+    } catch (error) {
+      setError("Failed to fetch departments");
+    }
+  };
 
   // Fetch employees of the selected department
   const fetchDepartmentEmployees = async () => {
@@ -39,6 +37,10 @@ const EmployeeReport = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchDepartments();
+  }, []);
 
   // Generate PDF report for the department
   const generatePDF = () => {
@@ -71,8 +73,8 @@ const EmployeeReport = () => {
         >
           <option value="">-- Select Department --</option>
           {departmentOptions.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
+            <option key={dept.id} value={dept.id}>
+              {dept.name}
             </option>
           ))}
         </select>
