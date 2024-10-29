@@ -17,6 +17,7 @@
   padding: 20px;
   border-radius: var(--border-radius);
   /* background: var(--gradient-bg); */
+  background-color: var(--secondary-color);
   box-shadow: var(--box-shadow);
   font-family: var(--font-family);
 }
@@ -85,7 +86,7 @@
   padding: 15px;
   margin-bottom: 10px;
   border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
+  background-color: var(--secondary-color) ;
   box-shadow: var(--box-shadow);
   transition: background-color 0.3s ease-in-out;
 }

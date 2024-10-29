@@ -6,7 +6,6 @@ import {
   fetchNotificationByNotificationId, 
   updateNotificationStatus,
   deleteNotification,
-  createNotification,
   getUnreadNotificationCount
 } from "../controllers/notificationController.js";
 
@@ -61,6 +60,6 @@ router.get("/fetch-notification-by-user-id", verifyToken, fetchNotificationByUse
 router.get("/get-unread-notification-count", verifyToken, getUnreadNotificationCount);
 router.post("/update-notification-status", updateNotificationStatus);
 router.delete("/delete-notification/:id", deleteNotification);
-router.put("/create-notification", createNotification);
+// router.put("/create-notification", createNotification);
 
 export default router;
