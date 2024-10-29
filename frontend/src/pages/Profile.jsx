@@ -28,6 +28,8 @@ const Profile = () => {
     return <div className="loading">Loading...</div>;
   }
 
+  const { custom_attributes } = profileData;
+
   return (
     <Container className="profile-page">
       <Card className="profile-card shadow-sm" border="info" text="dark">
@@ -88,7 +90,6 @@ const Profile = () => {
               </div>
             </Col>
           </Row>
-
           {/* Display contact numbers */}
           <Row className="profile-section">
             <Col md={12}>
@@ -103,7 +104,6 @@ const Profile = () => {
               </div>
             </Col>
           </Row>
-
           <Row className="profile-section">
             <Col md={6}>
               <h5>Emergency Contact</h5>
@@ -127,13 +127,39 @@ const Profile = () => {
               </div>
             </Col>
           </Row>
-
           {/* Simplified Supervisor section */}
           <Row className="profile-section">
             <Col md={6}>
               <h5>Supervisor</h5>
               <div className="profile-field">
                 <span>Name:</span> {profileData?.supervisor || "N/A"}
+              </div>
+            </Col>
+          </Row>
+          {/* Custom Attributes Section */}
+
+          <Row className="profile-section">
+            <Col md={12}>
+              <h5>Custom Attributes</h5>
+              <div className="custom-attribute">
+                {custom_attributes.key1_name && custom_attributes.value1 && (
+                  <div>
+                    <strong>{custom_attributes.key1_name}:</strong>{" "}
+                    {custom_attributes.value1}
+                  </div>
+                )}
+                {custom_attributes.key2_name && custom_attributes.value2 && (
+                  <div>
+                    <strong>{custom_attributes.key2_name}:</strong>{" "}
+                    {custom_attributes.value2}
+                  </div>
+                )}
+                {custom_attributes.key3_name && custom_attributes.value3 && (
+                  <div>
+                    <strong>{custom_attributes.key3_name}:</strong>{" "}
+                    {custom_attributes.value3}
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
