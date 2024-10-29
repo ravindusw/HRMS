@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Report.css";
-import workerImage from "../assets/appreal.png";
+import workerImage from "../assets/report_background.png";
 import axiosInstance from "../utils/AxiosInstance";
 
 const Report = () => {

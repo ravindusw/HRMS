@@ -8,13 +8,6 @@ const LeaveHistory = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Sample mock data
-  const mockLeaveData = [
-    { date: "2024-10-01", type: "Sick Leave", status: "Approved" },
-    { date: "2024-09-15", type: "Casual Leave", status: "Approved" },
-    { date: "2024-08-20", type: "Annual Leave", status: "Rejected" },
-  ];
-
   const fetchLeaveData = async (id) => {
     try {
       setLoading(true);
@@ -43,43 +36,46 @@ const LeaveHistory = () => {
 
   return (
     <div className="leave-history">
-      <h2>Employee Leave History</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter Employee ID"
-          value={employeeId}
-          onChange={(e) => setEmployeeId(e.target.value)}
-          required
-        />
-        <button type="submit">Get Leave History</button>
-      </form>
+      <img src="https://paybooks.in/wp-content/uploads/2020/04/A-Quick-Guide-to-Leave-Rules-in-India.png" alt="Leave Rules"></img>
+      <div className="leave-history-content">
+        <h2>Employee Leave History</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter Employee ID"
+            value={employeeId}
+            onChange={(e) => setEmployeeId(e.target.value)}
+            required
+          />
+          <button type="submit">Get Leave History</button>
+        </form>
 
-      {loading && <p>Loading leave data...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {loading && <p className="loading">Loading leave data...</p>}
+        {error && <p className="error">{error}</p>}
 
-      {leaveData.length > 0 && (
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Leave Type</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaveData.map((leave, index) => (
-              <tr key={index}>
-                <td>{new Date(leave.start_date).toLocaleDateString()}</td>
-                <td>{new Date(leave.end_date).toLocaleDateString()}</td>
-                <td>{leave.type}</td>
-                <td>{leave.status}</td>
+        {leaveData.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Leave Type</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {leaveData.map((leave, index) => (
+                <tr key={index}>
+                  <td>{new Date(leave.start_date).toLocaleDateString()}</td>
+                  <td>{new Date(leave.end_date).toLocaleDateString()}</td>
+                  <td>{leave.type}</td>
+                  <td>{leave.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };

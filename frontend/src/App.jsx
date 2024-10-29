@@ -28,6 +28,7 @@ import LeaveRequests from "./pages/LeaveRequests.jsx";
 import MyLeaves from "./pages/MyLeaves.jsx";
 
 import Configurations from "./pages/Configurations.jsx";
+import CustomAttribute from "./pages/customAttribute.jsx";
 
 import "./App.css";
 
@@ -60,6 +61,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/customAttributes"
+          element={
+            <ProtectedRoute allowedRoles={["Admin"]}>
+              <CustomAttribute />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/configurations"
@@ -69,7 +78,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-    
+
         <Route
           path="/Employee_Information_Management"
           element={
@@ -111,7 +120,7 @@ function App() {
         <Route
           path="/leave-history-admin"
           element={
-            <ProtectedRoute allowedRoles={["HR Manager"]}>
+            <ProtectedRoute allowedRoles={["HR Manager","Admin"]}>
               <LeaveHistory />
             </ProtectedRoute>
           }

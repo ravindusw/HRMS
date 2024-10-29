@@ -1,0 +1,97 @@
+/* Adjust the card size for a balanced look */
+.custom-attr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px; /* Adjusted padding */
+  width: 80vw; /* Slightly wider */
+  max-width: 800px; /* Set maximum width for a better fit */
+  margin: 80px auto; /* Adjusted margin for spacing from navbar */
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Standard shadow */
+  border-radius: 8px; /* Rounded corners */
+}
+
+/* Style for list and form sections */
+.custom-attr-list,
+.custom-attr-form {
+  width: 100%; /* Full width for list and form within container */
+  margin: 15px 0; /* Reduced vertical margin */
+}
+
+.custom-attr-list h2,
+.custom-attr-form h2 {
+  font-size: 1.5em; /* Moderate font size */
+  color: #333;
+  margin-bottom: 10px;
+
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 5px;
+}
+
+.custom-attr-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.custom-attr-list li {
+  font-size: 1em;
+  color: #555;
+  background-color: #f9f9f9;
+  padding: 10px; /* Adjusted padding */
+  margin: 6px 0; /* Reduced margin */
+  border-radius: 4px;
+}
+
+.custom-attr-list p {
+  font-size: 1em;
+  color: #999;
+}
+
+/* Form styling */
+.custom-attr-form {
+  background-color: #fff;
+  padding: 20px; /* Moderate padding */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.custom-attr-group {
+  margin-bottom: 15px;
+}
+
+.custom-attr-group label {
+  display: block;
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.custom-attr-control {
+  width: 100%;
+  padding: 10px; /* Adjusted padding */
+  font-size: 1em;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.custom-attr-control:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.error {
+  font-size: 0.9em;
+  color: #d9534f;
+  margin-bottom: 10px;
+}
+
+.custom-attr-list ul {
+  list-style-type: disc; /* This will add bullets to the list items */
+  padding-left: 20px; /* Optional: Adds some padding to the left */
+}

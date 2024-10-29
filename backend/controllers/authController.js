@@ -12,6 +12,8 @@ export const login = (req, res) => {
     if (err) {
       console.error("Error during stored procedure call:", err);
 
+      // logLoginAttempt(email, "Server error");
+
       return res.status(500).send("Server error");
     }
 
@@ -92,10 +94,10 @@ export const addEmployee = (req, res) => {
     Gender,
     Address,
     Marital_Status,
-    Department,
+    Department_ID,
     Supervisor_ID,
-    Job_Title,
-    Pay_Grade,
+    Job_Title_ID,
+    Pay_Grade_ID,
     Employment_Type,
     Work_Schedule,
     Hired_Date,
@@ -130,10 +132,10 @@ export const addEmployee = (req, res) => {
     makeNullIfEmpty(Gender),
     makeNullIfEmpty(Address),
     makeNullIfEmpty(Marital_Status),
-    makeNullIfEmpty(Department),
+    makeNullIfEmpty(Department_ID),
     makeNullIfEmpty(Supervisor_ID),
-    makeNullIfEmpty(Job_Title),
-    makeNullIfEmpty(Pay_Grade),
+    makeNullIfEmpty(Job_Title_ID),
+    makeNullIfEmpty(Pay_Grade_ID),
     makeNullIfEmpty(Employment_Type),
     makeNullIfEmpty(Work_Schedule),
     formatDate(makeNullIfEmpty(Hired_Date)),

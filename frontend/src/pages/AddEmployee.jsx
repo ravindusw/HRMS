@@ -22,10 +22,10 @@ const AddEmployee = () => {
     Gender: "",
     Address: "",
     Marital_Status: "",
-    Department: "",
+    Department_ID: "",
     Supervisor_ID: "",
-    Job_Title: "",
-    Pay_Grade: "",
+    Job_Title_ID: "",
+    Pay_Grade_ID: "",
     Employment_Type: "",
     Work_Schedule: "",
     Hired_Date: "",
@@ -45,6 +45,9 @@ const AddEmployee = () => {
   const [supervisors, setSupervisors] = useState([]);
   const [message, setMessage] = useState("Submit");
   const [buttonColor, setButtonColor] = useState("");
+  const [jobTitles, setJobTitles] = useState([]);
+  const [Departments, setDepartments] = useState([]);
+  const [Pay_Grades, setPay_Grades] = useState([]);
 
   useEffect(() => {
     axiosInstance
@@ -54,6 +57,33 @@ const AddEmployee = () => {
       })
       .catch((error) => {
         console.error("Error fetching supervisors:", error);
+      });
+
+    axiosInstance
+      .get("/auth/getJobTitles")
+      .then((response) => {
+        setJobTitles(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching jobTitles", error);
+      });
+
+    axiosInstance
+      .get("/auth/Hr/departments")
+      .then((response) => {
+        setDepartments(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching Departments", error);
+      });
+
+    axiosInstance
+      .get("/auth/Hr/pay_grades")
+      .then((response) => {
+        setPay_Grades(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching payGrades", error);
       });
   }, []);
 
@@ -221,22 +251,21 @@ const AddEmployee = () => {
                   <Form.Label>Department:</Form.Label>
                   <InputGroup>
                     <Form.Select
-                      name="Department"
+                      name="Department_ID"
                       onChange={handleChange}
                       required
                     >
                       <option value="" hidden>
                         Select Department
                       </option>
-                      <option value="IT">IT</option>
-                      <option value="HR">HR</option>
-                      <option value="Marketing">Marketing</option>
-                      <option value="Finance">Finance</option>
-                      <option value="Production">Production</option>
-                      <option value="Supply Chain">Supply Chain</option>
-                      <option value="Merchandising">Merchandising</option>
-                      <option value="Maintenance">Maintenance</option>
-                      <option value="Warehouse">Warehouse</option>
+                      {Departments.map((Department) => (
+                        <option
+                          key={Department.dept_id}
+                          value={Department.dept_id}
+                        >
+                          {Department.name}
+                        </option>
+                      ))}
                     </Form.Select>
                   </InputGroup>
                 </Form.Group>
@@ -263,57 +292,47 @@ const AddEmployee = () => {
                   <Form.Label>Job Title:</Form.Label>
                   <InputGroup>
                     <Form.Select
-                      name="Job_Title"
+                      name="Job_Title_ID"
                       onChange={handleChange}
                       required
                     >
-                      <option value="" disable hidden></option>
-                      <option value="Accountant">Accountant</option>
-                      <option value="CEO">CEO</option>
-                      <option value="Fashion Designer">Fashion Designer</option>
-                      <option value="HR Manager">HR Manager</option>
-                      <option value="IT Manager">IT Manager</option>
-                      <option value="Marketing Manager">
-                        Marketing Manager
+                      <option value="" disabled>
+                        Select Job Title
                       </option>
-                      <option value="Packaging Assistant">
-                        Packaging Assistant
-                      </option>
-                      <option value="Project Manager">Project Manager</option>
-                      <option value="Quality Control Inspector">
-                        Quality Control Inspector
-                      </option>
-                      <option value="Retail Assistant">Retail Assistant</option>
-                      <option value="Sales Manager">Sales Manager</option>
-                      <option value="Sewing Machine Operator">
-                        Sewing Machine Operator
-                      </option>
-                      <option value="Supply Chain Manager">
-                        Supply Chain Manager
-                      </option>
-                      <option value="Warehouse Worker">Warehouse Worker</option>
+                      {jobTitles.map((job) => (
+                        <option key={job.job_title_id} value={job.job_title_id}>
+                          {job.title}
+                        </option>
+                      ))}
                     </Form.Select>
                   </InputGroup>
                 </Form.Group>
               </Col>
+
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Pay Grade:</Form.Label>
                   <InputGroup>
                     <Form.Select
-                      name="Pay_Grade"
+                      name="Pay_Grade_ID"
                       onChange={handleChange}
                       required
                     >
-                      <option value="" hidden></option>
-                      <option value="Level-1">Level-1</option>
-                      <option value="Level-2">Level-2</option>
-                      <option value="Level-3">Level-3</option>
-                      <option value="Level-4">Level-4</option>
-                      <option value="Level-5">Level-5</option>
+                      <option value="" disabled>
+                        Select Pay grade
+                      </option>
+                      {Pay_Grades.map((Pay_Grade) => (
+                        <option
+                          key={Pay_Grade.pay_grade_id}
+                          value={Pay_Grade.pay_grade_id}
+                        >
+                          {Pay_Grade.name}
+                        </option>
+                      ))}
                     </Form.Select>
                   </InputGroup>
                 </Form.Group>
+
                 <Form.Group className="mb-3">
                   <Form.Label>Employment Type:</Form.Label>
                   <InputGroup>

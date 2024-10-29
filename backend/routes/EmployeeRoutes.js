@@ -5,3 +5,5 @@ router.post(
   authorizeRoles("Admin", "HR Manager"),
   addUser
 );
+
+// leave req

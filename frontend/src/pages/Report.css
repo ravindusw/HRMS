@@ -36,9 +36,9 @@ body {
 }
 
 .reportcontainer-1 h2 {
-  color: white;
-  font-size: 1.8rem; /* Removed space */
-  padding-top: 2px;
+  color: rgb(3, 34, 25);
+  font-size: 1.8rem;
+  padding-bottom: 2px;
   font-weight: 600;
   margin-bottom: 1rem;
   text-align: center; /* Changed justify-content to text-align */
