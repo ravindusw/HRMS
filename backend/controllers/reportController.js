@@ -74,9 +74,10 @@ export const getLeaveReport = (req, res) => {
 };
 
 export const getCustomFieldReport = (req, res) => {
-  const query = "CALL GetCustomFieldReport()";
+  const attribute_name = req.params.attribute_name;
+  const query = "GetEmployeeAttribute(?)";
 
-  db.query(query, (err, results) => {
+  db.query(query, [attribute_name], (err, results) => {
     if (err) {
       console.error(err);
       return res
