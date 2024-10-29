@@ -4,7 +4,9 @@ import { addUser, addEmployee } from "../controllers/authController.js";
 import { verifyToken, authorizeRoles } from "../middleWare/authMiddleware.js";
 import { getSupervisors } from "../controllers/employeeControler.js";
 import { fetchJobTitles } from "../controllers/configurationController.js";
+// import { getCustomAttributes } from "../controllers/customAttributesContoller.js";
 
+import customAttributeRoutes from "./customAttributeRoutes.js";
 import HrRouter from "./HrRouter.js";
 
 const router = Router();
@@ -41,6 +43,11 @@ router.post(
   addEmployee
 );
 
-0;
+router.use(
+  "/customAttributes",
+  verifyToken,
+  // authorizeRoles("Admin", "HR Manager"),
+  customAttributeRoutes
+);
 
 export default router;
