@@ -1,20 +1,35 @@
 .leave-history {
-  /* width: 100%;height: 100%; */
-  background-image: url("https://paybooks.in/wp-content/uploads/2020/04/A-Quick-Guide-to-Leave-Rules-in-India.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 100vw;
   min-height: 100vh;
   margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background color */
 }
 
+.leave-history img {
+  max-width: 40%;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 8px; /* Rounded corners for the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the image */
+}
+
+.leave-history-content {
+  max-width: 50%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the content */
+}
 
 .leave-history h2 {
-  padding-top: 120px;
   text-align: center;
   color: #4caf50; /* Green for headings */
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .leave-history form {
@@ -45,6 +60,7 @@
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 .leave-history button:hover {
@@ -52,15 +68,15 @@
 }
 
 .leave-history table {
-  width: 60%;
-  margin: 20px auto;
+  width: 100%;
+  margin: 20px 0;
   border-collapse: collapse;
   background-color: white; /* White table background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .leave-history th,
-td {
+.leave-history td {
   padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
