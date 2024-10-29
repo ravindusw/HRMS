@@ -40,31 +40,27 @@ export const addAttribute = (req, res) => {
       return res.status(500).send("Server error");
     }
 
-    const entryCount = results[0].entry_count; // Get the entry count
+    const entryCount = results[0].entry_count;
 
-    const { attributeKey, defaultValue, availableCustomAttributesCount } =
-      req.body;
+    const { attributeKey, defaultValue } = req.body;
 
     let query;
     if (entryCount === 0) {
       query = `CALL insert_first_custom_attribute(?, ?)`;
     } else {
-      query = `CALL insert_custom_attribute(?, ?, ?)`;
+      query = `CALL insert_custom_attribute(?, ?)`;
     }
 
-    // Perform the insert query
-    db.query(
-      query,
-      [attributeKey, defaultValue, availableCustomAttributesCount],
-      (err, results) => {
-        if (err) {
-          console.error("Error adding custom attribute:", err);
-          return res.status(500).send("Server error");
-        }
-
-        console.log("Custom attribute added");
-        res.json(results[0]); // Respond with the results
+    db.query(query, [attributeKey, defaultValue], (err, results) => {
+      if (err) {
+        console.error("Error adding custom attribute:", err);
+        return res.status(500).send("Server error");
       }
-    );
+
+      console.log("Custom attribute added");
+      console.log(results[0][0]);
+
+      res.json(results[0]);
+    });
   });
 };
