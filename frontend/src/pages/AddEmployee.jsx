@@ -290,7 +290,7 @@ const AddEmployee = () => {
                       onChange={handleChange}
                       required
                     >
-                      <option value="" hidden>
+                      <option value="" disabled>
                         Select Department
                       </option>
                       {Departments.map((Department) => (
@@ -309,10 +309,11 @@ const AddEmployee = () => {
                   <InputGroup>
                     <Form.Select
                       name="Supervisor_ID"
+                      value={employeeData.Supervisor_ID}
                       onChange={handleChange}
                       required
                     >
-                      <option value="" hidden>
+                      <option value="" disabled>
                         Select Supervisor
                       </option>
                       {supervisors.map((supervisor) => (
@@ -329,6 +330,7 @@ const AddEmployee = () => {
                     <Form.Select
                       name="Job_Title_ID"
                       onChange={handleChange}
+                      value={employeeData.Job_Title_ID}
                       required
                     >
                       <option value="" disabled>
@@ -350,6 +352,7 @@ const AddEmployee = () => {
                   <InputGroup>
                     <Form.Select
                       name="Pay_Grade_ID"
+                      value={employeeData.Pay_Grade_ID}
                       onChange={handleChange}
                       required
                     >
