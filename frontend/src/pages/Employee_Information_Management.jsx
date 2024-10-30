@@ -133,7 +133,7 @@ const EmployeeInfoManagement = () => {
   };
   
   const FilterGenders = () => {
-    const genders = ["All Genders", "Male", "Female", "others"];
+    const genders = ["All Genders", "Male", "Female", "Others"];
     return (
       <select>
         {genders.map((gender) => (
