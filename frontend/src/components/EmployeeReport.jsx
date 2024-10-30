@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
-import './ComponentStyles.css'
+import "./ComponentStyles.css";
 import axiosInstance from "../utils/AxiosInstance";
 
 const EmployeeReport = () => {
@@ -42,13 +42,19 @@ const EmployeeReport = () => {
     fetchDepartments();
   }, []);
 
-  // Generate PDF report for the department
   const generatePDF = () => {
     const doc = new jsPDF();
+    const pageHeight = doc.internal.pageSize.height;
+    let yOffset = 20;
+
     doc.text(`Department: ${department} Employee Report`, 10, 10);
+
     employees.forEach((emp, index) => {
-      const yOffset = 20 + index * 90; // Increased vertical spacing
-      // doc.text(`${index + 1}.`, 10, yOffset);
+      if (yOffset + 80 > pageHeight) {
+        doc.addPage(); // Add a new page if the current page is full
+        yOffset = 20; // Reset yOffset for the new page
+      }
+
       doc.text(`${index + 1}.`, 10, yOffset);
       doc.text(`Employee ID: ${emp.employee_id}`, 10, yOffset + 10);
       doc.text(`First Name: ${emp.first_name}`, 10, yOffset + 20);
@@ -58,7 +64,10 @@ const EmployeeReport = () => {
       doc.text(`Position: ${emp.job_title}`, 10, yOffset + 60);
       doc.text(`Email: ${emp.email}`, 10, yOffset + 70);
       doc.text(`Pay Grade: ${emp.pay_grade}`, 10, yOffset + 80);
+
+      yOffset += 90; // Increment yOffset for the next employee entry
     });
+
     doc.save(`${department}-employees-report.pdf`);
   };
 
