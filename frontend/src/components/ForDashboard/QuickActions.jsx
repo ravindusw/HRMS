@@ -1,4 +1,4 @@
-import "./QuickActions.css";
+import "./DashboardComponentStyles.css";
 import { Link } from "react-router-dom";
 
 export default function QuickActions() {

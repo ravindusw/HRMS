@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import axios from "axios";
-import "./ReportSubpage.css";
+import './ComponentStyles.css'
 import axiosInstance from "../utils/AxiosInstance";
 
 const EmployeeReport = () => {

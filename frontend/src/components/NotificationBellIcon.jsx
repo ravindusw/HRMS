@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import axiosInstance from '../utils/AxiosInstance';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './NotificationBellIcon.css'; // Import the CSS file for styling
+import './ComponentStyles.css'
 import bellicon from '../assets/bell-icon.svg'; // Import the bell icon
 
 const NotificationBellIcon = () => {

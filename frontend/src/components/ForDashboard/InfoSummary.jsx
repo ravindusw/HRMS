@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./InfoSummary.css";
+import "./DashboardComponentStyles.css";
 
 export default function InfoSummary({profileData}) {
 
