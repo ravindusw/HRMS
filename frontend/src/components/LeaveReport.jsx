@@ -77,7 +77,7 @@ const LeaveReport = () => {
           ))}
         </select>
       </div>
-      <button onClick={fetchLeaveDetails}>Fetch Leave Details</button>
+      <center><button onClick={fetchLeaveDetails}>Fetch Leave Details</button></center>
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
