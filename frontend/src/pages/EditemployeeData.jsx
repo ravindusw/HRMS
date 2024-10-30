@@ -16,6 +16,7 @@ const EditemployeeData = () => {
   const [jobTitles, setJobTitles] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [payGrades, setPayGrades] = useState([]);
+  const [coustumattributes, setcoustumattributes] = useState(null);
   const [employmentStatus, setEmploymentStats] = useState([]);
   const [editableFields, setEditableFields] = useState({
     address: false,
@@ -52,6 +53,10 @@ const EditemployeeData = () => {
         const employmentStatsResponse = await axiosInstance.get('/auth/Hr/employmentStats');
         setEmploymentStats(employmentStatsResponse.data);
         //console.log(employmentStatsResponse.data);
+
+        const response2 = await axiosInstance.get(`/auth/Hr/attributes/${id_to_edit}`);
+        //console.log(response2.data);
+        setcoustumattributes(response2.data);
         
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -164,7 +169,8 @@ const EditemployeeData = () => {
       marital_state: employee.marital_state,
       phone_numbers: employee.phone_numbers,
       dependents: employee.dependents,
-      emergency_contacts: employee.emergency_contacts
+      emergency_contacts: employee.emergency_contacts,
+      custom_Attributes: coustumattributes
 
       
     };
@@ -174,6 +180,9 @@ const EditemployeeData = () => {
       // Update employee data
       
       await axiosInstance.put(`/auth/Hr/employees/${id_to_edit}`, employeeChanges);
+
+      
+      
 
       
       
@@ -277,6 +286,13 @@ const EditemployeeData = () => {
       ...prevEmployee,
       last_name: e.target.value
     }));
+  }
+
+  const handleCustomAttributeChange = (index, value) => {
+    const updatedCustomAttributes = [...coustumattributes];
+    updatedCustomAttributes[index].value = value;
+    setcoustumattributes(updatedCustomAttributes);
+    //console.log(coustumattributes);
   }
 
   
@@ -557,6 +573,28 @@ const EditemployeeData = () => {
           ))}
           <button type="button" onClick={addEmergencyContact}>Add Emergency Contact</button>
         </label>
+
+        {coustumattributes && coustumattributes.length > 0 ? (
+          <label>
+            Coustum Attributes:
+            {coustumattributes.map((attribute, index) => (
+              <div key={index}>
+                <label>{attribute.key_name}</label>
+                <input
+                  type="text"
+                  placeholder={attribute.key_name}
+                  value={attribute.value}
+                  onChange={(e) => handleCustomAttributeChange(index, e.target.value)}
+                />
+              </div>
+            ))}
+          </label>
+          ) : (
+            <p>
+              
+            </p>
+          )}
+          
         
         
         <button type="submit">Save Changes</button>

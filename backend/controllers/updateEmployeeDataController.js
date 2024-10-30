@@ -16,7 +16,11 @@ export const updateEmployeeData = (req, res) => {
     phone_numbers,
     dependents,
     emergency_contacts,
+    custom_Attributes
+
   } = req.body;
+  
+
 
   // JSON Stringify if arrays are being passed directly
   const phoneNumbersJson = JSON.stringify(phone_numbers);
@@ -62,5 +66,20 @@ export const updateEmployeeData = (req, res) => {
     }
     res.status(200).json({ message: 'Employee updated successfully!' });
   });
+
+  // Update custom attributes
+  if (custom_Attributes) {
+    const customAttributesQuery = `CALL UpdatecustomAttributes(?, ?)`;
+    const customAttributesValues = [employeeId, JSON.stringify(custom_Attributes)];
+
+    db.query(customAttributesQuery, customAttributesValues, (err, results) => {
+      if (err) {
+        console.error('Error updating custom attributes:', err);
+        return res.status(500).send('Server error');
+      }
+    });
+  }
+
+
 };
 
