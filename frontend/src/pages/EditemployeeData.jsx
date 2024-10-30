@@ -315,6 +315,7 @@ const EditemployeeData = () => {
               name="first_name"
               value={employee.first_name}
               onChange={handleFirstNameChange}
+              required
             />
           ) : (
             <span>{employee.first_name}</span>
@@ -332,6 +333,7 @@ const EditemployeeData = () => {
               name="last_name"
               value={employee.last_name}
               onChange={handleLastNameChange}
+              required
             />
           ) : (
             <span>{employee.last_name}</span>
@@ -349,6 +351,7 @@ const EditemployeeData = () => {
               name="NIC"
               value={employee.NIC}
               onChange={handleNICChange}
+              required
             />
           ) : (
             <span>{employee.NIC}</span>
@@ -365,6 +368,7 @@ const EditemployeeData = () => {
               name="birthday"
               value={employee.birthday}
               onChange={handleBirthdayChange}
+              required
             />
           ) : (
             <span>{employee.birthday}</span>
@@ -381,6 +385,7 @@ const EditemployeeData = () => {
               name="address"
               value={employee.address}
               onChange={handleChange}
+              required
             />
           ) : (
             <span>{employee.address}</span>
@@ -396,6 +401,7 @@ const EditemployeeData = () => {
               name="marital_state"
               value={employee.marital_state}
               onChange={handleChange}
+              required
             >
               <option value="Single">Single</option>
               <option value="Married">Married</option>
@@ -414,6 +420,7 @@ const EditemployeeData = () => {
               name="job_title"
               value={employee.job_title_id}
               onChange={handleJobTitleChange}
+              required
             >
               {jobTitles.map((jobTitle) => (
                 <option key={jobTitle.job_title_id} value={jobTitle.job_title_id}>{jobTitle.title}</option>
@@ -433,6 +440,7 @@ const EditemployeeData = () => {
               name="department"
               value={employee.department_id}
               onChange={handleDepartmentChange}
+              required
             >
               {departments.map((department) => (
                 <option key={department.dept_id} value={department.dept_id}>{department.name}</option>
@@ -452,6 +460,7 @@ const EditemployeeData = () => {
               name="pay_grade"
               value={employee.pay_grade_id}
               onChange={handlePayGradeChange}
+              required
             >
               {payGrades.map((payGrade) => (
                 <option key={payGrade.pay_grade_id} value={payGrade.pay_grade_id}>{payGrade.name}</option>
@@ -474,6 +483,7 @@ const EditemployeeData = () => {
               name="employment_status"
               value={employee.employment_state_id}
               onChange={handleEmploymentStatusChange}
+              required
             >
               {employmentStatus.map((status) => (
                 <option key={status.employment_state_id} value={status.employment_state_id}>{status.employment_status}</option>
