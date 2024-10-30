@@ -84,7 +84,6 @@ export const addUser = (req, res) => {
 };
 
 export const addEmployee = (req, res) => {
-  console.log("came here");
   const {
     NIC,
     First_Name,
@@ -112,6 +111,7 @@ export const addEmployee = (req, res) => {
     Dependant_DOB,
     Dependant_Gender,
     Dependent_Contact_Number,
+    custom_attributes,
   } = req.body;
 
   const formatDate = (date) =>
@@ -158,6 +158,21 @@ export const addEmployee = (req, res) => {
       console.log(error);
       return res.status(500).json({ error: "Database error", details: error });
     }
+
+    const employeeID = results[0][0].employee_id;
+
+    const attributeQuery = "CALL insert_custom_attributes_for_employee(?,?,?)";
+
+    custom_attributes.forEach((attr) => {
+      const attrValues = [employeeID, attr.attribute_id, attr.value];
+
+      db.query(attributeQuery, attrValues, (error) => {
+        if (error) {
+          console.log("Error inserting custom attribute:", error);
+        }
+      });
+    });
+
     res.status(200).json({ message: "Employee added successfully!" });
   });
 };

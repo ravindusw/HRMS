@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import axiosInstance from "../utils/AxiosInstance";
 import "./Notification.css";
@@ -135,7 +136,11 @@ const Notification = () => {
                     notification.type == "alert" ? "Alert" : "Notification"
                   }
                 </h3>
-                <p className="notification-message">{notification.message}</p>
+                  { notification.type == "new request" ? <p className="notification-message">{notification.message}. <Link to="/leaverequests" styles={{all: "unset"}}>View</Link></p> : 
+                    notification.type == "leave status" ? <p className="notification-message">{notification.message}</p> :
+                    notification.type == "alert" ? <p className="notification-message">{notification.message} <Link to="/profile" styles={{all: "unset"}}>View</Link></p> 
+                    : <p className="notification-message">{notification.message}</p>
+                  }
                 <span className="notification-date">{new Date(notification.date).toLocaleString()}</span>
               </div>
 

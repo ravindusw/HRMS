@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
 import "./ReportSubpage.css";
@@ -10,19 +10,16 @@ const LeaveBalanceReport = () => {
   const [leaveBalances, setLeaveBalances] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [departmentOptions, setDepartmentOptions] = useState([]);
 
-  // Options for department and leave type selection
-  const departmentOptions = [
-    "IT",
-    "HR",
-    "Marketing",
-    "Finance",
-    "Production",
-    "Supply Chain",
-    "Merchandising",
-    "Maintenance",
-    "Warehouse",
-  ];
+  const fetchDepartments = async () => {
+    try {
+      const response = await axiosInstance.get("/auth/Hr/departments");
+      setDepartmentOptions(response.data);
+    } catch (error) {
+      setError("Failed to fetch departments");
+    }
+  };
 
   const leaveTypeOptions = ["Annual", "Casual", "Maternity", "No-pay"];
 
@@ -44,6 +41,9 @@ const LeaveBalanceReport = () => {
     }
   };
 
+  useEffect(() => {
+    fetchDepartments();
+  }, []);
   // Generate PDF report for the leave balances
   const generatePDF = () => {
     const doc = new jsPDF();
@@ -73,8 +73,8 @@ const LeaveBalanceReport = () => {
         >
           <option value="">-- Select Department --</option>
           {departmentOptions.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
+            <option key={dept.id} value={dept.id}>
+              {dept.name}
             </option>
           ))}
         </select>
