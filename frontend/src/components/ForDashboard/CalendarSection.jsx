@@ -1,6 +1,6 @@
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./CalendarSection.css";
+import "./DashboardComponentStyles.css";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../utils/AxiosInstance";
 

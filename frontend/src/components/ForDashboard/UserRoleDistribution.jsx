@@ -1,4 +1,4 @@
-import "./UserRoleDistribution.css";
+import "./DashboardComponentStyles.css";
 import adminIcon from "../../assets/admin-icon.png";
 import hrmIcon from "../../assets/hr-manager.png";
 import supervisorIcon from "../../assets/supervisor.png";
