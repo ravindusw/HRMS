@@ -2,9 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: system-ui, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, "Segoe UI", Roboto, Ubuntu, "Open Sans",
+    "Helvetica Neue", sans-serif;
 }
 
-body{
+body {
   background-color: #f0f0f0; /* Light grey */
 }
