@@ -165,10 +165,11 @@ const HrView = () => {
           {coustumattributes && coustumattributes.length > 0 ? (
             <div>
             {coustumattributes.map((attribute, index) => (
-              <h6 key={index}>
+              <p key={index}>
                 {attribute.key_name} : {attribute.value}
                 
-              </h6>
+                
+              </p>
             ))}
           </div>
           ) : (
