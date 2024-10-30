@@ -126,9 +126,9 @@ export const applyLeave = (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const query = `CALL insert_leave_record(?, ?, ?, ?, ?);`;
+  const query = `CALL insert_leave_record(?, ?, ?, ?, ?, ?);`;
 
-  db.query(query, [e_id, leave_type_id, start_date, end_date, applied_date], (err, results) => {
+  db.query(query, [e_id, leave_type_id, start_date, end_date, applied_date,reason], (err, results) => {
     if (err) {
       console.error("Error applying for leave:", err);
       return res.status(500).send("Server error");
@@ -158,5 +158,26 @@ export const getLeaveHistory = (req, res) => {
       // Handle unexpected format
       res.status(500).json({ message: "Unexpected format for leave history data." });
     }
+  });
+}
+
+export const getLeaveBalance = (req, res) => {
+  const { e_id } = req.user;
+  const {type} = req.query.type;
+  console.log(type);
+  const query = `CALL leave_balance(?,?);`;
+
+  db.query(query, [e_id,type], (err, results) => {
+    if (err) {
+      console.error("Error fetching leave balance:", err);
+      return res.status(500).send("Server error");
+    }
+
+    if (!results[0] || !results[0][0]) {
+      return res.status(404).json({ message: "No leave balance found." });
+    }
+
+    const leaveBalance = results[0][0]; // Stored procedure should return leave balance directly
+    res.status(200).json(leaveBalance);
   });
 }

@@ -9,6 +9,7 @@ const LeaveApplication = () => {
   const [endDate, setEndDate] = useState("");
   const [reason, setReason] = useState("");
   const [leaveTypes, setLeaveTypes] = useState([]);
+  
 
   const navigate = useNavigate(); // Initialize navigate
 
@@ -52,6 +53,8 @@ const LeaveApplication = () => {
 
     fetchLeaveTypes();
   }, []);
+
+ 
 
   return (
     <div className="leave-application">
