@@ -133,7 +133,7 @@ const EmployeeInfoManagement = () => {
   };
   
   const FilterGenders = () => {
-    const genders = ["All Genders", "Male", "Female", "others"];
+    const genders = ["All Genders", "male", "female", "Others"];
     return (
       <select>
         {genders.map((gender) => (
@@ -154,6 +154,7 @@ const EmployeeInfoManagement = () => {
             placeholder="Search Name..."
             onChange={changeFilter}
             value={filter}
+            style={{height: '45px', width: '200px', marginBottom: '0px'}}
           />
           <select onChange={handleJobTitleChange} value={selectedJobTitle}>
             {JobTitles.map(jobTitle => (
@@ -168,7 +169,7 @@ const EmployeeInfoManagement = () => {
           </select>
           
           <select onChange={handleGenderChange} value={selectedGender}>
-            {['All Genders', 'Male', 'Female', 'Others'].map(gender => (
+            {['All Genders', 'male', 'female', 'others'].map(gender => (
               <option key={gender} value={gender}>{gender}</option>
             ))}
           </select>
