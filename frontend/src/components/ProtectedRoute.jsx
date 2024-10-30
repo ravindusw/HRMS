@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const role = Cookies.get("role");
 
   if (!role) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   try {
@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return children;
   } catch (error) {
     console.error("Failed to decode token:", error);
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 };
 
