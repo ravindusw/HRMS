@@ -154,6 +154,7 @@ const EmployeeInfoManagement = () => {
             placeholder="Search Name..."
             onChange={changeFilter}
             value={filter}
+            style={{height: '45px', width: '200px', marginBottom: '0px'}}
           />
           <select onChange={handleJobTitleChange} value={selectedJobTitle}>
             {JobTitles.map(jobTitle => (
