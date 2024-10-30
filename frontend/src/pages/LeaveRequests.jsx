@@ -76,6 +76,7 @@ const LeaveRequests = () => {
             <th>Start Date</th>
             <th>End Date</th>
             <th>Leave Balance</th>
+            <th>Reason</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -87,6 +88,7 @@ const LeaveRequests = () => {
               <td>{new Date(request.start_date).toLocaleDateString()}</td>
               <td>{new Date(request.end_date).toLocaleDateString()}</td>
               <td>{request.balance}</td>
+              <td>{request.reason}</td>
               <td>
                 {request && (
                   <>
