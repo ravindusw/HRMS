@@ -179,8 +179,8 @@ const LoginHelp = () => {
         </Col>
       </Row>
       <div className="text-center mt-4">
-        <Button variant="light" onClick={() => navigate("/")}>
-          Back to Home
+        <Button variant="dark" onClick={() => navigate("/")}>
+          Back to Login page
         </Button>
       </div>
     </Container>

@@ -61,7 +61,12 @@ const LeaveApplication = () => {
           <button className="profile-btn" onClick={() => navigate("/profile")}>
             Profile
           </button>
-          <button className="my-leaves-btn" onClick={() => navigate("/myleaves")}>My Leaves</button>
+          <button
+            className="my-leaves-btn"
+            onClick={() => navigate("/myleaves")}
+          >
+            My Leaves
+          </button>
         </div>
       </header>
 
@@ -69,7 +74,10 @@ const LeaveApplication = () => {
         <h2>Request for leave</h2>
 
         <label>Type</label>
-        <select value={leaveType} onChange={(e) => setLeaveType(e.target.value)}>
+        <select
+          value={leaveType}
+          onChange={(e) => setLeaveType(e.target.value)}
+        >
           <option value="">Select leave type</option>
           {leaveTypes &&
             leaveTypes.map((type) => (
