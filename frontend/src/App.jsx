@@ -28,7 +28,7 @@ import LeaveRequests from "./pages/LeaveRequests.jsx";
 import MyLeaves from "./pages/MyLeaves.jsx";
 
 import Configurations from "./pages/Configurations.jsx";
-import CustomAttribute from "./pages/CustomAttribute.jsx";
+import CustomAttribute from "./pages/customAttribute.jsx";
 
 import "./App.css";
 
@@ -37,60 +37,19 @@ function App() {
     <BrowserRouter>
       <HRMSNavBar />
       <Routes>
-        
         <Route path="/" element={<Login />} />
-        
-        <Route path="/dashboard" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
-        
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/help" element={<Help />} />
-        
-        <Route path="/notification" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
-            <Notification />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/profile" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
-            <Profile />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/report" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-            <Report />
-          </ProtectedRoute>
-        } />
+        <Route path="/notification" element={<Notification />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/report" element={<Report />} />
 
         <Route path="/notAuthorized" element={<NotAuthorized />} />
+        <Route path="/employee-report" element={<EmployeeReport />} />
 
-        <Route path="/employee-report" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-            <EmployeeReport />
-          </ProtectedRoute>  
-        } />
-
-        <Route path="/leavebalance-report" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-            <LeaveBalanceReport />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/leave-report" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-            <LeaveReport />
-          </ProtectedRoute>
-        } />
-          
-        <Route path="/custom-fields-report" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager"]}>
-            <CustomFieldReport />
-          </ProtectedRoute>
-        } />
+        <Route path="/leavebalance-report" element={<LeaveBalanceReport />} />
+        <Route path="/leave-report" element={<LeaveReport />} />
+        <Route path="/custom-fields-report" element={<CustomFieldReport />} />
 
         <Route path="/loginHelp" element={<LoginHelp />} />
 
@@ -153,24 +112,10 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
-        <Route path="/leaveapplication" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
-            <LeaveApplication />
-          </ProtectedRoute>
-        } />
+        <Route path="/leaveapplication" element={<LeaveApplication />} />
 
-        <Route path="/myleaves" element={
-          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
-            <MyLeaves />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/leaverequests" element={
-          <ProtectedRoute allowedRoles={["Supervisor"]}>
-            <LeaveRequests />
-          </ProtectedRoute>
-        } />
+        <Route path="/myleaves" element={<MyLeaves />} />
+        <Route path="/leaverequests" element={<LeaveRequests />} />
 
         <Route
           path="/leave-history-admin"
@@ -180,7 +125,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
         <Route
           path="/addUser"
           element={
@@ -189,7 +133,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
         <Route
           path="/addEmployee"
           element={
@@ -198,7 +141,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-      
       </Routes>
     </BrowserRouter>
   );

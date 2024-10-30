@@ -19,7 +19,6 @@ const HRMSNavBar = () => {
 
   const handleLogout = () => {
     Cookies.remove("authToken");
-    Cookies.remove("role");
     navigate("/");
   };
 
