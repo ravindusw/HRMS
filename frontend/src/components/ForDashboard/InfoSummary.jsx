@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./DashboardComponentStyles.css";
 
-export default function InfoSummary({profileData}) {
+export default function InfoSummary({ profileData }) {
 
   return (
     <div className="info-summary">
@@ -18,9 +18,6 @@ export default function InfoSummary({profileData}) {
       <p>
         <strong>Date of Birth:</strong> {profileData?.date_of_birth}
       </p>
-      {/* <p>
-        <strong>Working Since:</strong> 12/05/2020
-      </p> */}
       <button className="btn-update"><Link to="/profile" style={{ all: 'unset' }}>View Details</Link></button>
     </div>
   );

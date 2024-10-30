@@ -19,12 +19,10 @@ export default function RemainingLeaves({ role }) {
   });
 
   useEffect(() => {
-    // const id = "6bf363e8-8b5d-11ef-acee-4a6a3b2083d6"; // Hardcoded employee id
-    
+
     const fetchRemainingLeaves = async () => {
       try {
         const response = await axiosInstance.get(`/dashboard/get-remaining-leave-count`);
-        // console.log(response.data);
         setRemainingLeaves(response.data);
       } catch (error) {
         console.error("Error fetching remaining leaves:", error);
@@ -35,15 +33,16 @@ export default function RemainingLeaves({ role }) {
 
   }, []);
 
-  
+
   return (
     <div className="remaining-leaves-card">
       <h3>Remaining Leaves</h3>
 
       <div className="leave-content">
+
         {/* Leave Types Cards */}
         <div className="leave-types">
-          {remainingLeaves.length > 0 ? 
+          {remainingLeaves.length > 0 ?
             remainingLeaves.map((leave, index) => {
               return (
                 <div key={index} className="leave-card">

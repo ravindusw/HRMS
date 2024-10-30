@@ -13,7 +13,6 @@ export default function EmployeesInfo() {
     const fetchEmployeesCount = async () => {
       try {
         const response = await axiosInstance.get(`/dashboard/get_total_employee_count`);
-        // console.log("Response from employees count:", response.data.total_count);
         setEmployeesCount(response.data.total_count);
       } catch (error) {
         console.error("Error fetching employees count:", error);
@@ -25,7 +24,6 @@ export default function EmployeesInfo() {
     const fetchAbsentEmployeesCount = async () => {
       try {
         const response = await axiosInstance.get(`/dashboard/get-absent-employee-count`);
-        // console.log("Response from absent employees count:", response.data);
         setAbsentEmployeesCount(response.data.absent_count);
       } catch (error) {
         console.error("Error fetching absent employees count:", error);

@@ -48,7 +48,11 @@ function App() {
           </ProtectedRoute>
         } />
         
-        <Route path="/help" element={<Help />} />
+        <Route path="/help" element={
+          <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
+            <Help />
+          </ProtectedRoute>
+          } />
         
         <Route path="/notification" element={
           <ProtectedRoute allowedRoles={["Admin", "HR Manager", "Supervisor", "Employee"]}>
