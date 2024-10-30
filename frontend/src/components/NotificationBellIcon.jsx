@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import axiosInstance from '../utils/AxiosInstance';
-import { useNavigate } from 'react-router-dom';
-import './NotificationBellIcon.css'; // Import the CSS file for styling
+import { useNavigate, useLocation } from 'react-router-dom';
+import './ComponentStyles.css'
 import bellicon from '../assets/bell-icon.svg'; // Import the bell icon
 
 const NotificationBellIcon = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const navigate = useNavigate(); // Initialize the useNavigate hook
-
-  // const userId = '4183f727-8be8-11ef-acee-4a6a3b2083d6'; // Hardcoded user ID for now
+  const location = useLocation(); // Initialize the useLocation hook
 
   useEffect(() => {
     // Fetch the unread message count from the backend
@@ -23,7 +22,7 @@ const NotificationBellIcon = () => {
     };
 
     fetchUnreadCount();
-  }, []);
+  }, [location]);
 
   // Handle click event to navigate to the notification page
   const handleClick = () => {

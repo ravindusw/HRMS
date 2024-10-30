@@ -16,7 +16,7 @@
   margin: 100px auto;
   padding: 20px;
   border-radius: var(--border-radius);
-  /* background: var(--gradient-bg); */
+  background: var(--secondary-color);
   box-shadow: var(--box-shadow);
   font-family: var(--font-family);
 }
@@ -67,11 +67,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* .filter-buttons button:hover {
-  background-color: var(--button-hover-color);
-  color: var(--secondary-color);
-} */
-
 /* Notification List */
 .notification-list {
   list-style-type: none;
@@ -85,7 +80,7 @@
   padding: 15px;
   margin-bottom: 10px;
   border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
+  background-color: var(--secondary-color) ;
   box-shadow: var(--box-shadow);
   transition: background-color 0.3s ease-in-out;
 }

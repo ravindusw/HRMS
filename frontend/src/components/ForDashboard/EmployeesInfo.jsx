@@ -1,4 +1,4 @@
-import "./EmployeesInfo.css";
+import "./DashboardComponentStyles.css";
 import axiosInstance from "../../utils/AxiosInstance";
 import { useState, useEffect } from "react";
 
