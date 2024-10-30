@@ -179,14 +179,14 @@
     margin-bottom: 1.5rem;
   }
   
-  label {
+ .subrep-container label {
     font-size: 1rem;
     font-weight: 500;
     color: #555;
     margin-bottom: 0.5rem;
   }
   
-  select {
+ .subrep-container select {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -196,7 +196,7 @@
     margin-bottom: 1rem;
   }
   
-  button {
+ .subrep-container button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     color: #fff;
@@ -208,49 +208,49 @@
     margin: 0.5rem;
   }
   
-  button:hover {
+ .subrep-container button:hover {
     background-color: #0056b3;
   }
   
   /* Loading and error messages */
-  p {
+ .subrep-container p {
     font-size: 1rem;
     margin-top: 0.5rem;
     color: #555;
   }
   
-  p[style*="color: red"] {
+ .subrep-container p[style*="color: red"] {
     color: #d9534f;
     font-weight: bold;
   }
   
   /* Table styling */
-  table {
+ .subrep-container table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
     font-size: 1rem;
   }
   
-  table thead {
+ .subrep-container table thead {
     background-color: #007bff;
     color: #fff;
   }
   
-  table th,
-  table td {
+ .subrep-container table th,
+ .subrep-container table td {
     padding: 0.75rem;
     text-align: left;
     border: 1px solid #ddd;
   }
   
-  table tbody tr:nth-child(even) {
+ .subrep-container table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   
   /* CSV and PDF download links */
-  .CSVLink,
-  button {
+ .subrep-container .CSVLink,
+ .subrep-container button {
     margin-top: 1rem;
     display: inline-block;
     font-size: 1rem;
@@ -262,8 +262,8 @@
     transition: background-color 0.3s;
   }
   
-  .CSVLink:hover,
-  button:hover {
+ .subrep-container .CSVLink:hover,
+ .subrep-container button:hover {
     background-color: #218838;
   }
 
