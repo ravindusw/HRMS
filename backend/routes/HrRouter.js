@@ -2,7 +2,7 @@ import { Router } from "express";
 import { db } from "../config/db.js";
 import { getJobTitles, getPayGrades, getDepartments ,employmentStats} from '../controllers/metadataController.js';
 import { getAllEmployees } from '../controllers/employeesController.js';
-import { getEmployeeByIdForHr } from '../controllers/employeesController.js';
+import { getEmployeeByIdForHr,getEachEmployeeCostumAttributes } from '../controllers/employeesController.js';
 import { updateEmployeeData} from '../controllers/updateEmployeeDataController.js';
 
 const router = Router();
@@ -32,6 +32,8 @@ router.get("/pay_grades", getPayGrades);
 router.get("/departments", getDepartments);
 
 router.get("/employmentStats",employmentStats)
+
+router.get("/attributes/:id/",getEachEmployeeCostumAttributes)
 
 
 

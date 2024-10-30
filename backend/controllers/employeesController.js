@@ -27,6 +27,7 @@ export const getAllEmployees = (req, res) => {
         const employeeQuery = 'CALL GetEmployeeDataForView(?)';
         const dependentQuery = 'CALL GetDependentDetails(?)';
         const emergencyContactQuery = 'CALL GetEmergencyContacts(?)';
+        
       
       
         db.query(employeeQuery, [employeeId], (err, employeeResults) => {
@@ -65,6 +66,7 @@ export const getAllEmployees = (req, res) => {
             phone_numbers: [],
             dependents: [],
             emergency_contacts: []
+            
           };
       
           employeeResults[0].forEach(row => {
@@ -106,12 +108,37 @@ export const getAllEmployees = (req, res) => {
                   });
                 });
               }
+              
       
-              console.log(employee.birthday);
+              //console.log(employee);
               res.status(200).json(employee);
             });
           });
         });
+
+
+
+        
       };
 
-  
+      export const getEachEmployeeCostumAttributes = (req, res) => {
+        const employeeId = req.params.id;
+        const getCustomAttributes = 'CALL GetCustomAttributesforGivenId(?);';
+
+              db.query(getCustomAttributes, [employeeId], (err, CustomAttributes) => {
+                if (err) {
+                  console.error('Error fetching custom attributes:', err);
+                  return res.status(500).send('Server error');
+                }
+                if (CustomAttributes.length === 0) {
+                  return res.status(404).send('Custom attributes not found');
+                }
+                //console.log(CustomAttributes[0])
+                res.status(200).json(CustomAttributes[0]);
+      
+      
+                
+              });
+      }
+
+

@@ -22,28 +22,43 @@ const calculateAge = (dateOfBirth) => {
 const HrView = () => {
   const { id_to_view } = useParams();
   const [employee, setEmployee] = useState(null);
+  const [coustumattributes, setcoustumattributes] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    const fetchEmployee = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axiosInstance.get(
+        const response1 = await axiosInstance.get(
           `/auth/Hr/employees/${id_to_view}`
         );
-        setEmployee(response.data);
+        setEmployee(response1.data);
+        
+
+        const response2 = await axiosInstance.get(`/auth/Hr/attributes/${id_to_view}`);
+        //console.log(response2.data);
+        setcoustumattributes(response2.data);
+        
+        
       } catch (error) {
-        console.error("There was an error fetching the employee!", error);
-        setError("There was an error fetching the employee!");
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
       }
     };
 
-    fetchEmployee();
+    fetchData();
   }, [id_to_view]);
 
-  if (!employee) {
+
+
+  if (!employee || !coustumattributes) {
     return <div>Loading...</div>;
   }
+
+  
+
+  
   const handleEdit = (id) => {
       
     const userConfirm = window.confirm('Are you sure you want to edit this employee?');
@@ -141,6 +156,23 @@ const HrView = () => {
             
             
           </Col>
+          <Col md={6}>
+          
+          {coustumattributes && coustumattributes.length > 0 ? (
+            <div>
+            {coustumattributes.map((attribute, index) => (
+              <h6 key={index}>
+                {attribute.key_name} : {attribute.value}
+                
+              </h6>
+            ))}
+          </div>
+          ) : (
+            <p>
+              
+            </p>
+          )}
+        </Col>
         </Row>
         
         <Row className="profile-section">
@@ -219,6 +251,10 @@ const HrView = () => {
           )}
         </Col>
       </Row>
+
+
+      
+      
         
 
         {/* Simplified Supervisor section 

@@ -55,6 +55,7 @@ export const getDepartments = (req, res) => {
       res.status(200).json(results[0]);
     });
   };
+  
   export const employmentStats = (req, res) => {
     const query = `SELECT employment_state_id,CONCAT(employment_state.employment_type, ' ', employment_state.work_schedule) as employment_status 
                   FROM hrms.employment_state;`
