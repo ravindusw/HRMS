@@ -30,6 +30,8 @@ import MyLeaves from "./pages/MyLeaves.jsx";
 import Configurations from "./pages/Configurations.jsx";
 import CustomAttribute from "./pages/CustomAttribute.jsx";
 
+import NotFound from "./pages/NotFound.jsx";
+
 import "./App.css";
 
 function App() {
@@ -198,6 +200,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="*" element={<NotFound />} />
       
       </Routes>
     </BrowserRouter>

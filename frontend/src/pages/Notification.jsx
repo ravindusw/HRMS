@@ -1,35 +1,29 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import axiosInstance from "../utils/AxiosInstance";
 import "./Notification.css";
+import NotificationPopupDelete from "../components/NotificationPopupDelete";
+
 import markread from "../assets/mark-as-read.svg";
 import deleteIcon from "../assets/delete.svg";
 import markunread from "../assets/mark-as-unread.svg";
-
-// import NotificationBellIcon from "../components/NotificationBellIcon";
-
-import NotificationPopupDelete from "../components/NotificationPopupDelete";
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [filter, setFilter] = useState("All");
   const [activeButton, setActiveButton] = useState("All");
-
   const [isDeletePopupVisible, setDeletePopupVisible] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-  // Need to fetch by user ID. IMPORTANT !!
   const fetchNotifications = async () => {
     try {
       const response = await axiosInstance.get("/notification/fetch-notification-by-user-id");
       setNotifications(response.data);
-      console.log("Notifications fetched:", response.data);
     } catch (err) {
       console.error("Error fetching notifications:", err);
     }
   };
-  
+
   useEffect(() => {
     fetchNotifications();
   }, []);
@@ -40,8 +34,6 @@ const Notification = () => {
         notificationId: id,
         status: "read",
       });
-      console.log(`Notification with id: ${id} is marked as read...`);
-      console.log("Response:", response.data);
       fetchNotifications();
     } catch (err) {
       console.error("Error marking notification as read:", err);
@@ -54,8 +46,6 @@ const Notification = () => {
         notificationId: id,
         status: "unread",
       });
-      console.log(`Notification with id: ${id} is marked as unread...`);
-      console.log("Response:", response.data);
       fetchNotifications();
     } catch (err) {
       console.error("Error marking notification as read:", err);
@@ -71,12 +61,10 @@ const Notification = () => {
     setDeletePopupVisible(true);
     setDeleteId(id);
   }
-  
+
   const handleDelete = async () => {
     try {
       const response = await axiosInstance.delete(`/notification/delete-notification/${deleteId}`);
-      console.log(`Notification with id: ${deleteId} is deleted...`);
-      console.log("Response:", response.data);
       fetchNotifications();
     } catch (err) {
       console.error("Error deleting notification:", err);
@@ -98,22 +86,17 @@ const Notification = () => {
     return true;
   });
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   return (
     <div className="notification-container">
       <h2 className="notification-header">Notifications</h2>
-      {/* <div style={{backgroundColor: 'green', height: "100px"}}><NotificationBellIcon /></div> */}
-      
+
       {/* Filter buttons */}
       <div className="filter-buttons">
-        <button className={activeButton=="All"? "active" : null} onClick={() => handleFilter("All")}>All</button>
-        <button className={activeButton=="Unread"? "active" : null} onClick={() => handleFilter("Unread")}>Unread</button>
-        <button className={activeButton=="Read"? "active" : null} onClick={() => handleFilter("Read")}>Read</button>
-        <button className={activeButton=="Alert"? "active" : null} onClick={() => handleFilter("Alert")}>Alert</button>
-        <button className={activeButton=="Leave"? "active" : null} onClick={() => handleFilter("Leave")}>Leave</button>
+        <button className={activeButton == "All" ? "active" : null} onClick={() => handleFilter("All")}>All</button>
+        <button className={activeButton == "Unread" ? "active" : null} onClick={() => handleFilter("Unread")}>Unread</button>
+        <button className={activeButton == "Read" ? "active" : null} onClick={() => handleFilter("Read")}>Read</button>
+        <button className={activeButton == "Alert" ? "active" : null} onClick={() => handleFilter("Alert")}>Alert</button>
+        <button className={activeButton == "Leave" ? "active" : null} onClick={() => handleFilter("Leave")}>Leave</button>
       </div>
 
       {/* Delete Notification Popup */}
@@ -131,16 +114,16 @@ const Notification = () => {
               <div className="notification-content">
                 <h3 className="notification-title">
                   {
-                    notification.type == "new request" ? "New Leave Request" : 
-                    notification.type == "leave status" ? "Leave Application Status" :
-                    notification.type == "alert" ? "Alert" : "Notification"
+                    notification.type == "new request" ? "New Leave Request" :
+                      notification.type == "leave status" ? "Leave Application Status" :
+                        notification.type == "alert" ? "Alert" : "Notification"
                   }
                 </h3>
-                  { notification.type == "new request" ? <p className="notification-message">{notification.message}. <Link to="/leaverequests" styles={{all: "unset"}}>View</Link></p> : 
-                    notification.type == "leave status" ? <p className="notification-message">{notification.message}</p> :
-                    notification.type == "alert" ? <p className="notification-message">{notification.message} <Link to="/profile" styles={{all: "unset"}}>View</Link></p> 
-                    : <p className="notification-message">{notification.message}</p>
-                  }
+                {notification.type == "new request" ? <p className="notification-message">{notification.message}. <Link to="/leaverequests" styles={{ all: "unset" }}>View</Link></p> :
+                  notification.type == "leave status" ? <p className="notification-message">{notification.message}</p> :
+                    notification.type == "alert" ? <p className="notification-message">{notification.message} <Link to="/profile" styles={{ all: "unset" }}>View</Link></p>
+                      : <p className="notification-message">{notification.message}</p>
+                }
                 <span className="notification-date">{new Date(notification.date).toLocaleString()}</span>
               </div>
 

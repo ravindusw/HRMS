@@ -4,23 +4,20 @@ import "./OrganizationInfoManagement.css";
 import organizationImg from "../assets/organization-cover.png";
 
 const OrganizationInfoManagement = () => {
-    const [organizationDetails, setOrganizationDetails] = useState({name:"", address:"", reg_number:""}); // DONE
+    const [organizationDetails, setOrganizationDetails] = useState({ name: "", address: "", reg_number: "" }); // DONE
     const [otherBranches, setOtherBranches] = useState([]); // DONE
 
-    const [branchInfo, setBranchInfo] = useState({branch_id: "", branch_name: "", country: "", address: "", phone_number: "", organization_id: ""});
-    const [originalBranchInfo, setOriginalBranchInfo] = useState({branch_id: "", branch_name: "", country: "", address: "", phone_number: "", organization_id: ""});
+    const [branchInfo, setBranchInfo] = useState({ branch_id: "", branch_name: "", country: "", address: "", phone_number: "", organization_id: "" });
+    const [originalBranchInfo, setOriginalBranchInfo] = useState({ branch_id: "", branch_name: "", country: "", address: "", phone_number: "", organization_id: "" });
 
     const [isEditing, setIsEditing] = useState(false);
     const [isChanged, setIsChanged] = useState(false);
-
-    
 
     useEffect(() => {
         // Fetch organization details
         const fetchOrganizationDetails = async () => {
             try {
                 const response = await axiosInstance.get("/organization-info/fetch-organization-details");
-                // console.log("Organization details fetched:", response.data);
                 setOrganizationDetails(response.data[0]);
             } catch (err) {
                 console.error("Error fetching organization details:", err);
@@ -33,7 +30,6 @@ const OrganizationInfoManagement = () => {
     const fetchBranchDetails = async () => {
         try {
             const response = await axiosInstance.get("/organization-info/fetch-branch-details");
-            // console.log("Branch details fetched:", response.data);
             setOtherBranches(response.data);
         } catch (err) {
             console.error("Error fetching branch details:", err);
@@ -41,11 +37,10 @@ const OrganizationInfoManagement = () => {
     };
 
     useEffect(() => {
-        // Fetch branch details
         fetchBranchDetails();
     }, []);
 
-    useEffect(() => { 
+    useEffect(() => {
         // Set the branch info for Sri Lanka branch
         const sriLankaBranch = otherBranches.find((branch) => branch.country == "Sri Lanka");
         if (sriLankaBranch) {
@@ -76,21 +71,17 @@ const OrganizationInfoManagement = () => {
     const handleSaveClick = () => {
         setIsEditing(false);
         setIsChanged(false);
-        
+
         // Update the branch info
         const updateBranchInfo = async () => {
             try {
-                // console.log(branchInfo);
                 const response = await axiosInstance.post("/organization-info/update-branch-details", branchInfo);
-                // console.log(response.data);
                 fetchBranchDetails();
             } catch (err) {
                 console.error("Error updating branch info:", err);
             }
         };
-
         updateBranchInfo();
-
     };
 
     return (
@@ -114,10 +105,11 @@ const OrganizationInfoManagement = () => {
 
             <div className="branch-info">
                 <h2 className="section-title">Branch Details</h2>
+
                 <form className="branch-form">
                     <label className="form-label">
                         Name:
-                        <input type="text" name="branch_name" value={branchInfo.branch_name} onChange={handleInputChange} className="form-input" disabled={!isEditing}/>
+                        <input type="text" name="branch_name" value={branchInfo.branch_name} onChange={handleInputChange} className="form-input" disabled={!isEditing} />
                     </label>
                     <br />
                     <label className="form-label">
@@ -138,11 +130,13 @@ const OrganizationInfoManagement = () => {
                     <button type="button" onClick={handleEditClick} className="btn-edit">{isEditing ? "Cancel" : "Edit"}</button>
                     <button type="button" onClick={handleSaveClick} className="btn-save" disabled={!isChanged}>Save</button>
                 </form>
+
             </div>
 
 
             <div className="other-branches">
                 <h2 className="section-title">All Branches Details</h2>
+
                 <ul className="branch-list">
                     {otherBranches.map((branch, index) => (
                         <li key={index} className="branch-item">
@@ -153,6 +147,7 @@ const OrganizationInfoManagement = () => {
                         </li>
                     ))}
                 </ul>
+
             </div>
 
         </div>

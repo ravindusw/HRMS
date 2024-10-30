@@ -1,0 +1,38 @@
+/* Container styling */
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Title styling */
+  .not-found-title {
+    font-size: 6em;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  /* Message styling */
+  .not-found-message {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+  }
+  
+  /* Link styling */
+  .not-found-link {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .not-found-link:hover {
+    background-color: #0056b3;
+  }
