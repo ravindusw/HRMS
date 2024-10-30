@@ -33,15 +33,15 @@ const NotAuthorized = () => {
         style={{
           padding: "10px 30px",
           fontSize: "16px",
-          backgroundColor: "#4CAF50", // Green button
+          backgroundColor: "#0288ff", // Green button
           color: "white",
           border: "none",
           borderRadius: "5px",
           cursor: "pointer",
           transition: "background-color 0.3s ease",
         }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#45a049")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#4CAF50")}
+        onMouseOver={(e) => (e.target.style.backgroundColor = "#034b80")}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "#0288ff")}
       >
         Go to Dashboard
       </button>
