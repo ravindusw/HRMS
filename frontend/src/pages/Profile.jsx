@@ -71,6 +71,14 @@ const Profile = () => {
               <div className="profile-field">
                 <span>Pay Grade:</span> {profileData?.pay_grade}
               </div>
+              <div className="custom-attribute">
+                {custom_attributes.key1_name && custom_attributes.value1 && (
+                  <div className="profile-field">
+                    <strong>{custom_attributes.key1_name}:</strong>{" "}
+                    {custom_attributes.value1}
+                  </div>
+                )}
+              </div>
             </Col>
             <Col md={6}>
               <div className="profile-field">
@@ -88,6 +96,20 @@ const Profile = () => {
               <div className="profile-field">
                 <span>Work Schedule:</span> {profileData?.work_schedule}
               </div>
+              <div className="custom-attribute">
+                {custom_attributes.key2_name && custom_attributes.value2 && (
+                  <div className="profile-field">
+                    <strong>{custom_attributes.key2_name}:</strong>{" "}
+                    {custom_attributes.value2}
+                  </div>
+                )}
+                {custom_attributes.key3_name && custom_attributes.value3 && (
+                  <div className="profile-field">
+                    <strong>{custom_attributes.key3_name}:</strong>{" "}
+                    {custom_attributes.value3}
+                  </div>
+                )}
+              </div>
             </Col>
           </Row>
           {/* Display contact numbers */}
@@ -96,11 +118,19 @@ const Profile = () => {
               <h5>Contact Numbers</h5>
               <div className="profile-field">
                 <span>Primary:</span>{" "}
-                {profileData?.contact_numbers?.primary || "N/A"}
+                {profileData?.contact_numbers?.primary ? (
+                  profileData.contact_numbers.primary
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
               <div className="profile-field">
                 <span>Secondary:</span>{" "}
-                {profileData?.contact_numbers?.secondary || "N/A"}
+                {profileData?.contact_numbers?.secondary ? (
+                  profileData.contact_numbers.secondary
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
             </Col>
           </Row>
@@ -109,57 +139,48 @@ const Profile = () => {
               <h5>Emergency Contact</h5>
               <div className="profile-field">
                 <span>Name:</span>{" "}
-                {profileData?.emergency_contact?.name || "N/A"}
+                {profileData?.emergency_contact?.name ? (
+                  profileData.emergency_contact.name
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
               <div className="profile-field">
                 <span>Phone:</span>{" "}
-                {profileData?.emergency_contact?.phone || "N/A"}
+                {profileData?.emergency_contact?.phone ? (
+                  profileData.emergency_contact.phone
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
               <div className="profile-field">
                 <span>Relationship:</span>{" "}
-                {profileData?.emergency_contact?.relationship || "N/A"}
+                {profileData?.emergency_contact?.relationship ? (
+                  profileData.emergency_contact.relationship
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
             </Col>
             <Col md={6}>
-              <h5>Dependent</h5>
+              <h5>Dependent details</h5>
               <div className="profile-field">
-                <span>Name:</span> {profileData?.dependent?.name || "N/A"}
+                <span>Name:</span>{" "}
+                {profileData?.dependent?.name ? (
+                  profileData.dependent.name
+                ) : (
+                  <em>Not available</em>
+                )}
               </div>
             </Col>
           </Row>
+
           {/* Simplified Supervisor section */}
           <Row className="profile-section">
             <Col md={6}>
               <h5>Supervisor</h5>
               <div className="profile-field">
-                <span>Name:</span> {profileData?.supervisor || "N/A"}
-              </div>
-            </Col>
-          </Row>
-          {/* Custom Attributes Section */}
-
-          <Row className="profile-section">
-            <Col md={12}>
-              <h5>Custom Attributes</h5>
-              <div className="custom-attribute">
-                {custom_attributes.key1_name && custom_attributes.value1 && (
-                  <div>
-                    <strong>{custom_attributes.key1_name}:</strong>{" "}
-                    {custom_attributes.value1}
-                  </div>
-                )}
-                {custom_attributes.key2_name && custom_attributes.value2 && (
-                  <div>
-                    <strong>{custom_attributes.key2_name}:</strong>{" "}
-                    {custom_attributes.value2}
-                  </div>
-                )}
-                {custom_attributes.key3_name && custom_attributes.value3 && (
-                  <div>
-                    <strong>{custom_attributes.key3_name}:</strong>{" "}
-                    {custom_attributes.value3}
-                  </div>
-                )}
+                <span>Name:</span> {profileData?.supervisor || "Not available"}
               </div>
             </Col>
           </Row>
