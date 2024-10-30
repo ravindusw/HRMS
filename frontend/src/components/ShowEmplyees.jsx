@@ -13,7 +13,7 @@ const ShowEmplyees=({initialEmployees})=>{
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const navigate = useNavigate();
-    console.log(employees);
+    //console.log(employees);
 
 
 
