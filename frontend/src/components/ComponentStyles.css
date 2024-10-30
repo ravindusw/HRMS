@@ -151,121 +151,119 @@
 
 /* Container styling */
 .subrep-container {
-    width: 100%;
-    margin-top: 10rem;
-    /* max-width: 900px; */
-  
-    padding: 2rem;
-    background-color: #e3eaec;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Header styling */
-  .subrep-container h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  /* Department selection and buttons */
-  .subrep-container div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  
- .subrep-container label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 0.5rem;
-  }
-  
- .subrep-container select {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 1rem;
-  }
-  
- .subrep-container button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 0.5rem;
-  }
-  
- .subrep-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Loading and error messages */
- .subrep-container p {
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    color: #555;
-  }
-  
- .subrep-container p[style*="color: red"] {
-    color: #d9534f;
-    font-weight: bold;
-  }
-  
-  /* Table styling */
- .subrep-container table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 1rem;
-  }
-  
- .subrep-container table thead {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
- .subrep-container table th,
- .subrep-container table td {
-    padding: 0.75rem;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
- .subrep-container table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  /* CSV and PDF download links */
- .subrep-container .CSVLink,
- .subrep-container button {
-    margin-top: 1rem;
-    display: inline-block;
-    font-size: 1rem;
-    text-decoration: none;
-    color: white;
-    background-color: #28a745;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-  
- .subrep-container .CSVLink:hover,
- .subrep-container button:hover {
-    background-color: #218838;
-  }
+  width: 100%;
+  margin-top: 10px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+.subrep-container h1 {
+  margin-top: 100px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Department selection and buttons */
+.subrep-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.subrep-container label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.subrep-container select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1rem;
+}
+
+.subrep-container button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0.5rem;
+}
+
+.subrep-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Loading and error messages */
+.subrep-container p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.subrep-container p[style*="color: red"] {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+/* Table styling */
+.subrep-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.subrep-container table thead {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.subrep-container table th,
+.subrep-container table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.subrep-container table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* CSV and PDF download links */
+.subrep-container .CSVLink,
+.subrep-container button {
+  margin-top: 1rem;
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.subrep-container .CSVLink:hover,
+.subrep-container button:hover {
+  background-color: #0056b3;
+}
 
 
   
