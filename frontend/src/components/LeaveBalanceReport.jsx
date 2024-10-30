@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import './ComponentStyles.css'
+import "./ComponentStyles.css";
 import axiosInstance from "../utils/AxiosInstance";
 
 const LeaveBalanceReport = () => {
@@ -44,21 +44,31 @@ const LeaveBalanceReport = () => {
   useEffect(() => {
     fetchDepartments();
   }, []);
-  // Generate PDF report for the leave balances
   const generatePDF = () => {
     const doc = new jsPDF();
+    const pageHeight = doc.internal.pageSize.height;
+    let yOffset = 20;
+
     doc.text(
       `Department: ${department} Leave Balance Report for Leave Type: ${leaveType}`,
       10,
       10
     );
+
     leaveBalances.forEach((emp, index) => {
-      doc.text(`${index + 1}.`, 10, 20 + index * 50);
-      doc.text(`Name: ${emp.name}`, 10, 30 + index * 50);
-      doc.text(`Employee ID: ${emp.employee_id}`, 10, 40 + index * 50);
-      doc.text(`Leave Balance: ${emp.leaveBalance} days`, 10, 50 + index * 50);
-      doc.text("\n", 10, 50 + index * 10); // Add a new line after each entry
+      if (yOffset + 40 > pageHeight) {
+        doc.addPage(); // Add a new page if the current page is full
+        yOffset = 20; // Reset yOffset for the new page
+      }
+
+      doc.text(`${index + 1}.`, 10, yOffset);
+      doc.text(`Name: ${emp.name}`, 10, yOffset + 10);
+      doc.text(`Employee ID: ${emp.employee_id}`, 10, yOffset + 20);
+      doc.text(`Leave Balance: ${emp.leaveBalance} days`, 10, yOffset + 30);
+
+      yOffset += 40; // Increment yOffset for the next entry
     });
+
     doc.save(`${department}-leave-balance-report-${leaveType}.pdf`);
   };
 

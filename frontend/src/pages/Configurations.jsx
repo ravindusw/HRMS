@@ -16,14 +16,13 @@ const Configurations = () => {
             setJobTitles(jobTitlesResponse.data);
 
             const payLeaveLimitsResponse = await axiosInstance.get('/configuration/fetch-max-leave-count');
-            // console.log(payLeaveLimitsResponse.data);
             setOriginalPayLeaveLimits(JSON.parse(JSON.stringify(payLeaveLimitsResponse.data))); // Deep copy
             setPayLeaveLimits(JSON.parse(JSON.stringify(payLeaveLimitsResponse.data))); // Deep copy
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-    
+
     useEffect(() => {
         // Fetch existing job titles and leave types
         fetchData();
@@ -46,10 +45,10 @@ const Configurations = () => {
             alert('Job title cannot be empty');
             return;
         }
-        
+
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post('/configuration/add-job-title', { "jobTitle": jobTitle } );
+            const response = await axiosInstance.post('/configuration/add-job-title', { "jobTitle": jobTitle });
             console.log(response.data);
             fetchData();
             setJobTitle('');
@@ -66,9 +65,7 @@ const Configurations = () => {
             type: payLeaveLimits[_index].type,
             max_leave_count: payLeaveLimits[_index].max_leave_count
         }
-        
-        // console.log(changedItem);
-        
+
         try {
             setIsLoading(true);
             const response = await axiosInstance.post('/configuration/update-max-leave-count', changedItem);
@@ -129,20 +126,20 @@ const Configurations = () => {
                                 <td className={originalPayLeaveLimits[index].max_leave_count !== item.max_leave_count ? 'changed' : ''}>{item.type}</td>
                                 <td className={originalPayLeaveLimits[index].max_leave_count !== item.max_leave_count ? 'changed' : ''}>
                                     <input
-                                        
+
                                         type="number"
                                         placeholder="Enter max leave count"
                                         value={item.max_leave_count}
                                         onChange={(e) => handleLeaveCountChange(e, index)}
                                     />
-                                    <button 
-                                        onClick={handleCancelChanges} 
+                                    <button
+                                        onClick={handleCancelChanges}
                                         disabled={originalPayLeaveLimits[index].max_leave_count === item.max_leave_count}>
                                         Cancel
                                     </button>
                                     <button
-                                        className="save" 
-                                        onClick={() => handleSaveLeaveCounts(index)} 
+                                        className="save"
+                                        onClick={() => handleSaveLeaveCounts(index)}
                                         disabled={originalPayLeaveLimits[index].max_leave_count === item.max_leave_count}>
                                         Save
                                     </button>
@@ -151,7 +148,7 @@ const Configurations = () => {
                         ))}
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
     );
