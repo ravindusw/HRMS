@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import './ComponentStyles.css'
+import "./ComponentStyles.css";
 import axiosInstance from "../utils/AxiosInstance";
 
 const CustomFieldReport = () => {
@@ -42,21 +42,29 @@ const CustomFieldReport = () => {
     fetchAttribute();
   }, []);
 
-  // Generate PDF report for custom attributes
+  // Generate PDF report for custom attributes with multi-page support
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.text("Custom Field Report for Last 3 Attributes", 10, 10);
-    attributeData.forEach((emp, index) => {
-      doc.text(`${index + 1}.`, 10, 20 + index * 60);
-      doc.text(`ID: ${emp.employee_id}`, 10, 30 + index * 60);
-      doc.text(`First_Name: ${emp.first_name}`, 10, 40 + index * 60);
-      doc.text(`Last_Name: ${emp.last_name}`, 10, 50 + index * 60);
-      doc.text(`Attribute_Value: ${emp.attribute_value}`, 10, 60 + index * 60);
+    const pageHeight = doc.internal.pageSize.height;
+    let yOffset = 20;
 
-      if (index > 0 && index % 3 === 0) {
-        doc.addPage();
+    doc.text("Custom Field Report for Last 3 Attributes", 10, 10);
+
+    attributeData.forEach((emp, index) => {
+      if (yOffset + 40 > pageHeight) {
+        doc.addPage(); // Add a new page if the current page is full
+        yOffset = 20; // Reset yOffset for the new page
       }
+
+      doc.text(`${index + 1}.`, 10, yOffset);
+      doc.text(`Employee ID: ${emp.employee_id}`, 10, yOffset + 10);
+      doc.text(`First Name: ${emp.first_name}`, 10, yOffset + 20);
+      doc.text(`Last Name: ${emp.last_name}`, 10, yOffset + 30);
+      doc.text(`Attribute Value: ${emp.attribute_value}`, 10, yOffset + 40);
+
+      yOffset += 50; // Increment yOffset for the next entry
     });
+
     doc.save("custom-field-report.pdf");
   };
 
@@ -65,12 +73,16 @@ const CustomFieldReport = () => {
       <h1>Jupiter Apparels HRMS - Custom Field Report</h1>
       <div>
         <label>Select Custom Field:</label>
-        <select 
+        <select
           value={attribute}
-          onChange={(e) => setAttribute(e.target.value)} >
+          onChange={(e) => setAttribute(e.target.value)}
+        >
           <option value="">-- Select Attribute --</option>
           {attributeOptions.map((attribute_i) => (
-            <option key={attribute_i.attribute_id} value={attribute_i.attribute_name}>
+            <option
+              key={attribute_i.attribute_id}
+              value={attribute_i.attribute_name}
+            >
               {attribute_i.attribute_name}
             </option>
           ))}

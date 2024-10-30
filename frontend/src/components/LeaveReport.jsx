@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import { CSVLink } from "react-csv";
-import './ComponentStyles.css'
+import "./ComponentStyles.css";
 import axiosInstance from "../utils/AxiosInstance";
 
 const LeaveReport = () => {
@@ -43,18 +43,25 @@ const LeaveReport = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
+    const pageHeight = doc.internal.pageSize.height;
+    let yOffset = 20;
+
     doc.text(`Department: ${department} Leave Report`, 10, 10);
+
     leaves.forEach((leave, index) => {
-      doc.text(`${index + 1}.`, 10, 20 + index * 70);
-      doc.text(`Name: ${leave.employee_name}`, 10, 30 + index * 70);
-      doc.text(`Employee Position: ${leave.job_title}`, 10, 40 + index * 70);
-      doc.text(`Leave Start: ${leave.leave_start_date}`, 10, 50 + index * 70);
-      doc.text(`Leave Type: ${leave.leave_type}`, 10, 60 + index * 70);
-      doc.text(`Leave Status: ${leave.leave_status}`, 10, 70 + index * 70);
-      if (index > 0 && index % 3 === 0) {
-        doc.addPage();
+      if (yOffset + 40 > pageHeight) {
+        doc.addPage(); // Add a new page if the current page is full
+        yOffset = 20; // Reset yOffset for the new page
       }
-      // doc.text("\n", 10, 30 + index * 10);
+
+      doc.text(`${index + 1}.`, 10, yOffset);
+      doc.text(`Name: ${leave.employee_name}`, 10, yOffset + 10);
+      doc.text(`Employee Position: ${leave.job_title}`, 10, yOffset + 20);
+      doc.text(`Leave Start: ${leave.leave_start_date}`, 10, yOffset + 30);
+      doc.text(`Leave Type: ${leave.leave_type}`, 10, yOffset + 40);
+      doc.text(`Leave Status: ${leave.leave_status}`, 10, yOffset + 50);
+
+      yOffset += 60; // Increment yOffset for the next entry
     });
 
     doc.save(`${department}-leave-report.pdf`);
@@ -77,7 +84,9 @@ const LeaveReport = () => {
           ))}
         </select>
       </div>
-      <center><button onClick={fetchLeaveDetails}>Fetch Leave Details</button></center>
+      <center>
+        <button onClick={fetchLeaveDetails}>Fetch Leave Details</button>
+      </center>
 
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
