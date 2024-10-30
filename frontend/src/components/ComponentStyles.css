@@ -1,0 +1,272 @@
+/* 
+ * Styles for the NotificationBellIcon component.
+ * 
+ * This section contains the styling for the NotificationBellIcon component used in the application.
+ * It includes styles for the bell icon container, the bell icon itself, and the unread notification count badge.
+ * Specific styles include positioning, display properties, cursor style, transitions, background color, text color, border radius, padding, font size, font weight, and hover effects.
+ */
+
+ .notification-bell-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+.notification-bell-icon  .bell-icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for the hover effect */
+  }
+  
+.notification-bell-icon  .unread-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  /* Hover effect */
+  .notification-bell-icon:hover .bell-icon {
+    transform: rotate(20deg); /* Rotate the bell icon on hover */
+  }
+
+
+/* 
+ * Styles for the NotificationPopupDelete component.
+ * 
+ * This section contains the styling for the NotificationPopupDelete component used in the application.
+ * It includes styles for the popup overlay, popup content, header, icons, and buttons.
+ * Specific styles include animations for fade-in and fade-out effects, positioning, background colors, padding, 
+ * border radius, text alignment, box shadows, button colors, and hover effects.
+ */
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Fade-out animation */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  /* Popup overlay (semi-transparent background) */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out; /* Fade-in animation */
+  }
+  
+  /* Popup content styling */
+  .popup-overlay .popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    animation: fadeIn 0.3s ease-in-out; /* Fade-in animation */
+  }
+  
+  /* Popup header styling */
+  .popup-overlay .popup-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .popup-overlay .popup-header .popup-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  /* Popup buttons styling */
+  .popup-overlay .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .popup-overlay .confirm-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .popup-overlay .confirm-button {
+    background-color: #007bff; /* Blue-based theme */
+    color: #fff;
+  }
+  
+  .popup-overlay .cancel-button {
+    background-color: #6c757d; /* Gray color for cancel */
+    color: #fff;
+  }
+  
+  /* Add hover effect */
+  .popup-overlay .confirm-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .popup-overlay .cancel-button:hover {
+    background-color: #5a6268;
+  }
+
+  /* 
+ * Styles for the ReportSubPage component.
+ * 
+ * This section contains the styling for the ReportSubPage component used in the application.
+ * It includes styles for the container, headers, department selection, buttons, loading and error messages, tables, and download links.
+ * Specific styles include width, margins, padding, background colors, border radius, box shadows, font properties, text alignment, borders, hover effects, and transitions.
+ */
+
+/* Container styling */
+.subrep-container {
+    width: 100%;
+    margin-top: 10rem;
+    /* max-width: 900px; */
+  
+    padding: 2rem;
+    background-color: #e3eaec;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header styling */
+  .subrep-container h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Department selection and buttons */
+  .subrep-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0.5rem;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Loading and error messages */
+  p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: #555;
+  }
+  
+  p[style*="color: red"] {
+    color: #d9534f;
+    font-weight: bold;
+  }
+  
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  table thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  table th,
+  table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* CSV and PDF download links */
+  .CSVLink,
+  button {
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: #28a745;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .CSVLink:hover,
+  button:hover {
+    background-color: #218838;
+  }
+
+
+  
+  

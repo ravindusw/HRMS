@@ -1,43 +1,9 @@
-// export default function RemainingLeaves() {
-//   return (
-//     <div className="remaining-leaves">
-//       <h3>Remaining Leaves</h3>
-//       <div className="leave-types">
-//         <div className="leave-card">
-//           Annual <br />
-//           <span>20</span>
-//         </div>
-//         <div className="leave-card">
-//           Casual <br />
-//           <span>12</span>
-//         </div>
-//         <div className="leave-card">
-//           Maternity <br />
-//           <span>10</span>
-//         </div>
-//         <div className="leave-card">
-//           No-pay <br />
-//           <span>35</span>
-//         </div>
-//       </div>
-//       <button className="btn-apply">Apply For Leave</button>
-//     </div>
-//   );
-// }
-
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import "./RemainingLeaves.css"; // Custom CSS for this component
+import "./DashboardComponentStyles.css";
 import { useState, useEffect } from "react";
 
 import axiosInstance from "../../utils/AxiosInstance";
 import { useNavigate } from "react-router-dom";
-// Sample data for the Pie Chart
-// const data = [
-//   { name: "Annual", value: 20 },
-//   { name: "Casual", value: 12 },
-//   { name: "Maternity", value: 10 },
-//   { name: "No-pay", value: 35 },
-// ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

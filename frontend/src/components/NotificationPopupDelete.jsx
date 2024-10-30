@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './NotificationPopupDelete.css'; // We will add animations and styles here
+import './ComponentStyles.css'
 import warningIcon from '../assets/warning.svg';
 
 const NotificatioPopupDelete = ({ onDelete, onCancel }) => {
