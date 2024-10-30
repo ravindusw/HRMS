@@ -40,6 +40,7 @@ const AddEmployee = () => {
     Dependant_DOB: "",
     Dependant_Gender: "",
     Dependent_Contact_Number: "",
+    custom_attributes: [],
   });
 
   const [supervisors, setSupervisors] = useState([]);
@@ -48,6 +49,7 @@ const AddEmployee = () => {
   const [jobTitles, setJobTitles] = useState([]);
   const [Departments, setDepartments] = useState([]);
   const [Pay_Grades, setPay_Grades] = useState([]);
+  const [customAttributes, setCustomAttributes] = useState([]);
 
   useEffect(() => {
     axiosInstance
@@ -85,14 +87,47 @@ const AddEmployee = () => {
       .catch((error) => {
         console.log("Error fetching payGrades", error);
       });
+
+    axiosInstance
+      .get("/auth/customAttributes")
+      .then((response) => {
+        setCustomAttributes(response.data);
+        // Initialize custom_attributes based on fetched data
+        const initialAttributes = response.data.map((attr) => ({
+          attribute_id: attr.attribute_id,
+          value: "",
+        }));
+        setEmployeeData((prevData) => ({
+          ...prevData,
+          custom_attributes: initialAttributes,
+        }));
+      })
+      .catch((error) => {
+        console.log("Error fetching custom attributes", error);
+      });
+    console.log(employeeData.custom_attributes);
   }, []);
 
   const handleChange = (e) => {
-    setEmployeeData({
-      ...employeeData,
-      [e.target.name]: e.target.value,
-    });
-    console.log(employeeData);
+    const { name, value } = e.target;
+
+    if (name.startsWith("custom_")) {
+      const attributeId = name.replace("custom_", "");
+
+      setEmployeeData((prevData) => ({
+        ...prevData,
+        custom_attributes: prevData.custom_attributes.map((attribute) =>
+          attribute.attribute_id === attributeId
+            ? { ...attribute, value }
+            : attribute
+        ),
+      }));
+    } else {
+      setEmployeeData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -383,6 +418,31 @@ const AddEmployee = () => {
                   />
                 </Form.Group>
               </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+        <Card className="mb-3" border="secondary" bg="light">
+          <Card.Header>Custom Attributes</Card.Header>
+          <Card.Body>
+            <Row>
+              {customAttributes.map((attribute) => (
+                <Col md={6} key={attribute.attribute_id}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>{attribute.attribute_name}:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name={`custom_${attribute.attribute_id}`}
+                      value={
+                        employeeData.custom_attributes.find(
+                          (attr) => attr.attribute_id === attribute.attribute_id
+                        )?.value || ""
+                      }
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              ))}
             </Row>
           </Card.Body>
         </Card>
