@@ -286,6 +286,7 @@ const AddEmployee = () => {
                     <Form.Select
                       name="Department_ID"
                       onChange={handleChange}
+                      value={employeeData.Department_ID}
                       required
                     >
                       <option value="" disabled>

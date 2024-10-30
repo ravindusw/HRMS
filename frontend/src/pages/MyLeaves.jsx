@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./MyLeaves.css"; // Styles for MyLeaves component
+import "./MyLeaves.css";
 import axiosInstance from "../utils/AxiosInstance";
 
 const MyLeaves = () => {
