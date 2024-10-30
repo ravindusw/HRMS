@@ -107,9 +107,13 @@ const HrView = () => {
             <div className="profile-field">
               <span>NIC:</span> {employee.NIC}
             </div>
-            <div className="profile-field">
+            {employee.username !==null ? (
+              <div className="profile-field">
               <span>User Name:</span> {employee.username}
             </div>
+            ):(
+              <div></div>
+            )}
             
             <div className="profile-field">
               <span>Email:</span> {employee.email}
@@ -161,10 +165,11 @@ const HrView = () => {
           {coustumattributes && coustumattributes.length > 0 ? (
             <div>
             {coustumattributes.map((attribute, index) => (
-              <h6 key={index}>
+              <p key={index}>
                 {attribute.key_name} : {attribute.value}
                 
-              </h6>
+                
+              </p>
             ))}
           </div>
           ) : (

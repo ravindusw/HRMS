@@ -213,7 +213,11 @@ tbody tr:nth-child(even) {
   width: 100px; /* Adjust the width as needed */
 }
 .id-column7 {
-  width: 120px; /* Adjust the width as needed */
+  width: 100px; /* Adjust the width as needed */
+}
+
+.id-column8 {
+  width: 130px; /* Adjust the width as needed */
 }
 
 
@@ -223,4 +227,8 @@ tbody tr:nth-child(even) {
   margin-top: 10px;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: #000000;
+}
+.form-select select{
+  width: 100px;
+  padding: auto;
 }

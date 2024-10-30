@@ -13,6 +13,7 @@ const ShowEmplyees=({initialEmployees})=>{
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const navigate = useNavigate();
+    console.log(employees);
 
 
 
@@ -86,7 +87,10 @@ const ShowEmplyees=({initialEmployees})=>{
         <div className="mb-3 d-flex align-items-center">
         
         <label htmlFor="rowsPerPage" className="form-label">Rows per page :  </label>
-        <select id="rowsPerPage" className="form-select" value={rowsPerPage} onChange={handleRowsPerPageChange}>
+        <select id="rowsPerPage" className="form-select" value={rowsPerPage} onChange={handleRowsPerPageChange}
+        style={{ width: '150px' , marginTop: '0', paddingTop: '15'}} 
+        
+        >
           <option value={5}>5</option>
           <option value={10}>10</option>
           <option value={20}>20</option>
@@ -103,7 +107,8 @@ const ShowEmplyees=({initialEmployees})=>{
               <th className="id-column4">Department</th>
               <th className="id-column5">Gender</th>
               <th className="id-column6">Email</th>
-              <th className="id-column7">Actions</th>
+              <th className="id-column7">Has User Account?</th>
+              <th className="id-column8">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -115,6 +120,12 @@ const ShowEmplyees=({initialEmployees})=>{
                 <td>{employee.department}</td>
                 <td>{employee.gender}</td>
                 <td>{employee.email}</td>
+                {employee.username !==null ? (
+                  <td>Yes</td>
+                    ):(
+                      <td>No</td>
+                    )}
+
                 <td className="action-buttons">
                   <button className="btn btn-primary btn-sm mr-2" onClick={() => handleViewButtonClick(employee.id)}>View</button>
                   <button className="btn btn-warning btn-sm mr-2" onClick={() => handleEdit(employee.id)}>Edit</button>
