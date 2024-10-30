@@ -12,7 +12,7 @@ router.get("/pendingLeaveREQUEST",verifyToken, getpendingleavedetail);
 router.get("/get-leave-types", getLeaveTypes);
 
 router.post("/apply-leave", verifyToken, applyLeave);
-router.get("/leaveBalance",verifyToken, getLeaveBalance);
+router.post("/leaveBalance",verifyToken, getLeaveBalance);
 
 router.put("/approveLeaveREQUEST/:leave_record_id",verifyToken, approveleaverequest);
 router.put("/rejectLeaveREQUEST/:leave_record_id", verifyToken, rejectleaverequest);

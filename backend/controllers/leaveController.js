@@ -163,11 +163,14 @@ export const getLeaveHistory = (req, res) => {
 
 export const getLeaveBalance = (req, res) => {
   const { e_id } = req.user;
-  const {type} = req.query.type;
-  console.log(type);
+
+  console.log(req.body);
+  const { leave_type_id } = req.body;
+
+  
   const query = `CALL leave_balance(?,?);`;
 
-  db.query(query, [e_id,type], (err, results) => {
+  db.query(query, [e_id,leave_type_id], (err, results) => {
     if (err) {
       console.error("Error fetching leave balance:", err);
       return res.status(500).send("Server error");
