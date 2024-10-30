@@ -89,7 +89,7 @@ const HRMSNavBar = () => {
                     )}
 
                     {/* Only HR manager can access Employee Information Management */}
-                    {(role === "Admin" ||role === "HR Manager") && (
+                    {(role === "Admin" || role === "HR Manager") && (
                       <NavDropdown.Item
                         as={Link}
                         to="/Employee_Information_Management"
@@ -111,8 +111,6 @@ const HRMSNavBar = () => {
                         Leave History
                       </NavDropdown.Item>
                     )}
-
-
                   </NavDropdown>
                 )}
 
