@@ -13,6 +13,7 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
 - **Real-time Notifications** - Stay informed with instant alerts for leave approvals and critical system actions 🔔
 - **Job Title & Compensation Management** - Configure and maintain job titles and associated pay grades 💼
 - **Role-Based Access Control** - Tailored system access for Administrators, HR Managers, and Employees 🔒
+- **Report Generation** - Generate detailed reports and analytics for employee data and leave requests 📊
 - **Support Resources** - Dedicated help section featuring FAQs and support contact information 📚
 - **Responsive Design** - Optimized user experience across desktop and mobile devices 📱💻
 
