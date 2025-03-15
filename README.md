@@ -1,40 +1,173 @@
-## HRMS
+# HRMS (Human Resource Management System)
 
-Human Resource Management System by Group 14
+<!-- ![HRMS Banner](https://via.placeholder.com/800x200?text=HRMS+Platform) -->
 
-Installation
+## Overview
 
-## 1. Clone the Repository
- [Link](https://github.com/GitUserRavindu/HRMS.git)
- 
+HRMS is a comprehensive web-based platform designed to revolutionize how organizations manage their human resources. This intuitive system streamlines essential HR processes including employee management, leave tracking, and organizational configurations through a user-friendly interface that empowers employees, HR managers, and administrators alike.
 
-## 2. Install Dependencies:
+## Key Features
 
-  Please make sure you have Node.js installed.
-  Install the necessary packages: npm install
+- **Employee Management** - Seamlessly add, update, and manage comprehensive employee profiles and information
+- **Leave Management** - Efficiently handle leave requests with an automated approval workflow and tracking system
+- **Real-time Notifications** - Stay informed with instant alerts for leave approvals and critical system actions
+- **Job Title & Compensation Management** - Configure and maintain job titles and associated pay grades
+- **Role-Based Access Control** - Tailored system access for Administrators, HR Managers, and Employees
+- **Support Resources** - Dedicated help section featuring FAQs and support contact information
+- **Responsive Design** - Optimized user experience across desktop and mobile devices
 
-## 3. Set Up the Database:
+## Technology Stack
 
-  Ensure you have a MySQL server running.
-  Create a new database for the HRMS.
- 
-## 4. Configure Environment Variables:
+### Frontend
+- **React.js** - Building dynamic, component-based user interfaces
+- **React Router** - Managing seamless client-side navigation
+- **Bootstrap** - Implementing responsive design and modern styling
 
-Create a .env file in the root directory of the project.
-Add the following environment variables: 
+### Backend
+- **Node.js** - Powering server-side applications with JavaScript
+- **Express.js** - Creating robust RESTful API endpoints
+- **MySQL** - Storing and managing relational database data
 
-DB_HOST=your_database_host
-DB_USER=your_database_user
-DB_PASS=your_database_password
-DB_NAME=your_database_name
+### Deployment
+- **Render.com** - Hosting the application with reliable cloud infrastructure
 
-## 5. Start the Application: npm start
+## Getting Started
 
-## Access the Application:
+### Prerequisites
+- Node.js (v14 or higher)
+- MySQL (v8 or higher)
+- Git
 
-Open your browser and navigate to:[Link](http://localhost:8800)
+### Installation
 
-   
-   
-    
-  
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/hrms.git
+   cd hrms
+   ```
+
+2. **Install Dependencies**
+
+   Backend setup:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+   Frontend setup:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+3. **Database Configuration**
+   - Create a MySQL database named `hrms`
+   - Import the schema and seed data from `HRMS/Database_Scripts` folder
+
+4. **Environment Setup**
+
+   Backend `.env` file:
+   ```env
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=yourpassword
+   DB_NAME=hrms
+   JWT_SECRET=your_jwt_secret
+   ```
+
+   Update API base URL in `frontend/src/config.js`
+
+5. **Launch the Application**
+
+   Start the backend:
+   ```bash
+   cd backend
+   npm start
+   ```
+
+   Start the frontend:
+   ```bash
+   cd ../frontend
+   npm start
+   ```
+
+6. **Access the Platform**
+   - Navigate to [http://localhost:3000](http://localhost:3000) in your browser
+
+## User Roles & Capabilities
+
+### Administrator
+- Configure organizational structure including job titles and pay grades
+- Establish and modify leave policies
+- Manage system-wide settings and user permissions
+
+### HR Manager
+- Review and process employee leave requests
+- Generate comprehensive reports and analytics
+- Oversee employee records and information
+
+### Employee
+- Submit and track personal leave requests
+- Access personalized notifications
+- View and update profile information
+
+## Deployment Information
+
+The application is deployed and accessible at:
+[https://your-app-name.onrender.com](https://your-app-name.onrender.com)
+
+### Deployment Notes
+- Backend is configured to serve the React frontend for seamless client-side routing
+- URL redirects are managed via `render.yaml` configuration or the Render dashboard
+
+## Project Structure
+
+```
+HRMS/
+├── backend/
+│   ├── controllers/       # Request handlers and business logic
+│   ├── models/            # Database schemas and relationships
+│   ├── routes/            # API endpoint definitions
+│   ├── config/            # Application configuration files
+│   ├── database/          # SQL scripts for database setup
+│   └── server.js          # Application entry point
+├── frontend/
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── pages/         # Complete page components
+│   │   ├── assets/        # Static resources and images
+│   │   ├── App.js         # Root application component
+│   │   └── index.js       # JavaScript entry point
+│   └── public/            # Static public assets
+└── README.md              # Project documentation
+```
+
+<!-- ## Contributing
+
+We welcome contributions to enhance the HRMS platform! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add: detailed description of your changes"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Submit a pull request -->
+
+<!-- ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for complete details. -->
+
+---
+
+<p align="center">
+  <strong>HRMS</strong> - Streamlining HR processes for the modern workplace<br>
+  Developed with ❤️ by Group 14
+</p>
