@@ -21,7 +21,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '688d0999-8540-11ef-9103-4a6a3b2083d6:1-2746';
+-- SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '688d0999-8540-11ef-9103-4a6a3b2083d6:1-2746';
 
 --
 -- Temporary view structure for view `admin_name`
@@ -261,7 +261,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`doadmin`@`%`*/ /*!50003 TRIGGER `set_employee_leave_balance_records` AFTER INSERT ON `employee` FOR EACH ROW BEGIN
+/*!50003 CREATE*/   /*!50003 TRIGGER `set_employee_leave_balance_records` AFTER INSERT ON `employee` FOR EACH ROW BEGIN
     DECLARE leave_year YEAR;
     SET leave_year = YEAR(CURDATE());
 
@@ -286,7 +286,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`doadmin`@`%`*/ /*!50003 TRIGGER `notification_on_employee_information_update` AFTER UPDATE ON `employee` FOR EACH ROW BEGIN
+/*!50003 CREATE*/   /*!50003 TRIGGER `notification_on_employee_information_update` AFTER UPDATE ON `employee` FOR EACH ROW BEGIN
     -- Get employee's user_id
     DECLARE employee_user_id CHAR(36);
     SET employee_user_id = (SELECT user_id FROM user WHERE employee_id = NEW.employee_id);
@@ -529,7 +529,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`doadmin`@`%`*/ /*!50003 TRIGGER `notification_on_leave_request_submission` AFTER INSERT ON `leave_record` FOR EACH ROW BEGIN
+/*!50003 CREATE*/   /*!50003 TRIGGER `notification_on_leave_request_submission` AFTER INSERT ON `leave_record` FOR EACH ROW BEGIN
     DECLARE supervisor_id CHAR(36);
 
     -- Fetch supervisor ID using the function
@@ -562,7 +562,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`doadmin`@`%`*/ /*!50003 TRIGGER `UpdateEmployeeLeaveCount` AFTER UPDATE ON `leave_record` FOR EACH ROW BEGIN
+/*!50003 CREATE*/   /*!50003 TRIGGER `UpdateEmployeeLeaveCount` AFTER UPDATE ON `leave_record` FOR EACH ROW BEGIN
     IF NEW.status = 'Approved' THEN
         
         SET @leave_balance := 0;
@@ -599,7 +599,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`doadmin`@`%`*/ /*!50003 TRIGGER `notification_on_leave_request_approval` AFTER UPDATE ON `leave_record` FOR EACH ROW BEGIN
+/*!50003 CREATE*/   /*!50003 TRIGGER `notification_on_leave_request_approval` AFTER UPDATE ON `leave_record` FOR EACH ROW BEGIN
     DECLARE employee_user_id CHAR(36);
 
     -- Get employee's user_id
@@ -947,7 +947,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_absent_employees_count"() RETURNS int
+CREATE  FUNCTION "get_absent_employees_count"() RETURNS int
     READS SQL DATA
 BEGIN
     DECLARE absent_count INT;
@@ -975,7 +975,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_department_id"(dep_name VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_department_id"(dep_name VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE dep_id CHAR(36);
@@ -997,7 +997,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_employment_state_id"(type VARCHAR(50),work_schedule VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_employment_state_id"(type VARCHAR(50),work_schedule VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE e_s_id CHAR(36);
@@ -1021,7 +1021,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_entry_count_in_employee_attribute"() RETURNS int
+CREATE  FUNCTION "get_entry_count_in_employee_attribute"() RETURNS int
+    READS SQL DATA
 BEGIN
     DECLARE entry_count INT;
     SET entry_count = (SELECT COUNT(*) FROM employee_custom_attribute);
@@ -1042,7 +1043,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_leavetype_id_by_name"(leave_type_name VARCHAR(30)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_leavetype_id_by_name"(leave_type_name VARCHAR(30)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE lt_id CHAR(36);
@@ -1070,7 +1071,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_paygrade_id_by_name"(pay_grade_name VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_paygrade_id_by_name"(pay_grade_name VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE pg_id CHAR(36);
@@ -1098,7 +1099,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_pay_grade_id"(payGrade VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_pay_grade_id"(payGrade VARCHAR(50)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE pg_id CHAR(36);
@@ -1122,7 +1123,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_role"(userid CHAR(36)) RETURNS varchar(20) CHARSET utf8mb4
+CREATE  FUNCTION "get_role"(userid CHAR(36)) RETURNS varchar(20) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE role_name VARCHAR(20);
@@ -1151,7 +1152,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_supervisor_user_id_of_employee"(emp_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_supervisor_user_id_of_employee"(emp_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
+READS SQL DATA
 BEGIN
     DECLARE supervisor_user_id CHAR(36);
 
@@ -1182,7 +1184,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_supervisor_user_id_of_user"(employee_user_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_supervisor_user_id_of_user"(employee_user_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
+READS SQL DATA
 BEGIN
     DECLARE employee_id_of_given_user CHAR(36);
     DECLARE supervisor_user_id CHAR(36);
@@ -1220,7 +1223,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_total_employees_count"() RETURNS int
+CREATE  FUNCTION "get_total_employees_count"() RETURNS int
     READS SQL DATA
 BEGIN
     DECLARE employee_count INT;
@@ -1246,7 +1249,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_unread_notification_count"(employee_user_id CHAR(36)) RETURNS int
+CREATE  FUNCTION "get_unread_notification_count"(employee_user_id CHAR(36)) RETURNS int
     READS SQL DATA
 BEGIN
     DECLARE notification_count INT;
@@ -1272,7 +1275,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_userID"(mail VARCHAR(255)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_userID"(mail VARCHAR(255)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE U_ID CHAR(36);
@@ -1298,7 +1301,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" FUNCTION "get_user_id_by_leave_record_id"(leave_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
+CREATE  FUNCTION "get_user_id_by_leave_record_id"(leave_id CHAR(36)) RETURNS char(36) CHARSET utf8mb4
     DETERMINISTIC
 BEGIN
     DECLARE output_user_id CHAR(36);
@@ -1326,7 +1329,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "add_Employee"(IN E_NIC VARCHAR(20), IN E_FIRST_NAME VARCHAR(50),
+CREATE  PROCEDURE "add_Employee"(IN E_NIC VARCHAR(20), IN E_FIRST_NAME VARCHAR(50),
                                                  IN E_LAST_NAME VARCHAR(50), IN E_EMAIL VARCHAR(150), IN E_DOB DATE,
                                                  IN E_GENDER VARCHAR(10), IN E_ADDRESS VARCHAR(255),
                                                  IN E_MARITAL_STATUS VARCHAR(10), IN E_DEPARTMENT_ID CHAR(36),
@@ -1400,7 +1403,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "add_role"(
+CREATE  PROCEDURE "add_role"(
     IN userID CHAR(36),
     IN userRole VARCHAR(20)
 )
@@ -1440,7 +1443,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "approve_leave_record"(
+CREATE  PROCEDURE "approve_leave_record"(
     IN p_leave_record_id CHAR(36),  -- Input parameter for leave_record_id
     IN p_approved_date DATE         -- Input parameter for the approved date
 )
@@ -1467,7 +1470,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "CreateUser"(IN p_employee_Id char(36), IN p_userName varchar(255),
+CREATE  PROCEDURE "CreateUser"(IN p_employee_Id char(36), IN p_userName varchar(255),
                                                IN p_password_hash varchar(255), IN p_email varchar(255),
                                                IN p_role varchar(20))
 BEGIN
@@ -1527,7 +1530,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "create_job_title"(IN p_title VARCHAR(30))
+CREATE  PROCEDURE "create_job_title"(IN p_title VARCHAR(30))
 BEGIN
     INSERT INTO hrms.job_title(`title`)
     VALUES (p_title);
@@ -1547,7 +1550,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "create_notification"(
+CREATE  PROCEDURE "create_notification"(
     IN user_id CHAR(36),             -- Input parameter for user_id
     IN message VARCHAR(255),         -- Input parameter for the message
     IN status VARCHAR(12),           -- Input parameter for status, e.g., 'unread', 'read'
@@ -1580,7 +1583,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "delete_notification_by_id"(IN id CHAR(36))
+CREATE  PROCEDURE "delete_notification_by_id"(IN id CHAR(36))
 BEGIN
         DELETE FROM hrms.notification
         WHERE notification_id = id;
@@ -1600,7 +1603,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetCustomAttributesforGivenId"(IN IN_employee_id VARCHAR(36))
+CREATE  PROCEDURE "GetCustomAttributesforGivenId"(IN IN_employee_id VARCHAR(36))
 BEGIN
     SELECT 
         key1_id as id,
@@ -1638,7 +1641,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetDepartmentsByCountry"(IN CountryName VARCHAR(255))
+CREATE  PROCEDURE "GetDepartmentsByCountry"(IN CountryName VARCHAR(255))
 BEGIN
     SELECT 
         name, 
@@ -1663,7 +1666,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetDependentDetails"(IN EmployeeID CHAR(36))
+CREATE  PROCEDURE "GetDependentDetails"(IN EmployeeID CHAR(36))
 BEGIN
     SELECT 
         dependent.name as dependent_name,
@@ -1691,7 +1694,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetEmergencyContacts"(IN Employee_id CHAR(36))
+CREATE  PROCEDURE "GetEmergencyContacts"(IN Employee_id CHAR(36))
 BEGIN
     SELECT name,contact_id, phone, relationship 
     FROM hrms.emergency_contact 
@@ -1712,7 +1715,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetEmployeeAttribute"(
+CREATE  PROCEDURE "GetEmployeeAttribute"(
     IN attribute_name VARCHAR(255)
 )
 BEGIN
@@ -1751,7 +1754,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetEmployeeDataForView"(IN EmployeeID char(36))
+CREATE  PROCEDURE "GetEmployeeDataForView"(IN EmployeeID char(36))
 BEGIN
 SELECT 
     employee.employee_id as id,
@@ -1812,7 +1815,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetEmployeeList"()
+CREATE  PROCEDURE "GetEmployeeList"()
 BEGIN
     SELECT 
         employee_id as id, 
@@ -1846,7 +1849,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetEmployeeReport"(
+CREATE  PROCEDURE "GetEmployeeReport"(
     IN dept_name VARCHAR(255)  -- Changed to accept department name
 )
 BEGIN
@@ -1890,7 +1893,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetLeaveBalance"(
+CREATE  PROCEDURE "GetLeaveBalance"(
     IN dept_name VARCHAR(50),
     IN leave_type_name VARCHAR(30)
 )
@@ -1926,7 +1929,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetLeaveBalanceForDashboard"(
+CREATE  PROCEDURE "GetLeaveBalanceForDashboard"(
     IN p_employee_id CHAR(36)   -- Input parameter for employee_id
 )
 BEGIN
@@ -1955,7 +1958,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetLeaveDetails"(IN Employee_id CHAR(36))
+CREATE  PROCEDURE "GetLeaveDetails"(IN Employee_id CHAR(36))
 BEGIN
     SELECT lr.start_date, lr.end_date, lt.type, lr.status
     FROM leave_record lr
@@ -1978,7 +1981,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetLeaveReport"(IN department VARCHAR(50))
+CREATE  PROCEDURE "GetLeaveReport"(IN department VARCHAR(50))
 BEGIN
     SELECT 
         e.first_name AS employee_name,
@@ -2009,7 +2012,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetPayGradeNames"()
+CREATE  PROCEDURE "GetPayGradeNames"()
 BEGIN
     SELECT * FROM hrms.pay_grade;
 END ;;
@@ -2028,7 +2031,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "GetSupervisors"()
+CREATE  PROCEDURE "GetSupervisors"()
 BEGIN
     SELECT JSON_ARRAYAGG(
                    JSON_OBJECT('id', id, 'name', name)
@@ -2050,7 +2053,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_branch_details"()
+CREATE  PROCEDURE "get_branch_details"()
 BEGIN
     SELECT * 
     FROM hrms.branch;
@@ -2070,7 +2073,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_custom_attributes"()
+CREATE  PROCEDURE "get_custom_attributes"()
 BEGIN
     SELECT *
     FROM custom_attribute;
@@ -2090,7 +2093,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_job_titles"()
+CREATE  PROCEDURE "get_job_titles"()
 BEGIN
     SELECT *
     FROM hrms.job_title
@@ -2111,7 +2114,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_leave_types"()
+CREATE  PROCEDURE "get_leave_types"()
 BEGIN
     SELECT *
     FROM hrms.leave_type;
@@ -2131,7 +2134,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_notification_all"()
+CREATE  PROCEDURE "get_notification_all"()
 BEGIN
 	SELECT * 
 	FROM hrms.notification;
@@ -2151,7 +2154,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_notification_by_id"(IN id CHAR(36))
+CREATE  PROCEDURE "get_notification_by_id"(IN id CHAR(36))
 BEGIN
 	SELECT * 
 	FROM hrms.notification 
@@ -2172,7 +2175,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_notification_by_user_id"(IN id CHAR(36))
+CREATE  PROCEDURE "get_notification_by_user_id"(IN id CHAR(36))
 BEGIN
 	SELECT * 
 	FROM hrms.notification
@@ -2194,7 +2197,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_organization_details"()
+CREATE  PROCEDURE "get_organization_details"()
 BEGIN
     SELECT name, address, reg_number  
     FROM hrms.organization;
@@ -2214,7 +2217,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_pay_grade_leave_limits"()
+CREATE  PROCEDURE "get_pay_grade_leave_limits"()
 BEGIN
     SELECT * FROM pay_grade_leave_limits;
 END ;;
@@ -2233,7 +2236,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_pending_leaves"(IN sup_id CHAR(36))
+CREATE  PROCEDURE "get_pending_leaves"(IN sup_id CHAR(36))
 BEGIN
     SELECT 
         lr.leave_record_id,
@@ -2271,7 +2274,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_profile"(IN e_id char(36))
+CREATE  PROCEDURE "get_profile"(IN e_id char(36))
 BEGIN
     -- Variable declarations
     DECLARE R_USER_NAME VARCHAR(50);
@@ -2402,7 +2405,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_remaining_leave_count"(IN _id CHAR(36), IN _year INT)
+CREATE  PROCEDURE "get_remaining_leave_count"(IN _id CHAR(36), IN _year INT)
 BEGIN
     SELECT lt.type, lb.balance 
     FROM hrms.`leave_type` lt
@@ -2424,7 +2427,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_role_count"()
+CREATE  PROCEDURE "get_role_count"()
 BEGIN
     SELECT role.role_name, COUNT(user_role.user_id) AS role_count  
     FROM hrms.user_role
@@ -2446,7 +2449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "get_upcoming_leaves"(IN emp_id CHAR(36))
+CREATE  PROCEDURE "get_upcoming_leaves"(IN emp_id CHAR(36))
 BEGIN
     SELECT lt.type, lr.start_date, lr.end_date, lr.status  
     FROM leave_type lt JOIN leave_record lr USING(leave_type_id)
@@ -2467,7 +2470,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "InsertDependent"(
+CREATE  PROCEDURE "InsertDependent"(
     IN p_employee_id VARCHAR(36),
     IN p_name VARCHAR(255),
     IN p_relationship VARCHAR(255),
@@ -2494,7 +2497,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "InsertEmergencyContact"(
+CREATE  PROCEDURE "InsertEmergencyContact"(
     IN p_employee_id VARCHAR(36),
     IN p_name VARCHAR(255),
     IN p_phone VARCHAR(15),
@@ -2519,7 +2522,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "InsertPhoneNumber"(
+CREATE  PROCEDURE "InsertPhoneNumber"(
     IN p_employee_id VARCHAR(36),
     IN p_phone_number VARCHAR(15)
 )
@@ -2542,7 +2545,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "insert_custom_attribute"(IN attributeKey varchar(50), IN defaultValue varchar(100))
+CREATE  PROCEDURE "insert_custom_attribute"(IN attributeKey varchar(50), IN defaultValue varchar(100))
 BEGIN
     DECLARE custom_attribute_id CHAR(36);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -2603,7 +2606,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "insert_custom_attributes_for_employee"(
+CREATE  PROCEDURE "insert_custom_attributes_for_employee"(
     IN IN_employee_id CHAR(36),
     IN IN_key CHAR(36),
     IN IN_value VARCHAR(100)
@@ -2651,7 +2654,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "insert_first_custom_attribute"(
+CREATE  PROCEDURE "insert_first_custom_attribute"(
     IN C_ATTRIBUTE_NAME VARCHAR(50),
     IN DEFAULT_VALUE VARCHAR(100)
 )
@@ -2685,7 +2688,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "insert_inquiry"(
+CREATE  PROCEDURE "insert_inquiry"(
     IN I_NAME VARCHAR(100),
     IN I_EMAIL VARCHAR(100),
     IN I_SUBJECT VARCHAR(100),
@@ -2712,7 +2715,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "insert_leave_record"(
+CREATE  PROCEDURE "insert_leave_record"(
     IN p_employee_id CHAR(36),      -- Input parameter for employee_id
     IN p_leave_type_id VARCHAR(50),    -- Input parameter for leave type (name, not ID)
     IN p_start_date DATE,           -- Input parameter for start date
@@ -2767,7 +2770,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "leave_balance"(
+CREATE  PROCEDURE "leave_balance"(
     IN p_employee_id CHAR(36),     -- Input parameter for employee_id
     IN TypeID    CHAR(36)            -- Input parameter for leave type
 )
@@ -2798,7 +2801,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "reject_leave_record"(
+CREATE  PROCEDURE "reject_leave_record"(
     IN p_leave_record_id CHAR(36)  -- Input parameter for leave_record_id
              -- Input parameter for the rejected date
 )
@@ -2824,7 +2827,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "remove_custom_attribute"(IN C_ATTRIBUTE_ID CHAR(36))
+CREATE  PROCEDURE "remove_custom_attribute"(IN C_ATTRIBUTE_ID CHAR(36))
 BEGIN
     -- Start transaction to ensure atomicity
     START TRANSACTION;
@@ -2864,7 +2867,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "UpdatecustomAttributes"(
+CREATE  PROCEDURE "UpdatecustomAttributes"(
     IN p_employee_id VARCHAR(36),
     IN In_custom_Attributes JSON
 )
@@ -2915,7 +2918,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "UpdateEmployeeDataInDataBase"(
+CREATE  PROCEDURE "UpdateEmployeeDataInDataBase"(
     IN p_employee_id VARCHAR(36),
     IN p_first_name VARCHAR(255),
     IN p_last_name VARCHAR(255),
@@ -3038,7 +3041,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "update_branch_details"(
+CREATE  PROCEDURE "update_branch_details"(
     IN p_branch_id CHAR(36),
     IN p_country VARCHAR(50),
     IN p_address VARCHAR(250),
@@ -3071,7 +3074,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "update_max_leave_count"(
+CREATE  PROCEDURE "update_max_leave_count"(
     IN p_pay_grade_name VARCHAR(50),  -- Pay grade name as input
     IN p_leave_type_name VARCHAR(30),  -- Leave type name as input
     IN p_new_count INT                  -- New max leave count as input
@@ -3106,7 +3109,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "update_notification_status"(IN id CHAR(36), IN new_status VARCHAR(12))
+CREATE  PROCEDURE "update_notification_status"(IN id CHAR(36), IN new_status VARCHAR(12))
 BEGIN
     DECLARE notification_exists INT;
 
@@ -3145,7 +3148,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ONLY_FULL_GROUP_BY,ANSI,STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER="doadmin"@"%" PROCEDURE "user_login"(IN p_email varchar(255))
+CREATE  PROCEDURE "user_login"(IN p_email varchar(255))
 BEGIN
     DECLARE emp_id CHAR(36);
     DECLARE login_status VARCHAR(255);
@@ -3201,7 +3204,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`doadmin`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `admin_name` AS select `user`.`employee_id` AS `employee_id`,`user`.`username` AS `username` from ((`user` join `user_role` on((`user`.`user_id` = `user_role`.`user_id`))) join `role` on((`user_role`.`role_id` = `role`.`role_id`))) where (`role`.`role_name` = 'Admin') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -3219,7 +3222,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`doadmin`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `employee_custom_attributes_view` AS select `e`.`employee_id` AS `employee_id`,`ca1`.`attribute_id` AS `key1_id`,`ca1`.`attribute_name` AS `key1_name`,`eca`.`value1` AS `value1`,`ca2`.`attribute_id` AS `key2_id`,`ca2`.`attribute_name` AS `key2_name`,`eca`.`value2` AS `value2`,`ca3`.`attribute_id` AS `key3_id`,`ca3`.`attribute_name` AS `key3_name`,`eca`.`value3` AS `value3` from ((((`employee` `e` left join `employee_custom_attribute` `eca` on((`e`.`employee_id` = `eca`.`employee_id`))) left join `custom_attribute` `ca1` on((`eca`.`key1` = `ca1`.`attribute_id`))) left join `custom_attribute` `ca2` on((`eca`.`key2` = `ca2`.`attribute_id`))) left join `custom_attribute` `ca3` on((`eca`.`key3` = `ca3`.`attribute_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -3237,7 +3240,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`doadmin`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `hr_managers` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username` from `user` where `user`.`user_id` in (select `user_role`.`user_id` from (`user_role` join `role` on((`user_role`.`role_id` = `role`.`role_id`))) where (`role`.`role_name` = 'HR Manager')) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -3255,7 +3258,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`doadmin`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `pay_grade_leave_limits` AS select `pg`.`name` AS `name`,`lt`.`type` AS `type`,`mlc`.`max_leave_count` AS `max_leave_count` from ((`pay_grade` `pg` join `max_leave_count` `mlc` on((`pg`.`pay_grade_id` = `mlc`.`pay_grade_id`))) join `leave_type` `lt` on((`mlc`.`leave_type_id` = `lt`.`leave_type_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -3273,7 +3276,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`doadmin`@`%` SQL SECURITY DEFINER */
+/*!50013   SQL SECURITY DEFINER */
 /*!50001 VIEW `supervisors` AS select `u`.`employee_id` AS `id`,`u`.`username` AS `name` from `user` `u` where `u`.`user_id` in (select `user_role`.`user_id` from (`user_role` join `role` on((`user_role`.`role_id` = `role`.`role_id`))) where (`role`.`role_name` = 'Supervisor')) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;

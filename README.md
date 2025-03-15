@@ -64,6 +64,8 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
    - Create a MySQL database named `hrms`
    - Import the schema and seed data from `HRMS/Database_Scripts` folder
 
+   > **Note:** The dump file is generated from a MySQL database hosted in Digital Ocean. In case of any issues (e.g. The `DEFINER` in routines is not automatically replaced to a valid user in your database during importing), you may need to refer and update the dump file accordingly or run relevant scripts to solve those issues.
+
 4. **Environment Setup**
 
    Backend `.env` file:
@@ -74,8 +76,6 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
    DB_NAME=hrms
    JWT_SECRET=your_jwt_secret
    ```
-
-   Update API base URL in `frontend/src/config.js`
 
 5. **Launch the Application**
 
@@ -88,11 +88,11 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
    Start the frontend:
    ```bash
    cd ../frontend
-   npm start
+   npm run dev
    ```
 
 6. **Access the Platform**
-   - Navigate to [http://localhost:3000](http://localhost:3000) in your browser
+   - Navigate to [http://localhost:5173](http://localhost:5173) in your browser. (NOTE: The port number may be different)
 
 ## User Roles & Capabilities
 
@@ -110,15 +110,6 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
 - Submit and track personal leave requests
 - Access personalized notifications
 - View and update profile information
-
-## Deployment Information
-
-The application is deployed and accessible at:
-[https://your-app-name.onrender.com](https://your-app-name.onrender.com)
-
-### Deployment Notes
-- Backend is configured to serve the React frontend for seamless client-side routing
-- URL redirects are managed via `render.yaml` configuration or the Render dashboard
 
 ## Project Structure
 
