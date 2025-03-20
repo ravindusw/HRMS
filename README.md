@@ -90,7 +90,7 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
    ```
 
 6. **Access the Platform** 🌐
-   - Navigate to [http://localhost:5173](http://localhost:5173) in your browser. (NOTE: The port number may be different)
+   - Navigate to [http://localhost:5173](http://localhost:5173) in your browser. (**Note**: The port number may be different)
 
 ## User Roles & Capabilities 👥
 
@@ -100,9 +100,14 @@ HRMS is a comprehensive web-based platform designed to revolutionize how organiz
 - Manage system-wide settings and user permissions
 
 ### HR Manager 📊
-- Review and process employee leave requests
+- Add and update employee profiles
 - Generate comprehensive reports and analytics
 - Oversee employee records and information
+
+### Supervisor 👨‍💼
+- Review and approve leave requests
+- Monitor employee attendance and leave balances
+- Access team-specific reports and data
 
 ### Employee 🧑‍💼
 - Submit and track personal leave requests
